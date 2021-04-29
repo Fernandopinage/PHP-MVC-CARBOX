@@ -1,0 +1,31 @@
+
+body{
+
+    background-color: rgba(6, 105, 47, 0.089);
+    font-family: Arial, Helvetica, sans-serif;
+}
+form{
+
+    max-width: 1200px;
+    padding: 35px 35px 45px;
+    margin:  auto;
+    margin-top: 50px;
+    background-color: #fff;
+    /*border: 1px solid rgba(0,0,0,0.1);  */
+    border-radius: 7px;
+    box-shadow: 1px 3px 4px 0px rgba(0, 0, 0, 0.342);
+  }
+  #title{
+    font-family: 'Cairo', sans-serif;
+  }
+
+  span{
+    padding: 3px;
+    color: red;
+    font-size: 16px;
+  }
+  p{
+    font-size: 12px;
+  }
+
+/*1200px*/
