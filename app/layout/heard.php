@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
   <!-- Required meta tags -->
@@ -52,7 +52,7 @@
         <ul class="navbar-nav text-right">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
-              <?php echo "Luiz Fernando Pinagé Coutinho"; ?>
+              <?php echo $_SESSION['valor']['nome']; ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="?p=alterarsenha/">Alterar Senha</a>
