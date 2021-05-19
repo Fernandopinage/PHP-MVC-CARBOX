@@ -1,8 +1,5 @@
-<?php 
-include_once "../carbox/app/dao/index.php";
+<?php   
 
-
-$index = new Route();
-$index->index();
+header('location: ../carbox/app/php/index.php');
 
 ?>

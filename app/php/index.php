@@ -1,12 +1,12 @@
 <?php include_once "../layout/heard.php";
 include_once "../class/ClassCliente.php";
-include_once "../dao/ClienteDAO.php";
+include_once "../dao/index.php";
 if (isset($_POST['acessar'])) {
 
     $ClassCliente = new ClassCliente();
-    $ClassCliente->setCPF($_POST['valor']);
+    $ClassCliente->setEmail($_POST['valor']);
     $ClassCliente->setSenha(md5($_POST['password']));
-    $Cliente = new ClienteDAO();
+    $Cliente = new ClassIndex();
     $Cliente->login($ClassCliente);
 }
 

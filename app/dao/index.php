@@ -1,18 +1,42 @@
 <?php 
+include_once "../dao/DAO.php";
 
+Class ClassIndex extends Dao{
 
-Class Route{
+   
+    public function login(ClassCliente $ClassCliente)
+    {
+        
+        
+        $sql = "SELECT * FROM `cliente` WHERE  CLIENTE_EMAIL = :CLIENTE_EMAIL  and  CLIENTE_SENHA = :CLIENTE_SENHA";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':CLIENTE_EMAIL', $ClassCliente->getEmail());
+        $select->bindValue(':CLIENTE_SENHA', $ClassCliente->getSenha());
+        $select->execute();
+       
+        $_SESSION['valor'] = array();   
 
-    public function index(){
+        if ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
-        header('Location: app/php/index.php');
+            $_SESSION['valor'] = array(
+
+                'id' => $row['CLIENTE_ID'],
+                'cpf' => $row['CLIENTE_CPF'],
+                'razao' => $row['CLIENTE_NOME'],
+                'nome' => $row['CLIENTE_NOME'],
+                'email' => $row['CLIENTE_EMAIL']
+
+            );
+
+            header('location: ../php/home.php');
+        } else {
+
+            header('location: ../php/index.php');
+            
+        }
+        
+        
     }
-
-    public function compras(){
-
-
-    }
-
 
 }
 
