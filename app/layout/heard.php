@@ -43,13 +43,10 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="?p=cliente/">Cliente</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
         </ul>
-        <ul class="navbar-nav text-right">
+        <ul class="navbar-nav text-right" style="margin-right: 60px;">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
               <?php echo $_SESSION['valor']['nome']; ?>
