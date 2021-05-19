@@ -51,31 +51,31 @@ if (isset($_POST['clientesalva'])) {
 
             <div class="form-group col-md-4">
                 <label for="inputEmail4">CPF/CNPJ <span style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control is-invalid" id="cpf" name="cpf" placeholder="">
+                <input type="text" class="form-control form-control-sm is-invalid" id="cpf" name="cpf" placeholder="">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control is-invalid" id="razao" name="razao" placeholder="">
+                <input type="text" class="form-control form-control-sm is-invalid" id="razao" name="razao" placeholder="">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputEmail4">Nome Fantasia </label>
-                <input type="text" class="form-control form-control" id="nome" name="nome" placeholder="">
+                <input type="text" class="form-control form-control-sm" id="nome" name="nome" placeholder="">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label for="inputEmail4">Email<span style="color: red;">*</span></label>
-                <input type="email" class="form-control form-control is-invalid" id="email" name="email" placeholder="">
+                <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Senha<span style="color: red;">*</span></label>
-                <input type="password" class="form-control form-control is-invalid" id="senha" name="senha" placeholder="">
+                <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Confirmar Senha<span style="color: red;">*</span></label>
-                <input type="password" class="form-control form-control is-invalid" id="senha2" name="senha2" placeholder="">
+                <input type="password" class="form-control form-control-sm is-invalid" id="senha2" name="senha2" placeholder="">
             </div>
             <p id="obrigatorio"></p>
         </div>
