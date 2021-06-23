@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once "../layout/heard.php";
 include_once "../class/ClassProduto.php";
 include_once "../dao/ProdutoDAO.php";
@@ -17,8 +17,6 @@ if (isset($_POST['produtosalva'])) {
 
         $Produto = new ProdutoDAO();
         $Produto->insertProduto($ClassProduto);
-
-
     } else {
 ?>
         <script>
@@ -63,13 +61,13 @@ if (isset($_POST['produtosalva'])) {
                 <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder="">
             </div>
             <div class="form-group col-md-2">
-                <label for="inputEmail4">Unidade <span style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder="">
+                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+
             </div>
         </div>
 
         <div id="lista">
-        
+
         </div>
 
 
@@ -93,7 +91,18 @@ if (isset($_POST['produtosalva'])) {
 
 <script>
 
-    
+$('#mais').click(function(){
+
+    var cont = 1;
+    $('#lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-2"><label for="inputEmail4">Código <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm is-invalid" id="codigo" name="codigo" placeholder=""></div><div class="form-group col-md-6"><label for="inputEmail4">Descrição <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder=""></div><div class="form-group col-md-2"><label for="inputEmail4">Unidade <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder=""></div><div class="form-group col-md-2"><a class="btn btn-danger"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a></div></div>')
+
+});
+
+$("form").on("click", ".btn-danger", function() {
+
+var btn_id = $(this).attr("id");
+$('#campo' + btn_id + '').remove();
+});
 
 </script>
 
