@@ -6,7 +6,7 @@ include_once "../dao/ClienteDAO.php";
 if (isset($_POST['clientesalva'])) {
 
 
-    if ($_POST['cpf'] != '' and $_POST['razao'] != '' and $_POST['nome'] != '' and  $_POST['email'] != '' and $_POST['senha'] != '') {
+    if ($_POST['cpf'] != '' and $_POST['razao'] != '' and $_POST['nome'] != '' and  $_POST['email'] != '' and $_POST['senha'] != '' and $_POST['sap'] != '') {
 
         $ClassCliente = new ClassCliente();
         $ClassCliente->setCPF($_POST['cpf']);
@@ -14,6 +14,7 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setNome($_POST['nome']);
         $ClassCliente->setEmail($_POST['email']);
         $ClassCliente->setSenha(md5($_POST['senha']));
+        $ClassCliente->setSap($_POST['sap']);
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
     } else {
@@ -60,7 +61,11 @@ if (isset($_POST['clientesalva'])) {
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-2">
+                <label for="inputEmail4">Cod SAP<span style="color: red;">*</span></label>
+                <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="">
+            </div>
+            <div class="form-group col-md-10">
                 <label for="inputEmail4">Email<span style="color: red;">*</span></label>
                 <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="">
             </div>
@@ -126,6 +131,18 @@ if (isset($_POST['clientesalva'])) {
 
         } else {
             $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#sap").change(function() {
+
+        if (document.getElementById('sap').value != "") {
+            $('#sap').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#sap').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
         }
 

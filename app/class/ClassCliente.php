@@ -8,7 +8,7 @@ Class ClassCliente{
     private $nome;
     private $email;
     private $senha;
-
+    private $sap;
 
     public function getID(){
 
@@ -73,6 +73,17 @@ Class ClassCliente{
     public function setSenha($senha){
 
         $this->senha =$senha;
+        
+    }
+    
+    public function getSap(){
+
+        return $this->sap;
+    }
+    
+    public function setSap($sap){
+
+        $this->sap =$sap;
         
     }
 }

@@ -66,7 +66,18 @@ if (isset($_POST['produtosalva'])) {
             </div>
         </div>
 
-        <div id="lista">
+        <div id="lista" style="margin-top:20px">
+            <table class="table">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Unidade</th>
+                        <th scope="col">Remover</th>
+                    </tr>
+                </thead>
+
+            </table>
 
         </div>
 
@@ -90,20 +101,21 @@ if (isset($_POST['produtosalva'])) {
 </div>
 
 <script>
+    var cont = 0;
 
-$('#mais').click(function(){
+    $('#mais').click(function() {
 
-    var cont = 1;
-    $('#lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-2"><label for="inputEmail4">Código <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm is-invalid" id="codigo" name="codigo" placeholder=""></div><div class="form-group col-md-6"><label for="inputEmail4">Descrição <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder=""></div><div class="form-group col-md-2"><label for="inputEmail4">Unidade <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder=""></div><div class="form-group col-md-2"><a class="btn btn-danger"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a></div></div>')
+        $('#lista').append('<tbody><tr id="campo' + cont + '"><th scope="row"><input type="text" class="form-control form-control-sm is-invalid" id="codigo" name="codigo" placeholder=""></th><td> <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder=""></td><td> <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder=""></td><td><a class="btn btn-danger btn-sm"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a><td></tr></tbody>')
 
-});
+        cont++
+    });
 
-$("form").on("click", ".btn-danger", function() {
+    $("form").on("click", ".btn-danger", function() {
 
-var btn_id = $(this).attr("id");
-$('#campo' + btn_id + '').remove();
-});
-
+        var btn_id = $(this).attr("id");
+        $('#campo' + btn_id + '').remove();
+        console.log(btn_id)
+    });
 </script>
 
 <?php include_once "../layout/footer.php"; ?>
