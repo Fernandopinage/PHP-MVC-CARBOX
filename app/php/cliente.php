@@ -36,9 +36,6 @@ if (isset($_POST['clientesalva'])) {
 
 ?>
 
-
-
-
 <link rel="stylesheet" href="../css/cliente.css">
 <div class="container">
 

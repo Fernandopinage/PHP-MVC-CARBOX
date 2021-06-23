@@ -22,6 +22,10 @@ $Cliente = new ClienteDAO();
                 include_once "../php/alterarsenha.php";
                 break;
 
+            case 'produto/':
+                include_once "../php/produto.php";
+                break;
+
             case 'logaut/':
                 $Cliente->logaut();
                 break;
