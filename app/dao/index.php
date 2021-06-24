@@ -24,7 +24,8 @@ Class ClassIndex extends Dao{
                 'cpf' => $row['CLIENTE_CPF'],
                 'razao' => $row['CLIENTE_NOME'],
                 'nome' => $row['CLIENTE_NOME'],
-                'email' => $row['CLIENTE_EMAIL']
+                'email' => $row['CLIENTE_EMAIL'],
+                'sap' => $row['CLIENTE_CODSAP']
 
             );
 
@@ -39,5 +40,3 @@ Class ClassIndex extends Dao{
     }
 
 }
-
-?>
