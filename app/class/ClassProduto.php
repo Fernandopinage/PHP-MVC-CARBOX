@@ -3,9 +3,10 @@
 Class ClassProduo{
 
     private $id;
-    private $cod;
+    private $produto;
     private $desc;
     private $unidade;
+    private $quantidade;
 
 
     public function getID(){
@@ -18,6 +19,18 @@ Class ClassProduo{
         $this->id =$id;
         
     }
+
+    public function getProduto(){
+
+        return $this->produto;
+    }
+    
+    public function setProduto($produto){
+
+        $this->produto =$produto;
+        
+    }
+
     public function getCod(){
 
         return $this->cod;
@@ -47,6 +60,17 @@ Class ClassProduo{
     public function setUnidade($unidade){
 
         $this->unidade =$unidade;
+        
+    }
+
+    public function getQuantidade(){
+
+        return $this->quantidade;
+    }
+    
+    public function setQuantidade($quantidade){
+
+        $this->quantidade =$quantidade;
         
     }
 }

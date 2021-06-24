@@ -8,12 +8,13 @@ include_once "../dao/ProdutoDAO.php";
 if (isset($_POST['produtosalva'])) {
 
 
-    if ($_POST['codigo'] != '' and $_POST['desc'] != ''  and $_POST['unidade'] != '') {
+    if (isset($_POST['produto'])) {
 
         $ClassProduto = new ClassProduo();
-        $ClassProduto->setCod($_POST['codigo']);
-        $ClassProduto->setDesc($_POST['desc']);
-        $ClassProduto->setUnidade($_POST['unidade']);
+        $ClassProduto->setProduto(implode(",",$_POST['produto']));
+        $ClassProduto->setDesc(implode(",",$_POST['desc']));
+        $ClassProduto->setQuantidade(implode(",",$_POST['quantidade']));
+        $ClassProduto->setUnidade(implode(",",$_POST['unidade']));
 
         $Produto = new ProdutoDAO();
         $Produto->insertProduto($ClassProduto);
@@ -48,9 +49,9 @@ if (isset($_POST['produtosalva'])) {
     </div>
     <div class="form-row">
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-4">
             <label for="inputEmail4">Produtos <span style="color: red;">*</span></label>
-            <select class="form-control form-control-sm" id="produto" name="produto">
+            <select class="form-control form-control-sm" id="produto">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -59,40 +60,40 @@ if (isset($_POST['produtosalva'])) {
             </select>
         </div>
         <div class="form-group col-md-4">
-            <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder="">
+            <label for="inputEmail4">Descrição</label>
+            <input type="text" class="form-control form-control-sm" id="desc" placeholder="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">Unidade de Médida</label>
+            <input type="text" class="form-control form-control-sm" id="unidade" placeholder="">
         </div>
         <div class="form-group col-md-1">
-            <label for="inputEmail4">Und. <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder="">
-        </div>
-        <div class="form-group col-md-1">
-            <label for="inputEmail4">Qtd. <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm is-invalid" id="quantidade" name="quantidade" placeholder="">
+            <label for="inputEmail4">Qtd.</label>
+            <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
         </div>
     </div>
 
-        
-   
-        <table class="table">
-            <thead class="thead"  style="background-color: #136132;color:white;">
-                <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Unidade</th>
-                    <th scope="col">Remover</th>
-                    <th scope="col">Remover</th>
-                </tr>
-            </thead>
-            <tbody id="lista">
-            
-            </tbody>
-        </table>
 
-   
+
+    <table class="table">
+        <thead class="thead" style="background-color: #136132;color:white;">
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Unidade</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Remover</th>
+            </tr>
+        </thead>
+        <tbody id="lista">
+
+        </tbody>
+    </table>
+
+
 
 
 
@@ -116,16 +117,20 @@ if (isset($_POST['produtosalva'])) {
 <script>
     var cont = 0;
 
-    
+
     $('#mais').click(function() {
         var produto = document.getElementById('produto').value;
         var desc = document.getElementById('desc').value;
         var unidade = document.getElementById('unidade').value;
         var quantidade = document.getElementById('quantidade').value;
 
-        $('#lista').append('<tr id="campo' + cont + '"> <th><input type="text" id="produto" name="produto[]" value="'+produto+'" placeholder=""></th> <td><input type="text"  id="desc" name="desc" value="'+desc+'" placeholder=""></td>  <td><input type="text"  id="unidade" name="unidade" value="'+unidade+'" placeholder=""></td> <td><input type="text"  id="quantidade" name="quantidade" value="'+quantidade+'" placeholder=""></td> </tr> ')
+        $('#lista').append('<tr id="campo' + cont + '"> <th><input type="text" id="produto" name="produto[]" value="' + produto + '" placeholder="" style="border:0px;" readonly></th> <td><input type="text"  id="desc" name="desc[]" value="' + desc + '" placeholder="" style="border:0px" readonly></td>  <td><input type="text"  id="unidade" name="unidade[]" value="' + unidade + '" placeholder="" style="border:0px" readonly></td> <td><input type="text"  id="quantidade" name="quantidade[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></td> <td><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></td> </tr> ')
 
         cont++
+        var produto = document.getElementById('produto').value ='';
+        var desc = document.getElementById('desc').value ='';
+        var unidade = document.getElementById('unidade').value ='';
+        var quantidade = document.getElementById('quantidade').value ='';
     });
 
     $("form").on("click", ".btn-danger", function() {
