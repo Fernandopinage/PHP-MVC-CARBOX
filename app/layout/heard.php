@@ -43,7 +43,7 @@
             Solicitar
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="?p=produto/">Pedido</a>
+              <a class="dropdown-item" href="?p=pedido/">Pedido</a>
             </div>
           </li>
 

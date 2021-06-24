@@ -5,7 +5,7 @@ include_once "../dao/PedidoDAO.php";
 
 
 
-if (isset($_POST['produtosalva'])) {
+if (isset($_POST['pedidoosalva'])) {
 
 
     if (isset($_POST['produto'])) {
@@ -95,7 +95,7 @@ if (isset($_POST['produtosalva'])) {
 
 
     <div class="text-right">
-        <button type="submit" class="btn btn-success" name="produtosalva">Salvar</button>
+        <button type="submit" class="btn btn-success" name="pedidoosalva">Salvar</button>
     </div>
 
     <div class="form-row">
