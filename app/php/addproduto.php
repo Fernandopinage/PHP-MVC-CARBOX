@@ -1,3 +1,14 @@
+<?php 
+
+ if(isset($_POST['produtosalvar'])){
+
+    echo "ok";
+ }
+
+
+
+?>
+
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
