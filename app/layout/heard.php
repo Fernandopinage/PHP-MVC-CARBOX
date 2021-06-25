@@ -26,7 +26,7 @@
 
   <?php
 
-  if (isset($_SESSION['valor']['nome'])) {
+  //if (isset($_SESSION['valor']['nome'])) {
     //var_dump($_SESSION['valor']['id']);
   ?>
 
@@ -61,7 +61,7 @@
         <ul class="navbar-nav text-right" style="margin-right: 60px;">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff; text-transform: uppercase;">
-              <?php echo $_SESSION['valor']['nome']; ?>
+              <?php //echo $_SESSION['valor']['nome']; ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="?p=alterarsenha/">Alterar Senha</a>
@@ -76,9 +76,9 @@
 
   <?php
 
-  } else {
+ // } else {
     //header("location: http://localhost/carbox/app/php/index.php");
-  }
+ // }
 
 
   ?>
