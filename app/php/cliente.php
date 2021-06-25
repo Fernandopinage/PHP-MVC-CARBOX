@@ -8,10 +8,10 @@ include_once "../dao/CompradorDAO.php";
 if (isset($_POST['clientesalva'])) {
 
 
-    if ($_POST['cnpj'] != '' and $_POST['razao'] != '' and  $_POST['email'] != '' and $_POST['sap'] != '') {
+    if ($_POST['cpf'] != '' and $_POST['razao'] != '' and  $_POST['email'] != '' and $_POST['sap'] != '') {
 
         $ClassCliente = new ClassCliente();
-        $ClassCliente->setCnpj($_POST['cnpj']);
+        $ClassCliente->setCnpj($_POST['cpf']);
         $ClassCliente->setRazao($_POST['razao']);
         $ClassCliente->setEmail($_POST['email']);
         $ClassCliente->setSap($_POST['sap']);
@@ -23,9 +23,11 @@ if (isset($_POST['clientesalva'])) {
         $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
         $ClassComprador->setEmail(implode(",", $_POST['comprador_nome']));
         $ClassComprador->setSenha(implode(",", $_POST['comprador_nome']));
+        $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
 
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($ClassComprador);
+        
     } else {
 ?>
         <script>
@@ -56,7 +58,7 @@ if (isset($_POST['clientesalva'])) {
 
         <div class="form-group col-md-4">
             <label for="inputEmail4">CNPJ <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm is-invalid" id="cnpj" name="cnpj" placeholder="">
+            <input type="text" class="form-control form-control-sm is-invalid" onfocus="javascript: retirarFormatacao(this);" onblur="javascript: formatarCampo(this);" name="cpf" id="cpf" placeholder="99.999.999/9999-99">
         </div>
         <div class="form-group col-md-8">
             <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
@@ -112,6 +114,7 @@ if (isset($_POST['clientesalva'])) {
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Senha</th>
+                <th scope="col">Status</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -128,6 +131,7 @@ if (isset($_POST['clientesalva'])) {
 
 </form>
 
+
 <script>
     $(document).ready(function() {
         $("#comprador_nome").attr('readonly', true);
@@ -141,7 +145,7 @@ if (isset($_POST['clientesalva'])) {
 
 $('#cnpj').change(function(){
 
-        var cnpj = document.getElementById('cnpj').value
+        var cnpj = document.getElementById('cpf').value
         if(cnpj != ''){
 
             
@@ -233,9 +237,10 @@ $('#cnpj').change(function(){
             var comprador_nome = document.getElementById('comprador_nome').value;
             var comprador_email = document.getElementById('comprador_email').value; 
             var comprador_senha = document.getElementById('comprador_senha').value;
+            var comprador_status = "Ativo";
 
 
-        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="'+comprador_nome+'" style="border:0px" readonly></th> <th scope="col"><input type="email"  id="comprador_email" name="comprador_email[]" value="'+comprador_email+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="'+comprador_senha+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="'+comprador_nome+'" style="border:0px" readonly></th> <th scope="col"><input type="email"  id="comprador_email" name="comprador_email[]" value="'+comprador_email+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="'+comprador_senha+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="'+comprador_status+'" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
 
         cont++
 
