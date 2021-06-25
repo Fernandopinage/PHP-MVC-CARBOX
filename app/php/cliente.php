@@ -69,7 +69,7 @@ if (isset($_POST['clientesalva'])) {
             <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="">
         </div>
         <div class="form-group col-md-10">
-            <label for="inputEmail4">Email<span style="color: red;">*</span></label>
+            <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
             <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="">
         </div>
     </div>
@@ -90,24 +90,35 @@ if (isset($_POST['clientesalva'])) {
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome[]" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="comprador_nome" name="" placeholder="">
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="comprador_email" name="comprador_email[]" placeholder="">
+            <input type="email" class="form-control form-control-sm" id="comprador_email" name="" placeholder="">
         </div>
         <div class="form-group col-md-3">
             <label for="inputEmail4">Senha </label>
-            <input type="text" class="form-control form-control-sm" id="comprador_senha" name="comprador_senha[]" placeholder="">
+            <input type="password" class="form-control form-control-sm" id="comprador_senha" name="" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
         </div>
     </div>
 
-    <div id="lista">
+    <table class="table">
+        <thead class="thead" style="background-color: #136132;color:white;">
+            <tr>
+                
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Senha</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="lista">
 
-    </div>
+        </tbody>
+    </table>
 
     <hr>
     <div class="text-right">
@@ -219,8 +230,12 @@ $('#cnpj').change(function(){
 
     $('#mais').click(function() {
 
+            var comprador_nome = document.getElementById('comprador_nome').value;
+            var comprador_email = document.getElementById('comprador_email').value; 
+            var comprador_senha = document.getElementById('comprador_senha').value;
 
-        $('#lista').append(' <div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-4"> <label for="inputEmail4">Nome <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome[]" placeholder=""></div> <div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_email" name="comprador_email[]" placeholder=""> </div> <div class="form-group col-md-3"> <label for="inputEmail4">Senha </label> <input type="text" class="form-control form-control-sm" id="comprador_senha" name="comprador_senha[]" placeholder=""> </div> <div class="form-group col-md-1"> <a class="btn btn-danger btn-sm"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a>  </div></div>');
+
+        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="'+comprador_nome+'" style="border:0px" readonly></th> <th scope="col"><input type="email"  id="comprador_email" name="comprador_email[]" value="'+comprador_email+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="'+comprador_senha+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
 
         cont++
 

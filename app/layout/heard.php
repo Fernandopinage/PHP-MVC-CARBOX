@@ -18,15 +18,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
-
   <title>Carbox</title>
 </head>
 
 <body>
 
+  
   <?php
 
-  //if (isset($_SESSION['valor']['nome'])) {
+ // if (isset($_SESSION['valor']['nome'])) {
     //var_dump($_SESSION['valor']['id']);
   ?>
 
@@ -75,10 +75,10 @@
     </nav>
 
   <?php
-
- // } else {
+/*
+  } else {
     //header("location: http://localhost/carbox/app/php/index.php");
- // }
-
+  }
+*/
 
   ?>
