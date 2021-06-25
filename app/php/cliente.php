@@ -6,14 +6,13 @@ include_once "../dao/ClienteDAO.php";
 if (isset($_POST['clientesalva'])) {
 
 
-    if ($_POST['cpf'] != '' and $_POST['razao'] != '' and $_POST['nome'] != '' and  $_POST['email'] != '' and $_POST['senha'] != '' and $_POST['sap'] != '') {
+    if ($_POST['cnpj'] != '' and $_POST['razao'] != '' and $_POST['nome'] != '' and  $_POST['email'] != '' and $_POST['sap'] != '') {
 
         $ClassCliente = new ClassCliente();
-        $ClassCliente->setCPF($_POST['cpf']);
+        $ClassCliente->setCnpj($_POST['cnpj']);
         $ClassCliente->setRazao($_POST['razao']);
         $ClassCliente->setNome($_POST['nome']);
         $ClassCliente->setEmail($_POST['email']);
-        $ClassCliente->setSenha(md5($_POST['senha']));
         $ClassCliente->setSap($_POST['sap']);
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
@@ -48,8 +47,8 @@ if (isset($_POST['clientesalva'])) {
         <div class="form-row">
 
             <div class="form-group col-md-4">
-                <label for="inputEmail4">CPF/CNPJ <span style="color: red;">*</span></label>
-                <input type="text" class="form-control form-control-sm is-invalid" id="cpf" name="cpf" placeholder="">
+                <label for="inputEmail4">CNPJ <span style="color: red;">*</span></label>
+                <input type="text" class="form-control form-control-sm is-invalid" id="cnpj" name="cnpj" placeholder="">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
@@ -71,26 +70,17 @@ if (isset($_POST['clientesalva'])) {
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Senha<span style="color: red;">*</span></label>
-                <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="">
+            <div class="form-group col-md-8">
+                <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Confirmar Senha<span style="color: red;">*</span></label>
-                <input type="password" class="form-control form-control-sm is-invalid" id="senha2" name="senha2" placeholder="">
-            </div>
-            <p id="obrigatorio"></p>
         </div>
+
+        <hr>
+
+
         <div class="text-right">
 
             <button type="submit" class="btn btn-success" name="clientesalva">Salvar</button>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-8">
-                <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
-
-            </div>
-
         </div>
 
     </form>
@@ -156,32 +146,6 @@ if (isset($_POST['clientesalva'])) {
         } else {
             $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
-        }
-
-    });
-
-    $("#senha").change(function() {
-
-        if (document.getElementById('senha').value != "") {
-            $('#senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-            var obg = document.getElementById('obrigatorio').innerHTML = "";
-        } else {
-            $('#senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-
-    $("#senha2").change(function() {
-
-        if (document.getElementById('senha').value === document.getElementById('senha2').value) {
-            $('#senha2').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-            var obg = document.getElementById('obrigatorio').innerHTML = "";
-        } else {
-            $('#senha2').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-            var obg = document.getElementById('obrigatorio').innerHTML = "Os campos <strong style = 'color:red;'>Senha</strong> é <strong style = 'color:red;'>Confirmar Senha</strong> devem ser iguais";
-
-            document.getElementById('senha2').value = '';
         }
 
     });

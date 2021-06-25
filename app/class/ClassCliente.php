@@ -3,11 +3,10 @@
 Class ClassCliente{
 
     private $id;
-    private $CPF;
+    private $CNPJ;
     private $razao;
     private $nome;
     private $email;
-    private $senha;
     private $sap;
 
     public function getID(){
@@ -21,14 +20,14 @@ Class ClassCliente{
         
     }
 
-    public function getCPF(){
+    public function getCnpj(){
 
-        return $this->CPF;
+        return $this->CNPJ;
     }
     
-    public function setCPF($CPF){
+    public function setCnpj($CNPJ){
 
-        $this->CPF =$CPF;
+        $this->CNPJ =$CNPJ;
         
     }
     
@@ -62,17 +61,6 @@ Class ClassCliente{
     public function setEmail($email){
 
         $this->email =$email;
-        
-    }
-
-    public function getSenha(){
-
-        return $this->senha;
-    }
-    
-    public function setSenha($senha){
-
-        $this->senha =$senha;
         
     }
     
