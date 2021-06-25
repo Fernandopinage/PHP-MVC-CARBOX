@@ -1,5 +1,5 @@
 <?php include_once "../layout/heard.php";
-      include_once "../dao/ClienteDAO.php";
+include_once "../dao/ClienteDAO.php";
 $Cliente = new ClienteDAO();
 
 ?>
@@ -25,11 +25,11 @@ $Cliente = new ClienteDAO();
             case 'pedido/':
                 include_once "../php/pedido.php";
                 break;
-            
+
             case 'add/produto/':
-                include_once "../php/addproduto.php";   
+                include_once "../php/addproduto.php";
                 break;
-         
+
 
             case 'logaut/':
                 $Cliente->logaut();

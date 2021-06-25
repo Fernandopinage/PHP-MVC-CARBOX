@@ -15,7 +15,7 @@ class ClienteDAO extends DAO
         $insert = $this->con->prepare($sql);
         $insert->bindValue(":CLIENTE_CNPJ", $ClassCliente->getCnpj());
         $insert->bindValue(":CLIENTE_RAZAO", $ClassCliente->getRazao());
-        $insert->bindValue(":CLIENTE_FANTASIA", $ClassCliente->getNome());
+        $insert->bindValue(":CLIENTE_FANTASIA", "");
         $insert->bindValue(":CLIENTE_EMAIL", $ClassCliente->getEmail());
         $insert->bindValue(":CLIENTE_CODSAP", $ClassCliente->getSap());
         $insert->execute();

@@ -5,7 +5,6 @@ Class ClassCliente{
     private $id;
     private $CNPJ;
     private $razao;
-    private $nome;
     private $email;
     private $sap;
 
@@ -39,17 +38,6 @@ Class ClassCliente{
     public function setRazao($razao){
 
         $this->razao =$razao;
-        
-    }
-
-    public function getNome(){
-
-        return $this->nome;
-    }
-    
-    public function setNome($nome){
-
-        $this->nome =$nome;
         
     }
 
