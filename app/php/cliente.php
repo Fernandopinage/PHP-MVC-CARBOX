@@ -3,6 +3,7 @@ include_once "../layout/heard.php";
 include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
 include_once "../class/ClassComprador.php";
+include_once "../dao/CompradorDAO.php";
 
 if (isset($_POST['clientesalva'])) {
 
@@ -19,15 +20,12 @@ if (isset($_POST['clientesalva'])) {
 
         $ClassComprador =  new ClassComprador();
         $ClassComprador->setCnpj($_POST['cnpj']);
-        $ClassComprador->setNome(implode(",",$_POST['comprador_nome']));
-        $ClassComprador->setEmail(implode(",",$_POST['comprador_nome']));
-        $ClassComprador->setSenha(implode(",",$_POST['comprador_nome']));
+        $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
+        $ClassComprador->setEmail(implode(",", $_POST['comprador_nome']));
+        $ClassComprador->setSenha(implode(",", $_POST['comprador_nome']));
 
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($ClassComprador);
-
-   
-
     } else {
 ?>
         <script>
@@ -108,7 +106,7 @@ if (isset($_POST['clientesalva'])) {
     </div>
 
     <div id="lista">
-    
+
     </div>
 
     <hr>
@@ -118,6 +116,38 @@ if (isset($_POST['clientesalva'])) {
     </div>
 
 </form>
+
+<script>
+    $(document).ready(function() {
+        $("#comprador_nome").attr('readonly', true);
+        $("#comprador_email").attr('readonly', true);
+        $("#comprador_senha").attr('readonly', true);
+        $('#mais').hide();
+    });
+</script>
+
+<script>
+
+$('#cnpj').change(function(){
+
+        var cnpj = document.getElementById('cnpj').value
+        if(cnpj != ''){
+
+            
+            $("#comprador_nome").attr('readonly', false);
+            $("#comprador_email").attr('readonly', false);
+            $("#comprador_senha").attr('readonly', false);
+            $('#mais').show();
+        }else{
+        $("#comprador_nome").attr('readonly', true);
+        $("#comprador_email").attr('readonly', true);
+        $("#comprador_senha").attr('readonly', true);
+        $('#mais').hide();
+        }
+
+});
+
+</script>
 
 
 <script>
@@ -188,7 +218,7 @@ if (isset($_POST['clientesalva'])) {
 
 
     $('#mais').click(function() {
-  
+
 
         $('#lista').append(' <div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-4"> <label for="inputEmail4">Nome <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome[]" placeholder=""></div> <div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_email" name="comprador_email[]" placeholder=""> </div> <div class="form-group col-md-3"> <label for="inputEmail4">Senha </label> <input type="text" class="form-control form-control-sm" id="comprador_senha" name="comprador_senha[]" placeholder=""> </div> <div class="form-group col-md-1"> <a class="btn btn-danger btn-sm"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a>  </div></div>');
 
