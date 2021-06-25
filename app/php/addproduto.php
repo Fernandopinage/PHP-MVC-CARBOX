@@ -1,5 +1,5 @@
 <?php
-
+include_once "../dao/Produto.DAO.php";
 include_once "../class/ClassProduto.php";
 
 if (isset($_POST['produtosalvar'])) {
@@ -10,9 +10,8 @@ if (isset($_POST['produtosalvar'])) {
     $ClassProduto->setProduto($_POST['desc']);
     $ClassProduto->setFicha($_POST['ficha']);
 
-    echo "<pre>";
-    var_dump($ClassProduto);
-    echo "</pre>";
+    $Produto = new ProdutoDAO();
+    $Produto->insertProduto($ClassProduto);
 
     
 }
