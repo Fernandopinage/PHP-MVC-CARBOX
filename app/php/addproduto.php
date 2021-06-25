@@ -30,7 +30,10 @@ if (isset($_POST['produtosalvar'])) {
             <label for="inputEmail4">Descrição<span style="color: red;">*</span></label>
             <input type="text" class="form-control form-control-sm" id="desc" name="desc" placeholder="">
         </div>
-
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">Unidade</label>
+            <input type="text" class="form-control form-control-sm" id="desc" name="desc" placeholder="">
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">

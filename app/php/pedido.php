@@ -11,10 +11,10 @@ if (isset($_POST['pedidoosalva'])) {
     if (isset($_POST['produto'])) {
 
         $ClassProduto = new ClassPedido();
-        $ClassProduto->setProduto(implode(",",$_POST['produto']));
+        $ClassProduto->setProduto(implode(",", $_POST['produto']));
         //$ClassProduto->setDesc(implode(",",$_POST['desc']));
-        $ClassProduto->setQuantidade(implode(",",$_POST['quantidade']));
-        $ClassProduto->setUnidade(implode(",",$_POST['unidade']));
+        $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
+        $ClassProduto->setUnidade(implode(",", $_POST['unidade']));
 
         $Produto = new PedidoDAO();
         $Produto->insertProduto($ClassProduto);
@@ -36,18 +36,16 @@ if (isset($_POST['pedidoosalva'])) {
 }
 
 
-
-
 ?>
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
-        <h2> NOVO PEDIDO </h2>
+        <h2> ORÇAMENTO </h2>
         <hr>
     </div>
     <div class="form-row">
 
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-6">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
             <select class="form-control form-control-sm" id="produto">
                 <option>1</option>
@@ -57,13 +55,16 @@ if (isset($_POST['pedidoosalva'])) {
                 <option>5</option>
             </select>
         </div>
-
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">UM.</label>
-            <input type="text" class="form-control form-control-sm" id="unidade" placeholder="">
+        <div class="form-group col-md-1">
+            <label for="inputEmail4">Cód. SAP</label>
+            <input type="text" class="form-control form-control-sm" id="codsap" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <label for="inputEmail4">Qtd.</label>
+            <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">Ficha Técnica</label>
             <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-1">
@@ -76,11 +77,10 @@ if (isset($_POST['pedidoosalva'])) {
     <table class="table">
         <thead class="thead" style="background-color: #136132;color:white;">
             <tr>
-                
+
                 <th scope="col">Descrição</th>
-                <th scope="col">Unidade</th>
                 <th scope="col">Quantidade</th>
-                <th scope="col">Remover</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody id="lista">
