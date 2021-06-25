@@ -6,8 +6,9 @@ class ClassProduto{
     private $id;
     private $produto;
     private $unidade;
-    private $quantidade;
+    private $sap;
     private $img;
+    private $ficha;
     
     
     public function getID(){
@@ -41,14 +42,14 @@ class ClassProduto{
         $this->unidade =$unidade;
         
     }
-    public function getQuantidade(){
+    public function getSap(){
 
-        return $this->quantidade;
+        return $this->sap;
     }
     
-    public function setQuantidade($quantidade){
+    public function setSap($sap){
 
-        $this->quantidade =$quantidade;
+        $this->sap =$sap;
         
     }
 
@@ -60,6 +61,17 @@ class ClassProduto{
     public function setImg($img){
 
         $this->img =$img;
+        
+    }
+
+    public function getFicha(){
+
+        return $this->ficha;
+    }
+    
+    public function setFicha($ficha){
+
+        $this->ficha =$ficha;
         
     }
     

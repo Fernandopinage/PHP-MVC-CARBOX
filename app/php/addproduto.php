@@ -1,8 +1,20 @@
 <?php
 
+include_once "../class/ClassProduto.php";
+
 if (isset($_POST['produtosalvar'])) {
 
-    echo "ok";
+    $ClassProduto = new ClassProduto();
+    $ClassProduto->setImg($_POST['img']);
+    $ClassProduto->setSap($_POST['sap']);
+    $ClassProduto->setProduto($_POST['desc']);
+    $ClassProduto->setFicha($_POST['ficha']);
+
+    echo "<pre>";
+    var_dump($ClassProduto);
+    echo "</pre>";
+
+    
 }
 
 
