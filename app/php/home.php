@@ -4,7 +4,7 @@ $Cliente = new ClienteDAO();
 
 ?>
 <link rel="stylesheet" href="../css/home.css">
-<div class="container-fluid">
+<div class="container">
     <?php
 
     if (isset($_GET['p'])) {

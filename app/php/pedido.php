@@ -40,8 +40,6 @@ if (isset($_POST['pedidoosalva'])) {
 
 ?>
 <link rel="stylesheet" href="../css/cliente.css">
-
-
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
         <h2> NOVO PEDIDO </h2>
@@ -111,29 +109,5 @@ if (isset($_POST['pedidoosalva'])) {
 
 
 
-<script>
-    var cont = 0;
-
-
-    $('#mais').click(function() {
-        var produto = document.getElementById('produto').value;
-        var unidade = document.getElementById('unidade').value;
-        var quantidade = document.getElementById('quantidade').value;
-
-        $('#lista').append('<tr id="campo' + cont + '"> <th><input type="text" id="produto" name="produto[]" value="' + produto + '" placeholder="" style="border:0px;" readonly></th> <td><input type="text"  id="unidade" name="unidade[]" value="' + unidade + '" placeholder="" style="border:0px" readonly></td> <td><input type="text"  id="quantidade" name="quantidade[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></td> <td><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></td> </tr> ')
-
-        cont++
-        var produto = document.getElementById('produto').value ='';
-        var unidade = document.getElementById('unidade').value ='';
-        var quantidade = document.getElementById('quantidade').value ='';
-    });
-
-    $("form").on("click", ".btn-danger", function() {
-
-        var btn_id = $(this).attr("id");
-        $('#campo' + btn_id + '').remove();
-        console.log(btn_id)
-    });
-</script>
 
 <?php include_once "../layout/footer.php"; ?>

@@ -2,6 +2,7 @@
 include_once "../layout/heard.php";
 include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
+include_once "../class/ClassComprador.php";
 
 if (isset($_POST['clientesalva'])) {
 
@@ -15,6 +16,18 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setSap($_POST['sap']);
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
+
+        $ClassComprador =  new ClassComprador();
+        $ClassComprador->setCnpj($_POST['cnpj']);
+        $ClassComprador->setNome(implode(",",$_POST['comprador_nome']));
+        $ClassComprador->setEmail(implode(",",$_POST['comprador_nome']));
+        $ClassComprador->setSenha(implode(",",$_POST['comprador_nome']));
+
+        $Comprador = new CompradorDAO();
+        $Comprador->inserComprador($ClassComprador);
+
+   
+
     } else {
 ?>
         <script>
@@ -36,8 +49,6 @@ if (isset($_POST['clientesalva'])) {
 ?>
 
 <link rel="stylesheet" href="../css/cliente.css">
-
-
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
         <h2> CADASTRO CLIENTE </h2>
@@ -81,19 +92,23 @@ if (isset($_POST['clientesalva'])) {
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome[]" placeholder="">
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="razao" name="razao" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="comprador_email" name="comprador_email[]" placeholder="">
         </div>
         <div class="form-group col-md-3">
             <label for="inputEmail4">Senha </label>
-            <input type="text" class="form-control form-control-sm" id="nome" name="nome" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="comprador_senha" name="comprador_senha[]" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
         </div>
+    </div>
+
+    <div id="lista">
+    
     </div>
 
     <hr>
@@ -166,6 +181,26 @@ if (isset($_POST['clientesalva'])) {
 
         }
 
+    });
+</script>
+<script>
+    var cont = 0;
+
+
+    $('#mais').click(function() {
+  
+
+        $('#lista').append(' <div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-4"> <label for="inputEmail4">Nome <span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_nome" name="comprador_nome[]" placeholder=""></div> <div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label> <input type="text" class="form-control form-control-sm" id="comprador_email" name="comprador_email[]" placeholder=""> </div> <div class="form-group col-md-3"> <label for="inputEmail4">Senha </label> <input type="text" class="form-control form-control-sm" id="comprador_senha" name="comprador_senha[]" placeholder=""> </div> <div class="form-group col-md-1"> <a class="btn btn-danger btn-sm"  id="' + cont + '" style="margin-top:26px;color: #fff;"> - </a>  </div></div>');
+
+        cont++
+
+    });
+
+    $("form").on("click", ".btn-danger", function() {
+
+        var btn_id = $(this).attr("id");
+        $('#campo' + btn_id + '').remove();
+        console.log(btn_id)
     });
 </script>
 
