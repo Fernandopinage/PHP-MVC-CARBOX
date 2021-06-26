@@ -143,7 +143,9 @@ if (isset($_POST['clientesalva'])) {
 
 <script>
 
-$('#cnpj').change(function(){
+$('#cpf').change(function(){
+
+        
 
         var cnpj = document.getElementById('cpf').value
         if(cnpj != ''){
@@ -154,7 +156,7 @@ $('#cnpj').change(function(){
             $("#comprador_senha").attr('readonly', false);
             $('#mais').show();
         }else{
-        $("#comprador_nome").attr('readonly', true);
+        $("#comprador_nome").attr('readonly', false);
         $("#comprador_email").attr('readonly', true);
         $("#comprador_senha").attr('readonly', true);
         $('#mais').hide();
