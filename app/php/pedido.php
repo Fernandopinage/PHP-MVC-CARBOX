@@ -4,6 +4,9 @@ include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 
 
+$Produto = new PedidoDAO();
+$dado = $Produto->selectProduto();
+
 
 if (isset($_POST['pedidoosalva'])) {
 
@@ -16,7 +19,6 @@ if (isset($_POST['pedidoosalva'])) {
         $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
         $ClassProduto->setUnidade(implode(",", $_POST['unidade']));
 
-        $Produto = new PedidoDAO();
         $Produto->insertProduto($ClassProduto);
     } else {
 ?>
@@ -48,11 +50,17 @@ if (isset($_POST['pedidoosalva'])) {
         <div class="form-group col-md-6">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
             <select class="form-control form-control-sm" id="produto">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <?php
+
+                foreach ($dado as $dados) {
+                ?>
+                <option value="<?php echo  $dados->getID(); ?>"><?php echo $dados->getProduto(); ?></option>
+
+                <?php
+
+                }
+
+                ?>
             </select>
         </div>
         <div class="form-group col-md-1">
@@ -106,8 +114,7 @@ if (isset($_POST['pedidoosalva'])) {
     <hr>
 
 </form>
-
-
-
-
 <?php include_once "../layout/footer.php"; ?>
+
+<script>
+</script>

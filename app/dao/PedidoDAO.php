@@ -2,6 +2,7 @@
 
 include_once "../dao/DAO.php";
 include_once "../class/ClassPedido.php";
+include_once "../class/ClassProduto.php";
 
 
 class PedidoDAO extends DAO{
@@ -16,6 +17,24 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_UNIDADE", $ClassProduto->getUnidade());
         $insert->bindValue(":PEDIDO_QUANTIDADE", $ClassProduto->getQuantidade());
         $insert->execute();
+    }
+
+    public function selectProduto(){
+     
+        $sql = "SELECT * FROM `produto` WHERE 1";
+        $select = $this->con->prepare($sql);
+        $select->execute();
+        $array = array();
+
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $ClassProduto = new ClassProduto();
+            $ClassProduto->setID($row['PRODUTO_ID']);
+            $ClassProduto->setProduto($row['PRODUTO_PRODUTO']);
+            $array[] = $ClassProduto;
+        }
+        return $array;
+
     }
 }
 
