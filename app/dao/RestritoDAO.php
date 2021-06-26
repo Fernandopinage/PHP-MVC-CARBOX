@@ -1,15 +1,15 @@
 <?php 
 include_once "../dao/DAO.php";
 include_once "../class/ClassRestrito.php";
-include_once "../dao/DAO.php";
 
-class RestritoDAO extends DAO{
+
+class RestritoDAO  extends DAO{
 
 
     public function insertRestrito(ClassRestrito $ClassRestrito){
 
-        $sql = "INSERT INTO `restrito`(`RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`) 
-        VALUES (:ESTRITO_NOME, :RESTRITO_SENHA, :RESTRITO_EMAIL) ";
+        $sql = "INSERT INTO `restrito`(`RESTRITO_ID`, `RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`) 
+        VALUES (null, :RESTRITO_NOME, :RESTRITO_SENHA, :RESTRITO_EMAIL) ";
         $insert = $this->con->prepare($sql);
 
 
@@ -18,7 +18,7 @@ class RestritoDAO extends DAO{
         $insert->bindValue(":RESTRITO_EMAIL", $ClassRestrito->getEmail());
         $insert->execute();
 
-      var_dump($ClassRestrito);
+      
     }
 
 }

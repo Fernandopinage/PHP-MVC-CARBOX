@@ -10,7 +10,7 @@ if(isset($_POST['restritosalvar'])){
         $ClassRestrito = new ClassRestrito();
         $ClassRestrito->setNome($_POST['nome']);
         $ClassRestrito->setEmail($_POST['email']);
-        $ClassRestrito->setSenha($_POST['senha']);
+        $ClassRestrito->setSenha(md5($_POST['senha']));
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
        
