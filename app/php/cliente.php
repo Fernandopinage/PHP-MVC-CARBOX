@@ -19,15 +19,14 @@ if (isset($_POST['clientesalva'])) {
         $Cliente->insertCliente($ClassCliente);
 
         $ClassComprador =  new ClassComprador();
-        $ClassComprador->setCnpj($_POST['cnpj']);
+        //$ClassComprador->setCnpj($_POST['cnpj']);
         $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
-        $ClassComprador->setEmail(implode(",", $_POST['comprador_nome']));
-        $ClassComprador->setSenha(implode(",", $_POST['comprador_nome']));
+        $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
+        $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
         $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
 
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($ClassComprador);
-        
     } else {
 ?>
         <script>
@@ -110,7 +109,7 @@ if (isset($_POST['clientesalva'])) {
     <table class="table">
         <thead class="thead" style="background-color: #136132;color:white;">
             <tr>
-                
+
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Senha</th>
@@ -142,28 +141,26 @@ if (isset($_POST['clientesalva'])) {
 </script>
 
 <script>
+    $('#cpf').change(function() {
 
-$('#cpf').change(function(){
 
-        
 
         var cnpj = document.getElementById('cpf').value
-        if(cnpj != ''){
+        if (cnpj != '') {
 
-            
+
             $("#comprador_nome").attr('readonly', false);
             $("#comprador_email").attr('readonly', false);
             $("#comprador_senha").attr('readonly', false);
             $('#mais').show();
-        }else{
-        $("#comprador_nome").attr('readonly', false);
-        $("#comprador_email").attr('readonly', true);
-        $("#comprador_senha").attr('readonly', true);
-        $('#mais').hide();
+        } else {
+            $("#comprador_nome").attr('readonly', false);
+            $("#comprador_email").attr('readonly', true);
+            $("#comprador_senha").attr('readonly', true);
+            $('#mais').hide();
         }
 
-});
-
+    });
 </script>
 
 
@@ -236,15 +233,21 @@ $('#cpf').change(function(){
 
     $('#mais').click(function() {
 
-            var comprador_nome = document.getElementById('comprador_nome').value;
-            var comprador_email = document.getElementById('comprador_email').value; 
-            var comprador_senha = document.getElementById('comprador_senha').value;
-            var comprador_status = "Ativo";
+        var comprador_nome = document.getElementById('comprador_nome').value;
+        var comprador_email = document.getElementById('comprador_email').value;
+        var comprador_senha = document.getElementById('comprador_senha').value;
+        var comprador_status = "Ativo";
 
 
-        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="'+comprador_nome+'" style="border:0px" readonly></th> <th scope="col"><input type="email"  id="comprador_email" name="comprador_email[]" value="'+comprador_email+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="'+comprador_senha+'" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="'+comprador_status+'" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
 
         cont++
+
+        var comprador_nome = document.getElementById('comprador_nome').value="";
+        var comprador_email = document.getElementById('comprador_email').value="";
+        var comprador_senha = document.getElementById('comprador_senha').value="";
+        var comprador_status = "Ativo";
+
 
     });
 
