@@ -7,6 +7,9 @@ Class ClassPedido{
     private $desc;
     private $unidade;
     private $quantidade;
+    private $razao;
+    private $data;
+    private $sap;
 
 
     public function getID(){
@@ -71,6 +74,36 @@ Class ClassPedido{
     public function setQuantidade($quantidade){
 
         $this->quantidade =$quantidade;
+        
+    }
+    public function getRazao(){
+
+        return $this->razao;
+    }
+    
+    public function setRazao($razao){
+
+        $this->razao =$razao;
+        
+    }
+    public function getData(){
+
+        return $this->data;
+    }
+    
+    public function setData($data){
+
+        $this->data =$data;
+        
+    }
+    public function getSap(){
+
+        return $this->sap;
+    }
+    
+    public function setSap($sap){
+
+        $this->sap =$sap;
         
     }
 }

@@ -2,6 +2,9 @@
 include_once "../layout/heard.php";
 include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
+include_once "../function/numeroOrcamento.php";
+
+$GerarNumero = new GerarNumero();
 
 
 $Produto = new PedidoDAO();
@@ -45,16 +48,31 @@ if (isset($_POST['pedidoosalva'])) {
         <h2> ORÇAMENTO </h2>
         <hr>
     </div>
-    <div class="form-row">
 
-        <div class="form-group col-md-6">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputEmail4">Número do Orçamento</label>
+            <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orçamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputEmail4">Data</label>
+            <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d-m-Y') ?>" placeholder="" readonly>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputEmail4">Cliente</label>
+            <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="razao" readonly>
+        </div>
+    </div>
+    <hr>
+    <div class="form-row">
+        <div class="form-group col-md-5">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
             <select class="form-control form-control-sm" id="produto">
                 <?php
 
                 foreach ($dado as $dados) {
                 ?>
-                <option value="<?php echo  $dados->getID(); ?>"><?php echo $dados->getProduto(); ?></option>
+                    <option value="<?php echo  $dados->getID(); ?>"><?php echo $dados->getProduto(); ?></option>
 
                 <?php
 
@@ -63,21 +81,22 @@ if (isset($_POST['pedidoosalva'])) {
                 ?>
             </select>
         </div>
-        <div class="form-group col-md-1">
-            <label for="inputEmail4">Cód. SAP</label>
-            <input type="text" class="form-control form-control-sm" id="codsap" placeholder="">
-        </div>
+
         <div class="form-group col-md-1">
             <label for="inputEmail4">Qtd.</label>
             <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-2">
-            <label for="inputEmail4">Ficha Técnica</label>
-            <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
+            <a href="" class="btnk btn-success">link</a>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputEmail4">Imagem do Produto</label>
+            <input type="text" class="form-control form-control-sm" id="img"placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
         </div>
+        <input type="hidden" class="form-control form-control-sm" id="codsap" placeholder="">
     </div>
 
 

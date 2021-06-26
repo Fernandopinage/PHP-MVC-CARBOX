@@ -10,12 +10,16 @@ class PedidoDAO extends DAO{
 
     public function insertProduto($ClassProduto){
 
-        $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`) VALUES (null, :PEDIDO_DESC, :PEDIDO_UNIDADE, :PEDIDO_PRODUTO, :PEDIDO_QUANTIDADE)";
+        $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`)
+         VALUES (null, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`) ";
         $insert = $this->con->prepare($sql);
-        $insert->bindValue(":PEDIDO_PRODUTO", $ClassProduto->getProduto());
         $insert->bindValue(":PEDIDO_DESC", '');
         $insert->bindValue(":PEDIDO_UNIDADE", $ClassProduto->getUnidade());
+        $insert->bindValue(":PEDIDO_PRODUTO", $ClassProduto->getProduto());
         $insert->bindValue(":PEDIDO_QUANTIDADE", $ClassProduto->getQuantidade());
+        $insert->bindValue(":PEDIDO_DATAEMISSAO", "");
+        $insert->bindValue(":PEDIDO_RAZAO", "");
+        $insert->bindValue(":PEDIDO_CODSAP", "");
         $insert->execute();
     }
 
