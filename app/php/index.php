@@ -1,13 +1,17 @@
-<?php include_once "../layout/heard.php";
-include_once "../class/ClassCliente.php";
+<?php 
+include_once "../layout/heard.php";
+include_once "../class/ClassRestrito.php";
 include_once "../dao/index.php";
+
+
 if (isset($_POST['acessar'])) {
 
-    $ClassCliente = new ClassCliente();
-    $ClassCliente->setEmail($_POST['valor']);
-    $ClassCliente->setSenha(md5($_POST['password']));
-    $Cliente = new ClassIndex();
-    $Cliente->login($ClassCliente);
+    $ClassRestrito = new ClassRestrito();
+    $ClassRestrito->setEmail($_POST['valor']);
+    $ClassRestrito->setSenha(md5($_POST['password']));
+
+    
+
 }
 
 ?>

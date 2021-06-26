@@ -7,7 +7,7 @@ Class ClassIndex extends Dao{
     public function login(ClassCliente $ClassCliente)
     {
         
-        
+        /*
         $sql = "SELECT * FROM `cliente` WHERE  CLIENTE_EMAIL = :CLIENTE_EMAIL  and  CLIENTE_SENHA = :CLIENTE_SENHA";
         $select = $this->con->prepare($sql);
         $select->bindValue(':CLIENTE_EMAIL', $ClassCliente->getEmail());
@@ -35,7 +35,7 @@ Class ClassIndex extends Dao{
             header('location: ../php/index.php');
             
         }
-        
+        */
         
     }
 

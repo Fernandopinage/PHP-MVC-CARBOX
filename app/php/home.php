@@ -30,6 +30,10 @@ $Cliente = new ClienteDAO();
                 include_once "../php/addproduto.php";
                 break;
 
+            case 'add/restrito/':
+                include_once "../php/addrestrito.php";
+                break;
+
 
             case 'logaut/':
                 $Cliente->logaut();

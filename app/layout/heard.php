@@ -55,6 +55,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="?p=cliente/">Cliente</a>
               <a class="dropdown-item" href="?p=add/produto/">Produto</a>
+              <a class="dropdown-item" href="?p=add/restrito/">Restrito</a>
             </div>
           </li>
         </ul>
