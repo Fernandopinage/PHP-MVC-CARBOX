@@ -44,7 +44,7 @@
             Solicitar
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="?p=pedido/">Pedido</a>
+              <a class="dropdown-item" href="?p=pedido/">Orçamento</a>
             </div>
           </li>
 
