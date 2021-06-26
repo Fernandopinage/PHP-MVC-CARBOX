@@ -13,7 +13,7 @@ if (isset($_POST['produtosalvar'])) {
     $Produto = new ProdutoDAO();
     $Produto->insertProduto($ClassProduto);
 
-    
+    $_UP[''];
 }
 
 

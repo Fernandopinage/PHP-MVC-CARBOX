@@ -60,7 +60,7 @@ if (isset($_POST['pedidoosalva'])) {
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">Cliente</label>
-            <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="razao" readonly>
+            <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="empresa teste" readonly>
         </div>
     </div>
     <hr>
