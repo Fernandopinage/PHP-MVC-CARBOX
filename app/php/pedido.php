@@ -55,11 +55,11 @@ if (isset($_POST['pedidoosalva'])) {
             <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orçamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
         </div>
         <div class="form-group col-md-3">
-            <label for="inputEmail4">Data</label>
+            <label for="inputEmail4">Data de Emissão</label>
             <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d-m-Y') ?>" placeholder="" readonly>
         </div>
         <div class="form-group col-md-4">
-            <label for="inputEmail4">Cliente</label>
+            <label for="inputEmail4">Nome do Cliente</label>
             <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="empresa teste" readonly>
         </div>
     </div>
@@ -84,10 +84,10 @@ if (isset($_POST['pedidoosalva'])) {
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">Qtd.</label>
-            <input type="text" class="form-control form-control-sm" id="quantidade" placeholder="">
+            <input type="number" min="1" max="999"  class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-2">
-            <a href="" class="btnk btn-success">link</a>
+            <a type="button" class="btn btn-primary btn-sm"  style="margin-top: 28px;">Ficha Técnica</a>
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">Imagem do Produto</label>

@@ -15,20 +15,37 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setRazao($_POST['razao']);
         $ClassCliente->setEmail($_POST['email']);
         $ClassCliente->setSap($_POST['sap']);
-        $Cliente = new ClienteDAO();
-        $Cliente->insertCliente($ClassCliente);
 
-        $ClassComprador =  new ClassComprador();
-        //$ClassComprador->setCnpj($_POST['cnpj']);
-        $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
-        $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
-        $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
-        $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
+        if (isset($_POST['comprador_nome']) != '' and  isset($_POST['comprador_email']) != '' and  isset($_POST['comprador_senha']) != '' and isset($_POST['comprador_status']) != '') {
+            $Cliente = new ClienteDAO();
+            $Cliente->insertCliente($ClassCliente);
 
-        $Comprador = new CompradorDAO();
-        $Comprador->inserComprador($ClassComprador);
-    } else {
+            $ClassComprador =  new ClassComprador();
+            $ClassComprador->setCnpj($_POST['cnpj']);
+            $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
+            $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
+            $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
+            $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
+
+            $Comprador = new CompradorDAO();
+            $Comprador->inserComprador($ClassComprador);
+        } else {
 ?>
+            <script>
+                Swal.fire({
+                    title: 'Atenção!',
+                    text: 'Preenchar todos os campos obrigatorios!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                })
+            </script>
+
+        <?php
+
+
+        }
+    } else {
+        ?>
         <script>
             Swal.fire({
                 title: 'Error!',
@@ -50,7 +67,7 @@ if (isset($_POST['clientesalva'])) {
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
-        <h2> CADASTRO CLIENTE </h2>
+        <h2> CLIENTE </h2>
         <hr>
     </div>
     <div class="form-row">
@@ -91,15 +108,15 @@ if (isset($_POST['clientesalva'])) {
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="comprador_nome" name="" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="comprador_nome" placeholder="">
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-            <input type="email" class="form-control form-control-sm" id="comprador_email" name="" placeholder="">
+            <input type="email" class="form-control form-control-sm" id="comprador_email" placeholder="">
         </div>
         <div class="form-group col-md-3">
             <label for="inputEmail4">Senha </label>
-            <input type="password" class="form-control form-control-sm" id="comprador_senha" name="" placeholder="">
+            <input type="password" class="form-control form-control-sm" id="comprador_senha" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
@@ -243,9 +260,9 @@ if (isset($_POST['clientesalva'])) {
 
         cont++
 
-        var comprador_nome = document.getElementById('comprador_nome').value="";
-        var comprador_email = document.getElementById('comprador_email').value="";
-        var comprador_senha = document.getElementById('comprador_senha').value="";
+        var comprador_nome = document.getElementById('comprador_nome').value = "";
+        var comprador_email = document.getElementById('comprador_email').value = "";
+        var comprador_senha = document.getElementById('comprador_senha').value = "";
         var comprador_status = "Ativo";
 
 
