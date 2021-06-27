@@ -2,18 +2,25 @@
 include_once "../dao/Produto.DAO.php";
 include_once "../class/ClassProduto.php";
 
+  
+
+    if(isset($_FILES['imagem']['name']) or isset($_FILES['ficha']['name'])){
+        $imagem = $_FILES['imagem']['name'];
+        $ficha = $_FILES['ficha']['name'];
+    }
+
 if (isset($_POST['produtosalvar'])) {
 
     $ClassProduto = new ClassProduto();
-    $ClassProduto->setImg($_POST['img']);
+    $ClassProduto->setImg($imagem);
     $ClassProduto->setSap($_POST['sap']);
     $ClassProduto->setProduto($_POST['desc']);
-    $ClassProduto->setFicha($_POST['ficha']);
+    $ClassProduto->setFicha($ficha );
 
     $Produto = new ProdutoDAO();
     $Produto->insertProduto($ClassProduto);
 
-    $_UP[''];
+   
 }
 
 
@@ -21,7 +28,7 @@ if (isset($_POST['produtosalvar'])) {
 ?>
 
 <link rel="stylesheet" href="../css/cliente.css">
-<form id="form-cliente" action="" method="POST">
+<form id="form-cliente" action="" method="POST" enctype="multipart/form-data">
     <div class="text-left" id="title">
         <h2> CADASTRO PRODUTO </h2>
         <hr>
@@ -29,7 +36,7 @@ if (isset($_POST['produtosalvar'])) {
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Imagem <span style="color: red;">*</span></label>
-            <input type="file" class="form-control form-control-sm" id="img" name="img" placeholder="">
+            <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" placeholder="">
         </div>
     </div>
     <div class="form-row">
