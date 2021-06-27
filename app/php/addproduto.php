@@ -7,6 +7,10 @@ include_once "../class/ClassProduto.php";
     if(isset($_FILES['imagem']['name']) or isset($_FILES['ficha']['name'])){
         $imagem = $_FILES['imagem']['name'];
         $ficha = $_FILES['ficha']['name'];
+ 
+        $diretorio = '../imagens/';
+
+        move_uploaded_file($_FILES['imagem']['tmp_name'],$diretorio.$imagem);
     }
 
 if (isset($_POST['produtosalvar'])) {
