@@ -2,8 +2,6 @@
 include_once "../dao/Produto.DAO.php";
 include_once "../class/ClassProduto.php";
 
-
-
 if (isset($_FILES['imagem']['name'])) {
     $imagem = $_FILES['imagem']['name'];
     
@@ -16,7 +14,7 @@ if(isset($_FILES['ficha']['name'])){
     
     $ficha = $_FILES['ficha']['name'];
     move_uploaded_file($_FILES['ficha']['tmp_name'], $diretorioPDF . $ficha);
-    var_dump($_FILES['ficha']);
+    
 }
 
 
