@@ -68,6 +68,7 @@ if (isset($_POST['pedidoosalva'])) {
         <div class="form-group col-md-5">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
             <select class="form-control form-control-sm" id="produto">
+                <option selected></option>
                 <?php
 
                 foreach ($dado as $dados) {
@@ -84,14 +85,14 @@ if (isset($_POST['pedidoosalva'])) {
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">Qtd.</label>
-            <input type="number" min="1" max="999"  class="form-control form-control-sm" id="quantidade" placeholder="">
+            <input type="number" min="1" max="999" class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-2">
-            <a type="button" class="btn btn-primary btn-sm"  style="margin-top: 28px;">Ficha Técnica</a>
+            <a type="button" class="btn btn-primary btn-sm" style="margin-top: 28px;">Ficha Técnica</a>
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">Imagem do Produto</label>
-            <input type="text" class="form-control form-control-sm" id="img"placeholder="">
+            <input type="text" class="form-control form-control-sm" id="img" placeholder="">
         </div>
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
@@ -136,4 +137,27 @@ if (isset($_POST['pedidoosalva'])) {
 <?php include_once "../layout/footer.php"; ?>
 
 <script>
+    $('#produto').change(function() {
+
+        var select = document.getElementById('produto');
+        var produto = select.options[select.selectedIndex].value;
+
+        $('#contrato').html('');
+
+        $.ajax({
+
+            type: 'POST', // Formado de envio
+            url: '../ajax/produto.php', // URL para onde vai ser enviados
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $('#contrato').html(data);
+            }
+
+
+        });
+        return false;
+
+    });
 </script>

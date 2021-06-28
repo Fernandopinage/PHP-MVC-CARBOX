@@ -40,6 +40,18 @@ class PedidoDAO extends DAO{
         return $array;
 
     }
+
+    public function ListaProdutos($id){
+
+        $sql = "SELECT * FROM `produto` WHERE PRODUTO_ID ='.$id.' ";
+        $select = $this->con->prepare($sql);
+        $select->execute();
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+            $ClassProduto = new ClassProduto();
+        }
+        
+    }
+
 }
 
 
