@@ -21,7 +21,7 @@ if (isset($_POST['clientesalva'])) {
             $Cliente->insertCliente($ClassCliente);
 
             $ClassComprador =  new ClassComprador();
-            $ClassComprador->setCnpj($_POST['cnpj']);
+            $ClassComprador->setCnpj($_POST['cpf']);
             $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
             $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
             $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
