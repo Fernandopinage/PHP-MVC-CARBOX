@@ -27,5 +27,17 @@ form{
   p{
     font-size: 12px;
   }
+  input{
+    text-transform: uppercase;
+}
+select{
+    text-transform: uppercase;
+}
+option{
+    text-transform: uppercase;
+}
+.fc-toolbar-title{                 
+    text-transform: uppercase;
+}
 
 /*1200px*/
