@@ -87,15 +87,10 @@ if (isset($_POST['pedidoosalva'])) {
             <label for="inputEmail4">Qtd.</label>
             <input type="number" min="1" max="999" class="form-control form-control-sm" id="quantidade" placeholder="">
         </div>
-        <div class="form-group col-md-2">
-            <a type="button" class="btn btn-primary btn-sm" style="margin-top: 28px;">Ficha Técnica</a>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputEmail4">Imagem do Produto</label>
-            <input type="text" class="form-control form-control-sm" id="img" placeholder="">
+        <div id="contrato">
         </div>
         <div class="form-group col-md-1">
-            <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+            <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Incluir</button>
         </div>
         <input type="hidden" class="form-control form-control-sm" id="codsap" placeholder="">
     </div>
@@ -133,21 +128,17 @@ if (isset($_POST['pedidoosalva'])) {
     </div>
     <hr>
 
-</form>
-<?php include_once "../layout/footer.php"; ?>
-
 <script>
-    $('#produto').change(function() {
+    $("#produto").change(function() {
 
-        var select = document.getElementById('produto');
-        var produto = select.options[select.selectedIndex].value;
+        var id = document.getElementById('produto').value
 
         $('#contrato').html('');
 
         $.ajax({
 
             type: 'POST', // Formado de envio
-            url: '../ajax/produto.php', // URL para onde vai ser enviados
+            url: '../ajax/contrato.php', // URL para onde vai ser enviados
             data: {
                 id: id
             },
@@ -159,5 +150,8 @@ if (isset($_POST['pedidoosalva'])) {
         });
         return false;
 
+
     });
 </script>
+</form>
+<?php include_once "../layout/footer.php"; ?>
