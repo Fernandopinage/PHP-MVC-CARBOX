@@ -38,7 +38,7 @@ if (isset($_POST['produtosalvar'])) {
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST" enctype="multipart/form-data">
     <div class="text-left" id="title">
-        <h2> CADASTRO PRODUTO </h2>
+        <h2> PRODUTO </h2>
         <hr>
     </div>
     <div class="form-row">
@@ -69,7 +69,7 @@ if (isset($_POST['produtosalvar'])) {
     </div>
     <div class="text-right">
 
-        <button type="submit" class="btn btn-success" name="produtosalvar">Salvar Produto</button>
+        <button type="submit" class="btn btn-success" name="produtosalvar">Salvar</button>
     </div>
 
 </form>

@@ -128,29 +128,52 @@ if (isset($_POST['pedidoosalva'])) {
     </div>
     <hr>
 
-<script>
-    $("#produto").change(function() {
+    <script>
+        $("#produto").change(function() {
 
-        var id = document.getElementById('produto').value
-        
-        $('#contrato').html('');
+            var id = document.getElementById('produto').value
 
-        $.ajax({
+            $('#contrato').html('');
 
-            type: 'POST', // Formado de envio
-            url: '../ajax/produto.php', // URL para onde vai ser enviados
-            data: {
-                id: id
-            },
-            success: function(data) {
-                $('#contrato').html(data);
-            }
+            $.ajax({
+
+                type: 'POST', // Formado de envio
+                url: '../ajax/produto.php', // URL para onde vai ser enviados
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    $('#contrato').html(data);
+                }
+
+
+            });
+            return false;
 
 
         });
-        return false;
+    </script>
 
+    <script>
+        $('#mais').click(function() {
 
-    });
-</script>
+            var produto = document.getElementById('produto').value
+            var quantidade = document.getElementById('quantidade').value
+            var cont = 1;
+            if (produto != '') {
+                $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_senha" name="produto[]" value="' + produto + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+
+                //<div class="form-check "><input class="form-check-input" ></div>
+
+            } else {
+
+            }
+        });
+        $("form").on("click", ".btn-danger", function() {
+
+            var btn_id = $(this).attr("id");
+            $('#campo' + btn_id + '').remove();
+            console.log(btn_id)
+        });
+    </script>
 </form>
