@@ -7,10 +7,12 @@ include_once "../class/ClassProduto.php";
     if(isset($_FILES['imagem']['name']) or isset($_FILES['ficha']['name'])){
         $imagem = $_FILES['imagem']['name'];
         $ficha = $_FILES['ficha']['name'];
- 
+        
+   
         $diretorio = '../imagens/';
-
+        $diretorioPDF = '../pdf/';
         move_uploaded_file($_FILES['imagem']['tmp_name'],$diretorio.$imagem);
+        move_uploaded_file($_FILES['ficha']['tmp_name'],$diretorioPDF.$imagem);
     }
 
 if (isset($_POST['produtosalvar'])) {
@@ -19,6 +21,7 @@ if (isset($_POST['produtosalvar'])) {
     $ClassProduto->setImg($imagem);
     $ClassProduto->setSap($_POST['sap']);
     $ClassProduto->setProduto($_POST['desc']);
+    $ClassProduto->setUnidade($_POST['unidade']);
     $ClassProduto->setFicha($ficha );
 
     $Produto = new ProdutoDAO();
@@ -40,7 +43,7 @@ if (isset($_POST['produtosalvar'])) {
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Imagem <span style="color: red;">*</span></label>
-            <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" placeholder="">
+            <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" accept=".png, .jpg, .jpeg" placeholder="">
         </div>
     </div>
     <div class="form-row">
@@ -54,13 +57,13 @@ if (isset($_POST['produtosalvar'])) {
         </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">Unidade</label>
-            <input type="text" class="form-control form-control-sm" id="desc" name="desc" placeholder="">
+            <input type="text" class="form-control form-control-sm" id="unidade" name="unidade" placeholder="">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Ficha Técnica<span style="color: red;">*</span></label>
-            <input type="file" class="form-control form-control-sm" id="ficha" name="ficha" placeholder="">
+            <input type="file" class="form-control form-control-sm" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel"  placeholder="">
         </div>
     </div>
     <div class="text-right">
