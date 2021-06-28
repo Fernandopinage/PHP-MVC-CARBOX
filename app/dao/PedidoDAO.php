@@ -48,24 +48,18 @@ class PedidoDAO extends DAO{
         $select->execute();
         $array = array();
         if($row = $select->fetch(PDO::FETCH_ASSOC)){
-            /*
+            
             echo ' <div class="form-group col-md-2">
             <a type="button" class="btn btn-primary btn-sm" style="margin-top: 28px;">Ficha Técnica</a>
             </div>
         <div class="form-group col-md-2">
             <label for="inputEmail4">Imagem do Produto</label>
-            <img src="'.$row['PRODUTO_IMG'].'" id="img" width="320" height="205">
+            <img src="../imagens/'.$row['PRODUTO_IMG'].'" id="img" width="100" height="100">
         </div>';
-            */
-
-            echo 'ok';
+            
         }
         
         
     }
 
 }
-
-
-
-?>
