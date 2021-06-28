@@ -132,13 +132,13 @@ if (isset($_POST['pedidoosalva'])) {
     $("#produto").change(function() {
 
         var id = document.getElementById('produto').value
-
+        
         $('#contrato').html('');
 
         $.ajax({
 
             type: 'POST', // Formado de envio
-            url: '../ajax/contrato.php', // URL para onde vai ser enviados
+            url: '../ajax/produto.php', // URL para onde vai ser enviados
             data: {
                 id: id
             },
@@ -154,4 +154,3 @@ if (isset($_POST['pedidoosalva'])) {
     });
 </script>
 </form>
-<?php include_once "../layout/footer.php"; ?>

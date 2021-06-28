@@ -1,5 +1,6 @@
     <!-- Optional JavaScript -->
     <script src="../js/mascaraCNPJ.js"></script>
+    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script><!-- Sweet Alert -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jquery CDN  -->
