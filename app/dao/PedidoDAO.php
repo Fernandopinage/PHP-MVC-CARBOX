@@ -51,7 +51,7 @@ class PedidoDAO extends DAO{
         if($row = $select->fetch(PDO::FETCH_ASSOC)){
             
             echo' <img  class="sticky-top" src="../imagens/'.$row['PRODUTO_IMG'].'" id="img" width="100" height="150" style="margin-top:-10px;">';
-            echo ' <a  href="../pdf/'.$row['PRODUTO_FIXA'].'"style="margin-top:-10px;" >Descrição Técnica</a>';
+            echo ' <a  href="../pdf/'.$row['PRODUTO_FIXA'].'"style="margin-top:-10px;" target="_blank" >Descrição Técnica</a>';
             echo '<input type="hidden" class="form-control form-control-sm" id="codsap" value="'.$row['PEDIDO_CODSAP'].'" placeholder="">';
         }
         
