@@ -17,12 +17,20 @@ if (isset($_POST['pedidoosalva'])) {
     if (isset($_POST['produto'])) {
 
         $ClassProduto = new ClassPedido();
-        $ClassProduto->setProduto(implode(",", $_POST['produto']));
-        //$ClassProduto->setDesc(implode(",",$_POST['desc']));
-        $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
-        $ClassProduto->setUnidade(implode(",", $_POST['unidade']));
+        $ClassProduto->setNum($_POST['numero_orçamento']);
+        $ClassProduto->setData($_POST['data_emissao']);
+        $ClassProduto->setRazao($_POST['razão_cliente']);
+        if(isset($_POST['produto']) != '' and isset($_POST['quantidade']) != '' and isset($_POST['codsap']) ){
+            
+            $ClassProduto->setSap(implode(",",$_POST['codsap']));
+            $ClassProduto->setProduto(implode(",",$_POST['produto']));
+            $ClassProduto->setQuantidade(implode(",",$_POST['quantidade']));
+        }
 
-        $Produto->insertProduto($ClassProduto);
+        $Pedido = new PedidoDAO();
+        $Pedido->insertPedido($ClassProduto);
+     
+
     } else {
 ?>
         <script>
@@ -92,7 +100,6 @@ if (isset($_POST['pedidoosalva'])) {
         <div class="form-group col-md-1">
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Incluir</button>
         </div>
-        <input type="hidden" class="form-control form-control-sm" id="codsap" placeholder="">
     </div>
 
 
@@ -164,11 +171,15 @@ if (isset($_POST['pedidoosalva'])) {
             var produto = option.textContent;
             var quantidade = document.getElementById('quantidade').value
            
+            var codsap = document.getElementById('codsap').value
+
             if (produto != '') {
-                $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_senha" name="produto[]" value="' + produto + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> EXCLUIR </a></th></tr>');
+                $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_senha" name="produto[]" value="' + produto + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="quantidade[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly><input type="hidden" class="form-control form-control-sm" id="codsap" name="codsap[]" value="'+codsap+'"></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> EXCLUIR </a></th></tr>');
                 cont++
                 var produto = document.getElementById('produto').value = "";
                 var quantidade = document.getElementById('quantidade').value = "";
+                var codsap = document.getElementById('codsap').value="";
+                $('#img').hide();
             }
 
             

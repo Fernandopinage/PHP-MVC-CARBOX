@@ -10,6 +10,7 @@ Class ClassPedido{
     private $razao;
     private $data;
     private $sap;
+    private $num;
 
 
     public function getID(){
@@ -104,6 +105,16 @@ Class ClassPedido{
     public function setSap($sap){
 
         $this->sap =$sap;
+        
+    }
+    public function getNum(){
+
+        return $this->num;
+    }
+    
+    public function setNum($num){
+
+        $this->num =$num;
         
     }
 }

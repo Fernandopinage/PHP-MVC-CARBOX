@@ -8,18 +8,19 @@ include_once "../class/ClassProduto.php";
 class PedidoDAO extends DAO{
 
 
-    public function insertProduto($ClassProduto){
+    public function insertPedido($ClassProduto){
 
-        $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`)
-         VALUES (null, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`) ";
+        $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
+         (null, :PEDIDO_DESC, :PEDIDO_UNIDADE, :PEDIDO_PRODUTO, :PEDIDO_QUANTIDADE, :PEDIDO_DATAEMISSAO, :PEDIDO_RAZAO, :PEDIDO_CODSAP, :PEDIDO_NUM)";
         $insert = $this->con->prepare($sql);
-        $insert->bindValue(":PEDIDO_DESC", '');
-        $insert->bindValue(":PEDIDO_UNIDADE", $ClassProduto->getUnidade());
+        $insert->bindValue(":PEDIDO_DESC",  '');
+        $insert->bindValue(":PEDIDO_UNIDADE", '');
         $insert->bindValue(":PEDIDO_PRODUTO", $ClassProduto->getProduto());
         $insert->bindValue(":PEDIDO_QUANTIDADE", $ClassProduto->getQuantidade());
-        $insert->bindValue(":PEDIDO_DATAEMISSAO", "");
-        $insert->bindValue(":PEDIDO_RAZAO", "");
-        $insert->bindValue(":PEDIDO_CODSAP", "");
+        $insert->bindValue(":PEDIDO_DATAEMISSAO", $ClassProduto->getData());
+        $insert->bindValue(":PEDIDO_RAZAO", $ClassProduto->getRazao());
+        $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
+        $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
     }
 
@@ -43,7 +44,7 @@ class PedidoDAO extends DAO{
 
     public function ListaProdutos($id){
 
-        $sql = "SELECT PRODUTO_IMG,PRODUTO_FIXA FROM `produto` WHERE PRODUTO_ID ='$id' ";
+        $sql = "SELECT PRODUTO_IMG,PRODUTO_FIXA,PEDIDO_CODSAP FROM `produto` WHERE PRODUTO_ID ='$id' ";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
@@ -51,7 +52,7 @@ class PedidoDAO extends DAO{
             
             echo ' <div class="form-group col-md-2"><a  href="../pdf/'.$row['PRODUTO_FIXA'].'">Descrição Técnica</a></div>';
             echo' <div class="form-group col-md-4"><img  src="../imagens/'.$row['PRODUTO_IMG'].'" id="img" width="100" height="150"></div>';
-            
+            echo '<input type="hidden" class="form-control form-control-sm" id="codsap" value="'.$row['PEDIDO_CODSAP'].'" placeholder="">';
         }
         
         
