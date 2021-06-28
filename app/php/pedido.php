@@ -155,19 +155,24 @@ if (isset($_POST['pedidoosalva'])) {
     </script>
 
     <script>
+
+        var cont = 0;
         $('#mais').click(function() {
 
-            var produto = document.getElementById('produto').value
+            var select = document.querySelector('#produto');
+            var option = select.children[select.selectedIndex];
+            var produto = option.textContent;
             var quantidade = document.getElementById('quantidade').value
-            var cont = 1;
+           
             if (produto != '') {
-                $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_senha" name="produto[]" value="' + produto + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
-
-                //<div class="form-check "><input class="form-check-input" ></div>
-
-            } else {
-
+                $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_senha" name="produto[]" value="' + produto + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + quantidade + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> EXCLUIR </a></th></tr>');
+                cont++
+                var produto = document.getElementById('produto').value = "";
+                var quantidade = document.getElementById('quantidade').value = "";
             }
+
+            
+
         });
         $("form").on("click", ".btn-danger", function() {
 
