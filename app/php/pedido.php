@@ -65,7 +65,7 @@ if (isset($_POST['pedidoosalva'])) {
     </div>
     <hr>
     <div class="form-row">
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-4">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
             <select class="form-control form-control-sm" id="produto">
                 <option selected></option>

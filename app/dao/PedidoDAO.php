@@ -43,13 +43,14 @@ class PedidoDAO extends DAO{
 
     public function ListaProdutos($id){
 
-        $sql = "SELECT PRODUTO_IMG FROM `produto` WHERE PRODUTO_ID ='$id' ";
+        $sql = "SELECT PRODUTO_IMG,PRODUTO_FIXA FROM `produto` WHERE PRODUTO_ID ='$id' ";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
         if($row = $select->fetch(PDO::FETCH_ASSOC)){
             
-            echo ' <div class="form-group col-md-2"><a href="" style="margin-top: 28px;">Ficha Técnica</a></div> <div class="form-group col-md-4"><img src="../imagens/'.$row['PRODUTO_IMG'].'" id="img" width="100" height="150"></div>';
+            echo ' <div class="form-group col-md-2"><a  href="../pdf/'.$row['PRODUTO_FIXA'].'">Descrição Técnica</a></div>';
+            echo' <div class="form-group col-md-4"><img  src="../imagens/'.$row['PRODUTO_IMG'].'" id="img" width="100" height="150"></div>';
             
         }
         
