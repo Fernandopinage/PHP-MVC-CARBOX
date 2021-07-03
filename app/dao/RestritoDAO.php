@@ -38,7 +38,8 @@ class RestritoDAO  extends DAO{
 
                 'id' => $row['RESTRITO_ID'],
                 'nome' => $row['RESTRITO_NOME'],
-                'email' => $row['RESTRITO_EMAIL']
+                'email' => $row['RESTRITO_EMAIL'],
+                'status' => $row['RESTRITO_STATUS']
             );
             header('Location: ../php/home.php?p=home/');
 

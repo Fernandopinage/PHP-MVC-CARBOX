@@ -25,12 +25,15 @@
 
 <body>
 
+    <?php 
+    
+      if(!empty($_SESSION['user']['status'])){
+        
+      }
 
-  <?php
+    ?>
 
-  // if (isset($_SESSION['valor']['nome'])) {
-  //var_dump($_SESSION['valor']['id']);
-  ?>
+
 
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#136132;">
     <a class="navbar-brand" href="?p=home/" style="color:#fff;"><img src="../img/LOGO carboxi gases original.png" alt="" width="120" height="44"></a>
@@ -41,6 +44,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
 
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
             Solicitar
@@ -49,6 +53,10 @@
             <a class="dropdown-item" href="?p=pedido/">Orçamento</a>
           </div>
         </li>
+
+      <?php 
+      if(!empty($_SESSION['user']['status'])){
+      ?>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
@@ -60,21 +68,23 @@
             <a class="dropdown-item" href="?p=add/restrito/">Restrito</a>
           </div>
         </li>
-      </ul>
-      <ul class="navbar-nav text-right" style="margin-right: 60px;">
+        <?php 
+      }
+        ?>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff; text-transform: uppercase;">
-            <?php echo $_SESSION['user']['nome']; 
-            ?>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Logout
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="?p=alterarsenha/">Alterar Senha</a>
-
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="?p=logaut/">Sair</a>
           </div>
         </li>
       </ul>
+
+    </div>
+    <div class="text-right" style="color: #fff;">
+      <?php echo '<span style="color: #f9d228; font-size: 15px;">Olá,  </span> ' . $_SESSION['user']['nome']; ?>
     </div>
   </nav>
 
