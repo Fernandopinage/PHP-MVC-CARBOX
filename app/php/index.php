@@ -39,7 +39,7 @@ if (isset($_POST['acessar'])) {
     <link rel="stylesheet" href="../css/index.css">
 
 
-    <div class="container" id="div1">
+    <div class="container">
 
         <form class="form-signin" method="POST">
             <div class="text-center" id="logo">
