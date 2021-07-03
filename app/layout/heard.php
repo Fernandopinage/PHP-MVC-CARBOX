@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php
+
+session_start();
+
+if(empty($_SESSION['user']['nome'])){
+  header('Location: ../php/index.php');
+}
+
+
+?>
 <!doctype html>
 <html lang="pt-br">
 
@@ -25,16 +34,6 @@
 
 <body>
 
-    <?php 
-    
-      if(!empty($_SESSION['user']['status'])){
-        
-      }
-
-    ?>
-
-
-
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#136132;">
     <a class="navbar-brand" href="?p=home/" style="color:#fff;"><img src="../img/LOGO carboxi gases original.png" alt="" width="120" height="44"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +54,7 @@
         </li>
 
       <?php 
-      if(!empty($_SESSION['user']['status'])){
+      if($_SESSION['user']['status'] != 'N'){
       ?>
 
         <li class="nav-item dropdown">
@@ -77,7 +76,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="?p=logaut/">Sair</a>
+            <a class="dropdown-item" href="?p=sair/">Sair</a>
           </div>
         </li>
       </ul>
