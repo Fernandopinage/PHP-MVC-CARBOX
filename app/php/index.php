@@ -39,7 +39,7 @@ if (isset($_POST['acessar'])) {
     <link rel="stylesheet" href="../css/index.css">
 
 
-    <div class="container">
+    <div class="container" id="div1">
 
         <form class="form-signin" method="POST">
             <div class="text-center" id="logo">
@@ -61,6 +61,9 @@ if (isset($_POST['acessar'])) {
         </form>
 
     </div>
+    
+    <img id="div2" src="../img/body3.jpg">
+    
 
     <?php include_once "../layout/footer.php"; ?>
 </body>
