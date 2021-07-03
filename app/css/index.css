@@ -39,15 +39,3 @@ a:hover {
 }
 
 
-input{
-  text-transform: uppercase;
-}
-select{
-  text-transform: uppercase;
-}
-option{
-  text-transform: uppercase;
-}
-.fc-toolbar-title{                 
-  text-transform: uppercase;
-}
