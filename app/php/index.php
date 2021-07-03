@@ -1,7 +1,8 @@
-<?php 
-include_once "../layout/heard.php";
+<?php
+
 include_once "../class/ClassRestrito.php";
 include_once "../dao/index.php";
+include_once "../dao/RestritoDAO.php";
 
 
 if (isset($_POST['acessar'])) {
@@ -10,35 +11,58 @@ if (isset($_POST['acessar'])) {
     $ClassRestrito->setEmail($_POST['valor']);
     $ClassRestrito->setSenha(md5($_POST['password']));
 
-    
-
+    $Registro  = new RestritoDAO();
+    $Registro->validarRegistro($ClassRestrito);
 }
 
 ?>
-<link rel="stylesheet" href="../css/index.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jquery CDN  -->
+    <title>Área Restrita</title>
+</head>
+
+<body>
 
 
-<div class="container">
 
-    <form class="form-signin" method="POST">
-        <div class="text-center" id="logo">
-            <h2 class="form-signin-heading">ÁREA RESTRITA</h2>
-            <hr>
-        </div>
-        <input type="text" class="form-control" name="valor" placeholder="Email ou CPF:" required="" autofocus="" />
-        <br>
-        <input type="password" class="form-control" name="password" placeholder="Senha:" required="" />
-        <br>
-        <div class="text-left" id="cadastro">
+    <link rel="stylesheet" href="../css/index.css">
 
-        </div>
 
-        <div class="text-right">
-            <input type="submit" name="acessar" class="btn btn-success btn-lg btn-block" value="Acessar">
-        </div>
+    <div class="container">
 
-    </form>
+        <form class="form-signin" method="POST">
+            <div class="text-center" id="logo">
+                <h2 class="form-signin-heading">ÁREA RESTRITA</h2>
+                <hr>
+            </div>
+            <input type="text" class="form-control" name="valor" placeholder="Digite seu e-mail" required="" autofocus="" />
+            <br>
+            <input type="password" class="form-control" name="password" placeholder="Digite seu senha:" required="" />
+            <br>
+            <div class="text-left" id="cadastro">
 
-</div>
+            </div>
 
-<?php include_once "../layout/footer.php"; ?>
+            <div class="text-right">
+                <input type="submit" name="acessar" class="btn btn-success btn-lg btn-block" value="Acessar">
+            </div>
+
+        </form>
+
+    </div>
+
+    <?php include_once "../layout/footer.php"; ?>
+</body>
+
+</html>

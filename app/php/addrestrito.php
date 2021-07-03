@@ -11,6 +11,8 @@ if(isset($_POST['restritosalvar'])){
         $ClassRestrito->setNome($_POST['nome']);
         $ClassRestrito->setEmail($_POST['email']);
         $ClassRestrito->setSenha(md5($_POST['senha']));
+        $ClassRestrito->setStatus('S');
+
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
        

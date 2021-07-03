@@ -64,7 +64,7 @@
       <ul class="navbar-nav text-right" style="margin-right: 60px;">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff; text-transform: uppercase;">
-            <?php //echo $_SESSION['valor']['nome']; 
+            <?php echo $_SESSION['user']['nome']; 
             ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">

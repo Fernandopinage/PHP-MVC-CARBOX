@@ -6,6 +6,7 @@ class ClassRestrito{
     private $nome;
     private $email;
     private $senha;
+    private $status;
 
     public function getID(){
 
@@ -48,6 +49,16 @@ class ClassRestrito{
     public function setSenha($senha){
 
         $this->senha =$senha;
+        
+    }
+    public function getStatus(){
+
+        return $this->status;
+    }
+    
+    public function setStatus($status){
+
+        $this->status =$status;
         
     }
 }
