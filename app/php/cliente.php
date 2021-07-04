@@ -38,10 +38,6 @@ if (isset($_POST['clientesalva'])) {
                'status' => $status = $_POST['comprador_status']
             );
 
-            echo "<pre>";
-            var_dump($lista);
-            echo "</pre>";
-            
             $tamanho = count($lista['cnpj']);
 
             for($i=0; $i< $tamanho;$i++){
@@ -56,10 +52,7 @@ if (isset($_POST['clientesalva'])) {
                  $Comprador->inserComprador($cnpj,$nome,$email,$senha,$status);
             }
            
-            /*
-            $Comprador = new CompradorDAO();
-            $Comprador->inserComprador($lista);
-            */
+          
             
         } else {
 ?>

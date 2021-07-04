@@ -1,18 +1,17 @@
 <?php
 
-include_once "../class/ClassRestrito.php";
-include_once "../dao/index.php";
-include_once "../dao/RestritoDAO.php";
-
+include_once "../class/ClassComprador.php";
+include_once "../dao/CompradorDAO.php";
 
 if (isset($_POST['acessar'])) {
 
-    $ClassRestrito = new ClassRestrito();
-    $ClassRestrito->setEmail($_POST['valor']);
-    $ClassRestrito->setSenha(md5($_POST['password']));
+    $ClassComprador = new ClassComprador();
+    $ClassComprador->setEmail($_POST['email']);
+    $ClassComprador->setSenha(md5($_POST['password']));
 
-    $Registro  = new RestritoDAO();
-    $Registro->validarRegistro($ClassRestrito);
+    $Comprador  =new CompradorDAO();
+    $Comprador->validarLogin($ClassComprador);
+    
 }
 
 ?>
@@ -43,10 +42,10 @@ if (isset($_POST['acessar'])) {
 
         <form class="form-signin" method="POST">
             <div class="text-center" id="logo">
-                <h2 class="form-signin-heading">ÁREA RESTRITA</h2>
+                <h2 class="form-signin-heading">ÁREA DO CLIENTE</h2>
                 <hr>
             </div>
-            <input type="text" class="form-control" name="valor" placeholder="Digite seu e-mail" required="" autofocus="" />
+            <input type="text" class="form-control" name="email" placeholder="Digite seu e-mail" required="" autofocus="" />
             <br>
             <input type="password" class="form-control" name="password" placeholder="Digite seu senha:" required="" />
             <br>
@@ -62,7 +61,7 @@ if (isset($_POST['acessar'])) {
 
     </div>
     
-    <img id="div2" src="../img/1.png">
+    <img id="div2" src="../img/2.png">
     
 
     <?php include_once "../layout/footer.php"; ?>
