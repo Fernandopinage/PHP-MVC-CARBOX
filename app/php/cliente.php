@@ -21,14 +21,46 @@ if (isset($_POST['clientesalva'])) {
             $Cliente->insertCliente($ClassCliente);
 
             $ClassComprador =  new ClassComprador();
+            /*
             $ClassComprador->setCnpj(implode(",", $_POST['CNPJ']));
             $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
             $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
             $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
             $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
+            */
+            
+            $lista = array(
 
+               'cnpj' => $_POST['CNPJ'],
+               'nome' => $nome = $_POST['comprador_nome'],
+               'email' => $email = $_POST['comprador_email'],
+               'senha' => $senha  = $_POST['comprador_senha'],
+               'status' => $status = $_POST['comprador_status']
+            );
+
+            echo "<pre>";
+            var_dump($lista);
+            echo "</pre>";
+            
+            $tamanho = count($lista['cnpj']);
+
+            for($i=0; $i< $tamanho;$i++){
+
+           
+                 $cnpj =  $lista['cnpj'][$i];
+                 $nome =  $lista['nome'][$i];
+                 $email =  $lista['email'][$i];
+                 $senha =  $lista['senha'][$i];
+                 $status =  $lista['status'][$i];
+                 $Comprador = new CompradorDAO();
+                 $Comprador->inserComprador($cnpj,$nome,$email,$senha,$status);
+            }
+           
+            /*
             $Comprador = new CompradorDAO();
-            $Comprador->inserComprador($ClassComprador);
+            $Comprador->inserComprador($lista);
+            */
+            
         } else {
 ?>
             <script>
