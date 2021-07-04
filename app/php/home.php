@@ -34,9 +34,12 @@ $Cliente = new ClienteDAO();
                 include_once "../php/addrestrito.php";
                 break;
 
-                case 'sair/':
-                    include_once "../php/logout.php";
-                    break; 
+            case 'sair/':
+                include_once "../php/logout.php";
+                break;
+            case 'exit/':
+                include_once "../php/logout_cliente.php";
+                break;
             default:
 
                 break;

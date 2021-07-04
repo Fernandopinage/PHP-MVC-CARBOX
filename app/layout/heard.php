@@ -2,7 +2,7 @@
 
 session_start();
 
-if(empty($_SESSION['user']['nome'])){
+if (empty($_SESSION['user']['nome'])) {
   header('Location: ../php/index.php');
 }
 
@@ -53,22 +53,22 @@ if(empty($_SESSION['user']['nome'])){
           </div>
         </li>
 
-      <?php 
-      if($_SESSION['user']['status'] != 'N'){
-      ?>
+        <?php
+        if ($_SESSION['user']['status'] != 'N') {
+        ?>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
-            Cadastro
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="?p=cliente/">Cliente</a>
-            <a class="dropdown-item" href="?p=add/produto/">Produto</a>
-            <a class="dropdown-item" href="?p=add/restrito/">Restrito</a>
-          </div>
-        </li>
-        <?php 
-      }
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+              Cadastro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="?p=cliente/">Cliente</a>
+              <a class="dropdown-item" href="?p=add/produto/">Produto</a>
+              <a class="dropdown-item" href="?p=add/restrito/">Restrito</a>
+            </div>
+          </li>
+        <?php
+        }
         ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
@@ -76,7 +76,31 @@ if(empty($_SESSION['user']['nome'])){
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="?p=sair/">Sair</a>
+            <?php
+            if (!empty($_SESSION['user']['comprador'])) {
+
+              if ($_SESSION['user']['comprador'] == 'S') {
+            ?>
+                <a class="dropdown-item" href="?p=exit/">Sair</a>
+              <?php
+              } else {
+
+              ?>
+                <?php
+                ?>
+                <a class="dropdown-item" href="?p=sair/">Sair</a>
+            <?php
+              }
+            }
+            if (!isset($_SESSION['user']['comprador'])) {
+              ?>
+              <a class="dropdown-item" href="?p=sair/">Sair</a>
+              <?php
+
+            }
+
+           
+            ?>
           </div>
         </li>
       </ul>

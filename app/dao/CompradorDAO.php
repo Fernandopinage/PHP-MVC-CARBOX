@@ -42,7 +42,8 @@ class CompradorDAO extends DAO{
                 'id' => $row['COMPRADOR_ID'],
                 'nome' => $row['COMPRADOR_NOME'],
                 'email' => $row['COMPRADOR_EMAIL'],
-                'status' => 'N'
+                'status' => 'N',
+                'comprador' => 'S'
             );
             header('Location: ../php/home.php?p=home/');
             
