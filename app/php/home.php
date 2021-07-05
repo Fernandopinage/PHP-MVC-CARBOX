@@ -58,7 +58,7 @@ $Cliente = new ClienteDAO();
 
         $edit = $_GET['edit/restrito/'];
 
-        echo $edit;
+        
     }
 
     if(isset($_GET['delete'])){
