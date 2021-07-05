@@ -41,8 +41,15 @@ class ProdutoDAO extends DAO{
 
     public function editarProduto(ClassProduto $ClassProduto){
 
-        echo "ok";
-
+       $sql = "UPDATE `produto` SET `PRODUTO_ID`=:PRODUTO_ID,`PEDIDO_CODSAP` = :PEDIDO_CODSAP,`PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,`PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,`PRODUTO_IMG` = :PRODUTO_IMG,`PRODUTO_FIXA` = :PRODUTO_FIXA WHERE `PRODUTO_ID` = :PRODUTO_ID";
+       $insert = $this->con->prepare($sql);
+       $insert->bindValue(":PEDIDO_ID", $ClassProduto->getID());
+       $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
+       $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
+       $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
+       $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
+       $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
+       $insert->execute();
     }
 
 }
