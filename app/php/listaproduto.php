@@ -41,11 +41,11 @@ if (isset($_POST['editaproduto'])) {
 
             <tr>
                 <th scope="col" style="text-align: center;"><?php echo $obj->getSap(); ?></th>
-                <th scope="col"><img src="../imagens/<?php echo $obj->getImg(); ?>" height="50" width="30"></th>
+                <th scope="col" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>"><img src="../imagens/<?php echo $obj->getImg(); ?>" height="80" width="50"  class="img-thumbnail"></th>
                 <th scope="col"><?php echo $obj->getProduto(); ?></th>
                 <th scope="col"><?php echo $obj->getUnidade(); ?></th>
                 <th scope="col" style="text-align: center;"><a href="../pdf/<?php echo $obj->getFicha(); ?>">Ficha Técnica</a></th>
-                <th scope="col"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
                 <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
 
             </tr>
@@ -102,6 +102,25 @@ if (isset($_POST['editaproduto'])) {
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="visualizar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $obj->getID(); ?>" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $obj->getProduto(); ?></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="../imagens/<?php echo $obj->getImg(); ?>" height="400" width="350" class="img-thumbnail">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
 
         <?php
@@ -113,3 +132,4 @@ if (isset($_POST['editaproduto'])) {
 
     </tbody>
 </table>
+
