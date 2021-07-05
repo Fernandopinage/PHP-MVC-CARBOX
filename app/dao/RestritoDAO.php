@@ -61,6 +61,7 @@ class RestritoDAO  extends DAO{
             $Restrito->setID($row['RESTRITO_ID']);
             $Restrito->setNome($row['RESTRITO_NOME']);
             $Restrito->setEmail($row['RESTRITO_EMAIL']);
+            $Restrito->setSenha($row['RESTRITO_SENHA']);
             $array[] = $Restrito;
         }
         return $array;
