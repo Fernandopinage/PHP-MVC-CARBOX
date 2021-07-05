@@ -1,5 +1,6 @@
 <?php include_once "../layout/heard.php";
 include_once "../dao/ClienteDAO.php";
+include_once "../dao/RestritoDAO.php";
 $Cliente = new ClienteDAO();
 
 ?>
@@ -10,6 +11,8 @@ $Cliente = new ClienteDAO();
     if (isset($_GET['p'])) {
 
         $pagina = $_GET['p'];
+       
+
 
         switch ($pagina) {
             case 'home/':
@@ -32,6 +35,11 @@ $Cliente = new ClienteDAO();
 
             case 'add/restrito/':
                 include_once "../php/addrestrito.php";
+                
+                break;
+
+            case 'restrito/':
+                include_once "../php/listarestrito.php";
                 break;
 
             case 'sair/':
@@ -46,7 +54,20 @@ $Cliente = new ClienteDAO();
         }
     }
 
+    if(isset($_GET['edit/restrito/'])){
 
+        $edit = $_GET['edit/restrito/'];
+
+        echo $edit;
+    }
+
+    if(isset($_GET['delete'])){
+
+        $delete = $_GET['delete'];
+
+        $Restrito = new RestritoDAO();
+        $Restrito->delete($delete);
+    }
 
     ?>
 </div>

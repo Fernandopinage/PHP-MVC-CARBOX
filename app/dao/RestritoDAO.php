@@ -48,6 +48,29 @@ class RestritoDAO  extends DAO{
         }
     }
 
+    public function listarRestrito(){
+
+        $sql = "SELECT * FROM `restrito`";
+        $select = $this->con->prepare($sql);
+        $select->execute();
+        $array = array();
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $Restrito = new ClassRestrito();
+
+            $Restrito->setID($row['RESTRITO_ID']);
+            $Restrito->setNome($row['RESTRITO_NOME']);
+            $Restrito->setEmail($row['RESTRITO_EMAIL']);
+            $array[] = $Restrito;
+        }
+        return $array;
+    }
+
+    public function delete($delete){
+
+        echo $delete;
+    }
+
 }
 
 
