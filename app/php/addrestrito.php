@@ -25,7 +25,7 @@ if(isset($_POST['restritosalvar'])){
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
-        <h2> CADASTRO RESTRITO </h2>
+        <h2> RESTRITO </h2>
         <hr>
     </div>
     <div class="form-row">

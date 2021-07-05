@@ -16,7 +16,7 @@ $dados = $Restrito->listarRestrito();
 <table class="table table-hover">
     <thead class="thead" style="background-color: #136132; color:#fff;">
         <tr>
-            <th scope="col">Cód</th>
+            <th scope="col"style="text-align: center;">Cód</th>
             <th scope="col">Nome</th>
             <th scope="col">E-mail</th>
             <th scope="col"></th>
@@ -30,7 +30,7 @@ $dados = $Restrito->listarRestrito();
         foreach ($dados as $dados) {
         ?>
             <tr>
-                <th scope="col"><?php echo $dados->getID(); ?></th>
+                <th scope="col" style="text-align: center;"><?php echo $dados->getID(); ?></th>
                 <th scope="col"><?php echo $dados->getNome(); ?></th>
                 <th scope="col"><?php echo $dados->getEmail(); ?></th>
                 <th scope="col"><a class="btn btn-success" href="?edit/restrito/=<?php echo $dados->getID(); ?>">Editar</a></th>
