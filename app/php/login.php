@@ -61,7 +61,7 @@ if (isset($_POST['acessar'])) {
 
     </div>
     
-    <img id="div2" src="../img/2.png">
+    <img id="div2" src="../img/3.png">
     
 
     <?php include_once "../layout/footer.php"; ?>
