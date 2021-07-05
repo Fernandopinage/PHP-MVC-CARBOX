@@ -33,8 +33,8 @@ $dados = $Restrito->listarRestrito();
                 <th scope="col" style="text-align: center;"><?php echo $obj->getID(); ?></th>
                 <th scope="col"><?php echo $obj->getNome(); ?></th>
                 <th scope="col"><?php echo $obj->getEmail(); ?></th>
-                <th scope="col"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                <th scope="col"><a class="btn btn-danger" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                <th scope="col"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
             </tr>
 
 
@@ -72,7 +72,7 @@ $dados = $Restrito->listarRestrito();
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Editar</button>
+                                    <button type="button" class="btn btn-primary" name="editar">Editar</button>
                                 </div>
                             </form>
                         </div>
