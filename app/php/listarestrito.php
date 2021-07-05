@@ -35,7 +35,7 @@ if(isset($_POST['edita-model'])){
             <th scope="col"></th>
 
         </tr>
-    </thead>
+    </thead> 
     <tbody style="background-color: #fff;">
         <?php
 

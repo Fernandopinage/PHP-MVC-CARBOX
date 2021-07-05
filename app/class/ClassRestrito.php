@@ -50,7 +50,7 @@ class ClassRestrito{
 
         $this->senha =$senha;
         
-    }
+    } 
     public function getStatus(){
 
         return $this->status;

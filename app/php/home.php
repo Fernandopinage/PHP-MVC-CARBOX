@@ -45,7 +45,7 @@ $Cliente = new ClienteDAO();
             case 'sair/':
                 include_once "../php/logout.php";
                 break;
-            case 'exit/':
+            case 'exit/': 
                 include_once "../php/logout_cliente.php";
                 break;
             default:

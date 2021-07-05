@@ -54,7 +54,7 @@ class RestritoDAO  extends DAO{
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
-        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){ 
 
             $Restrito = new ClassRestrito();
 
