@@ -11,7 +11,7 @@ $Cliente = new ClienteDAO();
     if (isset($_GET['p'])) {
 
         $pagina = $_GET['p'];
-       
+
 
 
         switch ($pagina) {
@@ -29,13 +29,18 @@ $Cliente = new ClienteDAO();
                 include_once "../php/pedido.php";
                 break;
 
+            case 'produto/':
+                include_once "../php/listaproduto.php";
+                break;
+
+
             case 'add/produto/':
                 include_once "../php/addproduto.php";
                 break;
 
             case 'add/restrito/':
                 include_once "../php/addrestrito.php";
-                
+
                 break;
 
             case 'restrito/':
@@ -45,7 +50,7 @@ $Cliente = new ClienteDAO();
             case 'sair/':
                 include_once "../php/logout.php";
                 break;
-            case 'exit/': 
+            case 'exit/':
                 include_once "../php/logout_cliente.php";
                 break;
             default:
@@ -54,14 +59,12 @@ $Cliente = new ClienteDAO();
         }
     }
 
-    if(isset($_GET['edit/restrito/'])){
+    if (isset($_GET['edit/restrito/'])) {
 
         $edit = $_GET['edit/restrito/'];
-
-        
     }
 
-    if(isset($_GET['delete'])){
+    if (isset($_GET['delete'])) {
 
         $delete = $_GET['delete'];
 
