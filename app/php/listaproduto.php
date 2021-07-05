@@ -6,6 +6,7 @@ include_once "../dao/Produto.DAO.php";
 $Produto = new ProdutoDAO();
 $dados = $Produto->listaProduto();
 
+
 if (isset($_FILES['imagem']['name'])) {
     $imagem = $_FILES['imagem']['name'];
 
@@ -28,10 +29,10 @@ if (isset($_POST['editaproduto'])) {
     $ClassProduto->setUnidade($_POST['unidade']);
     $ClassProduto->setFicha($ficha);
 
-    
+
+
     $Produto = new ProdutoDAO();
     $Produto->editarProduto($ClassProduto);
-    
 }
 
 ?>
@@ -88,7 +89,7 @@ if (isset($_POST['editaproduto'])) {
                                     <div class="form-group col-md-12">
                                         <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
                                         <label for="inputEmail4">Imagem <span style="color: red;">*</span></label>
-                                        <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" accept=".png, .jpg, .jpeg" placeholder="">
+                                        <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" accept=".png, .jpg, .jpeg" value="<?php echo $obj->getImg(); ?>" placeholder="">
                                     </div>
                                 </div>
 
@@ -113,7 +114,7 @@ if (isset($_POST['editaproduto'])) {
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Ficha Técnica</label>
-                                        <input type="file" class="form-control form-control-sm" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel" placeholder="" value="<?php echo $obj->getFicha(); ?>">
+                                        <input type="file" class="form-control form-control-sm" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel" value="<?php echo $obj->getFicha(); ?>" placeholder="">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
