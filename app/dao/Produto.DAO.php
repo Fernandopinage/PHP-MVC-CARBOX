@@ -39,6 +39,12 @@ class ProdutoDAO extends DAO{
 
     }
 
+    public function editarProduto(ClassProduto $ClassProduto){
+
+        echo "ok";
+
+    }
+
 }
 
 ?>
