@@ -77,7 +77,7 @@ class RestritoDAO  extends DAO{
         $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
         $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
         $insert->execute();
-
+        header('Location: ../php/home.php?p=restrito/');
 
     }
 
