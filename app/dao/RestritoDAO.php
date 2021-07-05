@@ -62,9 +62,23 @@ class RestritoDAO  extends DAO{
             $Restrito->setNome($row['RESTRITO_NOME']);
             $Restrito->setEmail($row['RESTRITO_EMAIL']);
             $Restrito->setSenha($row['RESTRITO_SENHA']);
+            $Restrito->setStatus($row['RESTRITO_STATUS']);
             $array[] = $Restrito;
         }
         return $array;
+    }
+    public function editarRegistro(ClassRestrito $ClassRestrito){
+
+        $sql = "UPDATE `restrito` SET `RESTRITO_NOME`= :RESTRITO_NOME,`RESTRITO_SENHA`= :RESTRITO_SENHA,`RESTRITO_EMAIL`=:RESTRITO_EMAIL,`RESTRITO_STATUS`= :RESTRITO_STATUS WHERE `RESTRITO_ID`=:RESTRITO_ID";
+        $insert = $this->con->prepare($sql);
+        $insert->bindValue(':RESTRITO_ID', $ClassRestrito->getID());
+        $insert->bindValue(':RESTRITO_NOME', $ClassRestrito->getNome());
+        $insert->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
+        $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+        $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
+        $insert->execute();
+
+
     }
 
     public function delete($delete){
