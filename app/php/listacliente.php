@@ -31,19 +31,36 @@ $dados = $Cliente->listaCliente();
 
         <?php
 
-        foreach ($dados as $dados => $obj) {
-        ?>
-        <tr>
-            <th scope="col" style="text-align: center;"><?php echo  $obj->getSap(); ?></th>
-            <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
-            <th scope="col"><?php echo  $obj->getRazao(); ?></th>
-            <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+        foreach ($dados as $dado => $obj) {
 
-        </tr>
+            if(empty($obj)){
+                ?>
+                <tr>
+                <th></th>
+                <th></th>
+                <th> <p class="text-center">Não existe nenhum registro</p></th>
+                <th></th>
+                <th></th>
+                </tr>
+                <?php
 
-        <?php
+            }else{
+
+                
+                ?>
+                <tr>
+                <th scope="col" style="text-align: center;"><?php echo  $obj->getSap(); ?></th>
+                <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
+                <th scope="col"><?php echo  $obj->getRazao(); ?></th>
+                <th scope="col"><?php echo  $obj->getEmail(); ?></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                
+                </tr>
+                
+                <?php
+                
+            }
         }
         ?>
 
