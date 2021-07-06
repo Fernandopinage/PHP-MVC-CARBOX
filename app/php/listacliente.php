@@ -6,7 +6,18 @@ include_once "../dao/ClienteDAO.php";
 $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
 
+if (isset($_POST['editacliente'])) {
 
+    $ClassCliente = new ClassCliente();
+
+    $ClassCliente->setID($_POST['id']);
+    $ClassCliente->setCnpj($_POST['cpf']);
+    $ClassCliente->setRazao($_POST['razao']);
+    $ClassCliente->setSap($_POST['sap']);
+    $ClassCliente->setEmail($_POST['email']);
+
+    $Cliente->editarCliente($ClassCliente);
+}
 
 ?>
 <br><br>
@@ -62,8 +73,6 @@ $dados = $Cliente->listaCliente();
                 <div class="modal fade" id="editar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $obj->getID(); ?>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                        <form action="" method="POST">
-                        
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel"><?php echo  $obj->getRazao(); ?></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -71,40 +80,42 @@ $dados = $Cliente->listaCliente();
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-row">
+                                <form action="" method="POST">
+                                    <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
+                                    <div class="form-row">
 
-                                    <div class="form-group col-md-12">
-                                        <label for="inputEmail4">CNPJ <span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm is-invalid" onfocus="javascript: retirarFormatacao(this);" onblur="javascript: formatarCampo(this);" name="cpf" id="cpf" placeholder="99.999.999/9999-99">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4">CNPJ <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control form-control-sm is-invalid" value="<?php echo $obj->getCnpj(); ?>" onfocus="javascript: retirarFormatacao(this);" onblur="javascript: formatarCampo(this);" name="cpf" id="cpf" placeholder="99.999.999/9999-99">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm is-invalid" id="razao" name="razao" placeholder="">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control form-control-sm is-invalid" id="razao" name="razao" placeholder="" value="<?php echo $obj->getRazao(); ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputEmail4">Cod SAP<span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4">Cod SAP<span style="color: red;">*</span></label>
+                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                        <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
+                                            <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="" value="<?php echo $obj->getEmail(); ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Editar</button>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="editacliente" class="btn btn-primary">Editar</button>
+                                    </div>
                             </div>
                             </form>
                         </div>
@@ -182,6 +193,4 @@ $dados = $Cliente->listaCliente();
         }
 
     });
-
-    
 </script>

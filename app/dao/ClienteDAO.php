@@ -42,6 +42,22 @@ class ClienteDAO extends DAO
         return $array;
     }
 
+    public function editarCliente(ClassCliente $ClassCliente){
+        
+       
+        $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID"; 
+
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':CLIENTE_ID', $ClassCliente->getID());
+        $update->bindValue(':CLIENTE_CNPJ', $ClassCliente->getCnpj());
+        $update->bindValue(':CLIENTE_RAZAO', $ClassCliente->getRazao());
+        $update->bindValue(':CLIENTE_EMAIL', $ClassCliente->getEmail());
+        $update->bindValue(':CLIENTE_CODSAP', $ClassCliente->getSap());
+        $update->execute();
+        header('Location: ../php/home.php?p=cliente/');
+        
+    }
+
     public function logaut()
     {
 
