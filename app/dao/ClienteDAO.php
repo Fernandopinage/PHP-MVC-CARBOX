@@ -21,6 +21,25 @@ class ClienteDAO extends DAO
         $insert->execute();
     }
 
+    public function listaCliente(){
+
+        $sql = "SELECT * FROM `cliente` ORDER BY `CLIENTE_CODSAP` ASC";
+        $select = $this->con->prepare($sql);
+        $select->execute();
+        $array = array();
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $ClassCliente = new ClassCliente();
+            $ClassCliente->setID($row['CLIENTE_ID']);
+            $ClassCliente->setCnpj($row['CLIENTE_CNPJ']);
+            $ClassCliente->setRazao($row['CLIENTE_RAZAO']);
+            $ClassCliente->setEmail($row['CLIENTE_EMAIL']);
+            $ClassCliente->setSap($row['CLIENTE_CODSAP']);
+            $array[] =$ClassCliente;
+        }
+        return $array;
+    }
+
     public function logaut()
     {
 

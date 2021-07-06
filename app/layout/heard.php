@@ -62,6 +62,7 @@ if (empty($_SESSION['user']['nome'])) {
               Cadastro
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
               <a class="dropdown-item" href="?p=cliente/">Cliente</a>
               <a class="dropdown-item" href="?p=produto/">Produto</a>
               <a class="dropdown-item" href="?p=restrito/">Usuário</a>
@@ -89,17 +90,17 @@ if (empty($_SESSION['user']['nome'])) {
                 <?php
                 ?>
                 <a class="dropdown-item" href="?p=sair/">Sair</a>
-            <?php
+              <?php
               }
             }
             if (!isset($_SESSION['user']['comprador'])) {
               ?>
               <a class="dropdown-item" href="?p=sair/">Sair</a>
-              <?php
+            <?php
 
             }
 
-           
+
             ?>
           </div>
         </li>

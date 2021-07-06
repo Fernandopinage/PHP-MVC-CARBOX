@@ -19,7 +19,10 @@ $Cliente = new ClienteDAO();
                 //include_once "../php/cliente.php";
                 break;
             case 'cliente/':
-                include_once "../php/cliente.php";
+                include_once "../php/listacliente.php";
+                break;
+            case 'add/cliente/':
+                include_once "../php/addcliente.php";
                 break;
             case 'alterarsenha/':
                 include_once "../php/alterarsenha.php";
