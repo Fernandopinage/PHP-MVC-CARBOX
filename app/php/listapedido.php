@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once "../dao/PedidoDAO.php";
 include_once "../class/ClassPedido.php";
@@ -28,22 +28,42 @@ $dados = $Pedido->listaPedido();
         </tr>
     </thead>
     <tbody style="background-color: #fff;">
-    <?php 
+        <?php
 
-        foreach($dados as $dado => $obj){
-    ?>
+        foreach ($dados as $dado => $obj) {
+        ?>
             <tr>
-            <th scope="col" style="text-align: center;"><?php echo $obj->getNum(); ?></th>
-            <th scope="col"><?php echo $obj->getData(); ?></th>
-            <th scope="col"><?php echo $obj->getRazao(); ?></th>
-            <th scope="col"><?php echo $obj->getProduto(); ?></th>
-            <th scope="col"><?php echo $obj->getQuantidade(); ?></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+                <th scope="col" style="text-align: center;"><?php echo $obj->getNum(); ?></th>
+                <th scope="col"><?php echo $obj->getData(); ?></th>
+                <th scope="col"><?php echo $obj->getRazao(); ?></th>
+                <th scope="col"><button type="button" class="btn  btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Pedidos</button></th>
+                <th scope="col"><?php echo $obj->getQuantidade(); ?></th>
+                <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
             </tr>
-    <?php
+
+            <div class="modal fade" id="visualizar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="visualizar<?php echo $obj->getID(); ?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">PEDIDOS <?php echo $obj->getNum(); ?></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
         }
 
-    ?>
+        ?>
     </tbody>
 </table>

@@ -64,7 +64,7 @@ if (empty($_SESSION['user']['nome'])) {
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <a class="dropdown-item" href="?p=cliente/">Cliente</a>
-              <a class="dropdown-item" href="?p=add/pedido/">Produto</a>
+              <a class="dropdown-item" href="?p=produto/">Produto</a>
               <a class="dropdown-item" href="?p=restrito/">Usuário</a>
             </div>
           </li>
