@@ -21,9 +21,8 @@ $dados = $Pedido->listaPedido();
             <th scope="col">DT EMISSÃO</th>
             <th scope="col">CLIENTE</th>
             <th scope="col">PRODUTO</th>
-            <th scope="col">QUANTIDADE</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+
+
 
         </tr>
     </thead>
@@ -36,27 +35,42 @@ $dados = $Pedido->listaPedido();
                 <th scope="col" style="text-align: center;"><?php echo $obj->getNum(); ?></th>
                 <th scope="col"><?php echo $obj->getData(); ?></th>
                 <th scope="col"><?php echo $obj->getRazao(); ?></th>
-                <th scope="col"><button type="button" class="btn  btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Pedidos</button></th>
-                <th scope="col"><?php echo $obj->getQuantidade(); ?></th>
-                <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                <th scope="col"><button type="button" class="btn  btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Lista de Itens</button></th>
+
+
             </tr>
 
             <div class="modal fade" id="visualizar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="visualizar<?php echo $obj->getID(); ?>" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">PEDIDOS <?php echo $obj->getNum(); ?></h5>
+                            <h5 class="modal-title" id="exampleModalLabel">PEDIDOS <span style="color: red;"><?php echo $obj->getNum(); ?></span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            
+                           <?php 
+                           
+                            $produto =  $obj->getProduto();
+                            $produto = explode(',',$produto);
+                            
+                            
+                            $quantidade =  $obj->getQuantidade();
+                            $quantidade = explode(',',$quantidade);
+
+
+                            $tamanho = count($produto);
+                            
+                            for($i=0; $i<$tamanho; $i++){
+
+                                echo "<strong>Produdo: </strong>".$produto[$i]." <br> <strong>Qtd: </strong>".$quantidade[$i]."<br><hr>";
+
+                            }
+
+                           ?>
+                           
                         </div>
                     </div>
                 </div>

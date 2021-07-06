@@ -16,7 +16,7 @@ $Cliente = new ClienteDAO();
 
         switch ($pagina) {
             case 'home/':
-                //include_once "../php/cliente.php";
+                include_once "../php/listapedido.php";
                 break;
             case 'cliente/':
                 include_once "../php/listacliente.php";
