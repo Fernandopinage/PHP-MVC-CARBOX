@@ -1,10 +1,13 @@
 <?php
+
 include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
 
 
 $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
+
+
 
 if (isset($_POST['editacliente'])) {
 
@@ -18,6 +21,8 @@ if (isset($_POST['editacliente'])) {
 
     $Cliente->editarCliente($ClassCliente);
 }
+
+
 
 ?>
 <br><br>

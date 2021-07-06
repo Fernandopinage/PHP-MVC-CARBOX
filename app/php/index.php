@@ -34,6 +34,13 @@ if (isset($_POST['acessar'])) {
 
 <body>
 
+    <style>
+        body{
+            /*
+            background-image: url('../img/1.png');
+            background: no-repeat;*/
+        }
+    </style>
 
 
     <link rel="stylesheet" href="../css/index.css">
@@ -61,9 +68,9 @@ if (isset($_POST['acessar'])) {
         </form>
 
     </div>
-    
-    <img id="div2" src="../img/1.png">
-    
+
+    <img id="div2" src="../img/1.png"> 
+
 
     <?php include_once "../layout/footer.php"; ?>
 </body>

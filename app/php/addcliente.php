@@ -28,40 +28,38 @@ if (isset($_POST['clientesalva'])) {
             $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
             $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
             */
-            
+
             $lista = array(
 
-               'cnpj' => $_POST['CNPJ'],
-               'nome' => $nome = $_POST['comprador_nome'],
-               'email' => $email = $_POST['comprador_email'],
-               'senha' => $senha  = $_POST['comprador_senha'],
-               'status' => $status = $_POST['comprador_status']
+                'cnpj' => $_POST['CNPJ'],
+                'nome' => $nome = $_POST['comprador_nome'],
+                'email' => $email = $_POST['comprador_email'],
+                'senha' => $senha  = $_POST['comprador_senha'],
+                'status' => $status = $_POST['comprador_status']
             );
 
             $tamanho = count($lista['cnpj']);
 
-            for($i=0; $i< $tamanho;$i++){
+            for ($i = 0; $i < $tamanho; $i++) {
 
-           
-                 $cnpj =  $lista['cnpj'][$i];
-                 $nome =  $lista['nome'][$i];
-                 $email =  $lista['email'][$i];
-                 $senha =  $lista['senha'][$i];
-                 $status =  $lista['status'][$i];
-                 $Comprador = new CompradorDAO();
-                 $Comprador->inserComprador($cnpj,$nome,$email,$senha,$status);
+
+                $cnpj =  $lista['cnpj'][$i];
+                $nome =  $lista['nome'][$i];
+                $email =  $lista['email'][$i];
+                $senha =  $lista['senha'][$i];
+                $status =  $lista['status'][$i];
+                $Comprador = new CompradorDAO();
+                $Comprador->inserComprador($cnpj, $nome, $email, $senha, $status);
             }
-           
-          
-            
         } else {
 ?>
             <script>
                 Swal.fire({
-                    title: 'Atenção!',
-                    text: 'Preenchar todos os campos obrigatorios!',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
                 })
             </script>
 
@@ -268,8 +266,6 @@ if (isset($_POST['clientesalva'])) {
         }
 
     });
-
-    
 </script>
 <script>
     var cont = 0;
@@ -283,9 +279,9 @@ if (isset($_POST['clientesalva'])) {
         var CNPJ = document.getElementById('cpf').value;
         var comprador_status = "Ativo";
 
-        if(comprador_nome != '' && comprador_email != ''){
-           
-            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="'+CNPJ+'"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+        if (comprador_nome != '' && comprador_email != '') {
+
+            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
         }
 
 
@@ -294,7 +290,7 @@ if (isset($_POST['clientesalva'])) {
         var comprador_nome = document.getElementById('comprador_nome').value = "";
         var comprador_email = document.getElementById('comprador_email').value = "";
         var comprador_senha = document.getElementById('comprador_senha').value = "";
-        
+
         var comprador_status = "Ativo";
 
 
