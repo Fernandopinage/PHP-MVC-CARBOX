@@ -20,6 +20,7 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setEmail($_POST['email']);
 
     $Cliente->editarCliente($ClassCliente);
+
 }
 
 
