@@ -15,10 +15,10 @@ if (isset($_POST['pedidoosalva'])) {
 
 
     if (isset($_POST['produto'])) {
-
+ 
         $ClassProduto = new ClassPedido();
         $ClassProduto->setNum($_POST['numero_orçamento']);
-        $ClassProduto->setData($_POST['data_emissao']);
+        $ClassProduto->setData(date('Y-m-d'));
         $ClassProduto->setRazao($_POST['razão_cliente']);
         if (isset($_POST['produto']) != '' and isset($_POST['quantidade']) != '' and isset($_POST['codsap'])) {
 
@@ -27,8 +27,11 @@ if (isset($_POST['pedidoosalva'])) {
             $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
         }
 
+       
+        
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
+       
     } else {
 ?>
         <script>
@@ -62,7 +65,7 @@ if (isset($_POST['pedidoosalva'])) {
         </div>
         <div class="form-group col-md-3">
             <label for="inputEmail4">Data de Emissão</label>
-            <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d-m-Y') ?>" placeholder="" readonly>
+            <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">Nome do Cliente</label>
