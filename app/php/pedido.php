@@ -66,14 +66,14 @@ if (isset($_POST['pedidoosalva'])) {
         </div>
         <div class="form-group col-md-4">
             <label for="inputEmail4">Nome do Cliente</label>
-            <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome']?>" readonly>
+            <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
         </div>
     </div>
     <hr>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="inputEmail4">Descrição <span style="color: red;">*</span></label>
-            <select class="form-control form-control-sm" id="produto">
+            <select class="form-control form-control-sm is-invalid" id="produto">
                 <option selected></option>
                 <?php
 
@@ -91,7 +91,7 @@ if (isset($_POST['pedidoosalva'])) {
 
         <div class="form-group col-md-1">
             <label for="inputEmail4">Qtd.</label>
-            <input type="number" min="1" max="999" class="form-control form-control-sm" id="quantidade" placeholder="">
+            <input type="number" min="1" max="999" class="form-control form-control-sm is-invalid" id="quantidade" placeholder="">
         </div>
         <div class="form-group col-md-6" id="contrato">
         </div>
@@ -187,6 +187,32 @@ if (isset($_POST['pedidoosalva'])) {
             var btn_id = $(this).attr("id");
             $('#campo' + btn_id + '').remove();
             console.log(btn_id)
+        });
+    </script>
+
+    <script>
+        $("#produto").change(function() {
+
+            if (document.getElementById('produto').value != "") {
+                $('#produto').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+            } else {
+                $('#produto').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+            }
+
+        });
+
+        $("#quantidade").change(function() {
+
+            if (document.getElementById('quantidade').value != "") {
+                $('#quantidade').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+            } else {
+                $('#quantidade').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+            }
+
         });
     </script>
 </form>
