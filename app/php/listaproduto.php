@@ -43,7 +43,16 @@ if (isset($_POST['editaproduto'])) {
     <a class="btn btn-primary" href="?p=add/produto/">Adicionar Produto</a>
 </div>
 <br><br>
-<table class="table table-hover">
+
+<style>
+.table-overflow {
+    max-height:400px;
+    overflow-y:auto;
+}
+
+</style>
+<div class="table-overflow">
+<table class="table table-hover" style="overflow-x: scroll">
     <thead class="thead" style="background-color: #136132; color:#fff;">
         <tr>
             <th scope="col" style="text-align: center;">CÓD SAP</th>
@@ -161,7 +170,7 @@ if (isset($_POST['editaproduto'])) {
 
     </tbody>
 </table>
-
+</div>
 <script>
     $("#imagem").change(function() {
 

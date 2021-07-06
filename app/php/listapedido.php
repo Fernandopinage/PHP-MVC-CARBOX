@@ -14,6 +14,14 @@ $dados = $Pedido->listaPedido();
     <a class="btn btn-primary" href="?p=add/pedido/">Novo Pedido</a>
 </div>
 <br><br>
+<style>
+.table-overflow {
+    max-height:400px;
+    overflow-y:auto;
+}
+
+</style>
+<div class="table-overflow">
 <table class="table table-hover">
     <thead class="thead" style="background-color: #136132; color:#fff;">
         <tr>
@@ -79,3 +87,4 @@ $dados = $Pedido->listaPedido();
         ?>
     </tbody>
 </table>
+</div>
