@@ -196,7 +196,7 @@ if (isset($_POST['clientesalva'])) {
             $("#comprador_senha").attr('readonly', false);
             $('#mais').show();
         } else {
-            $("#comprador_nome").attr('readonly', false);
+            $("#comprador_nome").attr('readonly', true);
             $("#comprador_email").attr('readonly', true);
             $("#comprador_senha").attr('readonly', true);
             $('#mais').hide();
@@ -268,6 +268,8 @@ if (isset($_POST['clientesalva'])) {
         }
 
     });
+
+    
 </script>
 <script>
     var cont = 0;
@@ -281,8 +283,11 @@ if (isset($_POST['clientesalva'])) {
         var CNPJ = document.getElementById('cpf').value;
         var comprador_status = "Ativo";
 
+        if(comprador_nome != '' && comprador_email != ''){
+           
+            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="'+CNPJ+'"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+        }
 
-        $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="'+CNPJ+'"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
 
         cont++
 

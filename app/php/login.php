@@ -42,7 +42,7 @@ if (isset($_POST['acessar'])) {
 
         <form class="form-signin" method="POST">
             <div class="text-center" id="logo">
-                <h2 class="form-signin-heading">ÁREA DO CLIENTE</h2>
+                <h2 class="form-signin-heading">PORTAL  ADMINISTRATIVO</h2>
                 <hr>
             </div>
             <input type="text" class="form-control" name="email" placeholder="Digite seu e-mail" required="" autofocus="" />
