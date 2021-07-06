@@ -5,7 +5,7 @@ include_once "../dao/RestritoDAO.php";
 $Restrito = new RestritoDAO();
 $dados = $Restrito->listarRestrito();
 
-if(isset($_POST['edita-model'])){
+if (isset($_POST['edita-model'])) {
 
     $ClassRestrito =  new ClassRestrito();
     $ClassRestrito->setNome($_POST['nome']);
@@ -35,7 +35,7 @@ if(isset($_POST['edita-model'])){
             <th scope="col"></th>
 
         </tr>
-    </thead> 
+    </thead>
     <tbody style="background-color: #fff;">
         <?php
 
@@ -63,13 +63,13 @@ if(isset($_POST['edita-model'])){
                         </div>
                         <div class="modal-body">
                             <form id="form-cliente" action="" method="POST">
- 
+
                                 <div class="form-row">
                                     <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
                                     <input type="hidden" name="status" id="status" value="<?php echo $obj->getStatus(); ?>">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Nome</label>
-                                        <input type="text" class="form-control form-control-sm is-invalid" name="nome" id="nome" value="<?php echo $obj->getNome(); ?>" >
+                                        <input type="text" class="form-control form-control-sm is-invalid" name="nome" id="nome" value="<?php echo $obj->getNome(); ?>">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -81,13 +81,13 @@ if(isset($_POST['edita-model'])){
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Senha</label>
-                                        <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="" value="<?php echo $obj->getSenha();?>">
+                                        <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="" value="<?php echo $obj->getSenha(); ?>">
                                     </div>
 
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary"  name="edita-model">Editar</button>
+                                    <button type="submit" class="btn btn-primary" name="edita-model">Editar</button>
                                 </div>
                             </form>
                         </div>
@@ -107,3 +107,53 @@ if(isset($_POST['edita-model'])){
     </tbody>
 
 </table>
+
+<script>
+    $("#nome").change(function() {
+
+        if (document.getElementById('nome').value != "") {
+            $('#nome').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#email").change(function() {
+
+        if (document.getElementById('email').value != "") {
+            $('#email').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#senha").change(function() {
+
+        if (document.getElementById('senha').value != "") {
+            $('#senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#conf_senha").change(function() {
+
+        if (document.getElementById('conf_senha').value != "") {
+            $('#conf_senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#conf_senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+</script>

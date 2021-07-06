@@ -89,32 +89,32 @@ if (isset($_POST['editaproduto'])) {
                                     <div class="form-group col-md-12">
                                         <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
                                         <label for="inputEmail4">Imagem <span style="color: red;">*</span></label>
-                                        <input type="file" class="form-control form-control-sm" id="imagem" name="imagem" accept=".png, .jpg, .jpeg" value="<?php echo $obj->getImg(); ?>" placeholder="">
+                                        <input type="file" class="form-control form-control-sm is-invalid" id="imagem" name="imagem" accept=".png, .jpg, .jpeg" value="<?php echo $obj->getImg(); ?>" placeholder="">
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Cód. SAP</label>
-                                        <input type="text" class="form-control form-control-sm" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>" readonly>
+                                        <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Descrição</label>
-                                        <input type="text" class="form-control form-control-sm" id="desc" name="desc" placeholder="" value="<?php echo $obj->getProduto(); ?>">
+                                        <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder="" value="<?php echo $obj->getProduto(); ?>">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Unidade</label>
-                                        <input type="text" class="form-control form-control-sm" id="unidade" name="unidade" placeholder="" value="<?php echo $obj->getUnidade(); ?>">
+                                        <input type="text" class="form-control form-control-sm is-invalid" id="unidade" name="unidade" placeholder="" value="<?php echo $obj->getUnidade(); ?>">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Ficha Técnica</label>
-                                        <input type="file" class="form-control form-control-sm" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel" value="<?php echo $obj->getFicha(); ?>" placeholder="">
+                                        <input type="file" class="form-control form-control-sm is-invalid" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel" value="<?php echo $obj->getFicha(); ?>" placeholder="">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -156,3 +156,52 @@ if (isset($_POST['editaproduto'])) {
 
     </tbody>
 </table>
+
+<script>
+    $("#imagem").change(function() {
+
+        if (document.getElementById('imagem').value != "") {
+            $('#imagem').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#imagem').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+    $("#sap").change(function() {
+
+        if (document.getElementById('sap').value != "") {
+            $('#sap').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#sap').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#desc").change(function() {
+
+        if (document.getElementById('desc').value != "") {
+            $('#desc').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#desc').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+
+    $("#ficha").change(function() {
+
+        if (document.getElementById('ficha').value != "") {
+            $('#ficha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+        } else {
+            $('#ficha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+        }
+
+    });
+</script>

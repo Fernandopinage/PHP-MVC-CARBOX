@@ -54,3 +54,53 @@ if(isset($_POST['restritosalvar'])){
         <button type="submit" class="btn btn-success" name="restritosalvar">Salvar Registro</button>
     </div>
 </form>
+
+<script>
+$("#nome").change(function() {
+
+if (document.getElementById('nome').value != "") {
+    $('#nome').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+} else {
+    $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+}
+
+});
+
+$("#email").change(function() {
+
+if (document.getElementById('email').value != "") {
+    $('#email').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+} else {
+    $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+}
+
+});
+
+$("#senha").change(function() {
+
+if (document.getElementById('senha').value != "") {
+    $('#senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+} else {
+    $('#senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+}
+
+});
+
+$("#conf_senha").change(function() {
+
+if (document.getElementById('conf_senha').value != "") {
+    $('#conf_senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+
+} else {
+    $('#conf_senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+
+}
+
+});
+</script>
