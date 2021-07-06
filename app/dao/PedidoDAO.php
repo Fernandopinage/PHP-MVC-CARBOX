@@ -3,6 +3,7 @@
 include_once "../dao/DAO.php";
 include_once "../class/ClassPedido.php";
 include_once "../class/ClassProduto.php";
+include_once '../class/ClassPedido.php';
 
 
 class PedidoDAO extends DAO{
@@ -56,6 +57,30 @@ class PedidoDAO extends DAO{
         }
         
         
+    }
+
+    public function listaPedido(){
+
+        $sql = "SELECT * FROM `pedido` ";
+        $select = $this->con->prepare($sql);
+        $select->execute();
+        $array = array();
+
+        if($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+           $ClassPedido = new ClassPedido();
+           $ClassPedido->setID($row['PEDIDO_ID']);
+           $ClassPedido->setDesc($row['PEDIDO_DESC']);
+           $ClassPedido->setUnidade($row['PEDIDO_UNIDADE']);
+           $ClassPedido->setProduto($row['PEDIDO_PRODUTO']);
+           $ClassPedido->setQuantidade($row['PEDIDO_QUANTIDADE']);
+           $ClassPedido->setData($row['PEDIDO_DATAEMISSAO']);
+           $ClassPedido->setRazao($row['PEDIDO_RAZAO']);
+           $ClassPedido->setSap($row['PEDIDO_CODSAP']);
+           $ClassPedido->setNum($row['PEDIDO_NUM']);
+           $array[] = $ClassPedido;
+        }
+        return $array;
     }
 
 }

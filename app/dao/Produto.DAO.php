@@ -23,6 +23,7 @@ class ProdutoDAO extends DAO{
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
+        
         while($row = $select->fetch(PDO::FETCH_ASSOC)){ 
             $ClassProduto = new ClassProduto();
             $ClassProduto->setID($row['PRODUTO_ID']);

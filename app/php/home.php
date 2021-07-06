@@ -28,8 +28,12 @@ $Cliente = new ClienteDAO();
                 include_once "../php/alterarsenha.php";
                 break;
 
+            case 'add/pedido/':
+                include_once "../php/addpedido.php";
+                break;
+                
             case 'pedido/':
-                include_once "../php/pedido.php";
+                include_once "../php/listapedido.php";
                 break;
 
             case 'produto/':
