@@ -49,7 +49,7 @@ if (isset($_POST['editaproduto'])) {
             <th scope="col" style="text-align: center;">CÓD SAP</th>
             <th scope="col">PRODUTO</th>
             <th scope="col">DESCRIÇÂO</th>
-            <th scope="col">UNIDADE</th>
+            <th scope="col">ESTOQUE</th>
             <th scope="col" style="text-align: center;">DOCUMENTAÇÃO</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -67,7 +67,7 @@ if (isset($_POST['editaproduto'])) {
                 <th scope="col" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>"><img src="../imagens/<?php echo $obj->getImg(); ?>" height="80" width="50" class="img-thumbnail"></th>
                 <th scope="col"><?php echo $obj->getProduto(); ?></th>
                 <th scope="col"><?php echo $obj->getUnidade(); ?></th>
-                <th scope="col" style="text-align: center;"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank">Ficha Técnica</a></th>
+                <th scope="col" style="text-align: center;"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></th>
                 <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
                 <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
 
