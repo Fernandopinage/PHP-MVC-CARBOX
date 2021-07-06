@@ -1,4 +1,3 @@
-
-.navbar-light .navbar-toggler-icon{
-    color: $fff;
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white !important;
 }
