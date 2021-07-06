@@ -36,8 +36,6 @@ $dados = $Pedido->listaPedido();
                 <th scope="col"><?php echo $obj->getData(); ?></th>
                 <th scope="col"><?php echo $obj->getRazao(); ?></th>
                 <th scope="col"><button type="button" class="btn  btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Lista de Itens</button></th>
-
-
             </tr>
 
             <div class="modal fade" id="visualizar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="visualizar<?php echo $obj->getID(); ?>" aria-hidden="true">

@@ -85,10 +85,16 @@ if (isset($_POST['edita-model'])) {
                                     </div>
 
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
+                                    </div>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" class="btn btn-primary" name="edita-model">Editar</button>
                                 </div>
+
                             </form>
                         </div>
 

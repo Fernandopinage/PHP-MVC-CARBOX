@@ -117,6 +117,11 @@ if (isset($_POST['editaproduto'])) {
                                         <input type="file" class="form-control form-control-sm is-invalid" id="ficha" name="ficha" target="_blank" accept="application/pdf,application/vnd.ms-excel" value="<?php echo $obj->getFicha(); ?>" placeholder="">
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
+                                    </div>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="editaproduto" class="btn btn-primary">Editar</button>
