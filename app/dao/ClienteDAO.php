@@ -27,7 +27,7 @@ class ClienteDAO extends DAO
 
     public function listaCliente(){
 
-        $sql = "SELECT * FROM `cliente`";
+        $sql = "SELECT * FROM `cliente` ORDER BY `CLIENTE_CODSAP` ASC";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
