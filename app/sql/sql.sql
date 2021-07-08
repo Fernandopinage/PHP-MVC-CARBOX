@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Jun-2021 às 17:40
+-- Tempo de geração: 08-Jul-2021 às 23:16
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 8.0.3
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `CLIENTE_ID` int(11) NOT NULL,
-  `CLIENTE_CNPJ` int(14) NOT NULL,
+  `CLIENTE_CNPJ` varchar(20) NOT NULL,
   `CLIENTE_RAZAO` varchar(100) DEFAULT NULL,
   `CLIENTE_FANTASIA` varchar(100) NOT NULL,
   `CLIENTE_EMAIL` varchar(100) DEFAULT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `comprador` (
   `COMPRADOR_ID` int(11) NOT NULL,
-  `COMPRADOR_CNPJ` varchar(20) DEFAULT NULL,
+  `COMPRADOR_CNPJ` varchar(100) DEFAULT NULL,
   `COMPRADOR_NOME` varchar(100) DEFAULT NULL,
   `COMPRADOR_EMAIL` varchar(100) DEFAULT NULL,
   `COMPRADOR_SENHA` varchar(100) DEFAULT NULL,
@@ -65,7 +65,8 @@ CREATE TABLE `pedido` (
   `PEDIDO_QUANTIDADE` varchar(11) NOT NULL,
   `PEDIDO_DATAEMISSAO` date NOT NULL,
   `PEDIDO_RAZAO` varchar(100) NOT NULL,
-  `PEDIDO_CODSAP` int(11) NOT NULL
+  `PEDIDO_CODSAP` int(11) NOT NULL,
+  `PEDIDO_NUM` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,7 +81,7 @@ CREATE TABLE `produto` (
   `PRODUTO_PRODUTO` varchar(100) DEFAULT NULL,
   `PRODUTO_UNIDADE` varchar(100) DEFAULT NULL,
   `PRODUTO_IMG` varchar(220) DEFAULT NULL,
-  `PRODUTO_FIXA` varchar(100) NOT NULL
+  `PRODUTO_FIXA` varchar(220) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -88,9 +89,19 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`PRODUTO_ID`, `PEDIDO_CODSAP`, `PRODUTO_PRODUTO`, `PRODUTO_UNIDADE`, `PRODUTO_IMG`, `PRODUTO_FIXA`) VALUES
-(1, '11', 'lapis', NULL, '00000000000000000000000023232.png', 'ARTIGO - SEGURANÃ‡A DA INFORMAÃ‡ÃƒO.docx'),
-(2, '2', 'caneta', NULL, '00000000000000000000000023232.png', 'dsparalegal.com.br.pdf'),
-(3, 'a', '1', NULL, '00000000000000000000000023232.png', 'barbeariadonvaliante.com.br.pdf');
+(1, '01', 'OxigÃªnio Industrial', '', 'OxigÃªnio Industrial.png', 'OXIGENIO_GASOSO.pdf'),
+(2, '02', 'OxigÃªnio Medicinal', '', 'OxigÃªnio Medicinal.png', 'OXIGENIO_MEDICINAL.pdf'),
+(3, '03', 'NitrogÃªnio Industrial', '', 'NitrogÃªnio Industrial.png', 'NITROGENIO_GASOSO.pdf'),
+(4, '04', 'Ar Comprimido RespirÃ¡vel', '', 'Ar Comprimido RespirÃ¡vel.png', 'AR_COMPRIMIDO.pdf'),
+(5, '05', 'ArgÃ´nio Industrial', '', 'ArgÃ´nio Industrial.png', 'ARGONIO_GASOSO.pdf'),
+(6, '06', 'DiÃ³xido de Carbono Industrial', '', 'DiÃ³xido de Carbono Industrial.png', 'DIOXIDO_DE_CARBONO.pdf'),
+(7, '07', 'DiÃ³xido de Carbono Medicinal', '', 'DiÃ³xido de Carbono Medicinal.png', 'DIOXIDO_DE_CARBONO (1).pdf'),
+(8, '08', 'Acetileno Dissolvido Industrial', '', 'Acetileno Dissolvido Industrial.png', 'ACETILENO.pdf'),
+(9, '09', 'Misturas para solda - Carbomix', '', 'Misturas para solda - Carbomix.png', 'GAS-MISTURA-PARA-SOLDA.pdf'),
+(10, '10', 'DiÃ³xido de Carbono LÃ­quido', '', 'DiÃ³xido de Carbono LÃ­quido.png', 'ARGONIO_LIQUIDO.pdf'),
+(11, '11', 'ArgÃ´nio LÃ­quido', '', 'ArgÃ´nio LÃ­quido.png', 'ARGONIO_LIQUIDO (1).pdf'),
+(12, '12', 'NitrogÃªnio LÃ­quido', '', 'NitrogÃªnio LÃ­quido.png', 'LIQ-NITROG_NIO-L_QUIDO.pdf'),
+(13, '13', 'OxigÃªnio LÃ­quido', '', 'OxigÃªnio LÃ­quido.png', 'OXIGENIO_LIQUIDO.pdf');
 
 -- --------------------------------------------------------
 
@@ -102,17 +113,18 @@ CREATE TABLE `restrito` (
   `RESTRITO_ID` int(11) NOT NULL,
   `RESTRITO_NOME` varchar(100) DEFAULT NULL,
   `RESTRITO_SENHA` varchar(100) DEFAULT NULL,
-  `RESTRITO_EMAIL` varchar(100) NOT NULL
+  `RESTRITO_EMAIL` varchar(100) NOT NULL,
+  `RESTRITO_STATUS` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `restrito`
 --
 
-INSERT INTO `restrito` (`RESTRITO_ID`, `RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`) VALUES
-(1, '[value-2]', '[value-3]', '[value-4]'),
-(2, 'aaaaa', '111', 'aaaa'),
-(3, 'aaaaa', '698d51a19d8a121ce581499d7b701668', 'aaaa');
+INSERT INTO `restrito` (`RESTRITO_ID`, `RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`, `RESTRITO_STATUS`) VALUES
+(4, 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '63a9f0ea7bb98050796b649e85481845', 'luiz.c@progride.com.br', 'S'),
+(7, 'Rhuan viana', '202cb962ac59075b964b07152d234b70', 'rhuan.v@progride.com.br', 'N'),
+(8, 'ORISMAR ', 'c7916c9600109ef3c10758b7d4b497b2', 'orismar@progride.com.br', 'S');
 
 --
 -- Índices para tabelas despejadas
@@ -156,13 +168,13 @@ ALTER TABLE `restrito`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
@@ -174,13 +186,13 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `PRODUTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PRODUTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `restrito`
 --
 ALTER TABLE `restrito`
-  MODIFY `RESTRITO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `RESTRITO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
