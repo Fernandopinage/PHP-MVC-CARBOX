@@ -19,6 +19,10 @@ class ClienteDAO extends DAO
         $insert->bindValue(":CLIENTE_EMAIL", $ClassCliente->getEmail());
         $insert->bindValue(":CLIENTE_CODSAP", $ClassCliente->getSap());
         $insert->execute();
+
+        $email =  $ClassCliente->getEmail();
+        include_once "../class/ClassPedidoMAIL.php";
+        header('Location: ../php/home.php?p=add/cliente/');
     }
 
     public function listaCliente(){
