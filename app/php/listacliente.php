@@ -21,9 +21,6 @@ if (isset($_POST['editacliente'])) {
     $Cliente->editarCliente($ClassCliente);
 
 }
-
-
-
 ?>
 <br><br>
 <link href='../css/table.css' rel='stylesheet' />

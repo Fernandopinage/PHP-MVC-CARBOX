@@ -38,7 +38,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = "Seu Pedido realizado com sucesso";
+    $mail->Subject = "Seu Pedido realizado com sucesso";    // titulo da mensagem exibida 
     $mail->Body    = "LISTA DE PEDIDOS";
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
