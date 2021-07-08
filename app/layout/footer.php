@@ -1,3 +1,4 @@
+   
     <!-- Optional JavaScript -->
     <script src="../js/mascaraCNPJ.js"></script>
 
@@ -9,7 +10,9 @@
 
     </body>
     <footer>
-
+    <nav class="navbar fixed-bottom navbar-expand-sm justify-content-center" style="background-color:#136132;">
+        <p style="color:#fff;"> Desenvolvido por Progride ®</p>
+    </nav>
     </footer>
 
     </html>
