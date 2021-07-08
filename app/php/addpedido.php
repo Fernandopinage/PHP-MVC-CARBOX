@@ -4,8 +4,6 @@ include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
-
-include_once "../class/ClassPedidoMAIL.php";
 $GerarNumero = new GerarNumero();
 
 

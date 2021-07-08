@@ -8,7 +8,6 @@ $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
 
 
-
 if (isset($_POST['editacliente'])) {
 
     $ClassCliente = new ClassCliente();

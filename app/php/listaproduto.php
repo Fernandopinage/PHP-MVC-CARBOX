@@ -46,7 +46,7 @@ if (isset($_POST['editaproduto'])) {
 
 <style>
 .table-overflow {
-    max-height:400px;
+    max-height:500px;
     overflow-y:auto;
 }
 
