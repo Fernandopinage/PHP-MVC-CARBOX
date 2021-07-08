@@ -35,7 +35,7 @@ if (empty($_SESSION['user']['nome'])) {
 <body>
   
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color:#136132;">
-    <a class="navbar-brand" href="?p=home/" style="color:#fff;"><img src="../img/LOGO carboxi gases original.png" alt="" width="120" height="44"></a>
+    <a class="navbar-brand" href="?p=home/" style="color:#fff;"><img src="../img/LOGO carboxi gases original.png" alt="" width="120" height="50"></a>
     <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span  class="navbar-toggler-icon"></span>
     </button>

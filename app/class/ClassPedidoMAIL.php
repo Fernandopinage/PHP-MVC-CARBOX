@@ -39,7 +39,23 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = "Seu Pedido realizado com sucesso";    // titulo da mensagem exibida 
-    $mail->Body    = "LISTA DE PEDIDOS";
+    $mail->Body    = '<div>
+
+    <div style="background-color: #136132; text-align: center">
+        <img style="background-color: #136132; text-align: justify;" src="../img/LOGO carboxi gases original.png" alt="" width="120" height="50">
+    </div>
+    <div style="text-align: justify; text-align: center">
+        <p style="margin-left: 150px;">CADASTRO REALIZADO COM SUCESSO</p>
+        <p>Olá Seja bem-vindo a <strong>CARBOXI</strong> Esperamos que encontre tudo o que você deseja,com melhores preços e condições de pagamento.</p>
+    </div>
+    <div style="text-align: justify; text-align: left; background-color: #FF5E14;color:#fff;">
+        <p>Em caso de dúvidas entre em contato conosco:</p>
+        <p>Telefone: </p>
+        <p>Atenciosamente</p>
+        <p>CARBOXI</p>
+    </div>
+
+</div>';
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
