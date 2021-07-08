@@ -37,16 +37,17 @@ if (isset($_POST['editaproduto'])) {
 
 ?>
 
-<br><br>
+<br>
 <link href='../css/table.css' rel='stylesheet' />
+<br>
+
 <div class="text-right">
     <a class="btn btn-primary" href="?p=add/produto/">Adicionar Produto</a>
 </div>
-<br><br>
-
 <style>
 .table-overflow {
-    max-height:500px;
+    margin: 10px;
+    max-height:440px;
     overflow-y:auto;
 }
 

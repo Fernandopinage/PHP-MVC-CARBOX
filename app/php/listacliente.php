@@ -21,16 +21,17 @@ if (isset($_POST['editacliente'])) {
     $Cliente->editarCliente($ClassCliente);
 
 }
+
 ?>
-<br><br>
+<br>
 <link href='../css/table.css' rel='stylesheet' />
 <div class="text-right">
     <a class="btn btn-primary" href="?p=add/cliente/">Adicionar Usuário</a>
 </div>
-<br><br>
+<br>
 <style>
 .table-overflow {
-    max-height:400px;
+    max-height:440px;
     overflow-y:auto;
 }
 
