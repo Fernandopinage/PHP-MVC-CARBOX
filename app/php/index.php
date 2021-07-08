@@ -76,7 +76,7 @@ if (isset($_POST['acessar'])) {
    <!-- <img id="div2" src="../img/1.png"> -->
 
 
-    <?php include_once "../layout/footer.php"; ?>
+
 </body>
 
 </html>
