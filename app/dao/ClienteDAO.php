@@ -44,6 +44,30 @@ class ClienteDAO extends DAO
         return $array;
     }
 
+    public function listaVendedores($id){
+
+       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID";
+       $select = $this->con->prepare($sql);
+       $select->bindValue(":CLIENTE_ID", $id);
+       $select->execute();
+       $lista = array();
+       while($row = $select->fetch(PDO::FETCH_ASSOC)){
+           
+            $array = array(
+
+                'id' => $row['COMPRADOR_ID'],
+                'nome' => $row['COMPRADOR_NOME'],
+                'email' => $row['COMPRADOR_EMAIL'],
+                'password' => $row['COMPRADOR_SENHA'],
+                'status' => $row['COMPRADOR_STATUS']
+            );
+           
+            $lista[]  =$array;
+            
+       }
+       return $lista;
+    }
+
     public function editarCliente(ClassCliente $ClassCliente){
   
       
@@ -59,6 +83,11 @@ class ClienteDAO extends DAO
         $update->execute();
       
         header('Location: ../php/home.php?p=cliente/');
+        
+    }
+
+    public function editarComprador(){
+
         
     }
 

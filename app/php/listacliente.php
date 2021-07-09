@@ -3,6 +3,8 @@
 include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
 
+include_once "../class/ClassComprador.php";
+
 
 $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
@@ -18,9 +20,19 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setSap($_POST['sap']);
     $ClassCliente->setEmail($_POST['email']);
 
-    $Cliente->editarCliente($ClassCliente);
+    //$Cliente->editarCliente($ClassCliente);
+
+    $lista = array(
+        'id' => $id = $_POST['id_comprador'],
+        'nome' => $nome = $_POST['nome_comprador'],
+        'email' => $email  = $_POST['email_comprador'],
+        'status' => $status = $_POST['status_comprador']
+    );
+    
+ 
 
 }
+  
 
 ?>
 <br>
@@ -30,118 +42,180 @@ if (isset($_POST['editacliente'])) {
 </div>
 <br>
 <style>
-.table-overflow {
-    max-height:440px;
-    overflow-y:auto;
-}
-
+    .table-overflow {
+        max-height: 440px;
+        overflow-y: auto;
+    }
 </style>
 <div class="table-overflow">
-<table class="table table-hover">
-    <thead class="thead" style="background-color: #136132; color:#fff;">
-        <tr>
-            <th scope="col" style="text-align: center;">CÓD SAP</th>
-            <th scope="col">CNPJ</th>
-            <th scope="col">RAZÃO SOCIAL</th>
-            <th scope="col">E-MAIL</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+    <table class="table table-hover">
+        <thead class="thead" style="background-color: #136132; color:#fff;">
+            <tr>
+                <th scope="col" style="text-align: center;">CÓD SAP</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">RAZÃO SOCIAL</th>
+                <th scope="col">E-MAIL</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
 
-        </tr>
-    </thead>
-    <tbody style="background-color: #fff;">
+            </tr>
+        </thead>
+        <tbody style="background-color: #fff;">
 
-        <?php
-
-        foreach ($dados as $dado => $obj) {
-
-            if (empty($obj)) {
-        ?>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>
-                        <p class="text-center">Não existe nenhum registro</p>
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
             <?php
 
-            } else {
+            foreach ($dados as $dado => $obj) {
 
-
+                if (empty($obj)) {
             ?>
-                <tr>
-                    <th scope="col" style="text-align: center;"><?php echo  $obj->getSap(); ?></th>
-                    <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
-                    <th scope="col"><?php echo  $obj->getRazao(); ?></th>
-                    <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-                    <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                    <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <p class="text-center">Não existe nenhum registro</p>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                <?php
 
-                </tr>
-                <div class="modal fade" id="editar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $obj->getID(); ?>" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"><?php echo  $obj->getRazao(); ?></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="POST">
-                                    <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
-                                    <div class="form-row">
+                } else {
 
-                                        <div class="form-group col-md-12">
-                                            <label for="inputEmail4">CNPJ <span style="color: red;">*</span></label>
-                                            <input type="text" class="form-control form-control-sm is-invalid" value="<?php echo $obj->getCnpj(); ?>" onfocus="javascript: retirarFormatacao(this);" onblur="javascript: formatarCampo(this);" name="cpf" id="cpf" placeholder="99.999.999/9999-99">
+
+                ?>
+                    <tr>
+                        <th scope="col" style="text-align: center;"><?php echo  $obj->getSap(); ?></th>
+                        <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
+                        <th scope="col"><?php echo  $obj->getRazao(); ?></th>
+                        <th scope="col"><?php echo  $obj->getEmail(); ?></th>
+                        <th scope="col"><button type="button" class="btn btn-primary btn-sm" id="viewBTN" data-toggle="modal" data-target="#view<?php echo $obj->getID(); ?>">Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                        <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+
+                    </tr>
+
+
+                    <!--------------------------------------  VIEW ---------------------------------->
+
+                    <div class="modal fade bd-example-modal-lg" id="view<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Lista de Compradores</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <form method="POST">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Editar</button>
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label for="inputEmail4">Razão Social <span style="color: red;">*</span></label>
-                                            <input type="text" class="form-control form-control-sm is-invalid" id="razao" name="razao" placeholder="" value="<?php echo $obj->getRazao(); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label for="inputEmail4">Cod SAP<span style="color: red;">*</span></label>
-                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                            <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="" value="<?php echo $obj->getEmail(); ?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <p for="inputEmail4">Campos Obrigatórios<span style="color: red;">*</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" name="editacliente" class="btn btn-primary">Editar</button>
-                                    </div>
+
+                                    </form>
+
+
+
+                                </div>
                             </div>
-                            </form>
                         </div>
                     </div>
-                </div>
-        <?php
+                    <!-------------------------------------- **********---------------------------------->
 
+                    <div class="modal fade bd-example-modal-lg" id="editar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $obj->getID(); ?>" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alteração no cadastro do Cliente</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="id" id="id" value="<?php echo $obj->getID(); ?>">
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-2">
+                                                <label for="inputEmail4">Cod SAP</label>
+                                                <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputEmail4">CNPJ</label>
+                                                <input type="text" class="form-control form-control-sm is-invalid" value="<?php echo $obj->getCnpj(); ?>" onfocus="javascript: retirarFormatacao(this);" onblur="javascript: formatarCampo(this);" name="cpf" id="cpf" placeholder="99.999.999/9999-99">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Razão Social</label>
+                                                <input type="text" class="form-control form-control-sm is-invalid" id="razao" name="razao" placeholder="" value="<?php echo $obj->getRazao(); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4">E-mail</label>
+                                                <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="" value="<?php echo $obj->getEmail(); ?>">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <?php
+                                        $id = $obj->getID();
+                                        $lista = $Cliente->listaVendedores($id);
+
+
+
+                                        foreach ($lista as $lista) {
+
+                                            echo '<div class="form-row">
+
+                                                    <div class="form-group col-md-4">
+                                                        <label for="inputEmail4">Nome </label>
+                                                        <input type="hidden" class="form-control form-control-sm" name="id_comprador" value="' . $lista['id'] . '" readonly>
+                                                        <input type="text" class="form-control form-control-sm" name="nome_comprador" value="' . $lista['nome'] . '" readonly>
+                                                    </div>
+
+                                                    <div class="form-group col-md-5">
+                                                        <label for="inputEmail4">Email</label>
+                                                        <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $lista['email'] . '" placeholder="">
+                                                    </div>
+                                                    <div class="form-check" style="margin-top: 30px; margin-left: 10px;">
+                                                        <input class="form-check-input" type="checkbox"  name="status_comprador[]" id="status_comprador">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Desativar   
+                                                        </label>
+                                                     </div>
+                                                  </div>
+                                                       
+                                                ';
+                                        }
+                                        ?>
+
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" name="editacliente" class="btn btn-primary">Editar</button>
+                                        </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+
+                }
             }
-        }
-        ?>
+            ?>
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>
+
+
 <script>
     $("#cpf").change(function() {
 
