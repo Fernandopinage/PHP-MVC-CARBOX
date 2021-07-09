@@ -239,7 +239,7 @@ if (isset($_POST['editacliente'])) {
     $('#mais').click(function() {
 
         
-        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="" id="comprador_nome" placeholder=""></div><div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="" id="comprador_email" placeholder=""></div><div class="form-group col-md-3"><label for="inputEmail4">Senha </label><input type="password" class="form-control form-control-sm" name="" id="comprador_senha" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></div></div></div>');
+        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-3"><label for="inputEmail4">Senha </label><input type="password" class="form-control form-control-sm" name="comprador_senha[]" id="comprador_senha" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff; margin-top: 30px;"> - </a></div></div></div>');
 
         cont++
     });
@@ -251,6 +251,7 @@ if (isset($_POST['editacliente'])) {
         console.log(campo);
     });
 </script>
+
 
 <script>
     $("#cpf").change(function() {
