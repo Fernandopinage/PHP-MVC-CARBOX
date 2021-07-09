@@ -37,6 +37,7 @@ class PedidoDAO extends DAO{
             $ClassProduto = new ClassProduto();
             $ClassProduto->setID($row['PRODUTO_ID']);
             $ClassProduto->setProduto($row['PRODUTO_PRODUTO']);
+            $ClassProduto->setImg($row['PRODUTO_IMG']);
             $array[] = $ClassProduto;
         }
         return $array;

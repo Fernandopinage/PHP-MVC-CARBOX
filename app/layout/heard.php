@@ -49,6 +49,7 @@ if (empty($_SESSION['user']['nome'])) {
             Solicitar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="?p=orcamento/">Orçamento</a>
             <a class="dropdown-item" href="?p=pedido/">Orçamento</a>
           </div>
         </li>

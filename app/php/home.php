@@ -15,6 +15,16 @@ $Cliente = new ClienteDAO();
 
 
         switch ($pagina) {
+
+
+            case 'orcamento/':
+                include_once "../php/orcamento.php";
+                break;
+
+
+
+
+
             case 'home/':
                 include_once "../php/listapedido.php";
                 break;
