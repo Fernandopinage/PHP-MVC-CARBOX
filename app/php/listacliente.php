@@ -28,11 +28,8 @@ if (isset($_POST['editacliente'])) {
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
-    
- 
-
 }
-  
+
 
 ?>
 <br>
@@ -89,7 +86,7 @@ if (isset($_POST['editacliente'])) {
                         <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
                         <th scope="col"><?php echo  $obj->getRazao(); ?></th>
                         <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-                        <th scope="col"><button type="button" class="btn btn-primary btn-sm" id="viewBTN" data-toggle="modal" data-target="#view<?php echo $obj->getID(); ?>">Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-primary btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Comprador</button></th>
                         <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
                         <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
 
@@ -98,12 +95,12 @@ if (isset($_POST['editacliente'])) {
 
                     <!--------------------------------------  VIEW ---------------------------------->
 
-                    <div class="modal fade bd-example-modal-lg" id="view<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade bd-example-modal-lg" id="novo<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Lista de Compradores</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Compradores</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -111,11 +108,32 @@ if (isset($_POST['editacliente'])) {
                                 <div class="modal-body">
 
 
-                                    <form method="POST">
+                                    <form id="form-comprador" action="" method="POST">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
+                                                <input type="text" class="form-control form-control-sm" name="" id="comprador_nome" placeholder="">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
+                                                <input type="email" class="form-control form-control-sm" name="" id="comprador_email" placeholder="">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="inputEmail4">Senha </label>
+                                                <input type="password" class="form-control form-control-sm" name="" id="comprador_senha" placeholder="">
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+                                            </div>
+                                        </div>
+                                        <div id="lista">
+
+
+                                        </div>
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-primary">Editar</button>
+                                            <button type="button" name="novocomprador" class="btn btn-primary">Adicionar</button>
                                         </div>
 
                                     </form>
@@ -214,7 +232,25 @@ if (isset($_POST['editacliente'])) {
         </tbody>
     </table>
 </div>
+<script>
+    var cont = 0;
 
+
+    $('#mais').click(function() {
+
+        
+        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="" id="comprador_nome" placeholder=""></div><div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="" id="comprador_email" placeholder=""></div><div class="form-group col-md-3"><label for="inputEmail4">Senha </label><input type="password" class="form-control form-control-sm" name="" id="comprador_senha" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></div></div></div>');
+
+        cont++
+    });
+
+    $("form").on("click", ".btn-danger", function() {
+       
+        var btn_id = $(this).attr("id");
+        $('#campo' + btn_id + '').remove();
+        console.log(campo);
+    });
+</script>
 
 <script>
     $("#cpf").change(function() {
