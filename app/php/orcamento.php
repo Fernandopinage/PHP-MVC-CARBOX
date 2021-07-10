@@ -74,12 +74,12 @@ if (isset($_POST['pedidoosalva'])) {
                                 <h5 class="card-title text-center"><?php echo $obj->getProduto(); ?></h5>
                                 <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
                                 <div class="text-center">
-                                    <a  class="btn btn-secondary a btn-sm" id="subtrair"onclick="subtrair(<?php echo $obj->getID(); ?> )" >-</a>
-                                    <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;">
-                                    <a  class="btn btn-secondary btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )">+</a>
+                                    <a  class="btn btn a btn-sm" id="subtrair"onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;" >-</a>
+                                    <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                    <a  class="btn btn btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
                                 </div>
-                                <div class="text-center" style="margin-top: 10px;">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">
+                                <div class="text-center" style="margin-top: 20px;">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
                                         COMPRAR
                                     </button>
                                 </div>
@@ -107,12 +107,17 @@ if (isset($_POST['pedidoosalva'])) {
     var substr =1;
     var soma =1;
     var total = 0;
+
+    
     function subtrair(id){
 
         var quantidade = parseInt(document.getElementById('quantidade'+id).value);
 
-        total = quantidade - substr
-        document.getElementById('quantidade'+id).value =total;
+        if(quantidade != 1){
+            total = quantidade - substr
+            document.getElementById('quantidade'+id).value =total;
+            
+        }
     }
 
     function somar(id){
