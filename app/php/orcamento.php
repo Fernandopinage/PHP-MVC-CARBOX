@@ -59,26 +59,37 @@ if (isset($_POST['pedidoosalva'])) {
 
     <?php
 
-    foreach ($dado as $dados) {
+
+    foreach ($dado as $dados => $obj) {
 
     ?>
-        <div class=" d-inline-block">
 
-            <div class="form-row" <?php echo $dados->getID(); ?>>
-                <div class="form-group col-md-3">
-                    <div class="card" style="width: 16rem;">
-                        <img class="card-img-top" src="../imagens/<?php echo $dados->getImg(); ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"><?php echo $dados->getProduto(); ?></h5>
-                            <p class="card-text text-center"><a href="../pdf/<?php echo $dados->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-primary ">COMPRAR</a>
+            <div class=" d-inline-block text-center" style="padding: 8px;">
+
+                <div class="form-row" <?php echo $obj->getID(); ?> style="border: 0px;">
+                    <div class="form-group col-md-4">
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><?php echo $obj->getProduto(); ?></h5>
+                                <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
+                                <div class="text-center">
+                                    <a  class="btn btn-secondary a btn-sm" id="subtrair"onclick="subtrair(<?php echo $obj->getID(); ?> )" >-</a>
+                                    <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;">
+                                    <a  class="btn btn-secondary btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )">+</a>
+                                </div>
+                                <div class="text-center" style="margin-top: 10px;">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">
+                                        COMPRAR
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- Modal -->
+
 
     <?php
 
@@ -91,3 +102,26 @@ if (isset($_POST['pedidoosalva'])) {
 
 
 </form>
+
+<script>
+    var substr =1;
+    var soma =1;
+    var total = 0;
+    function subtrair(id){
+
+        var quantidade = parseInt(document.getElementById('quantidade'+id).value);
+
+        total = quantidade - substr
+        document.getElementById('quantidade'+id).value =total;
+    }
+
+    function somar(id){
+
+        var quantidade = parseInt(document.getElementById('quantidade'+id).value);
+        
+        total = quantidade + soma
+        document.getElementById('quantidade'+id).value =total;
+        
+    }
+
+</script>
