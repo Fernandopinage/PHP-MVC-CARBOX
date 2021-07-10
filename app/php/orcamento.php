@@ -80,7 +80,7 @@ if (isset($_POST['pedidoosalva'])) {
                                 </div>
                                 <div class="text-center" style="margin-top: 20px;">
                                     <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
-                                        COMPRAR
+                                    COMPRAR <img src="../img/carrinho.png">
                                     </button>
                                 </div>
                             </div>
