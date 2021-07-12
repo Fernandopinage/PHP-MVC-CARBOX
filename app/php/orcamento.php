@@ -120,7 +120,7 @@ if (isset($_POST['pedidoosalva'])) {
         }
     }
 
-    function somar(id,){
+    function somar(id){
 
         var quantidade = parseInt(document.getElementById('quantidade'+id).value);
         
