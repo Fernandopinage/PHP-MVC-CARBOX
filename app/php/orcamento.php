@@ -105,10 +105,19 @@ if (isset($_POST['pedidoosalva'])) {
     ?>
 
 
-    <div class="lista" id="container">
-    
-    </div>
-    <button class="btn-lista" onclick="div()">Lista de Produtos</button>
+    <form action="">
+        <div class="lista" id="container">
+            <h1 class="text-center">Meus Produtos</h1>
+            <hr>
+            <div id="produto_lista">
+
+                <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
+            </div>
+
+
+        </div>
+    </form>
+    <a class="btn-lista" onclick="div()"></a>
 </div>
 <!-- -------------------------------------------------------------------------------------- -->
 <script>
@@ -145,25 +154,22 @@ if (isset($_POST['pedidoosalva'])) {
         var id;
         var quantidado = document.getElementById('quantidade' + id).value
         var produto = document.getElementById('produto' + id).value
-        console.log(produto, quantidado)
+
+
+        $('#produto_lista').append('<div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produto[]" value="'+produto+'">')
     }
 </script>
 
 <script>
+    function div() {
 
 
+        if (container.style.display === "block") {
 
-    function div(){
-
-        
-        if(container.style.display === "none"){
-            
-            container.style.display = "block";
-            
-        }else{
             container.style.display = "none";
+
+        } else {
+            container.style.display = "block";
         }
     }
-
-    
 </script>
