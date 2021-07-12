@@ -107,17 +107,17 @@ if (isset($_POST['pedidoosalva'])) {
 
     <form action="">
         <div class="lista" id="container">
-            <h1 class="text-center">Meus Produtos</h1>
+            <h1 class="text-center">Meu Carrinho</h1>
             <hr>
             <div id="produto_lista">
 
+                </div>
+                
+                
                 <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
-            </div>
-
-
         </div>
     </form>
-    <a class="btn-lista" onclick="div()"></a>
+    <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
 </div>
 <!-- -------------------------------------------------------------------------------------- -->
 <script>
@@ -152,11 +152,11 @@ if (isset($_POST['pedidoosalva'])) {
     function btn(id) {
 
         var id;
-        var quantidado = document.getElementById('quantidade' + id).value
+        var quantidade = document.getElementById('quantidade' + id).value
         var produto = document.getElementById('produto' + id).value
 
 
-        $('#produto_lista').append('<div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produto[]" value="'+produto+'">')
+        $('#produto_lista').append('<div class="form-row"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" value="'+produto+'" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" value="'+quantidade+'" ></div></div>')
     }
 </script>
 
