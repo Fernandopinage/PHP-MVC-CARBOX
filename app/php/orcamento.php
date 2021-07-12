@@ -71,9 +71,10 @@ if (isset($_POST['pedidoosalva'])) {
                         <div class="card" style="width: 20rem;">
                             <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title text-center"><spam id="produto<?php echo $obj->getProduto(); ?>"><?php echo $obj->getProduto(); ?></spam></h5>
+                                <h5 class="card-title text-center"><spam><?php echo $obj->getProduto(); ?></spam></h5>
                                 <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
                                 <div class="text-center">
+                                    <input type="hidden" value="<?php echo $obj->getProduto(); ?>" id="produto<?php echo $obj->getID(); ?>">
                                     <a  class="btn btn a btn-sm" id="subtrair"onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;" >-</a>
                                     <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                     <a  class="btn btn btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
@@ -139,6 +140,6 @@ if (isset($_POST['pedidoosalva'])) {
         var id;
         var quantidado = document.getElementById('quantidade'+id).value
         var produto = document.getElementById('produto'+id).value
-        console.log(produto)
+        console.log(produto,quantidado)
     }
 </script>
