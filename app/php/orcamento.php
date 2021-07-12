@@ -168,8 +168,15 @@ if (isset($_POST['pedidoosalva'])) {
 
         $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
         cont++
-        $("form").on("click", ".btn-danger", function() {
+        Swal.fire({
+                    position: 'mid-end',
+                    icon: 'success',
+                    title: 'Produto adicionado',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
+        $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
             $('#campo' + btn_id + '').remove();
             console.log(btn_id)
