@@ -79,7 +79,7 @@ if (isset($_POST['pedidoosalva'])) {
                                     <a  class="btn btn btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
                                 </div>
                                 <div class="text-center" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="btn(<?php echo $obj->getID(); ?>)" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
+                                    <button type="button" class="btn btn-success btn-lg btn-block" onclick="btn(<?php echo $obj->getID(); ?>)" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
                                     COMPRAR <img src="../img/carrinho.png">
                                     </button>
                                 </div>
