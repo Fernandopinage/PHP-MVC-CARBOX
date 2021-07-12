@@ -12,6 +12,17 @@ body{
     text-align: justify;
   }
 }
+.produtos-lista{
+  max-width: 1600px;
+  padding: 35px 35px 45px;
+  margin:  auto;
+  margin-top: 50px;
+  background-color: #fff;
+  /*border: 1px solid rgba(0,0,0,0.1);  */
+  border-radius: 7px;
+  box-shadow: 1px 3px 4px 0px rgba(0, 0, 0, 0.342);
+}
+
 form{
 
     max-width: 1600px;
@@ -23,6 +34,25 @@ form{
     border-radius: 7px;
     box-shadow: 1px 3px 4px 0px rgba(0, 0, 0, 0.342);
   }
+
+.lista{
+  position: fixed;
+  /* deixando o elemento na posição desejada */
+  right: 10px;
+  top: 200px;
+  /* apenas para aparência */
+  background-color: #fff;
+  border: 1px solid black;
+  width:500px;
+  height: 600px;
+}
+.btn-lista{
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  border-radius: 50px;
+}
+
   #title{
     font-family: 'Cairo', sans-serif;
   }

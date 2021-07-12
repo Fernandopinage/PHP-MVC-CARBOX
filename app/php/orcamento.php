@@ -51,7 +51,7 @@ if (isset($_POST['pedidoosalva'])) {
 
 ?>
 <link rel="stylesheet" href="../css/cliente.css">
-<form id="form-cliente" action="" method="POST">
+<div class="produtos-lista">
     <div class="text-left" id="title">
         <h2> PRODUTOS </h2>
         <hr>
@@ -92,7 +92,6 @@ if (isset($_POST['pedidoosalva'])) {
             </div>
         </div>
 
-        
         <!-- Modal -->
 
 
@@ -106,8 +105,12 @@ if (isset($_POST['pedidoosalva'])) {
     ?>
 
 
-</form>
-
+    <div class="lista" id="container">
+    
+    </div>
+    <button class="btn-lista" onclick="div()">Lista de Produtos</button>
+</div>
+<!-- -------------------------------------------------------------------------------------- -->
 <script>
     var substr = 1;
     var soma = 1;
@@ -144,4 +147,23 @@ if (isset($_POST['pedidoosalva'])) {
         var produto = document.getElementById('produto' + id).value
         console.log(produto, quantidado)
     }
+</script>
+
+<script>
+
+
+
+    function div(){
+
+        
+        if(container.style.display === "none"){
+            
+            container.style.display = "block";
+            
+        }else{
+            container.style.display = "none";
+        }
+    }
+
+    
 </script>
