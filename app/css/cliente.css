@@ -109,6 +109,10 @@ form{
     font-family: 'Cairo', sans-serif;
   }
 
+  .card{
+
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.212);
+  }
   span{
     padding: 3px;
     color: red;

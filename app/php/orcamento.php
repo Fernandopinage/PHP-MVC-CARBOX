@@ -11,6 +11,14 @@ $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
 
 
+if(isset($_POST['finalizarpedido'])){
+
+    echo "ok";
+
+}
+
+
+
 if (isset($_POST['pedidoosalva'])) {
 
 
@@ -111,7 +119,7 @@ if (isset($_POST['pedidoosalva'])) {
         }
     </style>
 
-    <form action="">
+    <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
             <hr>
@@ -120,7 +128,7 @@ if (isset($_POST['pedidoosalva'])) {
 
                 </div>
             </div>
-            <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
+            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
             
         </div>
     </form>
