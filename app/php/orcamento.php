@@ -103,14 +103,22 @@ if (isset($_POST['pedidoosalva'])) {
 
 
     ?>
-
+    <style>
+        .table-overflow {
+            max-height: 440px;
+            max-width: 100%;
+            overflow-y: auto;
+        }
+    </style>
 
     <form action="">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
             <hr>
-            <div id="produto_lista">
+            <div class="table-overflow">
+                <div id="produto_lista">
 
+                </div>
             </div>
 
 
@@ -150,6 +158,7 @@ if (isset($_POST['pedidoosalva'])) {
 
 <script>
     var cont = 0;
+
     function btn(id) {
 
 
