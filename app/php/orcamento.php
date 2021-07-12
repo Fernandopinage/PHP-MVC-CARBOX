@@ -64,31 +64,35 @@ if (isset($_POST['pedidoosalva'])) {
 
     ?>
 
-            <div class=" d-inline-block text-center" style="padding: 8px;">
+        <div class=" d-inline-block text-center" style="padding: 8px;">
 
-                <div class="form-row" <?php echo $obj->getID(); ?> style="border: 0px;">
-                    <div class="form-group col-md-4">
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title text-center"><spam><?php echo $obj->getProduto(); ?></spam></h5>
-                                <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
-                                <div class="text-center">
-                                    <input type="hidden" value="<?php echo $obj->getProduto(); ?>" id="produto<?php echo $obj->getID(); ?>">
-                                    <a  class="btn btn a btn-sm" id="subtrair"onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;" >-</a>
-                                    <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                    <a  class="btn btn btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
-                                </div>
-                                <div class="text-center" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success btn-lg btn-block" onclick="btn(<?php echo $obj->getID(); ?>)" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
+            <div class="form-row" <?php echo $obj->getID(); ?> style="border: 0px;">
+                <div class="form-group col-md-4">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <spam><?php echo $obj->getProduto(); ?></spam>
+                            </h5>
+                            <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
+                            <div class="text-center">
+                                <input type="hidden" value="<?php echo $obj->getProduto(); ?>" id="produto<?php echo $obj->getID(); ?>">
+                                <a class="btn btn a btn-sm" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a>
+                                <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                <a class="btn btn btn-sm" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
+                            </div>
+                            <div class="text-center" style="margin-top: 20px;">
+                                <button type="button" class="btn btn-success btn-lg btn-block" onclick="btn(<?php echo $obj->getID(); ?>)" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>" style="border-radius: 20px;">
                                     COMPRAR <img src="../img/carrinho.png">
-                                    </button>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        
         <!-- Modal -->
 
 
@@ -105,41 +109,39 @@ if (isset($_POST['pedidoosalva'])) {
 </form>
 
 <script>
-    var substr =1;
-    var soma =1;
+    var substr = 1;
+    var soma = 1;
     var total = 0;
 
-    
-    function subtrair(id){
 
-        var quantidade = parseInt(document.getElementById('quantidade'+id).value);
+    function subtrair(id) {
 
-        if(quantidade != 1){
+        var quantidade = parseInt(document.getElementById('quantidade' + id).value);
+
+        if (quantidade != 1) {
             total = quantidade - substr
-            document.getElementById('quantidade'+id).value =total;
-            
+            document.getElementById('quantidade' + id).value = total;
+
         }
     }
 
-    function somar(id){
+    function somar(id) {
 
-        var quantidade = parseInt(document.getElementById('quantidade'+id).value);
-        
+        var quantidade = parseInt(document.getElementById('quantidade' + id).value);
+
         total = quantidade + soma
-        document.getElementById('quantidade'+id).value =total;
-        
-    }
+        document.getElementById('quantidade' + id).value = total;
 
+    }
 </script>
 
 
 <script>
-
-    function btn(id){
+    function btn(id) {
 
         var id;
-        var quantidado = document.getElementById('quantidade'+id).value
-        var produto = document.getElementById('produto'+id).value
-        console.log(produto,quantidado)
+        var quantidado = document.getElementById('quantidade' + id).value
+        var produto = document.getElementById('produto' + id).value
+        console.log(produto, quantidado)
     }
 </script>
