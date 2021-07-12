@@ -111,10 +111,10 @@ if (isset($_POST['pedidoosalva'])) {
             <hr>
             <div id="produto_lista">
 
-                </div>
-                
-                
-                <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
+            </div>
+
+
+            <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
         </div>
     </form>
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
@@ -149,14 +149,23 @@ if (isset($_POST['pedidoosalva'])) {
 
 
 <script>
+    var cont = 0;
     function btn(id) {
+
 
         var id;
         var quantidade = document.getElementById('quantidade' + id).value
         var produto = document.getElementById('produto' + id).value
 
 
-        $('#produto_lista').append('<div class="form-row"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" value="'+produto+'" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" value="'+quantidade+'" ></div></div>')
+        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></div></div>');
+        cont++
+        $("form").on("click", ".btn-danger", function() {
+
+            var btn_id = $(this).attr("id");
+            $('#campo' + btn_id + '').remove();
+            console.log(btn_id)
+        });
     }
 </script>
 
