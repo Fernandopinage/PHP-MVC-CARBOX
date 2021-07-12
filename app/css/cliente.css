@@ -33,6 +33,25 @@ form{
     border-radius: 7px;
     box-shadow: 1px 3px 4px 0px rgba(0, 0, 0, 0.342);
   }
+  @media only screen and (max-width: 700px) {
+    .lista{
+      text-align: justify;
+      border-radius: 8px;
+      display: none;
+      position: fixed;
+      padding-left: 15px;
+      /* deixando o elemento na posição desejada */
+      right: 10px;
+      top: 50px;
+      /* apenas para aparência */
+      background-color: #fff;
+      box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.123);
+      width:300px;
+      height: 600px;
+    }
+    
+  }
+
 
 .lista{
   border-radius: 8px;
@@ -46,7 +65,7 @@ form{
   background-color: #fff;
   box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.123);
   width:450px;
-  height: 600px;
+  height: 670px;
 }
 .lista h1{
   margin-top: 20px;
