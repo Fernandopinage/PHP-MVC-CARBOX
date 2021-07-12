@@ -105,8 +105,8 @@ if (isset($_POST['pedidoosalva'])) {
     ?>
     <style>
         .table-overflow {
-            max-height: 440px;
-            max-width: 100%;
+            max-height: 370px;
+            max-width: 2000px;
             overflow-y: auto;
         }
     </style>
@@ -120,9 +120,8 @@ if (isset($_POST['pedidoosalva'])) {
 
                 </div>
             </div>
-
-
             <input type="submit" id="finalizar" value="FINALIZAR PEDIDO">
+            
         </div>
     </form>
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
@@ -167,7 +166,7 @@ if (isset($_POST['pedidoosalva'])) {
         var produto = document.getElementById('produto' + id).value
 
 
-        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></div></div>');
+        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
         cont++
         $("form").on("click", ".btn-danger", function() {
 
