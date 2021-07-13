@@ -42,7 +42,7 @@ if (isset($_POST['finalizarpedido'])) {
         $Pedido->insertPedido($ClassProduto);
         $orçamentoEmail = new OrçamentoMAIL();
         $orçamentoEmail->emailOrçamento($orçamento = $_POST['numero_orçamento'], $data = date('Y-m-d'), $cliente =$_POST['razão_cliente'],
-        $produto = $_POST['produto'] ,$quantidade = $_POST['quantidade'], $sap =  $_POST['sap']);   
+        $produto = $_POST['produto'] ,$quantidade = $_POST['quantidade'], $sap =  $_POST['sap'],$emailCliente = $_SESSION['user']['email']);   
 
 ?>
         <script>

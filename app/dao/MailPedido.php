@@ -15,7 +15,7 @@ require_once "../vendor/autoload.php";
 
 class OrçamentoMAIL{
     
-    public function emailOrçamento($orçamento, $data, $cliente, $produto,$quantidade, $sap )
+    public function emailOrçamento($orçamento, $data, $cliente, $produto,$quantidade, $sap, $emailCliente)
     {
 
         $mail = new PHPMailer(true);
@@ -33,7 +33,7 @@ try {
 
     //Recipients
     $mail->setFrom('luizfernandoluck@gmail.com', 'CARBOXI');
-    $mail->addAddress('rhuan.v@progride.com.br', 'destinatalho');     //Add a recipient $contatoemail
+    $mail->addAddress($emailCliente, 'destinatalho');     //Add a recipient $contatoemail
     // $mail->addAddress('ellen@example.com');               //Name is optional
     //$mail->addReplyTo('info@example.com', 'Information');
     // $mail->addCC('cc@example.com');
