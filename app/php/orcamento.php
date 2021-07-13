@@ -1,4 +1,5 @@
 <?php
+
 include_once "../layout/heard.php";
 include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
@@ -11,10 +12,36 @@ $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
 
 
-if(isset($_POST['finalizarpedido'])){
+if (isset($_POST['finalizarpedido'])) {
 
-    echo "ok";
+    if (isset($_POST['produto'])) {
+      
 
+        $Produto = $_POST['produto'];
+        $quantidade = $_POST['quantidade'];
+        $tamanho = count($Produto);
+        for ($i = 0; $i < $tamanho; $i++) {
+
+            $_SESSION['lista'] = array(
+                'produto' => $Produto[$i],
+                'quantidade' => $quantidade[$i],
+            );
+        }
+ 
+    }else{
+
+    ?>
+            <script>
+            Swal.fire({
+                title: 'Error!',
+                text: 'Carrinho vazio',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+        </script>
+    <?php  
+
+    }
 }
 
 
@@ -126,9 +153,9 @@ if (isset($_POST['pedidoosalva'])) {
 
                 </div>
             </div>
-            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
-           
-            
+            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO" >
+
+
         </div>
     </form>
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
@@ -176,12 +203,12 @@ if (isset($_POST['pedidoosalva'])) {
         $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
         cont++
         Swal.fire({
-                    position: 'mid-end',
-                    icon: 'success',
-                    title: 'Produto adicionado',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+            position: 'mid-end',
+            icon: 'success',
+            title: 'Produto adicionado',
+            showConfirmButton: false,
+            timer: 1500
+        });
 
         $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
