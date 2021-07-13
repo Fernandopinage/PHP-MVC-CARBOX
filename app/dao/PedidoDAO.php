@@ -63,12 +63,12 @@ class PedidoDAO extends DAO{
 
     public function listaPedido(){
 
-        $sql = "SELECT * FROM `pedido` ";
+        $sql = "SELECT * FROM `pedido` ORDER BY `pedido`.`PEDIDO_ID` DESC";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
 
-        if($row = $select->fetch(PDO::FETCH_ASSOC)){
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
 
            $ClassPedido = new ClassPedido();
            $ClassPedido->setID($row['PEDIDO_ID']);

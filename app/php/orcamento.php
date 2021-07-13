@@ -25,17 +25,21 @@ if (isset($_POST['finalizarpedido'])) {
 
         $tamanho = count($Produto);
 
-        for ($i = 0; $i < $tamanho; $i++) {
+        //for ($i = 0; $i < $tamanho; $i++) {
 
             $ClassProduto->setNum($_POST['numero_orçamento']);
             $ClassProduto->setData(date('Y-m-d'));
             $ClassProduto->setRazao($_POST['razão_cliente']);
-            $ClassProduto->setProduto($Produto[$i]);
-            $ClassProduto->setQuantidade($quantidade[$i]);
-            $ClassProduto->setSap($sap[$i]);
+           // $ClassProduto->setProduto($Produto[$i]);
+           $ClassProduto->setProduto(implode(",", $_POST['produto']));
+           // $ClassProduto->setQuantidade($quantidade[$i]);
+           $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
+           // $ClassProduto->setSap($sap[$i]);
+           $ClassProduto->setSap(implode(",", $_POST['sap']));
             $Pedido = new PedidoDAO();
             $Pedido->insertPedido($ClassProduto);
-        }
+            
+        //}
     } else {
 
 ?>
