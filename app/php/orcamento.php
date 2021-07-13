@@ -1,9 +1,11 @@
 <?php
 
+include_once "../dao/MailPedido.php";
 include_once "../layout/heard.php";
 include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
+
 
 $GerarNumero = new GerarNumero();
 
@@ -27,19 +29,22 @@ if (isset($_POST['finalizarpedido'])) {
 
         //for ($i = 0; $i < $tamanho; $i++) {
 
-            $ClassProduto->setNum($_POST['numero_orçamento']);
-            $ClassProduto->setData(date('Y-m-d'));
-            $ClassProduto->setRazao($_POST['razão_cliente']);
-           // $ClassProduto->setProduto($Produto[$i]);
-           $ClassProduto->setProduto(implode(",", $_POST['produto']));
-           // $ClassProduto->setQuantidade($quantidade[$i]);
-           $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
-           // $ClassProduto->setSap($sap[$i]);
-           $ClassProduto->setSap(implode(",", $_POST['sap']));
-            $Pedido = new PedidoDAO();
-            $Pedido->insertPedido($ClassProduto);
+        $ClassProduto->setNum($_POST['numero_orçamento']);
+        $ClassProduto->setData(date('Y-m-d'));
+        $ClassProduto->setRazao($_POST['razão_cliente']);
+        // $ClassProduto->setProduto($Produto[$i]);
+        $ClassProduto->setProduto(implode(",", $_POST['produto']));
+        // $ClassProduto->setQuantidade($quantidade[$i]);
+        $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
+        // $ClassProduto->setSap($sap[$i]);
+        $ClassProduto->setSap(implode(",", $_POST['sap']));
+        $Pedido = new PedidoDAO();
+        $Pedido->insertPedido($ClassProduto);
+        $orçamentoEmail = new OrçamentoMAIL();
+        $orçamentoEmail->emailOrçamento($orçamento = $_POST['numero_orçamento'], $data = date('Y-m-d'), $cliente =$_POST['razão_cliente'],
+        $produto = $_POST['produto'] ,$quantidade = $_POST['quantidade'], $sap =  $_POST['sap']);   
 
-            ?>
+?>
         <script>
             Swal.fire({
                 title: 'Parabéns',
@@ -48,12 +53,14 @@ if (isset($_POST['finalizarpedido'])) {
                 //confirmButtonText: 'OK'
             })
         </script>
-<?php
-            
+    <?php
+
+
+
         //}
     } else {
 
-?>
+    ?>
         <script>
             Swal.fire({
                 title: 'Error!',
@@ -151,7 +158,7 @@ if (isset($_POST['finalizarpedido'])) {
                     <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                 </div>
             </div>
-            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
+            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR ORÇAMENTO">
         </div>
 
 

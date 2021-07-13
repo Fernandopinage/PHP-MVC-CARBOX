@@ -1,5 +1,6 @@
 <?php 
 
+
 include_once "../dao/DAO.php";
 include_once "../class/ClassPedido.php";
 include_once "../class/ClassProduto.php";
@@ -23,6 +24,8 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
         $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
+
+     
     }
 
     public function selectProduto(){
