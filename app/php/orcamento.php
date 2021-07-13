@@ -15,7 +15,7 @@ $dado = $Produto->selectProduto();
 if (isset($_POST['finalizarpedido'])) {
 
     if (isset($_POST['produto'])) {
-      
+
 
         $Produto = $_POST['produto'];
         $quantidade = $_POST['quantidade'];
@@ -27,11 +27,10 @@ if (isset($_POST['finalizarpedido'])) {
                 'quantidade' => $quantidade[$i],
             );
         }
- 
-    }else{
+    } else {
 
-    ?>
-            <script>
+?>
+        <script>
             Swal.fire({
                 title: 'Error!',
                 text: 'Carrinho vazio',
@@ -39,7 +38,7 @@ if (isset($_POST['finalizarpedido'])) {
                 confirmButtonText: 'OK'
             })
         </script>
-    <?php  
+    <?php
 
     }
 }
@@ -67,7 +66,7 @@ if (isset($_POST['pedidoosalva'])) {
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
     } else {
-?>
+    ?>
         <script>
             Swal.fire({
                 title: 'Error!',
@@ -138,7 +137,6 @@ if (isset($_POST['pedidoosalva'])) {
     <style>
         .table-overflow {
             max-height: 370px;
-            max-width: 800px;
             overflow-y: auto;
             justify-content: center;
         }
@@ -147,13 +145,27 @@ if (isset($_POST['pedidoosalva'])) {
     <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputEmail4">Número do Orçamento</label>
+                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orçamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputEmail4">Data de Emissão</label>
+                    <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Nome do Cliente</label>
+                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                </div>
+            </div>
             <hr>
             <div class="table-overflow">
                 <div id="produto_lista">
 
                 </div>
             </div>
-            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO" >
+            <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
 
 
         </div>
