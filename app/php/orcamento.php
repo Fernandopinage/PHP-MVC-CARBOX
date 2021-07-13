@@ -136,7 +136,7 @@ if (isset($_POST['pedidoosalva'])) {
     ?>
     <style>
         .table-overflow {
-            max-height: 370px;
+            max-height: 340px;
             overflow-y: auto;
             justify-content: center;
         }
@@ -145,6 +145,7 @@ if (isset($_POST['pedidoosalva'])) {
     <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
+            <hr>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4">Número do Orçamento</label>

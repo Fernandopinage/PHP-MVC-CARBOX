@@ -22,8 +22,21 @@ body{
 .lista h1{
   color: rgb(168, 165, 170);
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
+@media screen and (max-width: 640px) and (min-width: 340px) {
+  .lista{
+    
+    justify-content: center;
+    text-align: justify;
+  }
+  .produtos-lista{
+    justify-content: center;
+    text-align: justify;
+ 
+  }
+}
 
 .lista{
   
