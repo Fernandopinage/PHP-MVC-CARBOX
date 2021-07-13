@@ -16,20 +16,26 @@ if (isset($_POST['finalizarpedido'])) {
 
     if (isset($_POST['produto'])) {
 
+        $ClassProduto = new ClassPedido();
+
 
         $Produto = $_POST['produto'];
         $quantidade = $_POST['quantidade'];
+        $sap = $_POST['sap'];
+
         $tamanho = count($Produto);
 
         for ($i = 0; $i < $tamanho; $i++) {
 
-            $_SESSION['lista'] = array(
-                'produto' => $Produto[$i],
-                'quantidade' => $quantidade[$i],
-            );
+            $ClassProduto->setNum($_POST['numero_orçamento']);
+            $ClassProduto->setData(date('Y-m-d'));
+            $ClassProduto->setRazao($_POST['razão_cliente']);
+            $ClassProduto->setProduto($Produto[$i]);
+            $ClassProduto->setQuantidade($quantidade[$i]);
+            $ClassProduto->setSap($sap[$i]);
+            $Pedido = new PedidoDAO();
+            $Pedido->insertPedido($ClassProduto);
         }
-
-        
     } else {
 
 ?>
@@ -41,50 +47,10 @@ if (isset($_POST['finalizarpedido'])) {
                 confirmButtonText: 'OK'
             })
         </script>
-    <?php
-
-    }
-}
-
-
-
-if (isset($_POST['pedidoosalva'])) {
-
-
-    if (isset($_POST['produto'])) {
-
-        $ClassProduto = new ClassPedido();
-        $ClassProduto->setNum($_POST['numero_orçamento']);
-        $ClassProduto->setData(date('Y-m-d'));
-        $ClassProduto->setRazao($_POST['razão_cliente']);
-        if (isset($_POST['produto']) != '' and isset($_POST['quantidade']) != '' and isset($_POST['codsap'])) {
-
-            $ClassProduto->setSap(implode(",", $_POST['codsap']));
-            $ClassProduto->setProduto(implode(",", $_POST['produto']));
-            $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
-        }
-
-
-
-        $Pedido = new PedidoDAO();
-        $Pedido->insertPedido($ClassProduto);
-    } else {
-    ?>
-        <script>
-            Swal.fire({
-                title: 'Error!',
-                text: 'Preenchar todos os campos obrigatorios!',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            })
-        </script>
-
 <?php
 
-
     }
 }
-
 
 ?>
 <link rel="stylesheet" href="../css/cliente.css">
@@ -113,6 +79,7 @@ if (isset($_POST['pedidoosalva'])) {
                             </h5>
                             <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
                             <div class="text-center">
+                                <input type="hidden" value="<?php echo $obj->getSap(); ?>" id="sap<?php echo $obj->getID(); ?>">
                                 <input type="hidden" value="<?php echo $obj->getProduto(); ?>" id="produto<?php echo $obj->getID(); ?>">
                                 <a class="btn btn a btn-sm" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a>
                                 <input type="text" class="" size="2" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
@@ -148,7 +115,7 @@ if (isset($_POST['pedidoosalva'])) {
     <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
-         
+
             <div class="table-overflow">
                 <div id="produto_lista">
 
@@ -214,9 +181,9 @@ if (isset($_POST['pedidoosalva'])) {
         var id;
         var quantidade = document.getElementById('quantidade' + id).value
         var produto = document.getElementById('produto' + id).value
-
-
-        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
+        var sap = document.getElementById('sap' + id).value
+        console.log(sap)
+        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
         cont++
         Swal.fire({
             position: 'mid-end',
