@@ -105,17 +105,15 @@ if (isset($_POST['pedidoosalva'])) {
 
     <?php
 
-
-
     }
-
 
     ?>
     <style>
         .table-overflow {
             max-height: 370px;
-            max-width: 2000px;
+            max-width: 800px;
             overflow-y: auto;
+            justify-content: center;
         }
     </style>
 
@@ -129,6 +127,7 @@ if (isset($_POST['pedidoosalva'])) {
                 </div>
             </div>
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
+           
             
         </div>
     </form>
