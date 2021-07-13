@@ -43,6 +43,7 @@ class PedidoDAO extends DAO{
             $ClassProduto->setProduto($row['PRODUTO_PRODUTO']);
             $ClassProduto->setImg($row['PRODUTO_IMG']);
             $ClassProduto->setSap($row['PEDIDO_CODSAP']);
+            $ClassProduto->setFicha($row['PRODUTO_FIXA']);
             $array[] = $ClassProduto;
         }
         return $array;
