@@ -146,6 +146,12 @@ if (isset($_POST['pedidoosalva'])) {
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
             <hr>
+            <div class="table-overflow">
+                <div id="produto_lista">
+
+                </div>
+            </div>
+            <hr>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4">Número do Orçamento</label>
@@ -160,16 +166,10 @@ if (isset($_POST['pedidoosalva'])) {
                     <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                 </div>
             </div>
-            <hr>
-            <div class="table-overflow">
-                <div id="produto_lista">
-
-                </div>
-            </div>
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR PEDIDO">
-
-
         </div>
+
+
     </form>
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
 </div>
