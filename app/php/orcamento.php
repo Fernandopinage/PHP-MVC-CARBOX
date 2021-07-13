@@ -20,6 +20,7 @@ if (isset($_POST['finalizarpedido'])) {
         $Produto = $_POST['produto'];
         $quantidade = $_POST['quantidade'];
         $tamanho = count($Produto);
+
         for ($i = 0; $i < $tamanho; $i++) {
 
             $_SESSION['lista'] = array(
@@ -27,6 +28,8 @@ if (isset($_POST['finalizarpedido'])) {
                 'quantidade' => $quantidade[$i],
             );
         }
+
+        
     } else {
 
 ?>
@@ -145,7 +148,7 @@ if (isset($_POST['pedidoosalva'])) {
     <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
-            <hr>
+         
             <div class="table-overflow">
                 <div id="produto_lista">
 
