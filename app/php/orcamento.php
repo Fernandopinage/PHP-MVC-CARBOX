@@ -38,6 +38,17 @@ if (isset($_POST['finalizarpedido'])) {
            $ClassProduto->setSap(implode(",", $_POST['sap']));
             $Pedido = new PedidoDAO();
             $Pedido->insertPedido($ClassProduto);
+
+            ?>
+        <script>
+            Swal.fire({
+                title: 'Parabéns',
+                text: 'Compra finalizada com sucesso',
+                icon: 'success',
+                //confirmButtonText: 'OK'
+            })
+        </script>
+<?php
             
         //}
     } else {
