@@ -41,8 +41,15 @@ if (isset($_POST['finalizarpedido'])) {
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
         $orçamentoEmail = new OrçamentoMAIL();
-        $orçamentoEmail->emailOrçamento($orçamento = $_POST['numero_orçamento'], $data = date('Y-m-d'), $cliente =$_POST['razão_cliente'],
-        $produto = $_POST['produto'] ,$quantidade = $_POST['quantidade'], $sap =  $_POST['sap'],$emailCliente = $_SESSION['user']['email']);   
+        $orçamentoEmail->emailOrçamento(
+            $orçamento = $_POST['numero_orçamento'],
+            $data = date('Y-m-d'),
+            $cliente = $_POST['razão_cliente'],
+            $produto = $_POST['produto'],
+            $quantidade = $_POST['quantidade'],
+            $sap =  $_POST['sap'],
+            $emailCliente = $_SESSION['user']['email']
+        );
 
 ?>
         <script>
@@ -72,7 +79,6 @@ if (isset($_POST['finalizarpedido'])) {
 <?php
 
     }
-    
 }
 
 ?>
@@ -192,9 +198,11 @@ if (isset($_POST['finalizarpedido'])) {
 
         total = quantidade + soma
         document.getElementById('quantidade' + id).value = total;
-
+        
     }
 </script>
+
+
 
 
 <script>
@@ -203,19 +211,34 @@ if (isset($_POST['finalizarpedido'])) {
     function btn(id) {
 
         var id;
-        var quantidade = document.getElementById('quantidade' + id).value
+        var quantidade = parseInt(document.getElementById('quantidade' + id).value);
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
-        console.log(sap)
-        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
-        cont++
-        Swal.fire({
-            position: 'mid-end',
-            icon: 'success',
-            title: 'Produto adicionado',
-            showConfirmButton: false,
-            timer: 1500
-        });
+
+        var itemIndex = $("#produto_lista input.sap").length;
+        console.log(itemIndex+1)
+        
+        if ( jQuery( "input[id="+sap+"]" ).length ) { 
+          
+            var total = 0;
+            var valor = parseInt(document.getElementById('quantidade'+sap).value);
+            total = valor + quantidade
+            document.getElementById('quantidade'+sap).value = total
+
+        }else{
+            
+            
+            
+            $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input id="'+ sap +'" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input id="quantidade'+sap+'" type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
+            cont++
+            Swal.fire({
+                position: 'mid-end',
+                icon: 'success',
+                title: 'Produto adicionado',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
 
         $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
@@ -225,6 +248,7 @@ if (isset($_POST['finalizarpedido'])) {
 
     }
 </script>
+
 
 <script>
     function div() {
