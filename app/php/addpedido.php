@@ -243,7 +243,7 @@ if (isset($_POST['finalizarpedido'])) {
         var quantidade = parseInt(document.getElementById('quantidade' + id).value);
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
-
+        var input = parseInt(document.getElementById("carrinho_input").value);
 
 
         //var itemIndex = $("#produto_lista input.sap").length;
