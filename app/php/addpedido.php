@@ -168,11 +168,12 @@ if (isset($_POST['finalizarpedido'])) {
             </div>
             -->
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR ORÇAMENTO">
+    
         </div>
 
 
     </form>
-    <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg"></a>
+    <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff"><spam id="carrinho" style="color:#fff">0</spam></a>
 </div>
 <!-- -------------------------------------------------------------------------------------- -->
 <script>
@@ -214,38 +215,33 @@ if (isset($_POST['finalizarpedido'])) {
         var quantidade = parseInt(document.getElementById('quantidade' + id).value);
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
-
-        var itemIndex = $("#produto_lista input.sap").length;
-        console.log(itemIndex+1)
+        
+        //var itemIndex = $("#produto_lista input.sap").length;
+        //document.getElementById("carrinho").innerText = itemIndex+1;
         
         if ( jQuery( "input[id="+sap+"]" ).length ) { 
-          
-            var total = 0;
-            var valor = parseInt(document.getElementById('quantidade'+sap).value);
+            
+            var valor =  parseInt(document.getElementById('lista_quantidade'+sap).value);
             total = valor + quantidade
-            document.getElementById('quantidade'+sap).value = total
-
+            document.getElementById('lista_quantidade'+sap).value = total;
+            document.getElementById("carrinho").innerText = total;
+            
         }else{
             
-            
-            
-            $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input id="'+ sap +'" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input id="quantidade'+sap+'" type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
+            $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input id="'+ sap +'" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input id="lista_quantidade'+sap+'" type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
             cont++
-            Swal.fire({
-                position: 'mid-end',
-                icon: 'success',
-                title: 'Produto adicionado',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            
         }
-
+       
+        
         $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
             $('#campo' + btn_id + '').remove();
             console.log(btn_id)
         });
+        
 
+ 
     }
 </script>
 
