@@ -168,12 +168,14 @@ if (isset($_POST['finalizarpedido'])) {
             </div>
             -->
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR ORÇAMENTO">
-    
+
         </div>
 
 
     </form>
-    <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff"><spam id="carrinho" style="color:#fff">0</spam></a>
+    <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff">
+        <spam id="carrinho" style="color:#fff">0</spam>
+    </a>
 </div>
 <!-- -------------------------------------------------------------------------------------- -->
 <script>
@@ -199,10 +201,36 @@ if (isset($_POST['finalizarpedido'])) {
 
         total = quantidade + soma
         document.getElementById('quantidade' + id).value = total;
-        
+
     }
 </script>
 
+
+<script>
+    var substr = 1;
+    var soma = 1;
+    var total = 0;
+
+
+    function subtrair_carrinho(id) {
+
+        var quantidade = parseInt(document.getElementById('lista_quantidade' + id).value);
+
+        if (quantidade != 1) {
+            total = quantidade - substr
+            document.getElementById('lista_quantidade' + id).value = total;
+
+        }
+
+    }
+
+    function somar_carrinho(id) {
+
+        var quantidade = parseInt(document.getElementById('lista_quantidade' + id).value);
+        total = quantidade + soma
+        document.getElementById('lista_quantidade' + id).value = total;
+    }
+</script>
 
 
 
@@ -211,37 +239,38 @@ if (isset($_POST['finalizarpedido'])) {
 
     function btn(id) {
 
-        var id;
+        var id = parseInt(id);
         var quantidade = parseInt(document.getElementById('quantidade' + id).value);
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
-        
+
         //var itemIndex = $("#produto_lista input.sap").length;
         //document.getElementById("carrinho").innerText = itemIndex+1;
-        
-        if ( jQuery( "input[id="+sap+"]" ).length ) { 
-            
-            var valor =  parseInt(document.getElementById('lista_quantidade'+sap).value);
+
+        if (jQuery("input[id=" + sap + "]").length) {
+
+            var valor = parseInt(document.getElementById('lista_quantidade' + id).value);
             total = valor + quantidade
-            document.getElementById('lista_quantidade'+sap).value = total;
+            document.getElementById('lista_quantidade' + id).value = total;
             document.getElementById("carrinho").innerText = total;
-            
-        }else{
-            
-            $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-1"><input id="'+ sap +'" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div><div class="form-group col-md-1 text-right"><a class="btn btn-danger btn-sm" style="color:#fff; background-color:#FF5E14;">-</a></div><div class="form-group col-md-1"><input id="lista_quantidade'+sap+'" type="text" class="form-control form-control-sm text-center" name="quantidade[]" value="' + quantidade + '"></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" style="color:#fff; background-color:#FF5E14;">+</a></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm" id="' + cont + '" style="color: #fff;"> Excluir </a></div></div>');
+
+        } else {
+            var sap = document.getElementById('sap' + id).value
+
+            $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-1"><input id="' + sap + '" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div><div class="form-group col-md-1 text-right"><a class="btn btn-danger btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="subtrair_carrinho(' + id + ')" >-</a></div><div class="form-group col-md-1"><input id="lista_quantidade' + id + '" type="text" class="form-control form-control-sm text-center ' + sap + '" name="quantidade[]" value="' + quantidade + '"></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="somar_carrinho(' + id + ')">+</a></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm" id="' + cont + '" style="color: #fff;"> Excluir </a></div></div>');
             cont++
-            
+
         }
-       
-        
+
+
         $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
             $('#campo' + btn_id + '').remove();
             console.log(btn_id)
         });
-        
 
- 
+
+
     }
 </script>
 
