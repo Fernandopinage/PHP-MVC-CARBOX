@@ -50,7 +50,7 @@ $dados = $Pedido->listaPedido();
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">PEDIDOS <span style="color: red;"><?php echo $obj->getNum(); ?></span></h5>
+                            <h5 class="modal-title" id="exampleModalLabel">ORÇAMENTO: <span style="color: red;"><?php echo $obj->getNum(); ?></span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -71,7 +71,7 @@ $dados = $Pedido->listaPedido();
                             
                             for($i=0; $i<$tamanho; $i++){
 
-                                echo "<strong>Produdo: </strong>".$produto[$i]." <br> <strong>Qtd: </strong>".$quantidade[$i]."<br><hr>";
+                                echo "<strong>Produdo: </strong>".$produto[$i]."  <strong style='margin-left:15px'>Quantidade: </strong>".$quantidade[$i]."<br><hr>";
 
                             }
 

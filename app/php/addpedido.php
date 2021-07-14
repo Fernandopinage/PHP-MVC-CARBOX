@@ -138,13 +138,14 @@ if (isset($_POST['finalizarpedido'])) {
     <form action="" method="POST">
         <div class="lista" id="container">
             <h1 class="text-center">Meu Carrinho</h1>
+            <hr>
 
             <div class="table-overflow">
                 <div id="produto_lista">
 
                 </div>
             </div>
-            <hr>
+            <!--
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4">Número do Orçamento</label>
@@ -159,6 +160,7 @@ if (isset($_POST['finalizarpedido'])) {
                     <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                 </div>
             </div>
+            -->
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR ORÇAMENTO">
         </div>
 
@@ -200,14 +202,19 @@ if (isset($_POST['finalizarpedido'])) {
 
     function btn(id) {
 
-
         var id;
         var quantidade = document.getElementById('quantidade' + id).value
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
-        console.log(sap)
-        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="sap[]" value="' + sap + '" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
+       
+        var lista = document.getSelection('#produto_lista')
+        var input = lista.querySelector('#lista_sap')
+        console.log(input)
+
+        $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"> <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="sap[]" value="' + sap + '" id="lista_sap" readonly></div> <div class="form-group col-md-6"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div> <div class="form-group col-md-1"><input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '" ></div><div class="form-group col-md-2"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> x </a></div></div>');
         cont++
+
+
         Swal.fire({
             position: 'mid-end',
             icon: 'success',
@@ -221,6 +228,7 @@ if (isset($_POST['finalizarpedido'])) {
             $('#campo' + btn_id + '').remove();
             console.log(btn_id)
         });
+
     }
 </script>
 
