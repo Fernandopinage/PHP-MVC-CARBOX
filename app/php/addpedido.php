@@ -174,7 +174,7 @@ if (isset($_POST['finalizarpedido'])) {
 
     </form>
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff">
-        <spam id="carrinho" style="color:#fff">0</spam>
+        <spam id="carrinho" style="color:#fff"><input type="text" id="carrinho_input" value="0">0</spam>
     </a>
 </div>
 <!-- -------------------------------------------------------------------------------------- -->
@@ -244,6 +244,8 @@ if (isset($_POST['finalizarpedido'])) {
         var produto = document.getElementById('produto' + id).value
         var sap = document.getElementById('sap' + id).value
 
+
+
         //var itemIndex = $("#produto_lista input.sap").length;
         //document.getElementById("carrinho").innerText = itemIndex+1;
 
@@ -252,21 +254,19 @@ if (isset($_POST['finalizarpedido'])) {
             var valor = parseInt(document.getElementById('lista_quantidade' + id).value);
             total = valor + quantidade
             document.getElementById('lista_quantidade' + id).value = total;
-            document.getElementById("carrinho").innerText = total;
+
 
         } else {
-            var sap = document.getElementById('sap' + id).value
 
             $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-1"><input id="' + sap + '" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div><div class="form-group col-md-1 text-right"><a class="btn btn-lg btn-block btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="subtrair_carrinho(' + id + ')" >-</a></div><div class="form-group col-md-1"><input id="lista_quantidade' + id + '" type="text" class="form-control form-control-sm text-center ' + sap + '" name="quantidade[]" value="' + quantidade + '"></div><div class="form-group col-md-1"><a class="btn btn-lg btn-block btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="somar_carrinho(' + id + ')">+</a></div><div class="form-group col-md-2"><a class="btn btn-block btn-danger btn-sm" id="' + cont + '" style="color: #fff;"> Excluir </a></div></div>');
             cont++
 
         }
 
-
         $("form").on("click", ".btn-danger", function() {
             var btn_id = $(this).attr("id");
             $('#campo' + btn_id + '').remove();
-            console.log(btn_id)
+
         });
 
 
@@ -277,7 +277,6 @@ if (isset($_POST['finalizarpedido'])) {
 
 <script>
     function div() {
-
 
         if (container.style.display === "block") {
 
