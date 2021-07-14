@@ -260,7 +260,8 @@ if (isset($_POST['finalizarpedido'])) {
 
             $('#produto_lista').append('<div class="form-row" id="campo' + cont + '"><div class="form-group col-md-1"><input id="' + sap + '" type="text" class="form-control form-control-sm sap" name="sap[]" value="' + sap + '" readonly></div><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div><div class="form-group col-md-1 text-right"><a class="btn btn-lg btn-block btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="subtrair_carrinho(' + id + ')" >-</a></div><div class="form-group col-md-1"><input id="lista_quantidade' + id + '" type="text" class="form-control form-control-sm text-center ' + sap + '" name="quantidade[]" value="' + quantidade + '" readonly></div><div class="form-group col-md-1"><a class="btn btn-lg btn-block btn-sm" style="color:#fff; background-color:#FF5E14;" onclick="somar_carrinho(' + id + ')">+</a></div><div class="form-group col-md-2"><a class="btn btn-block btn-danger btn-sm" id="' + cont + '" style="color: #fff;"> Excluir </a></div></div>');
             cont++
-
+            var inputs = $("#produto_lista").find($("input") );
+            console.log(inputs.length)
         }
 
         $("form").on("click", ".btn-danger", function() {
