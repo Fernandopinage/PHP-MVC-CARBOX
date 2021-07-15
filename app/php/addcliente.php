@@ -138,16 +138,16 @@ if (isset($_POST['clientesalva'])) {
             <input type="email" class="form-control form-control-sm" id="comprador_email" placeholder="">
         </div>
         <div class="form-group col-md-1">
-            <button type="button" class="btn btn-primary btn-block btn-sm" id="mais" style="margin-top: 32px;">Adicionar</button>
+            <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
         </div>
         <div class="form-group col-md-3">
-            <!--<label for="inputEmail4">Senha </label> -->
+           
             <input type="hidden" class="form-control form-control-sm" id="comprador_senha" placeholder="">
         </div>
     </div>
 
     <table class="table">
-        <thead class="thead" style="background-color: #136132;color:white; ">
+        <thead class="thead" style="background-color: #136132;color:white;">
             <tr>
 
                 <th scope="col">Nome</th>
@@ -157,7 +157,7 @@ if (isset($_POST['clientesalva'])) {
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody id="lista" style="justify-content: center">
+        <tbody id="lista">
 
         </tbody>
     </table>

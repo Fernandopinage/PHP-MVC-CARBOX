@@ -243,8 +243,10 @@ if (isset($_POST['editacliente'])) {
     function remove(id){
 
         $('#campo'+id).hide("#campo"+id)
-
+       document.getElementById('campo'+id).innerHTML ="";
+       
     }
+   
   
 </script>
 <script>
