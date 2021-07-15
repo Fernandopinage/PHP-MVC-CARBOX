@@ -9,7 +9,7 @@ class ClassProduto{
     private $sap;
     private $img;
     private $ficha;
-    
+    private $status;
     
     public function getID(){
 
@@ -75,6 +75,16 @@ class ClassProduto{
         
     }
     
+    public function getStatus(){
+
+        return $this->status;
+    }
+    
+    public function setStatus($status){
+
+        $this->status = $status;
+        
+    }
 
 
 

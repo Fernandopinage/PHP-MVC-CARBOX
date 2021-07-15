@@ -1,6 +1,8 @@
 <?php include_once "../layout/heard.php";
 include_once "../dao/ClienteDAO.php";
 include_once "../dao/RestritoDAO.php";
+include_once "../dao/Produto.DAO.php";
+
 $Cliente = new ClienteDAO();
 
 ?>
@@ -20,10 +22,6 @@ $Cliente = new ClienteDAO();
             case 'orcamento/':
                 include_once "../php/orcamento.php";
                 break;
-
-
-
-
 
             case 'home/':
                 include_once "../php/listapedido.php";
@@ -87,6 +85,14 @@ $Cliente = new ClienteDAO();
         $delete = $_GET['delete'];
         $Restrito = new RestritoDAO();
         $Restrito->delete($delete);
+    }
+    
+    if (isset($_GET['produto/delete'])) {
+
+         $delete = $_GET['produto/delete'];
+
+         $Restrito = new ProdutoDAO();
+         $Restrito->delete($delete);
     }
 
     ?>

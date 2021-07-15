@@ -77,7 +77,7 @@ if (isset($_POST['editaproduto'])) {
                 <th scope="col"><?php echo $obj->getProduto(); ?></th>
                 <th scope="col" style="text-align: center;"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></th>
                 <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                <th scope="col"><a class="btn btn-danger btn-sm" href="?produto/delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
 
             </tr>
 

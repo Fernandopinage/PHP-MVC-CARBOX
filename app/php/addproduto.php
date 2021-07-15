@@ -25,9 +25,10 @@ if (isset($_POST['produtosalvar'])) {
     $ClassProduto->setProduto($_POST['desc']);
     $ClassProduto->setUnidade($_POST['unidade']);
     $ClassProduto->setFicha($ficha);
-
+    $ClassProduto->setStatus('S');
     $Produto = new ProdutoDAO();
     $Produto->insertProduto($ClassProduto);
+ ;
 }
 
 
