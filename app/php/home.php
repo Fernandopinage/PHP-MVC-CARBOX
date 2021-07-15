@@ -95,6 +95,12 @@ $Cliente = new ClienteDAO();
          $Restrito->delete($delete);
     }
 
+    if(isset($_GET['cliente/delete'])){
+        $delete = $_GET['cliente/delete'];
+        $Cliente->deleteCliente($delete);
+
+    }
+
     ?>
 </div>
 

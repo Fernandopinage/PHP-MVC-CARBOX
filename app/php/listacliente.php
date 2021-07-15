@@ -86,9 +86,9 @@ if (isset($_POST['editacliente'])) {
                         <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
                         <th scope="col"><?php echo  $obj->getRazao(); ?></th>
                         <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-                        <th scope="col"><button type="button" class="btn btn-primary btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Comprador</button></th>
-                        <th scope="col"><button type="button" class="btn btn-success btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                        <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                        <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                        <th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?cliente/delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
 
                     </tr>
 

@@ -54,8 +54,8 @@ if (isset($_POST['edita-model'])) {
                 <th scope="col" style="text-align: center;"><?php echo $obj->getID(); ?></th>
                 <th scope="col"><?php echo $obj->getNome(); ?></th>
                 <th scope="col"><?php echo $obj->getEmail(); ?></th>
-                <th scope="col"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
-                <th scope="col"><a class="btn btn-danger btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
+                <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                <th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?delete=<?php echo $obj->getID(); ?>">Excluir</a></th>
             </tr>
 
 

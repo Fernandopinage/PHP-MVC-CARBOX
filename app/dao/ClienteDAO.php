@@ -10,7 +10,7 @@ class ClienteDAO extends DAO
     public function insertCliente(ClassCliente $ClassCliente)
     {
 
-        $sql = "INSERT INTO `cliente`(`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`) VALUES (null, :CLIENTE_CNPJ, :CLIENTE_RAZAO, :CLIENTE_FANTASIA, :CLIENTE_EMAIL, :CLIENTE_CODSAP)";
+        $sql = "INSERT INTO `cliente`(`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES (null, :CLIENTE_CNPJ, :CLIENTE_RAZAO, :CLIENTE_FANTASIA, :CLIENTE_EMAIL, :CLIENTE_CODSAP, :CLIENTE_STATUS)";
 
         $insert = $this->con->prepare($sql);
         $insert->bindValue(":CLIENTE_CNPJ", $ClassCliente->getCnpj());
@@ -18,16 +18,17 @@ class ClienteDAO extends DAO
         $insert->bindValue(":CLIENTE_FANTASIA", "");
         $insert->bindValue(":CLIENTE_EMAIL", $ClassCliente->getEmail());
         $insert->bindValue(":CLIENTE_CODSAP", $ClassCliente->getSap());
+        $insert->bindValue(":CLIENTE_STATUS", 'S');
         $insert->execute();
 
         $email =  $ClassCliente->getEmail();
-        include_once "../class/ClassPedidoMAIL.php";
+        //include_once "../class/ClassPedidoMAIL.php";
         header('Location: ../php/home.php?p=add/cliente/');
     }
 
     public function listaCliente(){
 
-        $sql = "SELECT * FROM `cliente` ORDER BY `CLIENTE_CODSAP` ASC";
+        $sql = "SELECT * FROM `cliente` WHERE CLIENTE_STATUS = 'S' ORDER BY `cliente`.`CLIENTE_ID` DESC";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
@@ -84,6 +85,20 @@ class ClienteDAO extends DAO
       
         header('Location: ../php/home.php?p=cliente/');
         
+    }
+
+    public function deleteCliente($delete){
+
+              
+       
+        $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_ID`=:CLIENTE_ID"; 
+
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':CLIENTE_ID', $delete);
+        $update->bindValue(':CLIENTE_STATUS', 'N');
+        $update->execute();
+      
+        header('Location: ../php/home.php?p=cliente/');
     }
 
     public function editarComprador(){
