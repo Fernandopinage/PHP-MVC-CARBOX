@@ -1,8 +1,43 @@
-'<div class="form-row" id="campo' + cont + '">
-    <div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="sap[]" value="' + sap + '" readonly></div>
-    <div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" readonly></div>
-    <div class="form-group col-md-2"><a class="btn btn a btn-sm" id="subtrair" onclick="subtrair( )" style="color:#fff ;background-color:#FF5E14;">-</a>
-        <input type="text" class="form-control form-control-sm" name="quantidade[]" value="' + quantidade + '"><a class="btn btn btn-sm" id="somar" onclick="somar( )" style="color:#fff ;background-color:#FF5E14;">+</a>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title></title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row" style="background-color:#136132;">
+
+            <div class="input-group mb-3" style="margin-left: 20px;margin-top: 20px;">
+                <img src="../img/LOGO carboxi gases original.png" width="150px" height="80px">
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 50px; text-align: center;">
+            <div class="col-sm">
+                <div>
+                    <h1 class="font-weight-light">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
+                    <h3 class="font-weight-light"> Esperamos que encontre tudo o que você procure.</h3>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="form-group col-md-2"><a class="btn btn-danger btn-sm" id="' + cont + '" style="color: #fff;"> Excluir </a></div>
-</div>
+    <div class="container navbar fixed-bottom navbar-expand-sm justify-content-center" style="background-color:#136132;">
+        <div class="row">
+
+           
+                <p style="color:#fff;"> Desenvolvido por Progride ®</p>
+           
+        </div>
+    </div>
+
+</body>
+
+</html>
