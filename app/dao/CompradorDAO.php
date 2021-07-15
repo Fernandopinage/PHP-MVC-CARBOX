@@ -21,7 +21,7 @@ class CompradorDAO extends DAO{
                     $insert->bindValue(":COMPRADOR_STATUS", $status);
                     $insert->execute();
                     
-                
+                    header('Location: ../php/home.php?p=cliente/');
 
     }
     public function validarLogin($ClassComprador){

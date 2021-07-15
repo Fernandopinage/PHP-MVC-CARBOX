@@ -54,6 +54,8 @@ if(isset($_POST['novocomprador'])){
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($cnpj, $nome, $email, $status);
     }
+
+    
 }
 
 
