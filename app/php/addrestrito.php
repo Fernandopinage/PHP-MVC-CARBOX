@@ -1,23 +1,26 @@
-<?php 
+<?php
 
 include_once "../class/ClassRestrito.php";
 include_once "../dao/RestritoDAO.php";
+include_once "../class/GerarSenha.php";
 
-if(isset($_POST['restritosalvar'])){
+$senha = new GerarSenha();
+$rash = $senha->senha();
 
-    if($_POST['senha'] === $_POST['conf_senha']){
+if (isset($_POST['restritosalvar'])) {
+
+    if ($_POST['senha'] === $_POST['conf_senha']) {
 
         $ClassRestrito = new ClassRestrito();
         $ClassRestrito->setNome($_POST['nome']);
         $ClassRestrito->setEmail($_POST['email']);
+        
         $ClassRestrito->setSenha(md5($_POST['senha']));
         $ClassRestrito->setStatus('S');
 
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
-       
     }
-
 }
 
 ?>
@@ -41,12 +44,12 @@ if(isset($_POST['restritosalvar'])){
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputEmail4">Senha <span style="color: red;">*</span></label>
-            <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="">
+
+            <input type="hidden" class="form-control form-control-sm is-invalid" id="senha" value="<?php echo $rash; ?>" name="senha" placeholder="">
         </div>
         <div class="form-group col-md-6">
-            <label for="inputEmail4">Confirmar Senha <span style="color: red;">*</span></label>
-            <input type="password" class="form-control form-control-sm is-invalid" id="conf_senha" name="conf_senha" placeholder="">
+
+            <input type="hidden" class="form-control form-control-sm is-invalid" id="conf_senha" value="<?php echo $rash ?>" name="conf_senha" placeholder="">
         </div>
     </div>
     <div class="text-right">
@@ -56,51 +59,51 @@ if(isset($_POST['restritosalvar'])){
 </form>
 
 <script>
-$("#nome").change(function() {
+    $("#nome").change(function() {
 
-if (document.getElementById('nome').value != "") {
-    $('#nome').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+        if (document.getElementById('nome').value != "") {
+            $('#nome').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
 
-} else {
-    $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+        } else {
+            $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
-}
+        }
 
-});
+    });
 
-$("#email").change(function() {
+    $("#email").change(function() {
 
-if (document.getElementById('email').value != "") {
-    $('#email').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+        if (document.getElementById('email').value != "") {
+            $('#email').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
 
-} else {
-    $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+        } else {
+            $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
-}
+        }
 
-});
+    });
 
-$("#senha").change(function() {
+    $("#senha").change(function() {
 
-if (document.getElementById('senha').value != "") {
-    $('#senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+        if (document.getElementById('senha').value != "") {
+            $('#senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
 
-} else {
-    $('#senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+        } else {
+            $('#senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
-}
+        }
 
-});
+    });
 
-$("#conf_senha").change(function() {
+    $("#conf_senha").change(function() {
 
-if (document.getElementById('conf_senha').value != "") {
-    $('#conf_senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
+        if (document.getElementById('conf_senha').value != "") {
+            $('#conf_senha').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
 
-} else {
-    $('#conf_senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
+        } else {
+            $('#conf_senha').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
 
-}
+        }
 
-});
+    });
 </script>
