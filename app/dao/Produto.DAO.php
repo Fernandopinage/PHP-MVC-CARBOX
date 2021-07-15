@@ -46,56 +46,38 @@ class ProdutoDAO extends DAO
     public function editarProduto(ClassProduto $ClassProduto)
     {
 
-            if($ClassProduto->getImg() == ''){
-                $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
+        if ($ClassProduto->getImg() == '') {
+            $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
                 `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
                 `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
                 `PRODUTO_FIXA` = :PRODUTO_FIXA
                  WHERE `PRODUTO_ID` = :PRODUTO_ID";
 
-                $insert = $this->con->prepare($sql);
-                $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-                $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-                $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-                $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
-                $insert->execute();
-                header('Location: ../php/home.php?p=produto/');
-
-            }if($ClassProduto->getFicha() == ''){
-
-                $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
-                `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
-                `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
-                `PRODUTO_IMG` = :PRODUTO_IMG
-                 WHERE `PRODUTO_ID` = :PRODUTO_ID";
-
-                $insert = $this->con->prepare($sql);
-                $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-                $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-                $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
-                $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-                $insert->execute();
-                header('Location: ../php/home.php?p=produto/');
-
-
-            }else{
-                $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
+            $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
+            $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
+            $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
+            $insert->execute();
+            header('Location: ../php/home.php?p=produto/');
+        } else {
+            $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
                 `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
                 `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
                 `PRODUTO_IMG` = :PRODUTO_IMG,
                 `PRODUTO_FIXA` = :PRODUTO_FIXA
                  WHERE `PRODUTO_ID` = :PRODUTO_ID";
 
-                $insert = $this->con->prepare($sql);
-                $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-                $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-                $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
-                $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-                $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
-                $insert->execute();
-                header('Location: ../php/home.php?p=produto/');
-            }
-       /*
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
+            $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
+            $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
+            $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
+            $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
+            $insert->execute();
+            header('Location: ../php/home.php?p=produto/');
+        }
+        /*
 
         $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
                                     `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
