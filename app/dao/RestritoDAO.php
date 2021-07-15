@@ -24,10 +24,11 @@ class RestritoDAO  extends DAO{
 
     public function validarRegistro(ClassRestrito $ClassRestrito){
 
-        $sql = "SELECT * FROM `restrito` WHERE RESTRITO_SENHA = :RESTRITO_SENHA and RESTRITO_EMAIL= :RESTRITO_EMAIL";
+        $sql = "SELECT * FROM `restrito` WHERE RESTRITO_SENHA = :RESTRITO_SENHA and RESTRITO_EMAIL= :RESTRITO_EMAIL and RESTRITO_STATUS = :RESTRITO_STATUS";
         $select = $this->con->prepare($sql);
         $select->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
         $select->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+        $select->bindValue(':RESTRITO_STATUS', 'S');
         $select->execute();
 
         $_SESSION['user'] = array();
@@ -50,7 +51,7 @@ class RestritoDAO  extends DAO{
 
     public function listarRestrito(){
 
-        $sql = "SELECT * FROM `restrito`";
+        $sql = "SELECT * FROM `restrito` WHERE RESTRITO_STATUS = 'S'";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
@@ -83,7 +84,13 @@ class RestritoDAO  extends DAO{
 
     public function delete($delete){
 
-        echo $delete;
+        $sql = "UPDATE `restrito` SET `RESTRITO_STATUS`= :RESTRITO_STATUS WHERE `RESTRITO_ID`=:RESTRITO_ID";
+        $insert = $this->con->prepare($sql);
+        $insert->bindValue(':RESTRITO_ID', $delete);
+        $insert->bindValue(':RESTRITO_STATUS', 'N');
+        $insert->execute();
+        header('Location: ../php/home.php?p=restrito/');
+
     }
 
 }

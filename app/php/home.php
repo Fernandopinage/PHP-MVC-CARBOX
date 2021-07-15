@@ -81,10 +81,10 @@ $Cliente = new ClienteDAO();
         $edit = $_GET['edit/restrito/'];
     }
 
+
     if (isset($_GET['delete'])) {
 
         $delete = $_GET['delete'];
-
         $Restrito = new RestritoDAO();
         $Restrito->delete($delete);
     }
