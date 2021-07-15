@@ -2,7 +2,7 @@
 
 include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
-
+include_once "../dao/CompradorDAO.php";
 include_once "../class/ClassComprador.php";
 
 
@@ -28,6 +28,32 @@ if (isset($_POST['editacliente'])) {
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
+}
+
+if(isset($_POST['novocomprador'])){
+    $lista = array(
+
+        'cnpj' => $_POST['comprador_cnpj'],
+        'nome' => $nome = $_POST['comprador_nome'],
+        'email' => $email = $_POST['comprador_email'],
+        //'senha' => $senha  = $_POST['comprador_senha'],
+        'status' => "Ativo"
+    );
+
+    $tamanho = count($lista['cnpj']);
+
+    for ($i = 0; $i < $tamanho; $i++) {
+
+
+        $cnpj =  $lista['cnpj'][$i];
+        $nome =  $lista['nome'][$i];
+        $email =  $lista['email'][$i];
+        //$senha =  $lista['senha'][$i];
+        $status =  $lista['status'][$i];
+
+        $Comprador = new CompradorDAO();
+        $Comprador->inserComprador($cnpj, $nome, $email, $status);
+    }
 }
 
 
@@ -110,13 +136,14 @@ if (isset($_POST['editacliente'])) {
 
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
+                                            <input type="hidden" name="comprador_cnpj[]" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" name="" id="comprador_nome" placeholder="">
+                                                <input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder="">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                                <input type="email" class="form-control form-control-sm" name="" id="comprador_email" placeholder="">
+                                                <input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder="">
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
@@ -129,7 +156,7 @@ if (isset($_POST['editacliente'])) {
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="button" name="novocomprador" class="btn btn-primary">Adicionar</button>
+                                            <button type="submit" name="novocomprador" class="btn btn-primary">Adicionar</button>
                                         </div>
 
                                     </form>
@@ -234,8 +261,9 @@ if (isset($_POST['editacliente'])) {
 
     $('#mais').click(function() {
 
+        var cnpj = document.getElementById('comprador_cnpj').value
         
-        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
+        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="'+cnpj+'"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
 
         cont++
     });
