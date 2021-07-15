@@ -57,8 +57,8 @@ if (isset($_POST['produtosalvar'])) {
             <input type="text" class="form-control form-control-sm is-invalid" id="desc" name="desc" placeholder="">
         </div>
         <div class="form-group col-md-2">
-            <label for="inputEmail4">Unidade</label>
-            <input type="text" class="form-control form-control-sm" id="unidade" name="unidade" placeholder="">
+            <!--<label for="inputEmail4">Unidade</label>-->
+            <input type="hidden" class="form-control form-control-sm" id="unidade" name="unidade" placeholder="">
         </div>
     </div>
     <div class="form-row">
