@@ -17,8 +17,8 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setSap($_POST['sap']);
 
         if (isset($_POST['comprador_nome']) != '' and  isset($_POST['comprador_email']) != '' and  isset($_POST['comprador_senha']) != '' and isset($_POST['comprador_status']) != '') {
-            $Cliente = new ClienteDAO();
-            $Cliente->insertCliente($ClassCliente);
+           // $Cliente = new ClienteDAO();
+           // $Cliente->insertCliente($ClassCliente);
 
             $ClassComprador =  new ClassComprador();
             /*
@@ -49,7 +49,7 @@ if (isset($_POST['clientesalva'])) {
                 $senha =  $lista['senha'][$i];
                 $status =  $lista['status'][$i];
                 $Comprador = new CompradorDAO();
-                $Comprador->inserComprador($cnpj, $nome, $email, $senha, $status);
+                $Comprador->inserComprador($cnpj, $nome, $email, $status);
             }
         } else {
 ?>
@@ -137,22 +137,22 @@ if (isset($_POST['clientesalva'])) {
             <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
             <input type="email" class="form-control form-control-sm" id="comprador_email" placeholder="">
         </div>
-        <div class="form-group col-md-3">
-            <label for="inputEmail4">Senha </label>
-            <input type="password" class="form-control form-control-sm" id="comprador_senha" placeholder="">
-        </div>
         <div class="form-group col-md-1">
-            <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+            <button type="button" class="btn btn-primary btn-block btn-sm" id="mais" style="margin-top: 32px;">Adicionar</button>
+        </div>
+        <div class="form-group col-md-3">
+            <!--<label for="inputEmail4">Senha </label> -->
+            <input type="hidden" class="form-control form-control-sm" id="comprador_senha" placeholder="">
         </div>
     </div>
 
     <table class="table">
-        <thead class="thead" style="background-color: #136132;color:white;">
+        <thead class="thead" style="background-color: #136132;color:white; ">
             <tr>
 
                 <th scope="col">Nome</th>
                 <th scope="col">E-mail</th>
-                <th scope="col">Senha</th>
+                <th scope="col"></th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
             </tr>
@@ -281,7 +281,7 @@ if (isset($_POST['clientesalva'])) {
 
         if (comprador_nome != '' && comprador_email != '') {
 
-            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="password"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff;"> - </a></th></tr>');
+            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="hidden"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-block btn-sm"  id="' + cont + '" style="color: #fff;"> Remover </a></th></tr>');
         }
 
 
