@@ -157,7 +157,7 @@ if (isset($_POST['clientesalva'])) {
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody id="lista">
+        <tbody id="lista" style="justify-content: center">
 
         </tbody>
     </table>

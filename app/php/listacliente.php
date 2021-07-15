@@ -110,20 +110,16 @@ if (isset($_POST['editacliente'])) {
 
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-5">
                                                 <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
                                                 <input type="text" class="form-control form-control-sm" name="" id="comprador_nome" placeholder="">
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-5">
                                                 <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
                                                 <input type="email" class="form-control form-control-sm" name="" id="comprador_email" placeholder="">
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="inputEmail4">Senha </label>
-                                                <input type="password" class="form-control form-control-sm" name="" id="comprador_senha" placeholder="">
-                                            </div>
                                             <div class="form-group col-md-1">
-                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
                                             </div>
                                         </div>
                                         <div id="lista">
@@ -239,17 +235,21 @@ if (isset($_POST['editacliente'])) {
     $('#mais').click(function() {
 
         
-        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-4"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-3"><label for="inputEmail4">Senha </label><input type="password" class="form-control form-control-sm" name="comprador_senha[]" id="comprador_senha" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm"  id="' + cont + '" style="color: #fff; margin-top: 30px;"> - </a></div></div></div>');
+        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
 
         cont++
     });
 
-    $("form").on("click", ".btn-danger", function() {
-       
-        var btn_id = $(this).attr("id");
-        $('#campo' + btn_id + '').remove();
-        console.log(campo);
-    });
+    function remove(id){
+
+        $('#campo'+id).hide("#campo"+id)
+
+    }
+  
+</script>
+<script>
+
+    
 </script>
 
 
