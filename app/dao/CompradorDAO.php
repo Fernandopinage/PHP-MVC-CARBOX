@@ -7,7 +7,7 @@ include_once "../class/GerarSenha.php";
 class CompradorDAO extends DAO{
     
     
-    public function inserComprador($cnpj,$nome,$email,$status){
+    public function inserComprador($cnpj,$nome,$email){
         
                     $senha = new GerarSenha();
                     $rash = $senha->senha();
@@ -18,7 +18,7 @@ class CompradorDAO extends DAO{
                     $insert->bindValue(":COMPRADOR_NOME", $nome);
                     $insert->bindValue(":COMPRADOR_EMAIL", $email);
                     $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
-                    $insert->bindValue(":COMPRADOR_STATUS", $status);
+                    $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
                     $insert->execute();
                     
                     header('Location: ../php/home.php?p=cliente/');

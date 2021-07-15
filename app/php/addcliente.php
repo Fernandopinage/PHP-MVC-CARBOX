@@ -47,9 +47,9 @@ if (isset($_POST['clientesalva'])) {
                 $nome =  $lista['nome'][$i];
                 $email =  $lista['email'][$i];
                 $senha =  $lista['senha'][$i];
-                $status =  $lista['status'][$i];
+                //$status =  $lista['status'][$i];
                 $Comprador = new CompradorDAO();
-                $Comprador->inserComprador($cnpj, $nome, $email, $status);
+                $Comprador->inserComprador($cnpj, $nome, $email);
             }
         } else {
 ?>
