@@ -17,8 +17,8 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setSap($_POST['sap']);
 
         if (isset($_POST['comprador_nome']) != '' and  isset($_POST['comprador_email']) != '' and  isset($_POST['comprador_senha']) != '' and isset($_POST['comprador_status']) != '') {
-           // $Cliente = new ClienteDAO();
-           // $Cliente->insertCliente($ClassCliente);
+            $Cliente = new ClienteDAO();
+            $Cliente->insertCliente($ClassCliente);
 
             $ClassComprador =  new ClassComprador();
             /*
