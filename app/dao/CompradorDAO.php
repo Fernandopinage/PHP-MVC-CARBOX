@@ -61,7 +61,7 @@ class CompradorDAO extends DAO
     $tamanho = count($lista['id']);
 
     
-    for($i=0; $i <= $tamanho-1; $i++){
+    for($i=0; $i <= $tamanho; $i++){
         
         
         $id =  $lista['id'][$i];
