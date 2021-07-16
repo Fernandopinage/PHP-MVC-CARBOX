@@ -3,7 +3,7 @@
 include_once "../class/ClassRestrito.php";
 include_once "../dao/RestritoDAO.php";
 include_once "../class/GerarSenha.php";
-
+include_once "../dao/MailRestrito.php";
 $senha = new GerarSenha();
 $rash = $senha->senha();
 
@@ -21,6 +21,9 @@ if (isset($_POST['restritosalvar'])) {
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
     }
+
+    $RestritoMial = new RestritoMAIL();
+    $RestritoMial->emailRestrito($ClassRestrito);
 }
 
 ?>
