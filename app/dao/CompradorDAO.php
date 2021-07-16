@@ -63,8 +63,7 @@ class CompradorDAO extends DAO{
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->bindValue(':COMPRADOR_STATUS', $status);
         $update->execute();
-       
-        // header('Location: ../php/home.php?p=cliente/');
+        header('Location: ../php/home.php?p=cliente/');
     }
 
 }

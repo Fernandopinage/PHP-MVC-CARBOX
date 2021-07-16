@@ -47,10 +47,9 @@ class ClienteDAO extends DAO
 
     public function listaVendedores($id){
 
-       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID and COMPRADOR_STATUS = :COMPRADOR_STATUS";
+       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID" ;
        $select = $this->con->prepare($sql);
        $select->bindValue(":CLIENTE_ID", $id);
-       $select->bindValue(":COMPRADOR_STATUS", 'Ativo');
        $select->execute();
        $lista = array();
 
