@@ -47,11 +47,13 @@ class ClienteDAO extends DAO
 
     public function listaVendedores($id){
 
-       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID";
+       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID and COMPRADOR_STATUS = :COMPRADOR_STATUS";
        $select = $this->con->prepare($sql);
        $select->bindValue(":CLIENTE_ID", $id);
+       $select->bindValue(":COMPRADOR_STATUS", 'Ativo');
        $select->execute();
        $lista = array();
+
        while($row = $select->fetch(PDO::FETCH_ASSOC)){
            
             $array = array(
@@ -63,7 +65,7 @@ class ClienteDAO extends DAO
                 'status' => $row['COMPRADOR_STATUS']
             );
            
-            $lista[]  =$array;
+            $lista[]  = $array;
             
        }
        return $lista;

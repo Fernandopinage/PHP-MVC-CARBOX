@@ -20,19 +20,35 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setSap($_POST['sap']);
     $ClassCliente->setEmail($_POST['email']);
 
-    $Cliente->editarCliente($ClassCliente);
+    //$Cliente->editarCliente($ClassCliente);
 
-/*
+    if (isset($_POST[''])) {
+    }
+
     $lista = array(
         'id' => $id = $_POST['id_comprador'],
         'nome' => $nome = $_POST['nome_comprador'],
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
-*/    
+
+    $tamanho = count($lista['id']);
+
+   
+    for ($i = 0; $i < $tamanho; $i++) {
+
+        $id =  $lista['id'][$i];
+        $nome =  $lista['nome'][$i];
+        $email =  $lista['email'][$i];
+        $status = $lista['status'][$i];
+        $Comprador = new CompradorDAO();
+        $Comprador->updateComprador($id, $email, $status);
+
+    }
+    
 }
 
-if(isset($_POST['novocomprador'])){
+if (isset($_POST['novocomprador'])) {
     $lista = array(
 
         'cnpj' => $_POST['comprador_cnpj'],
@@ -56,8 +72,6 @@ if(isset($_POST['novocomprador'])){
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($cnpj, $nome, $email);
     }
-
-    
 }
 
 
@@ -213,25 +227,24 @@ if(isset($_POST['novocomprador'])){
 
 
 
-                                        foreach ($lista as $lista) {
+                                        foreach ($lista as $lista => $key) {
 
-                                            echo '<div class="form-row">
+                                            echo '<div class="form-row" id="row' . $key['id'] . '">
 
                                                     <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Nome </label>
-                                                        <input type="hidden" class="form-control form-control-sm" name="id_comprador" value="' . $lista['id'] . '" readonly>
-                                                        <input type="text" class="form-control form-control-sm" name="nome_comprador" value="' . $lista['nome'] . '" readonly>
+                                                        <input type="hidden" class="form-control form-control-sm" name="id_comprador[]" value="' . $key['id'] . '" readonly>
+                                                        <input type="text" class="form-control form-control-sm" name="nome_comprador[]" value="' . $key['nome'] . '" readonly>
                                                     </div>
 
                                                     <div class="form-group col-md-5">
                                                         <label for="inputEmail4">Email</label>
-                                                        <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $lista['email'] . '" placeholder="">
+                                                        <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
+                                                    
                                                     <div class="form-check" style="margin-top: 30px; margin-left: 10px;">
-                                                        <input class="form-check-input" type="checkbox"  name="status_comprador[]" id="status_comprador">
-                                                        <label class="form-check-label" for="defaultCheck1">
-                                                            Desativar   
-                                                        </label>
+                                                        <input  value="Desativar" id="status'. $key['id'] .'" name ="status_comprador[]" type="hidden">
+                                                        <input class="btn btn-danger btn-block btn-sm" type="button"  name="" id="status_comprador' . $key['id'] . '" onclick="btncomprador(' . $key['id'] . ')" value="Desativar">
                                                      </div>
                                                   </div>
                                                        
@@ -266,24 +279,22 @@ if(isset($_POST['novocomprador'])){
     $('#mais').click(function() {
 
         var cnpj = document.getElementById('comprador_cnpj').value
-        
-        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="'+cnpj+'"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
+
+        $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
 
         cont++
     });
 
-    function remove(id){
+    function remove(id) {
 
-        $('#campo'+id).hide("#campo"+id)
-       document.getElementById('campo'+id).innerHTML ="";
-       
+        $('#campo' + id).hide("#campo" + id)
+        document.getElementById('campo' + id).innerHTML = "";
+
     }
-   
-  
 </script>
 <script>
 
-    
+
 </script>
 
 
@@ -349,4 +360,23 @@ if(isset($_POST['novocomprador'])){
         }
 
     });
+</script>
+
+<script>
+    function btncomprador(id) {
+       // alert(document.getElementById('status_comprador'+id).value)
+    
+        if(document.getElementById('status_comprador'+id).value == 'Desativar'){
+            var status = document.getElementById('status'+id).value = 'Ativo';
+            var status = document.getElementById('status_comprador'+id).value = 'Ativo';
+            $('#status_comprador'+id).removeClass('btn btn-danger');
+            $('#status_comprador'+id).addClass('btn btn-success')
+        }else{
+            var status = document.getElementById('status'+id).value = 'Desativar';
+            var status = document.getElementById('status_comprador'+id).value = 'Desativar';
+            $('#status_comprador'+id).removeClass('btn btn-success');
+            $('#status_comprador'+id).addClass('btn btn-danger')
+        }
+
+    }
 </script>
