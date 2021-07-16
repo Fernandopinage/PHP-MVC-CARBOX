@@ -230,7 +230,7 @@ if (isset($_POST['novocomprador'])) {
                                                     </div>
                                                     
                                                     <div class="form-check" style="margin-top: 30px; margin-left: 10px;">
-                                                        <input  value="Desativar" id="status' . $key['id'] . '" name ="status_comprador[]" type="hidden">
+                                                        <input  value="Ativo" id="status' . $key['id'] . '" name ="status_comprador[]" type="hidden">
                                                         <input class="btn btn-danger btn-block btn-sm" type="button"  name="" id="status_comprador' . $key['id'] . '" onclick="btncomprador(' . $key['id'] . ')" value="Desativar">
                                                      </div>
                                                   </div>
