@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="row" style="margin-top: 50px; text-align: center;">
+        <div class="row" style="margin-top: 150px; text-align: center;">
             <div class="col-sm">
                 <div>
                     <h1 class="font-weight-light">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
