@@ -47,9 +47,10 @@ class ClienteDAO extends DAO
 
     public function listaVendedores($id){
 
-       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID" ;
+       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID and COMPRADOR_STATUS = :COMPRADOR_STATUS";
        $select = $this->con->prepare($sql);
        $select->bindValue(":CLIENTE_ID", $id);
+       $select->bindValue(":COMPRADOR_STATUS", 'Ativo');
        $select->execute();
        $lista = array();
 
@@ -84,7 +85,8 @@ class ClienteDAO extends DAO
         $update->bindValue(':CLIENTE_CODSAP', $ClassCliente->getSap());
         $update->execute();
       
-        header('Location: ../php/home.php?p=cliente/');
+        // não pode redirecionar
+        //header('Location: ../php/home.php?p=cliente/');
         
     }
 

@@ -24,21 +24,15 @@ if (isset($_POST['editacliente'])) {
 
     $lista = array(
         'id' => $id = $_POST['id_comprador'],
-        'nome' => $nome = $_POST['nome_comprador'],
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
+    
+    $Comprador = new CompradorDAO();
+    $Comprador->updateComprador($lista);
+ 
 
-    for ($i = 0; $i < $tamanho; $i++) {
-       
-        echo $id =  $lista['id'][$i]."<br>";
-        $nome =  $lista['nome'][$i];
-        $email =  $lista['email'][$i];
-        echo $status = $lista['status'][$i]."<br>";
-
-        $Comprador = new CompradorDAO();
-        $Comprador->updateComprador($id, $email, $status);
-    }
+    
 }
 
 if (isset($_POST['novocomprador'])) {
@@ -364,11 +358,13 @@ if (isset($_POST['novocomprador'])) {
 
                 var status = document.getElementById('status' + id).value = 'Ativo';
                 var status = document.getElementById('status_comprador' + id).value = 'Ativo';
+
                 $('#status_comprador' + id).removeClass('btn btn-danger');
                 $('#status_comprador' + id).addClass('btn btn-success')
             } else {
                 var status = document.getElementById('status' + id).value = 'Desativar';
                 var status = document.getElementById('status_comprador' + id).value = 'Desativar';
+
                 $('#status_comprador' + id).removeClass('btn btn-success');
                 $('#status_comprador' + id).addClass('btn btn-danger')
             }
