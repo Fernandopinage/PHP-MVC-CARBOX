@@ -24,15 +24,23 @@ if (isset($_POST['editacliente'])) {
 
     $lista = array(
         'id' => $id = $_POST['id_comprador'],
+        'nome' => $nome = $_POST['nome_comprador'],
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
-    
-    $Comprador = new CompradorDAO();
-    $Comprador->updateComprador($lista);
- 
 
-    
+    $tamanho = count($lista['email']);
+
+    for ($i = 0; $i <= $tamanho; $i++) {
+       
+        $id =  $lista['id'][$i];
+        $nome =  $lista['nome'][$i];
+        $email =  $lista['email'][$i];
+        $status = $lista['status'][$i];
+
+       // $Comprador = new CompradorDAO();
+       // $Comprador->updateComprador($id, $email, $status);
+    }
 }
 
 if (isset($_POST['novocomprador'])) {
@@ -230,7 +238,7 @@ if (isset($_POST['novocomprador'])) {
                                                     </div>
                                                     
                                                     <div class="form-check" style="margin-top: 30px; margin-left: 10px;">
-                                                        <input  value="Ativo" id="status' . $key['id'] . '" name ="status_comprador[]" type="hidden">
+                                                        <input  value="Desativar" id="status' . $key['id'] . '" name ="status_comprador[]" type="hidden">
                                                         <input class="btn btn-danger btn-block btn-sm" type="button"  name="" id="status_comprador' . $key['id'] . '" onclick="btncomprador(' . $key['id'] . ')" value="Desativar">
                                                      </div>
                                                   </div>
@@ -358,13 +366,11 @@ if (isset($_POST['novocomprador'])) {
 
                 var status = document.getElementById('status' + id).value = 'Ativo';
                 var status = document.getElementById('status_comprador' + id).value = 'Ativo';
-
                 $('#status_comprador' + id).removeClass('btn btn-danger');
                 $('#status_comprador' + id).addClass('btn btn-success')
             } else {
                 var status = document.getElementById('status' + id).value = 'Desativar';
                 var status = document.getElementById('status_comprador' + id).value = 'Desativar';
-
                 $('#status_comprador' + id).removeClass('btn btn-success');
                 $('#status_comprador' + id).addClass('btn btn-danger')
             }

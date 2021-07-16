@@ -57,30 +57,20 @@ class CompradorDAO extends DAO
 
     public function updateComprador($lista)
     {
+       // echo "<pre>";
+        //var_dump($lista);
+        //echo "</pre>";
 
-    $tamanho = count($lista['id']);
+        echo $tamanho = count($lista);
 
-    
-    for($i=0; $i <= $tamanho; $i++){
-        
-        
-        $id =  $lista['id'][$i];
-        $email =  $lista['email'][$i];
-        $status =  $lista['status'][$i];
-        
-        try {
-            
-            $sql = "UPDATE `comprador` SET COMPRADOR_EMAIL = '$email' , COMPRADOR_STATUS = '$status' WHERE COMPRADOR_ID = '$id'";
-            $update = $this->con->prepare($sql);
-            $update->execute();
-            
-        } catch (PDOException $e) {
-            echo $e;
+        for ($i = 0; $i < $tamanho; $i++) {
+           $sql = "UPDATE `comprador` SET COMPRADOR_STATUS = :COMPRADOR_STATUS, COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
+           $update = $this->con->prepare($sql);
+           $update->bindValue(':COMPRADOR_ID', $lista['id'][$i]);
+           $update->bindValue(':COMPRADOR_STATUS',  $lista['status'][$i]);
+           $update->bindValue(':COMPRADOR_EMAIL', $lista['email'][$i]);
+           $update->execute();
         }
         
-    }
-    
-    /*
-        */
     }
 }
