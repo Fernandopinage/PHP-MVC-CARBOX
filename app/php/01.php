@@ -23,7 +23,7 @@
             <div class="col-sm">
                 <div>
                     <h1 class="font-weight-light">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                    <h3 class="font-weight-light"> Esperamos que encontre tudo o que você procure.</h3>
+                    <h3 class="font-weight-light"> Esperamos que encontre tudo o que procura.</h3>
                 </div>
             </div>
         </div>
