@@ -151,7 +151,7 @@ if (isset($_POST['finalizarpedido'])) {
 
                 </div>
             </div>
-            <!--
+            
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputEmail4">Número do Orçamento</label>
@@ -166,7 +166,7 @@ if (isset($_POST['finalizarpedido'])) {
                     <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                 </div>
             </div>
-            -->
+            
             <input type="submit" id="finalizar" name="finalizarpedido" value="FINALIZAR ORÇAMENTO">
 
         </div>

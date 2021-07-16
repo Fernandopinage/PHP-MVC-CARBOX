@@ -23,14 +23,14 @@
             <div class="col-sm">
                 <div>
                     <h1 class="font-weight-light">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                    <h3 class="font-weight-light"> Esperamos que encontre tudo o que procura.</h3>
+                    <h3 class="font-weight-light"> Esperamos que encontre tudo o que procure.</h3>
                 </div>
             </div>
         </div>
 
     </div>
     <div class="container navbar fixed-bottom navbar-expand-sm justify-content-center" style="background-color:#136132;">
-        <div class="row">
+        <div class="row" style="text-align: center;">
 
            
                 <p style="color:#fff;"> Desenvolvido por Progride ®</p>
