@@ -26,20 +26,20 @@ if (isset($_POST['editacliente'])) {
         'id' => $id = $_POST['id_comprador'],
         'nome' => $nome = $_POST['nome_comprador'],
         'email' => $email  = $_POST['email_comprador'],
-        'status' => $status = $_POST['status_comprador']
+        //'status' => $status = $_POST['status_comprador']
     );
 
     $tamanho = count($lista['email']);
 
-    for ($i = 0; $i <= $tamanho; $i++) {
+    for ($i = 0; $i < $tamanho; $i++) {
        
         $id =  $lista['id'][$i];
-        $nome =  $lista['nome'][$i];
+       // $status =  $lista['status'][$i];
         $email =  $lista['email'][$i];
-        $status = $lista['status'][$i];
+        //$status = $lista['status'][$i];
 
-       // $Comprador = new CompradorDAO();
-       // $Comprador->updateComprador($id, $email, $status);
+        $Comprador = new CompradorDAO();
+        $Comprador->updateComprador($id, $email);
     }
 }
 
@@ -236,11 +236,7 @@ if (isset($_POST['novocomprador'])) {
                                                         <label for="inputEmail4">Email</label>
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
-                                                    
-                                                    <div class="form-check" style="margin-top: 30px; margin-left: 10px;">
-                                                        <input  value="Desativar" id="status' . $key['id'] . '" name ="status_comprador[]" type="hidden">
-                                                        <input class="btn btn-danger btn-block btn-sm" type="button"  name="" id="status_comprador' . $key['id'] . '" onclick="btncomprador(' . $key['id'] . ')" value="Desativar">
-                                                     </div>
+
                                                   </div>
                                                        
                                                 ';
@@ -357,23 +353,3 @@ if (isset($_POST['novocomprador'])) {
     });
 </script>
 
-<script>
-    
-        function btncomprador(id) {
-
-            // alert(document.getElementById('status_comprador'+id).value)
-            if (document.getElementById('status_comprador' + id).value == 'Desativar') {
-
-                var status = document.getElementById('status' + id).value = 'Ativo';
-                var status = document.getElementById('status_comprador' + id).value = 'Ativo';
-                $('#status_comprador' + id).removeClass('btn btn-danger');
-                $('#status_comprador' + id).addClass('btn btn-success')
-            } else {
-                var status = document.getElementById('status' + id).value = 'Desativar';
-                var status = document.getElementById('status_comprador' + id).value = 'Desativar';
-                $('#status_comprador' + id).removeClass('btn btn-success');
-                $('#status_comprador' + id).addClass('btn btn-danger')
-            }
-        }
-    
-</script>
