@@ -20,14 +20,16 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setSap($_POST['sap']);
     $ClassCliente->setEmail($_POST['email']);
 
-    //$Cliente->editarCliente($ClassCliente);
+    $Cliente->editarCliente($ClassCliente);
 
+/*
     $lista = array(
         'id' => $id = $_POST['id_comprador'],
         'nome' => $nome = $_POST['nome_comprador'],
         'email' => $email  = $_POST['email_comprador'],
         'status' => $status = $_POST['status_comprador']
     );
+*/    
 }
 
 if(isset($_POST['novocomprador'])){
