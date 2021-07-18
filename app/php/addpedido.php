@@ -122,16 +122,79 @@ if (isset($_POST['carrinho'])) {
     }
 
     ?>
+
+    <style>
+        .tabela{
+            max-height: 440px;
+            overflow-y: auto;
+            justify-content: center;
+        }
+    </style>
+
+    <div class="lista" id="container">
+        <div class="lista-produto">
+            <h1>Lista de Produtos</h1>
+            <hr>
+            <div class="tabela">
+
+                <?php
+
+                if (!empty($_SESSION['lista'])) {
+                ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Produto</th>
+                                <th scope="col">quantidade</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+
+                            $tamanho = count($_SESSION['lista']);
+                            for ($i = 0; $i < $tamanho; $i++) {
+                            ?>
+
+                                <tr>
+                                    <th scope="row"><?php echo $i + 1; ?></th>
+                                    <td><?php echo $_SESSION['lista'][$i]['produto'] ?></td>
+                                    <td><?php echo $_SESSION['lista'][$i]['quantidade'] ?></td>
+
+                                </tr>
+                            <?php
+                            }
+
+                            ?>
+
+                        </tbody>
+                    </table>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+        <div class="submit" style="margin-top: 10px;">
+
+            <button type="button" class="btn btn-primary btn-lg btn-block">Finalizar Pedido</button>
+
+        </div>
+    </div>
+
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff">
         <spam id="carrinho" style="color:#fff">
             <?php
 
-            $total = 0;
-            $tamanho = count($_SESSION['lista']);
-            for ($i = 0; $i < $tamanho; $i++) {
-                $total = $total + $_SESSION['lista'][$i]['quantidade'];
+            if (!empty($_SESSION['lista'])) {
+
+                $total = 0;
+                $tamanho = count($_SESSION['lista']);
+                for ($i = 0; $i < $tamanho; $i++) {
+                    $total = $total + $_SESSION['lista'][$i]['quantidade'];
+                }
+                echo $total;
             }
-            echo $total;
 
             ?>
         </spam>
@@ -160,5 +223,16 @@ if (isset($_POST['carrinho'])) {
             total = quantidade + soma
             document.getElementById('quantidade' + id).value = total;
 
+        }
+
+        function div() {
+
+            if (container.style.display === "block") {
+
+                container.style.display = "none";
+
+            } else {
+                container.style.display = "block";
+            }
         }
     </script>
