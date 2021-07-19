@@ -12,26 +12,22 @@ $dado = $Produto->selectProduto();
 
 
 
-if(isset($_POST['confirmarorcamento'])){
+if (isset($_POST['confirmarorcamento'])) {
 
-    
-    $tamanho = count($_POST['produto']);
-    for ($i = 0; $i < $tamanho; $i++) {
+    $ClassProduto = new ClassPedido();
+    $ClassProduto->setNum($_POST['numero_orcamento']);
+    $ClassProduto->setData(date('Y-m-d'));
+    $ClassProduto->setRazao($_POST['razao_cliente']);
+    $ClassProduto->setSap(implode(",", $_POST['sap']));
+    $ClassProduto->setProduto(implode(",", $_POST['produto']));
+    $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
+    $Pedido = new PedidoDAO();
+    $Pedido->insertPedido($ClassProduto);
 
-        $ClassProduto = new ClassPedido();
-        $ClassProduto->setNum($_POST['numero_orçamento']);
-        $ClassProduto->setData(date('Y-m-d'));
-        $ClassProduto->setRazao($_POST['razão_cliente']);
-        $ClassProduto->setProduto($_POST['produto']);
-        $ClassProduto->setQuantidade($_POST['quantidade']);
-        
-        echo"<pre>";
-        var_dump($ClassProduto);
-        echo"</pre>";
-       
-    }
-
-
+    echo "<pre>";
+    var_dump($ClassProduto);
+    echo "</pre>";
+ 
 }
 
 
@@ -44,7 +40,8 @@ if (isset($_POST['carrinho'])) {
 
             'id' => $_POST['id'],
             'produto' => $_POST['produto'],
-            'quantidade' => $_POST['quantidade']
+            'quantidade' => $_POST['quantidade'],
+            'sap' => $_POST['sap']
 
         );
 
@@ -57,7 +54,8 @@ if (isset($_POST['carrinho'])) {
 
             'id' => $_POST['id'],
             'produto' => $_POST['produto'],
-            'quantidade' => $_POST['quantidade']
+            'quantidade' => $_POST['quantidade'],
+            'sap' => $_POST['sap']
 
         );
 
@@ -126,11 +124,12 @@ if (isset($_POST['carrinho'])) {
                             <div class="form-group text-center">
                                 <input type="hidden" name="id" value="<?php echo $obj->getID(); ?>">
                                 <input type="hidden" name="produto" value="<?php echo $obj->getProduto(); ?>">
+                                <input type="hidden" name="sap" value="<?php echo $obj->getSap(); ?>">
                                 <a class="btn btn a btn-lg" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a>
                                 <input type="text" class="form-control-lg" size="25" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                 <a class="btn btn btn-lg" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
                                 <div class="modal-footer">
-                                    <button type="submit"  name="carrinho" class="btn btn-success btn-lg btn-block">Adicionar no Carrinho</button>
+                                    <button type="submit" name="carrinho" class="btn btn-success btn-lg btn-block">Adicionar no Carrinho</button>
                                 </div>
                             </div>
                         </form>
@@ -216,7 +215,7 @@ if (isset($_POST['carrinho'])) {
                         <div class="form-row" style="margin-left: 20px;">
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">Número do Orçamento</label>
-                                <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orçamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+                                <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">Data de Emissão</label>
@@ -224,10 +223,9 @@ if (isset($_POST['carrinho'])) {
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="inputEmail4">Nome do Cliente</label>
-                                <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                                <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razao_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                             </div>
                         </div>
-
                         <div class="tabela">
                             <div class="modal-body">
 
@@ -241,8 +239,6 @@ if (isset($_POST['carrinho'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
                                         <?php
 
                                         $total = 0;
@@ -251,7 +247,7 @@ if (isset($_POST['carrinho'])) {
                                         ?>
 
                                             <tr>
-                                                <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
+                                                <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
                                                 <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
                                                 <td><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="quantidade" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a></td>
                                             </tr>
@@ -267,7 +263,7 @@ if (isset($_POST['carrinho'])) {
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success btn-block" name="confirmarorcamento" >Finalizar</button>
+                            <button type="submit" class="btn btn-success btn-block" name="confirmarorcamento">Finalizar</button>
                         </div>
                     </form>
                 </div>
