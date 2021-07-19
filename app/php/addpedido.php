@@ -25,7 +25,6 @@ if (isset($_POST['carrinho'])) {
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
         header('Location: ../php/home.php?p=add/pedido/');
-
     } else {
 
         $_SESSION['carrinho'] = array(
@@ -124,7 +123,7 @@ if (isset($_POST['carrinho'])) {
     ?>
 
     <style>
-        .tabela{
+        .tabela {
             max-height: 440px;
             overflow-y: auto;
             justify-content: center;
@@ -194,7 +193,7 @@ if (isset($_POST['carrinho'])) {
                     $total = $total + $_SESSION['lista'][$i]['quantidade'];
                 }
                 echo $total;
-            }else{
+            } else {
 
                 echo "0";
             }
