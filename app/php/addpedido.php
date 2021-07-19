@@ -11,6 +11,31 @@ $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
 
 
+
+if(isset($_POST['confirmarorcamento'])){
+
+    
+    $tamanho = count($_POST['produto']);
+    for ($i = 0; $i < $tamanho; $i++) {
+
+        $ClassProduto = new ClassPedido();
+        $ClassProduto->setNum($_POST['numero_orçamento']);
+        $ClassProduto->setData(date('Y-m-d'));
+        $ClassProduto->setRazao($_POST['razão_cliente']);
+        $ClassProduto->setProduto($_POST['produto']);
+        $ClassProduto->setQuantidade($_POST['quantidade']);
+        
+        echo"<pre>";
+        var_dump($ClassProduto);
+        echo"</pre>";
+       
+    }
+
+
+}
+
+
+
 if (isset($_POST['carrinho'])) {
 
     if (empty($_SESSION['carrinho'])) {
@@ -226,9 +251,9 @@ if (isset($_POST['carrinho'])) {
                                         ?>
 
                                             <tr>
-                                                <th scope="row"><input type="text" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
-                                                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
-                                                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>"></td>
+                                                <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
+                                                <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
+                                                <td><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="quantidade" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a></td>
                                             </tr>
 
                                         <?php
@@ -242,8 +267,7 @@ if (isset($_POST['carrinho'])) {
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="submit" class="btn btn-success btn-block" name="confirmarorcamento" >Finalizar</button>
                         </div>
                     </form>
                 </div>
