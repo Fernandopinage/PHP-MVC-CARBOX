@@ -133,7 +133,7 @@ if (isset($_POST['carrinho'])) {
 
     <div class="lista" id="container">
         <div class="lista-produto">
-            <h1>Lista de Produtos</h1>
+            <h1>Meu Carrinho</h1>
             <hr>
             <div class="tabela">
 
@@ -176,7 +176,7 @@ if (isset($_POST['carrinho'])) {
             </div>
         </div>
         <div class="submit" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#finalizar">Finalizar Pedido</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#finalizar">Finalizar Orçamento</button>
         </div>
     </div>
 
@@ -185,11 +185,67 @@ if (isset($_POST['carrinho'])) {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="lista-produto">
-                    <h1>Finalizando de Pedido</h1>
+                    <h1 style="text-align: center;margin-top:20px;">Confirma Orçamento</h1>
                     <hr>
-                    <div class="tabela">
-                        
-                    </div>
+                    <form action="" method="POST" enctype="">
+                        <div class="form-row" style="margin-left: 20px;">
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">Número do Orçamento</label>
+                                <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orçamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">Data de Emissão</label>
+                                <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Nome do Cliente</label>
+                                <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="tabela">
+                            <div class="modal-body">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Produto</th>
+                                            <th scope="col">Quantidade</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <?php
+
+                                        $total = 0;
+                                        $tamanho = count($_SESSION['lista']);
+                                        for ($i = 0; $i < $tamanho; $i++) {
+                                        ?>
+
+                                            <tr>
+                                                <th scope="row"><input type="text" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
+                                                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
+                                                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>"></td>
+                                            </tr>
+
+                                        <?php
+
+                                        }
+
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Send message</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
