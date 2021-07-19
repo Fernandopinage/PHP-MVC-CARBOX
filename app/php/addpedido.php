@@ -11,9 +11,6 @@ $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
 
 
-
-
-
 if (isset($_POST['carrinho'])) {
 
     if (empty($_SESSION['carrinho'])) {
@@ -27,6 +24,8 @@ if (isset($_POST['carrinho'])) {
         );
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
+        header('Location: ../php/home.php?p=add/pedido/');
+
     } else {
 
         $_SESSION['carrinho'] = array(
@@ -38,6 +37,7 @@ if (isset($_POST['carrinho'])) {
         );
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
+        header('Location: ../php/home.php?p=add/pedido/');
     }
 }
 
@@ -194,6 +194,9 @@ if (isset($_POST['carrinho'])) {
                     $total = $total + $_SESSION['lista'][$i]['quantidade'];
                 }
                 echo $total;
+            }else{
+
+                echo "0";
             }
 
             ?>
