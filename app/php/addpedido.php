@@ -6,10 +6,10 @@ include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
 
+
 $GerarNumero = new GerarNumero();
 $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
-
 
 
 if (isset($_POST['confirmarorcamento'])) {
@@ -23,10 +23,6 @@ if (isset($_POST['confirmarorcamento'])) {
     $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
     $Pedido = new PedidoDAO();
     $Pedido->insertPedido($ClassProduto);
-
-   
-
- 
 }
 
 
@@ -204,71 +200,81 @@ if (isset($_POST['carrinho'])) {
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="lista-produto">
-                    <h1 style="text-align: center;margin-top:20px;">Confirma Orçamento</h1>
-                    <hr>
-                    <form action="" method="POST" enctype="">
-                        <div class="form-row" style="margin-left: 20px;">
-                            <div class="form-group col-md-3">
-                                <label for="inputEmail4">Número do Orçamento</label>
-                                <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+    <?php
+
+    if (!empty($_SESSION['lista'])) {
+    ?>
+
+        <div class="modal fade bd-example-modal-lg" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="lista-produto">
+                        <h1 style="text-align: center;margin-top:20px;">Confirma Orçamento</h1>
+                        <hr>
+                        <form action="" method="POST" enctype="">
+                            <div class="form-row" style="margin-left: 20px;">
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Número do Orçamento</label>
+                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Data de Emissão</label>
+                                    <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="inputEmail4">Nome do Cliente</label>
+                                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razao_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                                </div>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputEmail4">Data de Emissão</label>
-                                <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
-                            </div>
-                            <div class="form-group col-md-5">
-                                <label for="inputEmail4">Nome do Cliente</label>
-                                <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razao_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
-                            </div>
-                        </div>
-                        <div class="tabela">
-                            <div class="modal-body">
+                            <div class="tabela">
+                                <div class="modal-body">
 
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Produto</th>
-                                            <th scope="col">Quantidade</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-
-                                        $total = 0;
-                                        $tamanho = count($_SESSION['lista']);
-                                        for ($i = 0; $i < $tamanho; $i++) {
-                                        ?>
-
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
-                                                <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
-                                                <td><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="quantidade" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a></td>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Produto</th>
+                                                <th scope="col">Quantidade</th>
+
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
 
-                                        <?php
+                                            $total = 0;
+                                            $tamanho = count($_SESSION['lista']);
+                                            for ($i = 0; $i < $tamanho; $i++) {
+                                            ?>
 
-                                        }
+                                                <tr>
+                                                    <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
+                                                    <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
+                                                    <td><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="quantidade" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn a" id="subtrair" onclick="subtrair(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a></td>
+                                                </tr>
 
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            <?php
+
+                                            }
+
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success btn-block" name="confirmarorcamento">Finalizar</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-block" name="confirmarorcamento">Finalizar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+
+    }
+
+    ?>
 
     <a class="btn-lista" onclick="div()"><img id="img-carrinho" src="../img/carrinho.svg" style="color:#fff">
         <spam id="carrinho" style="color:#fff">
