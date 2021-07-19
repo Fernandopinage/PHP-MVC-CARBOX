@@ -26,6 +26,7 @@ if (isset($_POST['carrinho'])) {
         $_SESSION['lista'][] = $_SESSION['carrinho'];
         header('Location: ../php/home.php?p=add/pedido/');
     } else {
+        
 
         $_SESSION['carrinho'] = array(
 
