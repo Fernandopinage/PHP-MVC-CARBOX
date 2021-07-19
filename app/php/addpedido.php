@@ -23,6 +23,9 @@ if (isset($_POST['confirmarorcamento'])) {
     $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
     $Pedido = new PedidoDAO();
     $Pedido->insertPedido($ClassProduto);
+
+    $PedidoEmail = new OrçamentoMAIL();
+    
 }
 
 
