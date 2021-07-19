@@ -25,9 +25,8 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
         $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
-
-        session_unset();
-        session_destroy();
+       
+        unset($_SESSION['lista']);
         header('location: ../php/home.php?p=pedido/');
      
     }
