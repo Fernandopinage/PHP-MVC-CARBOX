@@ -11,6 +11,7 @@ class PedidoDAO extends DAO{
 
 
     public function insertPedido($ClassProduto){
+        
 
         $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
          (null, :PEDIDO_DESC, :PEDIDO_UNIDADE, :PEDIDO_PRODUTO, :PEDIDO_QUANTIDADE, :PEDIDO_DATAEMISSAO, :PEDIDO_RAZAO, :PEDIDO_CODSAP, :PEDIDO_NUM)";
@@ -24,8 +25,8 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
         $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
-
-        header('location: ../php/home.php?p=pedido/');
+        
+       // header('location: ../php/home.php?p=pedido/');
      
     }
 

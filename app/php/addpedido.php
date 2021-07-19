@@ -24,9 +24,8 @@ if (isset($_POST['confirmarorcamento'])) {
     $Pedido = new PedidoDAO();
     $Pedido->insertPedido($ClassProduto);
 
-    echo "<pre>";
-    var_dump($ClassProduto);
-    echo "</pre>";
+   
+
  
 }
 
