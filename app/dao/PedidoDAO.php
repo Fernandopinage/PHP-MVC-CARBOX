@@ -27,7 +27,7 @@ class PedidoDAO extends DAO{
         $insert->execute();
        
         unset($_SESSION['lista']);
-        header('location: ../php/home.php?p=pedido/');
+        //header('location: ../php/home.php?p=pedido/');
      
     }
 

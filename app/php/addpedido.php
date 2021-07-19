@@ -5,7 +5,7 @@ include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
-include_once "../class/ClassPedidoMAIL.php";
+
  
 $GerarNumero = new GerarNumero();
 $Produto = new PedidoDAO();
@@ -14,6 +14,8 @@ $dado = $Produto->selectProduto();
 
 if (isset($_POST['confirmarorcamento'])) {
 
+     $tamanho = count($_POST['sap']);
+    
     $ClassProduto = new ClassPedido();
     $ClassProduto->setNum($_POST['numero_orcamento']);
     $ClassProduto->setData(date('Y-m-d'));
@@ -21,11 +23,15 @@ if (isset($_POST['confirmarorcamento'])) {
     $ClassProduto->setSap(implode(",", $_POST['sap']));
     $ClassProduto->setProduto(implode(",", $_POST['produto']));
     $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
+    
     $Pedido = new PedidoDAO();
     $Pedido->insertPedido($ClassProduto);
+    $emailCliente = $_SESSION['user']['email'];
+    $cliente = $_SESSION['user']['nome'];
 
-    $PedidoEmail = new OrçamentoMAIL();
-    $PedidoEmail->emailOrçamento($ClassProduto);
+    $PedidoOrcamento = new OrçamentoMAIL();
+    $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
+    
 }
 
 
