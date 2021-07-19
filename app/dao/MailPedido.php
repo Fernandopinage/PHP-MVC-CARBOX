@@ -1,6 +1,6 @@
 <?php 
 include_once "../class/ClassProduto.php";
-
+include_once "../class/ClassPedido.php";
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -15,7 +15,7 @@ require_once "../vendor/autoload.php";
 
 class OrçamentoMAIL{
     
-    public function emailOrçamento($orçamento, $data, $cliente, $produto,$quantidade, $sap, $emailCliente)
+    public function emailOrçamento(ClassProduto $ClassProduto)
     {
 
         $mail = new PHPMailer(true);
