@@ -26,7 +26,7 @@ if (isset($_POST['carrinho'])) {
         $_SESSION['lista'][] = $_SESSION['carrinho'];
         header('Location: ../php/home.php?p=add/pedido/');
     } else {
-        
+
 
         $_SESSION['carrinho'] = array(
 
@@ -176,9 +176,50 @@ if (isset($_POST['carrinho'])) {
             </div>
         </div>
         <div class="submit" style="margin-top: 10px;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#finalizar">Finalizar Pedido</button>
+        </div>
+    </div>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block">Finalizar Pedido</button>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <form action="" method="POST" enctype="">
 
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Quantidade</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <?php
+
+        $total = 0;
+        $tamanho = count($_SESSION['lista']);
+        for ($i = 0; $i < $tamanho; $i++) {
+        ?>
+
+            <tr>
+                <th scope="row"><input type="text" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
+                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
+                <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>"></td>
+            </tr>
+
+        <?php
+
+        }
+
+        ?>
+    </tbody>
+</table>
+</form>
+            </div>
         </div>
     </div>
 
