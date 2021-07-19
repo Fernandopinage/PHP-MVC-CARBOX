@@ -25,8 +25,7 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
         $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
-        
-       // header('location: ../php/home.php?p=pedido/');
+        header('location: ../php/home.php?p=pedido/');
      
     }
 
