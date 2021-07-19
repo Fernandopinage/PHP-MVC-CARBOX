@@ -41,6 +41,7 @@ body{
   position: fixed;
   right: 5px;
   bottom: 0px;
+  display: none;
 }
 .lista h1{
   margin-top: 10px;
@@ -73,6 +74,9 @@ body{
   width: 100%;
   bottom:   140px;
 }
+#container{
+  display: none;
+}
 
 .btn-lista{
   background-repeat: no-repeat;
@@ -86,6 +90,7 @@ body{
   border:1px;
   width: 70px;
   height: 70px;
+  
 }
 
 #img-carrinho{

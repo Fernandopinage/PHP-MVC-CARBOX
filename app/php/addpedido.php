@@ -105,7 +105,7 @@ if (isset($_POST['carrinho'])) {
                                 <input type="text" class="form-control-lg" size="25" id="quantidade<?php echo $obj->getID(); ?>" value="1" name="quantidade" style="text-align: center;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                 <a class="btn btn btn-lg" id="somar" onclick="somar(<?php echo $obj->getID(); ?> )" style="color:#fff ;background-color:#FF5E14;">+</a>
                                 <div class="modal-footer">
-                                    <button type="submit" name="carrinho" class="btn btn-success btn-lg btn-block">Adicionar no Carrinho</button>
+                                    <button type="submit"  name="carrinho" class="btn btn-success btn-lg btn-block">Adicionar no Carrinho</button>
                                 </div>
                             </div>
                         </form>
@@ -197,7 +197,7 @@ if (isset($_POST['carrinho'])) {
                                 <label for="inputEmail4">Data de Emissão</label>
                                 <input type="text" class="form-control form-control-sm" id="data_emissao" name="data_emissao" value="<?php echo date('d/m/Y') ?>" placeholder="<?php echo date('d/m/Y') ?>" readonly>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-5">
                                 <label for="inputEmail4">Nome do Cliente</label>
                                 <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razão_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
                             </div>
