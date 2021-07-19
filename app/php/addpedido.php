@@ -188,41 +188,7 @@ if (isset($_POST['carrinho'])) {
                     <h1>Finalizando de Pedido</h1>
                     <hr>
                     <div class="tabela">
-                        <form action="" method="POST" enctype="">
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Produto</th>
-                                        <th scope="col">Quantidade</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <?php
-
-                                    $total = 0;
-                                    $tamanho = count($_SESSION['lista']);
-                                    for ($i = 0; $i < $tamanho; $i++) {
-                                    ?>
-
-                                        <tr>
-                                            <th scope="row"><input type="text" value="<?php echo $i + 1; ?>" min="1" max="3"></th>
-                                            <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
-                                            <td><input type="text" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>"></td>
-                                        </tr>
-
-                                    <?php
-
-                                    }
-
-                                    ?>
-                                </tbody>
-                            </table>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
