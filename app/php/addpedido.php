@@ -174,7 +174,7 @@ if (isset($_POST['carrinho'])) {
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Produto</th>
-                                <th scope="col">quantidade</th>
+                                <th scope="col">Quantidade</th>
 
                             </tr>
                         </thead>
@@ -203,8 +203,8 @@ if (isset($_POST['carrinho'])) {
                 ?>
             </div>
         </div>
-        <div class="submit" style="margin-top: 10px;">
-            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#finalizar">Finalizar Orçamento</button>
+        <div class="submit" style="margin-top: 10px; margin-left:8%;">
+            <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#finalizar" style="padding-left:25%; padding-right:25%;">Finalizar Orçamento</button>
         </div>
     </div>
 
