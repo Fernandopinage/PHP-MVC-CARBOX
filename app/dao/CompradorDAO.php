@@ -13,7 +13,7 @@ class CompradorDAO extends DAO
 
         $senha = new GerarSenha();
         $rash = $senha->senha();
-        $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS)";
+        $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO)";
 
         $insert = $this->con->prepare($sql);
         $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
@@ -21,6 +21,7 @@ class CompradorDAO extends DAO
         $insert->bindValue(":COMPRADOR_EMAIL", $email);
         $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
         $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
+        $insert->bindValue(":COMPRADOR_ACESSO", 'N');
         $insert->execute();
 
         $emailCliente = new VendedorMAIL();
@@ -60,9 +61,7 @@ class CompradorDAO extends DAO
 
     public function updateComprador($id, $email)
     {
-       // echo "<pre>";
-        //var_dump($lista);
-        //echo "</pre>";
+ 
 
            $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
            $update = $this->con->prepare($sql);
@@ -72,5 +71,11 @@ class CompradorDAO extends DAO
            $update->execute();
         
         
+    }
+
+    public function primeiroAcesso(){
+
+        
+
     }
 }

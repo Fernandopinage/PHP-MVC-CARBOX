@@ -8,6 +8,7 @@
         private $email;
         private $senha;
         private $status;
+        private $acesso;
 
         public function getID(){
 
@@ -70,6 +71,17 @@
         public function setStatus($status){
     
             $this->status =$status;
+            
+        }
+
+        public function getAcessp(){
+
+            return $this->acesso;
+        }
+        
+        public function setAcessp($acesso){
+    
+            $this->acesso =$acesso;
             
         }
 

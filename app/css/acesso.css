@@ -1,0 +1,68 @@
+body{
+
+    
+    background-color: rgba(6, 105, 47, 0.089);
+     font-family: Arial, Helvetica, sans-serif;
+  
+ }
+ 
+ .wrapper {	
+     margin-top: 80px;
+     margin-bottom: 80px;
+ }
+ 
+ 
+ .form-signin {
+   max-width: 480px;
+   padding: 35px 35px 45px 35px;
+   margin:  auto;
+   margin-top: 150px;
+   margin-right: 90px;
+   background-color: #fff;
+   box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.342);
+   border-radius: 7px;
+ 
+ }
+ 
+ #cadastro{
+ 
+   padding-bottom: 20px;
+ }
+ a:link {
+   color: rgba(6, 105, 47, 0.76);
+   text-decoration: none;
+ }
+ a:hover {
+   color: rgba(6, 105, 47, 0.76);
+ }
+ 
+ #logo{
+ 
+   margin-bottom: 50px;
+   font-family: 'Cairo', sans-serif;
+ }
+ 
+ #div2{
+   
+   position: absolute;
+   margin-top: -525px;
+   margin-left: 5px;
+ 
+   
+ }
+ @media only screen and (max-width: 1300px) {
+   #div2{
+       position:relative;
+   
+       display:none;
+   }
+   .form-signin{
+  
+     max-width: 400px;
+     padding: 35px 35px 45px 35px;
+     margin:  auto;
+     margin-top: 150px;
+   
+     justify-content: center;
+   }
+ }
