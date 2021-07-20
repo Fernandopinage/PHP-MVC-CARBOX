@@ -2,7 +2,7 @@
 include_once "../dao/DAO.php";
 include_once "../class/ClassComprador.php";
 include_once "../class/GerarSenha.php";
-
+include_once "../dao/MailVendedor.php";
 
 class CompradorDAO extends DAO
 {
@@ -22,6 +22,9 @@ class CompradorDAO extends DAO
         $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
         $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
         $insert->execute();
+
+        $emailCliente = new VendedorMAIL();
+        $emailCliente->vendedorMail($nome, $email,$rash);
 
         header('Location: ../php/home.php?p=cliente/');
     }
