@@ -69,8 +69,7 @@ class CompradorDAO extends DAO
            //$update->bindValue(':COMPRADOR_STATUS',  $status);
            $update->bindValue(':COMPRADOR_EMAIL', $email);
            $update->execute();
-        
-        
+                
     }
 
     public function primeiroAcesso(ClassComprador $ClassComprador){
