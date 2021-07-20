@@ -73,9 +73,42 @@ class CompradorDAO extends DAO
         
     }
 
-    public function primeiroAcesso(){
+    public function primeiroAcesso(ClassComprador $ClassComprador){
 
-        
+        $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_SENHA = :COMPRADOR_SENHA and COMPRADOR_EMAIL= :COMPRADOR_EMAIL";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':COMPRADOR_SENHA', $ClassComprador->getSenha());
+        $select->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
+        $select->execute();
+
+        $_SESSION['user'] = array();
+
+        if ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+
+
+            $sql2 = "UPDATE `comprador` SET  COMPRADOR_ACESSO = :COMPRADOR_ACESSO, COMPRADOR_SENHA =:COMPRADOR_SENHA WHERE COMPRADOR_EMAIL = :COMPRADOR_EMAIL";
+            $update = $this->con->prepare($sql2);
+            $update->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
+            //$update->bindValue(':COMPRADOR_STATUS',  $status);
+            $update->bindValue(':COMPRADOR_ACESSO', 'S');
+            $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
+            $update->execute();
+
+            
+        } else {
+            echo "nao";
+        }
+
+            /*
+            $sql2 = "UPDATE `comprador` SET  COMPRADOR_ACESSO = :COMPRADOR_ACESSO, COMPRADOR_SENHA =:COMPRADOR_SENHA WHERE COMPRADOR_EMAIL = :COMPRADOR_EMAIL";
+            $update = $this->con->prepare($sql2);
+            $update->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
+            //$update->bindValue(':COMPRADOR_STATUS',  $status);
+            $update->bindValue(':COMPRADOR_ACESSO', 'S');
+            $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
+            $update->execute();
+
+        */
 
     }
 }

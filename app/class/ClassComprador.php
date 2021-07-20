@@ -7,6 +7,7 @@
         private $nome;
         private $email;
         private $senha;
+        private $novasenha;
         private $status;
         private $acesso;
 
@@ -82,6 +83,17 @@
         public function setAcessp($acesso){
     
             $this->acesso =$acesso;
+            
+        }
+
+        public function getNovasenha(){
+
+            return $this->novasenha;
+        }
+        
+        public function setNovasenha($novasenha){
+    
+            $this->novasenha =$novasenha;
             
         }
 

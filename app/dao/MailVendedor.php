@@ -76,7 +76,7 @@ class VendedorMAIL
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
                                 <h3 class="font-weight-light">Olá, ' . $nome . ' você foi cadastrado no sistema de compras da Carboxi.</h3>
-                                <h3 class="font-weight-light">Sua senha do primeiro acesso é , <strong style="color:#FF5E14;">' . $rash . '</strong></h3>
+                                <h3 class="font-weight-light">Para efetuar o primeiro acesso entre com seu e-mail <strong><i>'.$email.'  </i><strong>, <strong style="color:#FF5E14;">' . $rash . '</strong></h3>
                             </div>
                         </div>
                     </div>
