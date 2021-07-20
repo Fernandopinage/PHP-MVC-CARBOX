@@ -81,7 +81,7 @@ class CompradorDAO extends DAO
         $select->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
         $select->execute();
 
-        $_SESSION['user'] = array();
+        
 
         if ($select->fetch(PDO::FETCH_ASSOC)) {
 
@@ -93,21 +93,11 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
             $update->execute();
             
-
+            header('Location: ../php/login.php');
         } else {
-            echo "nao";
+            header('Location: ../php/acesso.php');
         }
 
-            /*
-            $sql2 = "UPDATE `comprador` SET  COMPRADOR_ACESSO = :COMPRADOR_ACESSO, COMPRADOR_SENHA =:COMPRADOR_SENHA WHERE COMPRADOR_EMAIL = :COMPRADOR_EMAIL";
-            $update = $this->con->prepare($sql2);
-            $update->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
-            //$update->bindValue(':COMPRADOR_STATUS',  $status);
-            $update->bindValue(':COMPRADOR_ACESSO', 'S');
-            $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
-            $update->execute();
-
-        */
 
     }
 }
