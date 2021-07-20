@@ -12,7 +12,7 @@ if(isset($_POST['primeiro'])){
 
         $ClassComprador = new ClassComprador();
         $ClassComprador->setEmail($_POST['email']);
-        $ClassComprador->setSenha($_POST['senha']);
+        $ClassComprador->setSenha(md5($_POST['senha']));
         $ClassComprador->setNovasenha(md5($_POST['password1']));
           
         $Comprador = new CompradorDAO();
