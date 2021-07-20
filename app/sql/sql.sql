@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Jul-2021 às 23:47
+-- Tempo de geração: 20-Jul-2021 às 23:26
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 8.0.3
 
@@ -42,7 +42,9 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES
-(8, '004.963.342-20', 'luiz fernando pinage coutinho', '', 'luiz.c@progride.com.br', 1, 'S');
+(5, '10.000.000/0000-0000', 'fernando', '', 'rhuan.v@progride.com.br', 55, 'S'),
+(6, '10.000.000/0220-0000', 'fernando', '', 'luiz.c@progride.com.br', 552, 'S'),
+(7, '10.000.000/0000-0000', 'fernando', '', 'luizfernandoluck@hotmail.com', 55, 'S');
 
 -- --------------------------------------------------------
 
@@ -56,17 +58,17 @@ CREATE TABLE `comprador` (
   `COMPRADOR_NOME` varchar(100) DEFAULT NULL,
   `COMPRADOR_EMAIL` varchar(100) DEFAULT NULL,
   `COMPRADOR_SENHA` varchar(100) DEFAULT NULL,
-  `COMPRADOR_STATUS` varchar(100) NOT NULL
+  `COMPRADOR_STATUS` varchar(100) NOT NULL,
+  `COMPRADOR_ACESSO` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `comprador`
 --
 
-INSERT INTO `comprador` (`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`) VALUES
-(18, '004.963.342-20', 'luiz01', 'luizfernandoluck@hotmail.com', '4f574cbe76fab3b4bce0b154df7bb5aa', 'Ativo'),
-(19, '004.963.342-20', 'luiz02', 'luiz2@hotmail.com', '702170e2e81a6670a0dd40ba0d3a33a5', 'Ativo'),
-(20, '004.963.342-20', 'MARCOS VINICIUS COUTINHO2', 'luiz5@hotmail.com', 'e9efcfedb77c814254c49e7a0069b5a1', 'Ativo');
+INSERT INTO `comprador` (`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES
+(11, '10.000.000/0220-0000', 'a1', 'luiz.c@progride.com.br', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S'),
+(13, '10.000.000/0000-0000', 'b1', 'luizfernandoluck@hotmail.com', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S');
 
 -- --------------------------------------------------------
 
@@ -91,12 +93,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
-(76, '', '', 'Oxigenio Liquido', '11', '2021-07-14', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '13', 2324514),
-(77, '', '', 'Oxigenio Industrial', '1', '2021-07-16', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '01', 7399516),
-(78, '', '', 'Oxigenio Medicinal', '1', '2021-07-16', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '02', 8061516),
-(79, '', '', 'Oxigenio Medicinal', '1', '2021-07-16', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '02', 8061516),
-(80, '', '', 'Oxigenio Industrial', '1', '2021-07-16', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '01', 3038716),
-(81, '', '', 'Oxigenio Medicinal', '1', '2021-07-16', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '02', 3416416);
+(1, '', '', 'Oxigenio Industrial,Nitrogenio Industrial,Argonio Liquido', '3,5,6', '2021-07-20', 'LUIZ FERNANDO PINAGÃ‰ COUTINHO', '01,03,11', 4299220),
+(2, '', '', 'Oxigenio Industrial,Oxigenio Medicinal', '1,3', '2021-07-20', 'fernando', '01,02', 3786020),
+(3, '', '', 'Oxigenio Industrial,Ar Comprimido Respiravel', '4,6', '2021-07-20', 'a1', '01,04', 7568820);
 
 -- --------------------------------------------------------
 
@@ -200,19 +199,19 @@ ALTER TABLE `restrito`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
