@@ -16,7 +16,7 @@ require_once "../vendor/autoload.php";
 class OrçamentoMAIL
 {
 
-    public function emailOrçamento($ClassProduto, $emailCliente, $cliente)
+    public function emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho)
     {
 
    
@@ -75,9 +75,16 @@ class OrçamentoMAIL
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá, ' . $cliente . ' seu pedido foi realizado com sucesso.</h3>
+                                <h3 class="font-weight-light">Olá, ' . $cliente . ' seu pedido foi realizado com sucesso.</h3>';
+
+
+                                for($i=0; $i< $tamanho; $i++ ){
+
+                                  echo " Produto: ".$ClassProduto->getProduto()." Quantidade: ".$ClassProduto->getQuantidade()."<br>";
+
+                                }
                                 
-                           </div>
+                           '</div>
                         </div>
                     </div>
             
