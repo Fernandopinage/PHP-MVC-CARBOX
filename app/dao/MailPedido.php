@@ -19,7 +19,30 @@ class OrçamentoMAIL
     public function emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho)
     {
 
-   
+
+        $txt = "";
+        $qtd = "";  
+        $conctenacao = "";                
+        for($i=0; $i< $tamanho; $i++ ){
+
+            //echo $msg = " <h3> Produto: ".$ClassProduto->getProduto()."<br>"." Quantidade: ".$ClassProduto->getQuantidade()."<h3><br>";
+
+            $produto = explode(',',$ClassProduto->getProduto())[$i]."<br>";
+            $txt = $txt."".$produto; 
+
+           $quantidade = explode(',',$ClassProduto->getQuantidade())[$i]."<br>";
+           $qtd = $qtd."".$quantidade;
+
+           $conct = "<strong>Produto:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getProduto())[$i]. "</b> <strong>Quantidade:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getQuantidade())[$i]. "</b><br>";
+           $conctenacao = $conctenacao."". $conct;
+
+            }
+            
+       
+
+
+        
+                    
         $mail = new PHPMailer(true);
         try {
             //Server settings
@@ -44,7 +67,6 @@ class OrçamentoMAIL
             //Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
             //Content
             $mail->CharSet = 'utf-8';
             $mail->isHTML(true);                                  //Set email format to HTML
@@ -66,32 +88,34 @@ class OrçamentoMAIL
                     <div class="row" style="background-color: #136132; border-radius: 30px 30px 0px 0px;">
             
                         <div class="input-group mb-3" style="margin-left: 20px; margin-top: 40px;">
-                            <img src="http://carboxigases.agenciaprogride.com.br/wp-content/uploads/2021/07/gary.png" width="190px" height="160px">
+                            <img src="http://carboxigases.agenciaprogride.com.br/wp-content/uploads/2021/07/Design-sem-nome-24.png" width="190px" height="160px">
                         </div>
                     </div>
-                    <hr style="background-color: #FF5E14; border-top: 8px solid #FF5E14; margin-top:0px">
+                    
             
                     <div class="row" style="margin-top: 150px; text-align: center;">
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá, ' . $cliente . ' seu pedido foi realizado com sucesso.</h3>';
-
-
-                                for($i=0; $i< $tamanho; $i++ ){
-
-                                  echo " Produto: ".$ClassProduto->getProduto()." Quantidade: ".$ClassProduto->getQuantidade()."<br>";
-
-                                }
+                                <h3 class="font-weight-light">Olá, ' . $cliente . ' seu pedido foi realizado com sucesso.</h3>
+                                <table style="text-align: left;">
+                                <tr>
+                                    <td>
+                                '.
                                 
-                           '</div>
+                                $conctenacao
+                            
+                                .'</td></tr>
+                                <table>
+
+                                </div>
                         </div>
                     </div>
             
                 </div>
                 
-                <hr style="background-color: #FF5E14; border-top: 8px solid #FF5E14;position: relative; margin-bottom:0px;margin-top: 200px;">
-                <div class="container" style="background-color:#136132; bottom:0px; padding:50px; position: relative; border-radius: 0px 0px 30px 30px;">
+               
+                <div>
                 
                     <div class="row" style="text-align: center;">
                             <p style="color:#fff;"> Desenvolvido por Progride ®</p>           
@@ -108,6 +132,6 @@ class OrçamentoMAIL
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-       
+      
     }
 }
