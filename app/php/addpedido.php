@@ -203,6 +203,7 @@ if (isset($_POST['carrinho'])) {
                 ?>
             </div>
         </div>
+        
         <div class="submit" style="margin-top: 10px; margin-left:8%;">
             <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#finalizar" style="padding-left:25%; padding-right:25%;">Finalizar Orçamento</button>
         </div>
