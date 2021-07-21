@@ -80,7 +80,6 @@ if (empty($_SESSION['user']['nome'])) {
             <div class="dropdown-divider"></div>
             <?php
             if (!empty($_SESSION['user']['comprador'])) {
-
               if ($_SESSION['user']['comprador'] == 'S') {
             ?>
                 <a class="dropdown-item" href="?p=exit/">Sair</a>
