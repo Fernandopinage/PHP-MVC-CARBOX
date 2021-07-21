@@ -33,7 +33,7 @@ class PedidoDAO extends DAO{
 
     public function selectProduto(){
      
-        $sql = "SELECT * FROM `produto` WHERE 1";
+        $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S'";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
