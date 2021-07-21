@@ -85,11 +85,8 @@ class OrçamentoMAIL
             <body style="margin-left: 200px; margin-right:200px;">
             
                 <div class="container">
-                    <div class="row" style="background-color: #136132; border-radius: 30px 30px 0px 0px;">
-            
-                        <div class="input-group mb-3" style="margin-left: 20px; margin-top: 40px;">
-                            <img src="http://carboxigases.agenciaprogride.com.br/wp-content/uploads/2021/07/Design-sem-nome-24.png" width="190px" height="160px">
-                        </div>
+                    <div class="row">
+                        <img src="http://carboxigases.agenciaprogride.com.br/wp-content/uploads/2021/07/photo_2021-07-21_17-41-39.jpg"">
                     </div>
                     
             
