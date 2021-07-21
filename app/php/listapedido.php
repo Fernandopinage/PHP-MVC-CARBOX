@@ -3,8 +3,9 @@
 include_once "../dao/PedidoDAO.php";
 include_once "../class/ClassPedido.php";
 
+$nome = $_SESSION['user']['nome']; // usuario logado
 $Pedido = new PedidoDAO();
-$dados = $Pedido->listaPedido();
+$dados = $Pedido->listaPedido($nome);
 
 ?>
 

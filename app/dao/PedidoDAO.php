@@ -68,10 +68,11 @@ class PedidoDAO extends DAO{
         
     }
 
-    public function listaPedido(){
+    public function listaPedido($nome){
 
-        $sql = "SELECT * FROM `pedido` ORDER BY `pedido`.`PEDIDO_ID` DESC";
+        $sql = "SELECT * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO ORDER BY `pedido`.`PEDIDO_ID` DESC";
         $select = $this->con->prepare($sql);
+        $select->bindValue(":PEDIDO_RAZAO", $nome);
         $select->execute();
         $array = array();
 
