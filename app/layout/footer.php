@@ -10,23 +10,21 @@
 
     </body>
 
-    
+  
+    <footer style="margin-top: 150px">
+      <nav class="navbar fixed-bottom navbar-expand-sm navbar bg" style="background-color: #136132">
+          <div class="container" style="margin-top: 8px">
+              <div class="col-9 input-group-sm">
+                  <p class="text-start" style="color:#fff">
+                  </p>
+              </div>
+              <div class="col-6 input-group-sm">
+                  <p class="text-end" style="color:#fff">Desenvolvido por <img src="../img/progride.png" width="25">
+                      Progride </p>
+              </div>
 
-        <footer style="margin-top: 150px">
-            <nav class="navbar fixed-bottom navbar-expand-sm navbar bg" style="background-color: #136132">
-                <div class="container" style="margin-top: 8px">
-                    <div class="col-9 input-group-sm">
-                        <p class="text-start" style="color:#fff">Progride® é uma marca registrada © <?php echo date('Y')?>
-                    </p>
-                </div>
-                <div class="col-6 input-group-sm">
-                    <p class="text-end" style="color:#fff">Desenvolvido por <img src="../img/progride.png" width="25">
-                    Progride </p>
-                </div>
-                
-            </div>
-        </nav>
-    </footer>
-    </div>
+          </div>
+      </nav>
+  </footer>
 
     </html>

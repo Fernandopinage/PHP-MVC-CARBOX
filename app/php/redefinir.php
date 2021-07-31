@@ -1,10 +1,23 @@
+<?php
+
+   
+    require_once "../dao/ClienteDAO.php";
+
+
+    if(isset($_POST['primeiro'])){
+
+        
+        $ClassCliente =$_POST['email'];
+        $cliente = new ClienteDAO();
+        $cliente->esquecisenha($ClassCliente);
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<?php
-
-
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +39,6 @@
             </div>
             <input type="text" class="form-control" name="email" placeholder="Digite o e-mail cadastrado" required="" autofocus="" />
             <br>
-
 
             <div class="text-right">
                 <input type="submit" name="primeiro" class="btn btn-success btn-lg btn-block" value="Enviar">

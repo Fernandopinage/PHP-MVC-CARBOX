@@ -110,6 +110,11 @@ class ClienteDAO extends DAO
         
     }
 
+    public function esquecisenha($request){
+
+        
+    }
+
     public function logaut()
     {
 
