@@ -3,9 +3,9 @@
 include_once "../dao/PedidoDAO.php";
 include_once "../class/ClassPedido.php";
 
-$nome = $_SESSION['user']['nome']; // usuario logado
+$id = $_SESSION['user']['id']; // usuario logado
 $Pedido = new PedidoDAO();
-$dados = $Pedido->listaPedido($nome);
+$dados = $Pedido->listaPedido($id);
 
 ?>
 
@@ -28,7 +28,7 @@ $dados = $Pedido->listaPedido($nome);
         <tr>
             <th scope="col" style="text-align: center;">ORÇAMENTO</th>
             <th scope="col">DT EMISSÃO</th>
-            <th scope="col">CLIENTE</th>
+           <!-- <th scope="col">CLIENTE</th>-->
             <th scope="col">PRODUTO</th>
 
 
@@ -43,8 +43,8 @@ $dados = $Pedido->listaPedido($nome);
             <tr>
                 <th scope="col" style="text-align: center;"><?php echo $obj->getNum(); ?></th>
                 <th scope="col"><?php echo $obj->getData(); ?></th>
-                <th scope="col"><?php echo $obj->getRazao(); ?></th>
-                <th scope="col"><button type="button" class="btn btn-danger btn-block btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Lista de Itens</button></th>
+                <!-- <th scope="col"><?php echo $obj->getRazao(); ?></th>-->
+                <th scope="col"><button type="button" class="btn btn-danger  btn-sm" id="editarBTN" style="background-color:#FF5E14; color:#fff;" data-toggle="modal" data-target="#visualizar<?php echo $obj->getID(); ?>">Lista de Itens</button></th>
             </tr>
 
             <div class="modal fade" id="visualizar<?php echo $obj->getID(); ?>" tabindex="-1" role="dialog" aria-labelledby="visualizar<?php echo $obj->getID(); ?>" aria-hidden="true">

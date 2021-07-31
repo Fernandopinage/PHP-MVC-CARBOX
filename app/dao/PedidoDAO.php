@@ -21,7 +21,7 @@ class PedidoDAO extends DAO{
         $insert->bindValue(":PEDIDO_PRODUTO", $ClassProduto->getProduto());
         $insert->bindValue(":PEDIDO_QUANTIDADE", $ClassProduto->getQuantidade());
         $insert->bindValue(":PEDIDO_DATAEMISSAO", $ClassProduto->getData());
-        $insert->bindValue(":PEDIDO_RAZAO", $ClassProduto->getRazao());
+        $insert->bindValue(":PEDIDO_RAZAO", $ClassProduto->getID());
         $insert->bindValue(":PEDIDO_CODSAP", $ClassProduto->getSap());
         $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $insert->execute();
@@ -68,11 +68,11 @@ class PedidoDAO extends DAO{
         
     }
 
-    public function listaPedido($nome){
+    public function listaPedido($id){
 
         $sql = "SELECT * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO ORDER BY `pedido`.`PEDIDO_ID` DESC";
         $select = $this->con->prepare($sql);
-        $select->bindValue(":PEDIDO_RAZAO", $nome);
+        $select->bindValue(":PEDIDO_RAZAO", $id);
         $select->execute();
         $array = array();
 

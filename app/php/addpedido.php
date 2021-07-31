@@ -19,7 +19,7 @@ if (isset($_POST['confirmarorcamento'])) {
     $ClassProduto = new ClassPedido();
     $ClassProduto->setNum($_POST['numero_orcamento']);
     $ClassProduto->setData(date('Y-m-d'));
-    $ClassProduto->setRazao($_POST['razao_cliente']);
+    $ClassProduto->setID($_POST['razao_cliente']);
     $ClassProduto->setSap(implode(",", $_POST['sap']));
     $ClassProduto->setProduto(implode(",", $_POST['produto']));
     $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
@@ -233,7 +233,9 @@ if (isset($_POST['carrinho'])) {
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label for="inputEmail4">Nome do Cliente</label>
-                                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="razao_cliente" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                                    <input type="hidden" name="razao_cliente" value="<?php echo $_SESSION['user']['id'] ?>">
+                                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+
                                 </div>
                             </div>
                             <div class="tabela">
