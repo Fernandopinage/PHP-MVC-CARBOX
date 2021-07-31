@@ -24,7 +24,7 @@ class ClienteDAO extends DAO
  
 
         //include_once "../class/ClassPedidoMAIL.php";
-        //header('Location: ../php/home.php?p=add/cliente/');
+        header('Location: ../php/home.php?p=cliente/');
     }
 
     public function listaCliente(){

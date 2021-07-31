@@ -74,7 +74,7 @@ if (isset($_POST['novocomprador'])) {
 <br>
 <link href='../css/table.css' rel='stylesheet' />
 <div class="text-right">
-    <a class="btn btn-primary" href="?p=add/cliente/">Adicionar Usuário</a>
+    <a class="btn btn-primary" href="?p=add/cliente/">Adicionar Cliente</a>
 </div>
 <br>
 <style>
