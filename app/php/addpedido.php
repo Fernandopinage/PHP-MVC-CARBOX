@@ -17,21 +17,26 @@ if (isset($_POST['confirmarorcamento'])) {
      $tamanho = count($_POST['sap']);
     
     $ClassProduto = new ClassPedido();
+
+    for($i=0;$i<$tamanho;$i++){
+
     $ClassProduto->setNum($_POST['numero_orcamento']);
     $ClassProduto->setData(date('Y-m-d'));
     $ClassProduto->setID($_POST['razao_cliente']);
-    $ClassProduto->setSap(implode(",", $_POST['sap']));
-    $ClassProduto->setProduto(implode(",", $_POST['produto']));
-    $ClassProduto->setQuantidade(implode(",", $_POST['quantidade']));
-    
+    $ClassProduto->setSap($_POST['sap'][$i]);
+    $ClassProduto->setProduto($_POST['produto'][$i]);
+    $ClassProduto->setQuantidade($_POST['quantidade'][$i]);
     $Pedido = new PedidoDAO();
     $Pedido->insertPedido($ClassProduto);
-    $emailCliente = $_SESSION['user']['email'];
-    $cliente = $_SESSION['user']['nome'];
-
-    $PedidoOrcamento = new OrçamentoMAIL();
-    $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
     
+   
+    }
+
+   // $emailCliente = $_SESSION['user']['email'];
+    //$cliente = $_SESSION['user']['nome'];
+    //$PedidoOrcamento = new OrçamentoMAIL();
+    //$PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
+   
 }
 
 
