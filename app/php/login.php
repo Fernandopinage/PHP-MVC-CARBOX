@@ -36,7 +36,7 @@ if (isset($_POST['acessar'])) {
 <style>
 
 body{
-    background-image: url('../img/02.jpg');
+    background-image: url('../img/photo2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
