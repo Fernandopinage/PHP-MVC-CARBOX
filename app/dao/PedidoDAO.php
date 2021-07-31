@@ -70,7 +70,8 @@ class PedidoDAO extends DAO{
 
     public function listaPedido($id){
 
-        $sql = "SELECT * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO ORDER BY `pedido`.`PEDIDO_ID` DESC";
+        //$sql = "SELECT * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO ORDER BY `pedido`.`PEDIDO_ID` DESC";
+        $sql = "SELECT DISTINCT  * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO GROUP BY PEDIDO_NUM";
         $select = $this->con->prepare($sql);
         $select->bindValue(":PEDIDO_RAZAO", $id);
         $select->execute();
@@ -89,6 +90,22 @@ class PedidoDAO extends DAO{
            $ClassPedido->setSap($row['PEDIDO_CODSAP']);
            $ClassPedido->setNum($row['PEDIDO_NUM']);
            $array[] = $ClassPedido;
+        }
+        return $array;
+    }
+
+    public function listaPedidoOrcamento($id){
+
+        $sql = "SELECT * FROM `pedido` WHERE PEDIDO_NUM = :PEDIDO_NUM";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(":PEDIDO_NUM", $id);
+        $select->execute();
+        $array = array();
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+            $ClassPedido = new ClassPedido();
+            $ClassPedido->setProduto($row['PEDIDO_PRODUTO']);
+            $ClassPedido->setQuantidade($row['PEDIDO_QUANTIDADE']);
+            $array[] = $ClassPedido;
         }
         return $array;
     }

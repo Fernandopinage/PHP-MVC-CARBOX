@@ -60,22 +60,14 @@ $dados = $Pedido->listaPedido($id);
                             
                            <?php 
                            
-                            $produto =  $obj->getProduto();
-                            $produto = explode(',',$produto);
-                            
-                            
-                            $quantidade =  $obj->getQuantidade();
-                            $quantidade = explode(',',$quantidade);
+                            $id = $obj->getNum();
+                            $cod = $Pedido->listaPedidoOrcamento($id);
+                
+                            foreach ($cod as $cod => $obj) {
 
-
-                            $tamanho = count($produto);
-                            
-                            for($i=0; $i<$tamanho; $i++){
-
-                                echo "<strong>Produdo: </strong>".$produto[$i]."  <strong style='margin-left:15px'>Quantidade: </strong>".$quantidade[$i]."<br><hr>";
-
+                                echo "<strong>Produdo: </strong>".$obj->getProduto()."  <strong style='margin-left:15px'>Quantidade: </strong>".$obj->getQuantidade()."<br><hr>";
                             }
-
+                        
                            ?>
                            
                         </div>
