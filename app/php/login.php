@@ -9,9 +9,8 @@ if (isset($_POST['acessar'])) {
     $ClassComprador->setEmail($_POST['email']);
     $ClassComprador->setSenha(md5($_POST['password']));
 
-    $Comprador  =new CompradorDAO();
+    $Comprador  = new CompradorDAO();
     $Comprador->validarLogin($ClassComprador);
-    
 }
 
 ?>
@@ -33,19 +32,17 @@ if (isset($_POST['acessar'])) {
 
 <body>
 
-<style>
+    <style>
+        body {
+            background-image: url('../img/photo2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
 
-body{
-    background-image: url('../img/photo2.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-   
-    
-}
 
-</style>
+        }
+    </style>
 
     <link rel="stylesheet" href="../css/index.css">
 
@@ -62,7 +59,7 @@ body{
             <input type="password" class="form-control" name="password" placeholder="Digite seu senha:" required="" />
             <br>
             <div class="text-left" id="cadastro">
-
+                <a href="../php/redefinir.php" class="stretched-link">Esqueci minha senha</a>
             </div>
 
             <div class="text-right">
@@ -72,9 +69,9 @@ body{
         </form>
 
     </div>
-    
+
     <!--<img id="div2" src="../img/3.png">-->
-    
+
 
     <?php include_once "../layout/footer.php"; ?>
 </body>
