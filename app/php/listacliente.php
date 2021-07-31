@@ -32,9 +32,9 @@ if (isset($_POST['editacliente'])) {
     $tamanho = count($lista['email']);
 
     for ($i = 0; $i < $tamanho; $i++) {
-       
+
         $id =  $lista['id'][$i];
-       // $status =  $lista['status'][$i];
+        // $status =  $lista['status'][$i];
         $email =  $lista['email'][$i];
         //$status = $lista['status'][$i];
 
@@ -44,6 +44,9 @@ if (isset($_POST['editacliente'])) {
 }
 
 if (isset($_POST['novocomprador'])) {
+
+
+
     $lista = array(
 
         'cnpj' => $_POST['comprador_cnpj'],
@@ -64,8 +67,11 @@ if (isset($_POST['novocomprador'])) {
         //$senha =  $lista['senha'][$i];
         //$status =  $lista['status'][$i];
 
-        $Comprador = new CompradorDAO();
-        $Comprador->inserComprador($cnpj, $nome, $email);
+        if (!empty($nome) and !empty($email)) {
+
+            $Comprador = new CompradorDAO();
+            $Comprador->inserComprador($cnpj, $nome, $email);
+        }
     }
 }
 
@@ -125,7 +131,7 @@ if (isset($_POST['novocomprador'])) {
                         <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
                         <th scope="col"><?php echo  $obj->getRazao(); ?></th>
                         <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-                        <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Adicionar Comprador</button></th>
                         <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
                         <th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?cliente/delete=<?php echo $obj->getID(); ?>">Inativar</a></th>
 
@@ -159,7 +165,7 @@ if (isset($_POST['novocomprador'])) {
                                                 <input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder="">
                                             </div>
                                             <div class="form-group col-md-1">
-                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
+                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
                                             </div>
                                         </div>
                                         <div id="lista">
@@ -169,7 +175,7 @@ if (isset($_POST['novocomprador'])) {
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" name="novocomprador" class="btn btn-primary">Adicionar</button>
+                                            <button type="submit" name="novocomprador" class="btn btn-primary">Salvar</button>
                                         </div>
 
                                     </form>
@@ -352,4 +358,3 @@ if (isset($_POST['novocomprador'])) {
 
     });
 </script>
-
