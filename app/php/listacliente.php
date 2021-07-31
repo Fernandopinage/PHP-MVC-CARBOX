@@ -109,7 +109,7 @@ if (isset($_POST['novocomprador'])) {
 
             foreach ($dados as $dado => $obj) {
 
-                if (empty($obj)) {
+                if (empty($obj)) { 
             ?>
                     <tr>
                         <th></th>
