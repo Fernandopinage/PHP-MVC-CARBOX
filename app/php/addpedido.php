@@ -211,6 +211,7 @@ if (isset($_POST['carrinho'])) {
         
         <div class="submit" style="margin-top: 10px; margin-left:8%;">
             <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#finalizar" style="padding-left:25%; padding-right:25%;">Finalizar Orçamento</button>
+            <button type="button" class="btn btn-success btn-lg " onclick="div()" data-toggle="modal" data-target="" style="padding-left:25%; padding-right:20%; margin-top:10px;">Contunuar Comprando</button>
         </div>
     </div>
 
