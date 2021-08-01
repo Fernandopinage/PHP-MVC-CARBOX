@@ -21,19 +21,20 @@ class ClienteDAO extends DAO
         $insert->bindValue(":CLIENTE_STATUS", 'S');
         $insert->execute();
 
- 
+
 
         //include_once "../class/ClassPedidoMAIL.php";
         header('Location: ../php/home.php?p=cliente/');
     }
 
-    public function listaCliente(){
+    public function listaCliente()
+    {
 
         $sql = "SELECT * FROM `cliente` WHERE CLIENTE_STATUS = 'S' ORDER BY `cliente`.`CLIENTE_ID` DESC";
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
-        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
             $ClassCliente = new ClassCliente();
             $ClassCliente->setID($row['CLIENTE_ID']);
@@ -41,22 +42,25 @@ class ClienteDAO extends DAO
             $ClassCliente->setRazao($row['CLIENTE_RAZAO']);
             $ClassCliente->setEmail($row['CLIENTE_EMAIL']);
             $ClassCliente->setSap($row['CLIENTE_CODSAP']);
-            $array[] =$ClassCliente;
+            $array[] = $ClassCliente;
         }
         return $array;
     }
 
-    public function listaVendedores($id){
 
-       $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID and COMPRADOR_STATUS = :COMPRADOR_STATUS";
-       $select = $this->con->prepare($sql);
-       $select->bindValue(":CLIENTE_ID", $id);
-       $select->bindValue(":COMPRADOR_STATUS", 'Ativo');
-       $select->execute();
-       $lista = array();
 
-       while($row = $select->fetch(PDO::FETCH_ASSOC)){
-           
+    public function listaVendedores($id)
+    {
+
+        $sql = "SELECT * FROM `cliente` inner join comprador on CLIENTE_CNPJ = COMPRADOR_CNPJ WHERE CLIENTE_ID = :CLIENTE_ID and COMPRADOR_STATUS = :COMPRADOR_STATUS";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(":CLIENTE_ID", $id);
+        $select->bindValue(":COMPRADOR_STATUS", 'Ativo');
+        $select->execute();
+        $lista = array();
+
+        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+
             $array = array(
 
                 'id' => $row['COMPRADOR_ID'],
@@ -65,18 +69,42 @@ class ClienteDAO extends DAO
                 'password' => $row['COMPRADOR_SENHA'],
                 'status' => $row['COMPRADOR_STATUS']
             );
-           
+
             $lista[]  = $array;
-            
-       }
-       return $lista;
+        }
+        return $lista;
     }
 
-    public function editarCliente(ClassCliente $ClassCliente){
-  
-      
-       
-        $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID"; 
+    public function listarCompradores($id)
+    {
+
+        $sql = "SELECT * FROM `comprador` where COMPRADOR_CNPJ = :COMPRADOR_CNPJ";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(":COMPRADOR_CNPJ", $id);
+        $select->execute();
+        $listacomprador = array();
+        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+
+            $array = array(
+
+                'id' => $row['COMPRADOR_ID'],
+                'nome' => $row['COMPRADOR_NOME'],
+                'email' => $row['COMPRADOR_EMAIL'],
+                'password' => $row['COMPRADOR_SENHA'],
+                'status' => $row['COMPRADOR_STATUS']
+            );
+
+            $listacomprador[]  = $array;
+        }
+        return $listacomprador;
+    }
+
+    public function editarCliente(ClassCliente $ClassCliente)
+    {
+
+
+
+        $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID";
 
         $update = $this->con->prepare($sql);
         $update->bindValue(':CLIENTE_ID', $ClassCliente->getID());
@@ -85,34 +113,33 @@ class ClienteDAO extends DAO
         $update->bindValue(':CLIENTE_EMAIL', $ClassCliente->getEmail());
         $update->bindValue(':CLIENTE_CODSAP', $ClassCliente->getSap());
         $update->execute();
-      
+
         // não pode redirecionar
         //header('Location: ../php/home.php?p=cliente/');
-        
+
     }
 
-    public function deleteCliente($delete){
+    public function deleteCliente($delete)
+    {
 
-              
-       
-        $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_ID`=:CLIENTE_ID"; 
+
+
+        $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_ID`=:CLIENTE_ID";
 
         $update = $this->con->prepare($sql);
         $update->bindValue(':CLIENTE_ID', $delete);
         $update->bindValue(':CLIENTE_STATUS', 'N');
         $update->execute();
-      
+
         header('Location: ../php/home.php?p=cliente/');
     }
 
-    public function editarComprador(){
-
-        
+    public function editarComprador()
+    {
     }
 
-    public function esquecisenha($request){
-
-        
+    public function esquecisenha($request)
+    {
     }
 
     public function logaut()
