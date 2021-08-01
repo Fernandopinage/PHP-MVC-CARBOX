@@ -28,6 +28,7 @@ class CompradorDAO extends DAO
             $insert->bindValue(":COMPRADOR_ACESSO", 'N');
             $insert->execute();
             
+
             ?>
             
             <script>
@@ -42,7 +43,8 @@ class CompradorDAO extends DAO
 
             
             <?php
-
+            $emailCliente = new VendedorMAIL();
+            $emailCliente->vendedorMail($nome, $email,$rash);
 
 
         } catch (\Throwable $th) {
@@ -62,8 +64,7 @@ class CompradorDAO extends DAO
             
             <?php
         }
-       // $emailCliente = new VendedorMAIL();
-       // $emailCliente->vendedorMail($nome, $email,$rash);
+
 
        // header('Location: ../php/home.php?p=cliente/');
     }

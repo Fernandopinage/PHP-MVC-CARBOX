@@ -284,7 +284,7 @@ if (isset($_POST['novocomprador'])) {
 
                                     foreach ($todos as $todos => $key) {
 
-                                        echo "<strong>Cliente: </strong>" . $key['email'] . "<br><hr>";
+                                        echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br><hr>";
                                     }
 
                                     ?>
