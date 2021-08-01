@@ -52,9 +52,9 @@ class CompradorDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Erro ao cadastrar comprador',
+                    title: 'Registro já cadastrado.',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 })
             </script>
 

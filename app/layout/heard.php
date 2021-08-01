@@ -77,7 +77,7 @@ if (empty($_SESSION['user']['nome'])) {
             Logout
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <div class="dropdown-divider"></div>
+           
             <?php
             if (!empty($_SESSION['user']['comprador'])) {
               if ($_SESSION['user']['comprador'] == 'S') {

@@ -23,7 +23,19 @@ class ClienteDAO extends DAO
             $insert->bindValue(":CLIENTE_STATUS", 'S');
             $insert->execute();
 
-    
+            ?>
+                 <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro salvo com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+            
+            
+            <?php
             
         } catch (\Throwable $th) {
 
@@ -136,7 +148,7 @@ class ClienteDAO extends DAO
         $update->execute();
 
         // não pode redirecionar
-        //header('Location: ../php/home.php?p=cliente/');
+        header('Location: ../php/home.php?p=cliente/');
 
     }
 
