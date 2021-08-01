@@ -74,8 +74,12 @@ if (isset($_POST['clientesalva'])) {
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
         <h2> CLIENTE </h2>
-        <hr>
     </div>
+    <div class="text-right">
+
+        <button type="submit" class="btn btn-success" name="clientesalva">Salvar Cliente</button>
+    </div>
+        <hr>
     <div class="form-row">
 
         <div class="form-group col-md-4">
@@ -146,10 +150,7 @@ if (isset($_POST['clientesalva'])) {
     </table>
 
     <hr>
-    <div class="text-right">
 
-        <button type="submit" class="btn btn-success" name="clientesalva">Salvar</button>
-    </div>
 
 </form>
 

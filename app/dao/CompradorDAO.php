@@ -52,9 +52,10 @@ class CompradorDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Código SAP já cadastrado',
+                    title: 'Duplicidade.',
+                    text: '<?= $email ?> Já possui este email na base de dados',
                     showConfirmButton: false,
-                    timer: 2500
+                    timer: 3500
                 })
             </script>
 
