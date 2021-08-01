@@ -24,13 +24,6 @@ if (isset($_POST['clientesalva'])) {
 
 
             $ClassComprador =  new ClassComprador();
-            /*
-            $ClassComprador->setCnpj(implode(",", $_POST['CNPJ']));
-            $ClassComprador->setNome(implode(",", $_POST['comprador_nome']));
-            $ClassComprador->setEmail(implode(",", $_POST['comprador_email']));
-            $ClassComprador->setSenha(implode(",", $_POST['comprador_senha']));
-            $ClassComprador->setStatus(implode(",", $_POST['comprador_status']));
-            */
 
             $lista = array(
 
@@ -54,10 +47,10 @@ if (isset($_POST['clientesalva'])) {
                 $Comprador = new CompradorDAO();
                 $Comprador->inserComprador($cnpj, $nome, $email);
             }
-        } 
-    }else{
-        ?>
-            
+        }
+    } else {
+?>
+
         <script>
             Swal.fire({
                 position: 'center',
@@ -68,9 +61,9 @@ if (isset($_POST['clientesalva'])) {
             })
         </script>
 
-        
-        <?php
-        
+
+<?php
+
     }
 }
 
