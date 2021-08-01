@@ -52,7 +52,7 @@ class CompradorDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Registro já cadastrado.',
+                    title: 'Código SAP já cadastrado',
                     showConfirmButton: false,
                     timer: 2500
                 })
