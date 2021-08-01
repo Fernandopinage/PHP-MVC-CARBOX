@@ -11,23 +11,60 @@ class CompradorDAO extends DAO
     public function inserComprador($cnpj, $nome, $email)
     {
 
-        $senha = new GerarSenha();
-        $rash = $senha->senha();
-        $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO)";
 
-        $insert = $this->con->prepare($sql);
-        $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
-        $insert->bindValue(":COMPRADOR_NOME", $nome);
-        $insert->bindValue(":COMPRADOR_EMAIL", $email);
-        $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
-        $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
-        $insert->bindValue(":COMPRADOR_ACESSO", 'N');
-        $insert->execute();
+        try {
+            //code...
+            
+            $senha = new GerarSenha();
+            $rash = $senha->senha();
+            $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO)";
+            
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
+            $insert->bindValue(":COMPRADOR_NOME", $nome);
+            $insert->bindValue(":COMPRADOR_EMAIL", $email);
+            $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
+            $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
+            $insert->bindValue(":COMPRADOR_ACESSO", 'N');
+            $insert->execute();
+            
+            ?>
+            
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro salvo com sucesso',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            </script>
 
-        $emailCliente = new VendedorMAIL();
-        $emailCliente->vendedorMail($nome, $email,$rash);
+            
+            <?php
 
-        header('Location: ../php/home.php?p=cliente/');
+
+
+        } catch (\Throwable $th) {
+            ?>
+            
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro ao cadastrar comprador',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            </script>
+
+            
+            <?php
+        }
+       // $emailCliente = new VendedorMAIL();
+       // $emailCliente->vendedorMail($nome, $email,$rash);
+
+       // header('Location: ../php/home.php?p=cliente/');
     }
     public function validarLogin($ClassComprador)
     {

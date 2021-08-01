@@ -10,21 +10,42 @@ class ClienteDAO extends DAO
     public function insertCliente(ClassCliente $ClassCliente)
     {
 
-        $sql = "INSERT INTO `cliente`(`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES (null, :CLIENTE_CNPJ, :CLIENTE_RAZAO, :CLIENTE_FANTASIA, :CLIENTE_EMAIL, :CLIENTE_CODSAP, :CLIENTE_STATUS)";
+        try {
+            
+            $sql = "INSERT INTO `cliente`(`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES (null, :CLIENTE_CNPJ, :CLIENTE_RAZAO, :CLIENTE_FANTASIA, :CLIENTE_EMAIL, :CLIENTE_CODSAP, :CLIENTE_STATUS)";
+            
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(":CLIENTE_CNPJ", $ClassCliente->getCnpj());
+            $insert->bindValue(":CLIENTE_RAZAO", $ClassCliente->getRazao());
+            $insert->bindValue(":CLIENTE_FANTASIA", "");
+            $insert->bindValue(":CLIENTE_EMAIL", $ClassCliente->getEmail());
+            $insert->bindValue(":CLIENTE_CODSAP", $ClassCliente->getSap());
+            $insert->bindValue(":CLIENTE_STATUS", 'S');
+            $insert->execute();
 
-        $insert = $this->con->prepare($sql);
-        $insert->bindValue(":CLIENTE_CNPJ", $ClassCliente->getCnpj());
-        $insert->bindValue(":CLIENTE_RAZAO", $ClassCliente->getRazao());
-        $insert->bindValue(":CLIENTE_FANTASIA", "");
-        $insert->bindValue(":CLIENTE_EMAIL", $ClassCliente->getEmail());
-        $insert->bindValue(":CLIENTE_CODSAP", $ClassCliente->getSap());
-        $insert->bindValue(":CLIENTE_STATUS", 'S');
-        $insert->execute();
+    
+            
+        } catch (\Throwable $th) {
 
+            ?>
+            
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Código SAP já cadastrado',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
 
+            
+            <?php
+        }
+       
 
         //include_once "../class/ClassPedidoMAIL.php";
-        header('Location: ../php/home.php?p=cliente/');
+       // header('Location: ../php/home.php?p=cliente/');
     }
 
     public function listaCliente()

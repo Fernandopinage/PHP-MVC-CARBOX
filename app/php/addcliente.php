@@ -17,10 +17,11 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setRazao($_POST['razao']);
         $ClassCliente->setEmail($_POST['email']);
         $ClassCliente->setSap($_POST['sap']);
+        $Cliente = new ClienteDAO();
+        $Cliente->insertCliente($ClassCliente);
 
         if (isset($_POST['comprador_nome']) != '' and  isset($_POST['comprador_email']) != '' and  isset($_POST['comprador_senha']) != '' and isset($_POST['comprador_status']) != '') {
-            $Cliente = new ClienteDAO();
-            $Cliente->insertCliente($ClassCliente);
+
 
             $ClassComprador =  new ClassComprador();
             /*
@@ -53,36 +54,23 @@ if (isset($_POST['clientesalva'])) {
                 $Comprador = new CompradorDAO();
                 $Comprador->inserComprador($cnpj, $nome, $email);
             }
-        } else {
-?>
-            <script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your work has been saved',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            </script>
-
-        <?php
-
-
-        }
-    } else {
+        } 
+    }else{
         ?>
+            
         <script>
             Swal.fire({
-                title: 'Error!',
-                text: 'Preenchar todos os campos obrigatorios!',
-                icon: 'error',
-                confirmButtonText: 'OK'
+                position: 'center',
+                icon: 'warning',
+                title: 'Preenchar todos os campos obrigatorio',
+                showConfirmButton: false,
+                timer: 1500
             })
         </script>
 
-<?php
-
-
+        
+        <?php
+        
     }
 }
 
@@ -143,7 +131,7 @@ if (isset($_POST['clientesalva'])) {
             <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
         </div>
         <div class="form-group col-md-3">
-           
+
             <input type="hidden" class="form-control form-control-sm" id="comprador_senha" placeholder="">
         </div>
     </div>
