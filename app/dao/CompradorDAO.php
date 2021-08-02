@@ -189,5 +189,23 @@ class CompradorDAO extends DAO
         }
     }
 
+    
+    public function alterandoSenha($email,$senha,$novasenha){
+
+
+        try {
+ 
+            
+            $sql ="UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL" ;
+            $update = $this->con->prepare($sql);
+            $update->bindValue(':COMPRADOR_EMAIL', $email);
+            $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
+            $update->execute();
+            
+        } catch (\Throwable $th) {
+            
+        }
+    }
+
 
 }

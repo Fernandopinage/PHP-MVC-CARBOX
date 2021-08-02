@@ -172,13 +172,6 @@ class ClienteDAO extends DAO
     }
 
 
-    public function alterandoSenha($email,$senha,$novasenha){
-
-
-    }
-
-
-
     public function logaut()
     {
 

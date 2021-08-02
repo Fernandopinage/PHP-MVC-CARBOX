@@ -2,7 +2,7 @@
 
 <?php
 include_once "../class/ClassCliente.php";
-include_once "../dao/ClienteDAO.php";
+include_once "../dao/CompradorDAO.php";
 
 if (isset($_POST['acessar'])) {
 
@@ -13,7 +13,7 @@ if (isset($_POST['acessar'])) {
         $senha = $_POST['senha'];
         $novasenha = $_POST['novasenha'];
 
-        $ClienteDAO = new ClienteDAO();
+        $ClienteDAO = new CompradorDAO();
         $ClienteDAO->alterandoSenha($email,$senha,$novasenha);
     }
     
