@@ -19,7 +19,7 @@ class RedefinirSenhaEmail
 
     public function redefinir($email, $rash)
     {
-        echo $email;
+        
         $mail = new PHPMailer(true);
         
         try {

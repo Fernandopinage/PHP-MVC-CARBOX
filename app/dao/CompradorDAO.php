@@ -202,8 +202,37 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
             $update->execute();
             
+
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sua senha foi alterda',
+                   // text: 'Por favor verifique seu e-mail',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+        <?php
+
+
+
         } catch (\Throwable $th) {
             
+            ?>
+
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'Erro ao tentar alterar senha',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+        <?php
         }
     }
 
