@@ -41,6 +41,7 @@ if (isset($_POST['confirmarorcamento'])) {
     $PedidoOrcamento = new OrçamentoMAIL();
     $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
     unset($_SESSION['lista']);
+    header('location: ../php/home.php?p=pedido/');
 }
 
 
