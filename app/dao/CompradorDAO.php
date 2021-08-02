@@ -13,7 +13,7 @@ class CompradorDAO extends DAO
 
 
         try {
-            //code...
+            
             
             $senha = new GerarSenha();
             $rash = $senha->senha();
@@ -37,7 +37,7 @@ class CompradorDAO extends DAO
                     icon: 'success',
                     title: 'Registro salvo com sucesso',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3500
                 })
             </script>
 

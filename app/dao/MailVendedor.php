@@ -47,7 +47,7 @@ class VendedorMAIL
             //Content
             $mail->CharSet = 'utf-8';
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = "Seu Pedido realizado com sucesso";    // titulo da mensagem exibida 
+            $mail->Subject = "Cadastro de compradores";    // titulo da mensagem exibida 
             $mail->Body    = '<!DOCTYPE html>
             <html lang="pt-br">
             
