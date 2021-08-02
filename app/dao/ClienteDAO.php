@@ -176,7 +176,7 @@ class ClienteDAO extends DAO
 
         try {
 
-
+           
             $senha = new GerarSenha();
             $rash = $senha->senha();
 
@@ -221,6 +221,14 @@ class ClienteDAO extends DAO
 <?php
         }
     }
+
+
+    public function alterandoSenha($email,$senha,$novasenha){
+
+
+    }
+
+
 
     public function logaut()
     {

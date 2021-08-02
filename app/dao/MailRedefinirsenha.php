@@ -21,7 +21,7 @@ class RedefinirSenhaEmail
     {
         echo $email;
         $mail = new PHPMailer(true);
-        /*
+        
         try {
             //Server settings
             //$mail->SMTPDebug = 1;                      //Enable verbose debug output
@@ -96,6 +96,6 @@ class RedefinirSenhaEmail
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        */
+        
     }
 }

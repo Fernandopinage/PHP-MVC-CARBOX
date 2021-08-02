@@ -4,10 +4,10 @@
 require_once "../dao/ClienteDAO.php";
 
 
-if (isset($_POST['primeiro'])) {
+if (isset($_POST['redefinirsenha'])) {
 
 
-    $request = $_POST['email'];
+    $email = $_POST['email'];
     $cliente = new ClienteDAO();
     $cliente->esquecisenha($email);
 }
@@ -62,7 +62,7 @@ if (isset($_POST['primeiro'])) {
             <br>
 
             <div class="text-right">
-                <input type="submit" name="primeiro" class="btn btn-success btn-lg btn-block" value="Enviar">
+                <input type="submit" name="redefinirsenha" class="btn btn-success btn-lg btn-block" value="Enviar">
             </div>
 
         </form>

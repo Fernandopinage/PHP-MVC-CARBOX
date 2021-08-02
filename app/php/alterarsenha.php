@@ -6,6 +6,17 @@ include_once "../dao/ClienteDAO.php";
 
 if (isset($_POST['acessar'])) {
 
+    if($_POST['novasenha'] === $_POST['confirme']){
+
+        
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+        $novasenha = $_POST['novasenha'];
+
+        $ClienteDAO = new ClienteDAO();
+        $ClienteDAO->alterandoSenha($email,$senha,$novasenha);
+    }
+    
     
 }
 if(isset($_GET['email']) and isset($_GET['senha'])){
