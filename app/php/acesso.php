@@ -37,6 +37,19 @@ if(isset($_POST['primeiro'])){
 
 <body>
 
+<style>
+        body {
+            background-image: url('../img/04.JPG');
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+
+
+        }
+    </style>
+
+
     <div class="container">
 
         <form class="form-signin" method="POST">

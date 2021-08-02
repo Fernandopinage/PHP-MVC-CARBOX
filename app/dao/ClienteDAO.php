@@ -2,7 +2,8 @@
 
 include_once "../dao/DAO.php";
 include_once "../class/ClassCliente.php";
-
+include_once "../class/GerarSenha.php";
+include_once "../dao/MailRedefinirsenha.php";
 class ClienteDAO extends DAO
 {
 
@@ -11,9 +12,9 @@ class ClienteDAO extends DAO
     {
 
         try {
-            
+
             $sql = "INSERT INTO `cliente`(`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES (null, :CLIENTE_CNPJ, :CLIENTE_RAZAO, :CLIENTE_FANTASIA, :CLIENTE_EMAIL, :CLIENTE_CODSAP, :CLIENTE_STATUS)";
-            
+
             $insert = $this->con->prepare($sql);
             $insert->bindValue(":CLIENTE_CNPJ", $ClassCliente->getCnpj());
             $insert->bindValue(":CLIENTE_RAZAO", $ClassCliente->getRazao());
@@ -23,8 +24,8 @@ class ClienteDAO extends DAO
             $insert->bindValue(":CLIENTE_STATUS", 'S');
             $insert->execute();
 
-            ?>
-                 <script>
+?>
+            <script>
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -33,14 +34,14 @@ class ClienteDAO extends DAO
                     timer: 3500
                 })
             </script>
-            
-            
-            <?php
-            
+
+
+        <?php
+
         } catch (\Throwable $th) {
 
-            ?>
-            
+        ?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -51,13 +52,13 @@ class ClienteDAO extends DAO
                 })
             </script>
 
-            
-            <?php
+
+        <?php
         }
-       
+
 
         //include_once "../class/ClassPedidoMAIL.php";
-       // header('Location: ../php/home.php?p=cliente/');
+        // header('Location: ../php/home.php?p=cliente/');
     }
 
     public function listaCliente()
@@ -149,7 +150,6 @@ class ClienteDAO extends DAO
 
         // não pode redirecionar
         header('Location: ../php/home.php?p=cliente/');
-
     }
 
     public function deleteCliente($delete)
@@ -174,8 +174,52 @@ class ClienteDAO extends DAO
     public function esquecisenha($request)
     {
 
-        $redefinir = new RedefinirSenhaEmail();
-        $redefinir->redefinir($request);
+        try {
+
+
+            $senha = new GerarSenha();
+            $rash = $senha->senha();
+
+            $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+            $update = $this->con->prepare($sql);
+            $update->bindValue(':COMPRADOR_EMAIL', $request);
+            $update->bindValue(':COMPRADOR_SENHA', md5($rash));
+            $update->execute();
+
+            $redefinir = new RedefinirSenhaEmail();
+            $redefinir->redefinir($request, $rash);
+
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sua senha foi redefinida',
+                    text: 'Por favor verifique seu e-mail',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+        <?php
+
+        } catch (\Throwable $th) {
+
+        ?>
+
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'E-mail não cadastrado',
+                    text: 'Informe um e-mail valido',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+<?php
+        }
     }
 
     public function logaut()

@@ -17,7 +17,7 @@ class RedefinirSenhaEmail
 {
 
 
-    public function redefinir($request)
+    public function redefinir($request, $rash)
     {
 
         $mail = new PHPMailer(true);
@@ -69,7 +69,8 @@ class RedefinirSenhaEmail
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá, <b style="color:#136132;">' . $request . '</b> você foi cadastrado no sistema de compras da Carboxi.</h3>
+                                <h2>Esqueceu sua senha?</h2>
+                                <h3 class="font-weight-light">Não se preocupe, acontece com todo mundo. Para redenifir sua senha, use este código de verificação: <b style="color:#136132;">' . $rash . '</b> .</h3>
                             </div>
                         </div>
                     </div>
