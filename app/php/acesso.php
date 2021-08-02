@@ -70,7 +70,7 @@ if (isset($_GET['email']) and isset($_GET['senha'])) {
             </div>
 
             <div class="text-right">
-                <input type="submit" name="primeiro" class="btn btn-success btn-lg btn-block" value="Acessar">
+                <input type="submit" name="primeiro" class="btn btn-success btn-lg btn-block" value="Salvar senha">
             </div>
             <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Digite o e-mail cadastrado" required="" autofocus="" readonly />
             <br>
