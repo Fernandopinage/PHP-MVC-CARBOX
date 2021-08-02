@@ -11,7 +11,7 @@ class PedidoDAO extends DAO
 {
 
 
-    public function insertPedido($ClassProduto, $emailCliente,$cliente,$tamanho)
+    public function insertPedido($ClassProduto)
     {
 
         try {
@@ -30,7 +30,7 @@ class PedidoDAO extends DAO
             $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
             $insert->execute();
 
-            unset($_SESSION['lista']);
+            
             //header('location: ../php/home.php?p=pedido/');
             
             ?>
@@ -39,7 +39,7 @@ class PedidoDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Pedido realizando com sucesso',
+                    title: 'Pedido foi realizado com sucesso',
                     text: "Você vai receber um e-mail com seu pedidos",
                     showConfirmButton: false,
                     timer: 3500
@@ -48,10 +48,7 @@ class PedidoDAO extends DAO
 
             
             <?php
-                
 
-            $PedidoOrcamento = new OrçamentoMAIL();
-            $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
 
         } catch (\Throwable $th) {
             ?>
