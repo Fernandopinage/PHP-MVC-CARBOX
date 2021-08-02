@@ -9,7 +9,7 @@ if (isset($_POST['primeiro'])) {
 
     $request = $_POST['email'];
     $cliente = new ClienteDAO();
-    $cliente->esquecisenha($request);
+    $cliente->esquecisenha($email);
 }
 
 ?>

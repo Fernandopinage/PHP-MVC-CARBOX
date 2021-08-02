@@ -17,7 +17,7 @@ class RedefinirSenhaEmail
 {
 
 
-    public function redefinir($request, $rash)
+    public function redefinir($email, $rash)
     {
 
         $mail = new PHPMailer(true);
@@ -34,7 +34,7 @@ class RedefinirSenhaEmail
             $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
             $mail->setFrom('luiz.c@agenciaprogride.com.br', 'CARBOXI');
-            $mail->addAddress($request, 'destinatalho');     //Add a recipient $contatoemail
+            $mail->addAddress($email, 'destinatalho');     //Add a recipient $contatoemail
             // $mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
             // $mail->addCC('cc@example.com');
@@ -70,7 +70,7 @@ class RedefinirSenhaEmail
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
                                 <h2>Esqueceu sua senha?</h2>
-                                <h3 class="font-weight-light">Não se preocupe, acontece com todo mundo. Para redenifir sua senha, use este código de verificação: <b style="color:#136132;">' . $rash . '</b> .</h3>
+                                <h3 class="font-weight-light">Não se preocupe, acontece com todo mundo. Para redenifir sua senha, <a href="https://carboxsistema.agenciaprogride.com.br/app/php/alterarsenha.php?email='.$email.'&senha='.$rash.'"><b style="color:#136132;">Click aqui</b></a>:</h3>
                             </div>
                         </div>
                     </div>

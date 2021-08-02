@@ -171,7 +171,7 @@ class ClienteDAO extends DAO
     {
     }
 
-    public function esquecisenha($request)
+    public function esquecisenha($email)
     {
 
         try {
@@ -182,12 +182,12 @@ class ClienteDAO extends DAO
 
             $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
             $update = $this->con->prepare($sql);
-            $update->bindValue(':COMPRADOR_EMAIL', $request);
+            $update->bindValue(':COMPRADOR_EMAIL', $email);
             $update->bindValue(':COMPRADOR_SENHA', md5($rash));
             $update->execute();
 
             $redefinir = new RedefinirSenhaEmail();
-            $redefinir->redefinir($request, $rash);
+            $redefinir->redefinir($email, $rash);
 
         ?>
             <script>
