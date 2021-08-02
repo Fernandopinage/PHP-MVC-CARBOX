@@ -138,4 +138,56 @@ class CompradorDAO extends DAO
 
 
     }
+    public function esquecisenha($email)
+    {
+
+        try {
+
+           
+            $senha = new GerarSenha();
+            $rash = $senha->senha();
+
+            $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+            $update = $this->con->prepare($sql);
+            $update->bindValue(':COMPRADOR_EMAIL', $email);
+            $update->bindValue(':COMPRADOR_SENHA', md5($rash));
+            $update->execute();
+
+            $redefinir = new RedefinirSenhaEmail();
+            $redefinir->redefinir($email, $rash);
+
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sua senha foi redefinida',
+                    text: 'Por favor verifique seu e-mail',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+        <?php
+
+        } catch (\Throwable $th) {
+
+        ?>
+
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'E-mail não cadastrado',
+                    text: 'Informe um e-mail valido',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+<?php
+        }
+    }
+
+
 }

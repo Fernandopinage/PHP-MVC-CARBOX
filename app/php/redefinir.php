@@ -2,13 +2,13 @@
 
 
 require_once "../dao/ClienteDAO.php";
-
+require_once "../dao/CompradorDAO.php";
 
 if (isset($_POST['redefinirsenha'])) {
 
 
     $email = $_POST['email'];
-    $cliente = new ClienteDAO();
+    $cliente = new CompradorDAO();
     $cliente->esquecisenha($email);
 }
 
