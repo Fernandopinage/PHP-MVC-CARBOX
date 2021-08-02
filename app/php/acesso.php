@@ -22,6 +22,12 @@ if(isset($_POST['primeiro'])){
 
 }
 
+if (isset($_GET['email']) and isset($_GET['senha'])) {
+
+   echo  $email = $_GET['email'];
+    echo $senha = $_GET['senha'];
+}
+
 
 
 ?>
@@ -57,9 +63,9 @@ if(isset($_POST['primeiro'])){
                 <h2 class="form-signin-heading">Primeiro Acesso</h2>
                 <hr>
             </div>
-            <input type="text" class="form-control" name="email" placeholder="Digite o e-mail cadastrado" required="" autofocus="" />
+            <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Digite o e-mail cadastrado" required="" autofocus="" readonly/>
             <br>
-            <input type="password" class="form-control" name="senha" placeholder="Digite a senha fornecida" required="" />
+            <input type="hidden" class="form-control" name="senha" value="<?php echo $senha; ?>" placeholder="Digite a senha fornecida" required="" readonly/>
             <br>
             <input type="password" class="form-control" name="password1" placeholder="Digite uma nova senha" required="" />
             <br>
