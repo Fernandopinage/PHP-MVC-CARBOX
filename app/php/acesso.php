@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<?php 
+<?php
 
 include_once "../class/ClassComprador.php";
 include_once "../dao/CompradorDAO.php";
 
-if(isset($_POST['primeiro'])){
+if (isset($_POST['primeiro'])) {
 
-    if($_POST['password1'] === $_POST['password2']){
+    if ($_POST['password1'] === $_POST['password2']) {
 
         $ClassComprador = new ClassComprador();
         $ClassComprador->setEmail($_POST['email']);
         $ClassComprador->setSenha(md5($_POST['senha']));
         $ClassComprador->setNovasenha(md5($_POST['password1']));
-          
+
         $Comprador = new CompradorDAO();
         $Comprador->primeiroAcesso($ClassComprador);
     }
-
-
 }
 
 if (isset($_GET['email']) and isset($_GET['senha'])) {
 
-   echo  $email = $_GET['email'];
-    echo $senha = $_GET['senha'];
+    $email = $_GET['email'];
+    $senha = $_GET['senha'];
 }
 
 
@@ -43,7 +41,7 @@ if (isset($_GET['email']) and isset($_GET['senha'])) {
 
 <body>
 
-<style>
+    <style>
         body {
             background-image: url('../img/04.JPG');
             background-repeat: no-repeat;
@@ -63,10 +61,6 @@ if (isset($_GET['email']) and isset($_GET['senha'])) {
                 <h2 class="form-signin-heading">Primeiro Acesso</h2>
                 <hr>
             </div>
-            <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Digite o e-mail cadastrado" required="" autofocus="" readonly/>
-            <br>
-            <input type="hidden" class="form-control" name="senha" value="<?php echo $senha; ?>" placeholder="Digite a senha fornecida" required="" readonly/>
-            <br>
             <input type="password" class="form-control" name="password1" placeholder="Digite uma nova senha" required="" />
             <br>
             <input type="password" class="form-control" name="password2" placeholder="Confirme a nova senha" required="" />
@@ -78,6 +72,10 @@ if (isset($_GET['email']) and isset($_GET['senha'])) {
             <div class="text-right">
                 <input type="submit" name="primeiro" class="btn btn-success btn-lg btn-block" value="Acessar">
             </div>
+            <input type="hidden" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Digite o e-mail cadastrado" required="" autofocus="" readonly />
+            <br>
+            <input type="hidden" class="form-control" name="senha" value="<?php echo $senha; ?>" placeholder="Digite a senha fornecida" required="" readonly />
+            <br>
 
         </form>
 
