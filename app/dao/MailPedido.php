@@ -33,15 +33,10 @@ class OrçamentoMAIL
            $quantidade = explode(',',$ClassProduto->getQuantidade())[$i]."<br>";
            $qtd = $qtd."".$quantidade;
 
-           $conct = "<strong>Produto:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getProduto())[$i]. "</b> <strong>Quantidade:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getQuantidade())[$i]. "</b><br>";
+           $conct = "<strong>Produto:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getProduto())[$i]. "</b> <strong>Quantidade:</strong> <b style='color:red;'>".explode(',',$ClassProduto->getQuantidade())[$i]. " </b><br>";
            $conctenacao = $conctenacao."". $conct;
 
             }
-            
-       
-
-
-        
                     
         $mail = new PHPMailer(true);
         try {
@@ -92,7 +87,7 @@ class OrçamentoMAIL
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá,<b style="color:#136132;"> ' . $cliente . '</b> seu pedido foi realizado com sucesso.</h3>
+                                <h3 class="font-weight-light">Olá,<b style="color:#136132;"> ' . $cliente . '</b> seu pedido foi realizado com sucesso. Número do seu orçamento <b style="color:#FF5E14;">'.$ClassProduto->getNum().'</b> </h3>
                                 <table style="text-align: left;">
                                 <tr>
                                     <td>
