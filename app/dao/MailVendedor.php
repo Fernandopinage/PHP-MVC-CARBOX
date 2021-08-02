@@ -52,11 +52,7 @@ class VendedorMAIL
             <html lang="pt-br">
             
             <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-                <title></title>
+
             </head>
             
             <body style="margin-left: 200px; margin-right:200px;">
@@ -74,7 +70,7 @@ class VendedorMAIL
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá, ' . $nome . ' você foi cadastrado no sistema de compras da Carboxi.</h3>
+                                <h3 class="font-weight-light">Olá, <b style="color:#136132;">' . $nome . '</b> você foi cadastrado no sistema de compras da Carboxi.</h3>
                                 <h3 class="font-weight-light">Para efetuar o primeiro acesso entre com seu e-mail <strong><i>'.$email.'  </i><strong> e utilize o código para alterar sua senha <strong style="color:#FF5E14;">' . $rash . '</strong></h3>
                             </div>
                         </div>
