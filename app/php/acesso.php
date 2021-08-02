@@ -43,7 +43,7 @@ if (isset($_GET['email']) and isset($_GET['senha'])) {
 
     <style>
         body {
-            background-image: url('../img/04.JPG');
+            background-image: url('../img/04.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             -webkit-background-size: cover;
