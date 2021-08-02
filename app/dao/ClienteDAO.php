@@ -173,6 +173,9 @@ class ClienteDAO extends DAO
 
     public function esquecisenha($request)
     {
+
+        $redefinir = new RedefinirSenhaEmail();
+        $redefinir->redefinir($request);
     }
 
     public function logaut()
