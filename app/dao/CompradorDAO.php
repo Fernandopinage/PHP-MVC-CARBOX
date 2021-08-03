@@ -7,11 +7,8 @@ include_once "../dao/MailVendedor.php";
 class CompradorDAO extends DAO
 {
 
-
     public function inserComprador($cnpj, $nome, $email)
     {
-
-
         try {
             
             
@@ -153,21 +150,10 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_SENHA', md5($rash));
             $update->execute();
        
-            $redefinir = new RedefinirSenhaEmail();
-            $redefinir->redefinir($email, $rash);
+           // $redefinir = new RedefinirSenhaEmail();
+           // $redefinir->redefinir($email, $rash);
            
-        ?>
-            <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Sua senha foi redefinida',
-                    text: 'Por favor verifique seu e-mail',
-                    showConfirmButton: false,
-                    timer: 3500
-                })
-            </script>
-        <?php
+           
 
         } catch (\Throwable $th) {
 

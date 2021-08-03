@@ -71,4 +71,6 @@ if (isset($_POST['redefinirsenha'])) {
     <?php include_once "../layout/footer.php"; ?>
 </body>
 
+
+
 </html>
