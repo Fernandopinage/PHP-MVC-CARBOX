@@ -180,12 +180,24 @@ class CompradorDAO extends DAO
     {
 
 
+        $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_EMAIL =:COMPRADOR_EMAIL AND COMPRADOR_SENHA =:COMPRADOR_SENHA";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':COMPRADOR_EMAIL', $email);
+        $select->bindValue(':COMPRADOR_SENHA', md5($senha));
+        $select->execute();
+
+        if($select->fetch(PDO::FETCH_ASSOC)){
+            echo $email."<br>";
+            echo $senha."<br>";
+            echo $novasenha."<br>";
+
         $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
+        var_dump($update);
         $update->execute();
-
+           
         echo " <script>
                     Swal.fire({
                         position: 'center',
@@ -197,5 +209,10 @@ class CompradorDAO extends DAO
                     })
                     setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
                     </script>";
+       
+        }else{
+            echo "nao";
+        }
+
     }
 }

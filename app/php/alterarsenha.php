@@ -1,3 +1,16 @@
+<?php 
+       
+        include_once "../class/ClassCliente.php";
+        include_once "../dao/CompradorDAO.php";
+
+        if (isset($_GET['email']) and isset($_GET['senha'])) {
+
+            $email = $_GET['email'];
+            $senha = $_GET['senha'];
+        }
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,14 +88,7 @@
         </script>
 
         <?php
-        include_once "../class/ClassCliente.php";
-        include_once "../dao/CompradorDAO.php";
 
-        if (isset($_GET['email']) and isset($_GET['senha'])) {
-
-            $email = $_GET['email'];
-            $senha = $_GET['senha'];
-        }
         if (isset($_POST['acessar'])) {
 
             if ($_POST['novasenha'] === $_POST['confirme']) {
