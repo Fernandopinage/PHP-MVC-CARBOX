@@ -24,14 +24,13 @@ class RestritoMAIL {
             //Server settings
             //$mail->SMTPDebug = 1;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'mail.agenciaprogride.com.br';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
+            $mail->Host       = 'mail.carboxigases.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->SMTPSecure = 'tls';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
-            $mail->Username   = 'luiz.c@agenciaprogride.com.br';                     //SMTP username
+            $mail->Username   = 'progride@carboxigases.com';                     //SMTP username
             $mail->Password   = 'root36482681';                               //SMTP password
             //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-           
             //Recipients
             $mail->setFrom('luiz.c@agenciaprogride.com.br', 'CARBOXI');
             $mail->addAddress($ClassRestrito->getEmail(), 'destinatalho');     //Add a recipient $contatoemail
