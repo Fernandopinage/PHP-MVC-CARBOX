@@ -5,7 +5,7 @@ class ConnectFactory{
     
     public static function getConection(){
         
-        $host = "mysql:host=localhost;dbname=carbox";
+        $host = "mysql:host=localhost;dbname=carboxi_sistema;charset=utf8";
         $root = "root";
         $senha = "";
                 
