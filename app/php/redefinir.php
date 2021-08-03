@@ -1,22 +1,6 @@
 <!doctype html>
 <html>
 
-<?php
-
-
-require_once "../dao/ClienteDAO.php";
-require_once "../dao/CompradorDAO.php";
-
-if (isset($_POST['redefinirsenha'])) {
-
-
-    $email = $_POST['email'];
-    $cliente = new CompradorDAO();
-    $cliente->esquecisenha($email);
-
-}
-
-?>
 
 <head>
     <!-- Required meta tags -->
@@ -74,3 +58,19 @@ if (isset($_POST['redefinirsenha'])) {
 
 
 </html>
+
+<?php
+
+
+require_once "../dao/ClienteDAO.php";
+require_once "../dao/CompradorDAO.php";
+
+if (isset($_POST['redefinirsenha'])) {
+
+
+    $email = $_POST['email'];
+    $cliente = new CompradorDAO();
+    $cliente->esquecisenha($email);
+}
+
+?>

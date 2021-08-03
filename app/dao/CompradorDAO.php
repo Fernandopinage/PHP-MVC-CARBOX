@@ -10,12 +10,12 @@ class CompradorDAO extends DAO
     public function inserComprador($cnpj, $nome, $email)
     {
         try {
-            
-            
+
+
             $senha = new GerarSenha();
             $rash = $senha->senha();
             $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO)";
-            
+
             $insert = $this->con->prepare($sql);
             $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
             $insert->bindValue(":COMPRADOR_NOME", $nome);
@@ -24,10 +24,10 @@ class CompradorDAO extends DAO
             $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
             $insert->bindValue(":COMPRADOR_ACESSO", 'N');
             $insert->execute();
-            
 
-            ?>
-            
+
+?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -38,15 +38,13 @@ class CompradorDAO extends DAO
                 })
             </script>
 
-            
-            <?php
+
+        <?php
             $emailCliente = new VendedorMAIL();
-            $emailCliente->vendedorMail($nome, $email,$rash);
-
-
+            $emailCliente->vendedorMail($nome, $email, $rash);
         } catch (\Throwable $th) {
-            ?>
-            
+        ?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -58,12 +56,12 @@ class CompradorDAO extends DAO
                 })
             </script>
 
-            
-            <?php
+
+<?php
         }
 
 
-       // header('Location: ../php/home.php?p=cliente/');
+        // header('Location: ../php/home.php?p=cliente/');
     }
     public function validarLogin($ClassComprador)
     {
@@ -97,18 +95,18 @@ class CompradorDAO extends DAO
 
     public function updateComprador($id, $email)
     {
- 
 
-           $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
-           $update = $this->con->prepare($sql);
-           $update->bindValue(':COMPRADOR_ID', $id);
-           //$update->bindValue(':COMPRADOR_STATUS',  $status);
-           $update->bindValue(':COMPRADOR_EMAIL', $email);
-           $update->execute();
-                
+
+        $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':COMPRADOR_ID', $id);
+        //$update->bindValue(':COMPRADOR_STATUS',  $status);
+        $update->bindValue(':COMPRADOR_EMAIL', $email);
+        $update->execute();
     }
 
-    public function primeiroAcesso(ClassComprador $ClassComprador){
+    public function primeiroAcesso(ClassComprador $ClassComprador)
+    {
 
         $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_SENHA = :COMPRADOR_SENHA and COMPRADOR_EMAIL= :COMPRADOR_EMAIL";
         $select = $this->con->prepare($sql);
@@ -116,7 +114,7 @@ class CompradorDAO extends DAO
         $select->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
         $select->execute();
 
-        
+
 
         if ($select->fetch(PDO::FETCH_ASSOC)) {
 
@@ -127,100 +125,77 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_ACESSO', 'S');
             $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
             $update->execute();
-            
+
             header('Location: ../php/login.php');
         } else {
             header('Location: ../php/acesso.php');
         }
-
-
     }
     public function esquecisenha($email)
     {
 
-        try {
+        $senha = new GerarSenha();
+        $rash = $senha->senha();
 
-           
-            $senha = new GerarSenha();
-            $rash = $senha->senha();
-
-            $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
-            $update = $this->con->prepare($sql);
-            $update->bindValue(':COMPRADOR_EMAIL', $email);
-            $update->bindValue(':COMPRADOR_SENHA', md5($rash));
-            $update->execute();
-       
-           // $redefinir = new RedefinirSenhaEmail();
-           // $redefinir->redefinir($email, $rash);
-           
-           
-
-        } catch (\Throwable $th) {
-
-        ?>
-
-            <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'E-mail não cadastrado',
-                    text: 'Informe um e-mail valido',
-                    showConfirmButton: false,
-                    timer: 3500
-                })
-            </script>
+        $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':COMPRADOR_EMAIL', $email);
+        $update->bindValue(':COMPRADOR_SENHA', md5($rash));
+        $update->execute();
 
 
-<?php
-        }
-    }
+        if ($update->rowCount()) {
 
-    
-    public function alterandoSenha($email,$senha,$novasenha){
+            $redefinir = new RedefinirSenhaEmail();
+            $redefinir->redefinir($email, $rash);
 
 
-        try {
- 
-            
-            $sql ="UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL" ;
-            $update = $this->con->prepare($sql);
-            $update->bindValue(':COMPRADOR_EMAIL', $email);
-            $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
-            $update->execute();
-            
-
-            ?>
-            <script>
+            echo " <script>
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Sua senha foi alterda',
-                   // text: 'Por favor verifique seu e-mail',
+                    title: 'Sua senha foi redefinida',
+                    text: 'Por favor verifique seu e-mail',
                     showConfirmButton: false,
                     timer: 3500
                 })
-            </script>
-        <?php
-
-
-
-        } catch (\Throwable $th) {
-            
-            ?>
-
-            <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Erro',
-                    text: 'Erro ao tentar alterar senha',
-                    showConfirmButton: false,
-                    timer: 3500
-                })
-            </script>
-        <?php
+                </script>";
+        } else {
+            echo "
+                <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'E-mail não cadastrado',
+                        text: 'Informe um e-mail válido',
+                        showConfirmButton: false,
+                        timer: 3500
+                    })
+                </script>";
         }
     }
 
 
+    public function alterandoSenha($email, $senha, $novasenha)
+    {
+
+
+        $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':COMPRADOR_EMAIL', $email);
+        $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
+        $update->execute();
+
+        echo " <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Sucesso',
+                        text: 'Sua senha foi alterada',
+                        showConfirmButton: false,
+                        timer: 3500
+                    })
+                    setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
+                    </script>";
+    }
 }
