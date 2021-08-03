@@ -152,10 +152,10 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_EMAIL', $email);
             $update->bindValue(':COMPRADOR_SENHA', md5($rash));
             $update->execute();
-
+       
             $redefinir = new RedefinirSenhaEmail();
             $redefinir->redefinir($email, $rash);
-
+           
         ?>
             <script>
                 Swal.fire({
