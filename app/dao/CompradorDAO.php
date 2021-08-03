@@ -187,15 +187,12 @@ class CompradorDAO extends DAO
         $select->execute();
 
         if($select->fetch(PDO::FETCH_ASSOC)){
-            echo $email."<br>";
-            echo $senha."<br>";
-            echo $novasenha."<br>";
+
 
         $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
-        var_dump($update);
         $update->execute();
            
         echo " <script>
