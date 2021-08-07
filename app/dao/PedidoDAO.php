@@ -69,6 +69,44 @@ class PedidoDAO extends DAO
         }
     }
 
+    public function encode($ClassProduto){
+            $cod =  $ClassProduto->getNum();
+            
+            $sql = "SELECT * FROM `pedido` WHERE PEDIDO_NUM  =:PEDIDO_NUM";
+            $select = $this->con->prepare($sql);
+            $select->bindValue(":PEDIDO_NUM", $cod);
+            $select->execute();
+            $linha = array();
+            while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+                /*$ClassPedido = new ClassPedido();
+                $ClassPedido->setProduto($row['PEDIDO_PRODUTO']);
+                $ClassPedido->setQuantidade($row['PEDIDO_QUANTIDADE']);
+                */
+                $item = array(
+                    'sap' => $row['PEDIDO_CODSAP'],
+                    'quantidade' => $row['PEDIDO_QUANTIDADE'],
+                );
+
+                $linha[] = $item;
+            }
+
+            $pedido = array(
+
+                'id' => $ClassProduto->getID(),
+                'numero' => $ClassProduto->getNum(),
+                'data' => $ClassProduto->getData(),
+                'linha' => $linha
+            );
+            
+            echo "<pre>";
+            var_dump($pedido);
+            echo "</pre>";
+
+
+         // json_encode($linha);
+          
+    }
+
     public function selectProduto()
     {
 

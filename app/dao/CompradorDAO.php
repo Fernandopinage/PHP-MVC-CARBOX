@@ -7,14 +7,14 @@ include_once "../dao/MailVendedor.php";
 class CompradorDAO extends DAO
 {
 
-    public function inserComprador($cnpj, $nome, $email)
+    public function inserComprador($cnpj, $nome, $email,$codsap)
     {
         try {
 
 
             $senha = new GerarSenha();
             $rash = $senha->senha();
-            $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO)";
+            $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO, :COMPRADOR_CODSAP)";
 
             $insert = $this->con->prepare($sql);
             $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
@@ -23,6 +23,7 @@ class CompradorDAO extends DAO
             $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
             $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
             $insert->bindValue(":COMPRADOR_ACESSO", 'N');
+            $insert->bindValue(":COMPRADOR_CODSAP", $codsap);
             $insert->execute();
 
 

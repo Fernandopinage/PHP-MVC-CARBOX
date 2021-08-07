@@ -10,6 +10,7 @@
         private $novasenha;
         private $status;
         private $acesso;
+        private $codsap;
 
         public function getID(){
 
@@ -94,6 +95,17 @@
         public function setNovasenha($novasenha){
     
             $this->novasenha =$novasenha;
+            
+        }
+
+        public function getCodsap(){
+
+            return $this->codsap;
+        }
+        
+        public function setCodsap($codsap){
+    
+            $this->codsap =$codsap;
             
         }
 

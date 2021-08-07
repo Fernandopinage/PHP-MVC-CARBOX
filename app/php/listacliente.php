@@ -45,15 +45,13 @@ if (isset($_POST['editacliente'])) {
 
 if (isset($_POST['novocomprador'])) {
 
-
-
     $lista = array(
 
         'cnpj' => $_POST['comprador_cnpj'],
         'nome' => $nome = $_POST['comprador_nome'],
         'email' => $email = $_POST['comprador_email'],
-        //'senha' => $senha  = $_POST['comprador_senha'],
-        'status' => "Ativo"
+        'status' => "Ativo",
+        'codsap' => $codsap = $_POST['codsap']
     );
 
     $tamanho = count($lista['cnpj']);
@@ -64,13 +62,15 @@ if (isset($_POST['novocomprador'])) {
         $cnpj =  $lista['cnpj'][$i];
         $nome =  $lista['nome'][$i];
         $email =  $lista['email'][$i];
+        $codsap = $lista['codsap'][$i];
+
         //$senha =  $lista['senha'][$i];
         //$status =  $lista['status'][$i];
 
         if (!empty($nome) and !empty($email)) {
 
             $Comprador = new CompradorDAO();
-            $Comprador->inserComprador($cnpj, $nome, $email);
+            $Comprador->inserComprador($cnpj, $nome, $email,$codsap);
         }
     }
 }
@@ -157,6 +157,8 @@ if (isset($_POST['novocomprador'])) {
 
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
+
+                                        <input type="hidden" name="codsap[]" id="codsap" value="<?php echo  $obj->getSap();?>">
                                             <input type="hidden" name="comprador_cnpj[]" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">Nome <span style="color: red;">*</span></label>

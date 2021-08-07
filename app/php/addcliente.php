@@ -31,7 +31,8 @@ if (isset($_POST['clientesalva'])) {
                 'nome' => $nome = $_POST['comprador_nome'],
                 'email' => $email = $_POST['comprador_email'],
                 'senha' => $senha  = $_POST['comprador_senha'],
-                'status' => $status = $_POST['comprador_status']
+                'status' => $status = $_POST['comprador_status'],
+                'codsap' => $codsap = $_POST['codsap']
             );
 
             $tamanho = count($lista['cnpj']);
@@ -43,9 +44,10 @@ if (isset($_POST['clientesalva'])) {
                 $nome =  $lista['nome'][$i];
                 $email =  $lista['email'][$i];
                 $senha =  $lista['senha'][$i];
+                $codsap = $lista['codsap'][$i];
                 //$status =  $lista['status'][$i];
                 $Comprador = new CompradorDAO();
-                $Comprador->inserComprador($cnpj, $nome, $email);
+                $Comprador->inserComprador($cnpj, $nome, $email,$codsap);
             }
         }
     } else {
@@ -261,11 +263,15 @@ if (isset($_POST['clientesalva'])) {
         var comprador_email = document.getElementById('comprador_email').value;
         var comprador_senha = document.getElementById('comprador_senha').value;
         var CNPJ = document.getElementById('cpf').value;
+        var codsap = document.getElementById('sap').value;
+
+
+
         var comprador_status = "Ativo";
 
         if (comprador_nome != '' && comprador_email != '') {
 
-            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="hidden"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_senha" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-block btn-sm"  id="' + cont + '" style="color: #fff;"> Remover </a></th></tr>');
+            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="hidden" name="codsap[]" value="'+codsap+'" ><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="hidden"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_status" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-block btn-sm"  id="' + cont + '" style="color: #fff;"> Remover </a></th></tr>');
         }
 
 
