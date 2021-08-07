@@ -30,6 +30,8 @@ if (isset($_POST['confirmarorcamento'])) {
         $ClassProduto->setQuantidade($_POST['quantidade'][$i]);
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
+
+        
     }
 
         $Produto->encode($ClassProduto);

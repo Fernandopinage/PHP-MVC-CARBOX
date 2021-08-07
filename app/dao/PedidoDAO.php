@@ -30,11 +30,11 @@ class PedidoDAO extends DAO
             $insert->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
             $insert->execute();
 
-            
+
             //header('location: ../php/home.php?p=pedido/');
-            
-            ?>
-            
+
+?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -46,13 +46,13 @@ class PedidoDAO extends DAO
                 })
             </script>
 
-            
-            <?php
+
+        <?php
 
 
         } catch (\Throwable $th) {
-            ?>
-            
+        ?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -64,48 +64,59 @@ class PedidoDAO extends DAO
                 })
             </script>
 
-            
-            <?php
+
+<?php
         }
     }
 
-    public function encode($ClassProduto){
-            $cod =  $ClassProduto->getNum();
-            
-            $sql = "SELECT * FROM `pedido` WHERE PEDIDO_NUM  =:PEDIDO_NUM";
-            
-            $select = $this->con->prepare($sql);
-            $select->bindValue(":PEDIDO_NUM", $cod);
-            $select->execute();
-            $linha = array();
-            while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
-                /*$ClassPedido = new ClassPedido();
-                $ClassPedido->setProduto($row['PEDIDO_PRODUTO']);
-                $ClassPedido->setQuantidade($row['PEDIDO_QUANTIDADE']);
-                */
-                $item = array(
-                    'sap' => $row['PEDIDO_CODSAP'],
-                    'quantidade' => $row['PEDIDO_QUANTIDADE'],
-                );
+    public function encode($ClassProduto)
+    {
+        $cod =  $ClassProduto->getNum();
 
-                $linha[] = $item;
-            }
+        // numero do orçamento      PEDIDO_NUM
+        // codigo do pedido item    PEDIDO_CODSAP
+        // quantidade  item         PEDIDO_QUANTIDADE 
+        // codigocliente sap        COMPRADOR_CODSAP
 
+
+
+
+
+        $sql = "SELECT PEDIDO_NUM,PEDIDO_CODSAP,PEDIDO_QUANTIDADE,COMPRADOR_CODSAP FROM pedido INNER JOIN comprador
+            ON PEDIDO_RAZAO = comprador_id WHERE PEDIDO_NUM = :PEDIDO_NUM";
+
+        $select = $this->con->prepare($sql);
+        $select->bindValue(":PEDIDO_NUM", $cod);
+        $select->execute();
+
+        $linha = array();
+
+   
+        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+
+            $ClienteSAP = $row['COMPRADOR_CODSAP'];
+
+            $item = array(
+                'ItemCode' => $row['PEDIDO_CODSAP'],
+                'Quantity' => $row['PEDIDO_QUANTIDADE'],
+            );
+
+            $linha[] = $item;
+        }
+
+            
             $pedido = array(
 
-                'id' => $ClassProduto->getID(),
-                'numero' => $ClassProduto->getNum(),
-                'data' => $ClassProduto->getData(),
-                'linha' => $linha
+                'CardCode' => $ClienteSAP,
+               /* 'ORCAMENTO' => $ClassProduto->getNum(),*/
+                'DocDate' => $ClassProduto->getData(),
+                'TaxDate' => $ClassProduto->getData(),
+                'DocDueDate' => $ClassProduto->getData(),
+                'ITEM' => $linha
             );
             
-            echo "<pre>";
-            var_dump($pedido);
-            echo "</pre>";
+        return json_encode($linha);
 
-
-         // json_encode($linha);
-          
     }
 
     public function selectProduto()
