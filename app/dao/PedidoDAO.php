@@ -73,6 +73,7 @@ class PedidoDAO extends DAO
             $cod =  $ClassProduto->getNum();
             
             $sql = "SELECT * FROM `pedido` WHERE PEDIDO_NUM  =:PEDIDO_NUM";
+            
             $select = $this->con->prepare($sql);
             $select->bindValue(":PEDIDO_NUM", $cod);
             $select->execute();
