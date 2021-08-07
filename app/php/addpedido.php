@@ -31,13 +31,12 @@ if (isset($_POST['confirmarorcamento'])) {
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
 
-        
+
     }
 
         $Produto->encode($ClassProduto);
        
-        
-/*
+    
     $emailCliente = $_SESSION['user']['email'];
     $cliente = $_SESSION['user']['nome'];
     $ClassProduto->setProduto (implode(" ,",$_POST['produto']));
@@ -46,7 +45,6 @@ if (isset($_POST['confirmarorcamento'])) {
     $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
     unset($_SESSION['lista']);
     //header('location: ../php/home.php?p=pedido/');
-    */
 }
 
 
