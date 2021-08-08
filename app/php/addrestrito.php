@@ -17,11 +17,11 @@ if (isset($_POST['restritosalvar'])) {
         
         $ClassRestrito->setSenha(md5($_POST['senha']));
         $ClassRestrito->setStatus('S');
-
+        
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
     }
-
+    
     $RestritoMial = new RestritoMAIL();
     $RestritoMial->emailRestrito($ClassRestrito);
 }
@@ -32,6 +32,10 @@ if (isset($_POST['restritosalvar'])) {
 <form id="form-cliente" action="" method="POST">
     <div class="text-left" id="title">
         <h2> RESTRITO </h2>
+        <div class="text-right">
+            <a href="?p=restrito/"  class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-success" name="restritosalvar">Salvar Registro</button>
+        </div>
         <hr>
     </div>
     <div class="form-row">
@@ -54,10 +58,6 @@ if (isset($_POST['restritosalvar'])) {
 
             <input type="hidden" class="form-control form-control-sm is-invalid" id="conf_senha" value="<?php echo $rash ?>" name="conf_senha" placeholder="">
         </div>
-    </div>
-    <div class="text-right">
-
-        <button type="submit" class="btn btn-success" name="restritosalvar">Salvar Registro</button>
     </div>
 </form>
 

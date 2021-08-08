@@ -36,7 +36,7 @@ body{
   border: 5px;
   box-shadow: 3px 1px 4px 6px rgba(0, 0, 0, 0.342);
   max-height: auto;
-  min-height: 700px;
+  min-height: 750px;
   min-width: 500px;
   position: fixed;
   right: 5px;
@@ -55,7 +55,7 @@ body{
   justify-content: center;
 }
 .lista tbody{
-  max-width: 500px;
+  max-width: 450px;
   overflow-x: auto;
   justify-content: center
 }
@@ -85,7 +85,7 @@ body{
   text-align: center;
   position: fixed;
   right: 10px;
-  bottom: 60px;
+  bottom: 85px;
   border-radius: 50rem;
   border:1px;
   width: 70px;

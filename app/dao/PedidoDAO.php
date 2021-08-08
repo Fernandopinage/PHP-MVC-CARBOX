@@ -105,7 +105,7 @@ class PedidoDAO extends DAO
         }
 
             
-            $pedido = array(
+            $API = array(
 
                 'CardCode' => $ClienteSAP,
                /* 'ORCAMENTO' => $ClassProduto->getNum(),*/
@@ -114,9 +114,9 @@ class PedidoDAO extends DAO
                 'DocDueDate' => $ClassProduto->getData(),
                 'ITEM' => $linha
             );
-            
-        return json_encode($linha);
-
+                       
+            echo json_encode($API);
+           
     }
 
     public function selectProduto()

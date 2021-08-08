@@ -28,7 +28,7 @@ if (isset($_POST['produtosalvar'])) {
     $ClassProduto->setStatus('S');
     $Produto = new ProdutoDAO();
     $Produto->insertProduto($ClassProduto);
- ;
+    ;
 }
 
 
@@ -37,8 +37,12 @@ if (isset($_POST['produtosalvar'])) {
 
 <link rel="stylesheet" href="../css/cliente.css">
 <form id="form-cliente" action="" method="POST" enctype="multipart/form-data">
-    <div class="text-left" id="title">
-        <h2> PRODUTO </h2>
+<div class="text-left" id="title">
+    <h2> PRODUTO </h2>
+    <div class="text-right">
+        <a href="?p=produto/"  class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-success" name="produtosalvar">Salvar Produto</button>
+    </div>
         <hr>
     </div>
     <div class="form-row">
@@ -66,10 +70,6 @@ if (isset($_POST['produtosalvar'])) {
             <label for="inputEmail4">Ficha Técnica<span style="color: red;">*</span></label>
             <input type="file" class="form-control form-control-sm is-invalid" id="ficha" name="ficha" accept="application/pdf,application/vnd.ms-excel" placeholder="">
         </div>
-    </div>
-    <div class="text-right">
-
-        <button type="submit" class="btn btn-success" name="produtosalvar">Salvar</button>
     </div>
 
 </form>

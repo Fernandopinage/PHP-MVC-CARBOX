@@ -78,7 +78,7 @@ if (isset($_POST['clientesalva'])) {
         <h2> CLIENTE </h2>
     </div>
     <div class="text-right">
-
+        <a href="?p=cliente/"  class="btn btn-danger">Cancelar</a>
         <button type="submit" class="btn btn-success" name="clientesalva">Salvar Cliente</button>
     </div>
         <hr>

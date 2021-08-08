@@ -35,8 +35,9 @@ if (isset($_POST['confirmarorcamento'])) {
     }
 
         $Produto->encode($ClassProduto);
-       
-    
+      
+ 
+    /*
     $emailCliente = $_SESSION['user']['email'];
     $cliente = $_SESSION['user']['nome'];
     $ClassProduto->setProduto (implode(" ,",$_POST['produto']));
@@ -45,9 +46,10 @@ if (isset($_POST['confirmarorcamento'])) {
     $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
     unset($_SESSION['lista']);
     //header('location: ../php/home.php?p=pedido/');
+    */
 }
 
-
+    
 
 if (isset($_POST['carrinho'])) {
 
