@@ -6,7 +6,7 @@ include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
 
- 
+
 $GerarNumero = new GerarNumero();
 $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto();
@@ -15,13 +15,13 @@ $dado = $Produto->selectProduto();
 if (isset($_POST['confirmarorcamento'])) {
 
 
-    
+
     $tamanho = count($_POST['sap']);
-    
+
     $ClassProduto = new ClassPedido();
-    
-    for($i=0;$i<$tamanho;$i++){
-        
+
+    for ($i = 0; $i < $tamanho; $i++) {
+
         $ClassProduto->setNum($_POST['numero_orcamento']);
         $ClassProduto->setData(date('Y-m-d'));
         $ClassProduto->setID($_POST['razao_cliente']);
@@ -30,13 +30,11 @@ if (isset($_POST['confirmarorcamento'])) {
         $ClassProduto->setQuantidade($_POST['quantidade'][$i]);
         $Pedido = new PedidoDAO();
         $Pedido->insertPedido($ClassProduto);
-
-
     }
 
-        $Produto->encode($ClassProduto);
-      
- 
+    $Produto->encode($ClassProduto);
+
+
     /*
     $emailCliente = $_SESSION['user']['email'];
     $cliente = $_SESSION['user']['nome'];
@@ -49,9 +47,14 @@ if (isset($_POST['confirmarorcamento'])) {
     */
 }
 
-    
+
 
 if (isset($_POST['carrinho'])) {
+
+    if (isset($_SESSION['lista'])) {
+
+        $tamanho = count($_SESSION['lista']); // tamanho
+    }
 
     if (empty($_SESSION['carrinho'])) {
 
@@ -65,7 +68,7 @@ if (isset($_POST['carrinho'])) {
         );
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
-        header('Location: ../php/home.php?p=add/pedido/');
+        //header('Location: ../php/home.php?p=add/pedido/');
     } else {
 
 
@@ -77,11 +80,24 @@ if (isset($_POST['carrinho'])) {
             'sap' => $_POST['sap']
 
         );
-
         $_SESSION['lista'][] = $_SESSION['carrinho'];
-        header('Location: ../php/home.php?p=add/pedido/');
+        
+        for ($i = 0; $i < $tamanho; $i++) {
+            
+            if ($_SESSION['lista'][$i]['id'] == $_SESSION['carrinho']['id']) {
+                
+                $qtd = $_SESSION['lista'][$i]['quantidade'] + $_SESSION['carrinho']['quantidade'];
+                $_SESSION['carrinho']['quantidade'] = $qtd;
+                header('Location: ../php/home.php?p=add/pedido/');
+            }           
+        }
+        
+     
     }
 }
+    echo "<pre>";
+    var_dump($_SESSION['lista']);
+    echo "</pre>";
 
 
 ?>
@@ -187,7 +203,7 @@ if (isset($_POST['carrinho'])) {
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                
                                 <th scope="col">Produto</th>
                                 <th scope="col">Quantidade</th>
 
@@ -201,7 +217,7 @@ if (isset($_POST['carrinho'])) {
                             ?>
 
                                 <tr>
-                                    <th scope="row"><?php echo $i + 1; ?></th>
+                                   
                                     <td><?php echo $_SESSION['lista'][$i]['produto'] ?></td>
                                     <td><?php echo $_SESSION['lista'][$i]['quantidade'] ?></td>
 
@@ -218,7 +234,7 @@ if (isset($_POST['carrinho'])) {
                 ?>
             </div>
         </div>
-        
+
         <div class="submit" style="margin-top: 10px; margin-left:8%;">
             <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#finalizar" style="padding-left:25%; padding-right:25%;">Finalizar Orçamento</button>
             <button type="button" class="btn btn-success btn-lg " onclick="div()" data-toggle="modal" data-target="" style="padding-left:25%; padding-right:20%; margin-top:10px;">Continuar Comprando</button>
@@ -354,10 +370,10 @@ if (isset($_POST['carrinho'])) {
 
         function subtrair2(id) {
 
-            
-           var quantidade = parseInt(document.getElementById(id).value);
 
-           if (quantidade != 1) {
+            var quantidade = parseInt(document.getElementById(id).value);
+
+            if (quantidade != 1) {
                 total = quantidade - substr
                 document.getElementById(id).value = total;
 
@@ -367,9 +383,9 @@ if (isset($_POST['carrinho'])) {
         function somar2(id) {
 
 
-            
+
             var quantidade = parseInt(document.getElementById(id).value);
-            
+
             total = quantidade + soma
             document.getElementById(id).value = total;
         }
