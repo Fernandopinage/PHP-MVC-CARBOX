@@ -88,7 +88,7 @@ if (isset($_POST['carrinho'])) {
                 $qtd = $_SESSION['lista'][$i]['quantidade'] + $_SESSION['carrinho']['quantidade'];
                 $_SESSION['lista'][$i]['quantidade'] = $qtd;
                 unset($_SESSION['carrinho']);
-               header('Location: ../php/home.php?p=add/pedido/');
+                //header('Location: ../php/home.php?p=add/pedido/');
             }
         }
 
@@ -98,7 +98,7 @@ if (isset($_POST['carrinho'])) {
             
         }
 
-        //header('Location: ../php/home.php?p=add/pedido/');
+        header('Location: ../php/home.php?p=add/pedido/');
     }
 }
 

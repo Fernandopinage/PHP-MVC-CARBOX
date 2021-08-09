@@ -89,22 +89,22 @@ class PedidoDAO extends DAO
         $select->bindValue(":PEDIDO_NUM", $cod);
         $select->execute();
 
-        $linha = array();
 
-   
+        /************************************************************************************************** */
+        
+        
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
             $ClienteSAP = $row['COMPRADOR_CODSAP'];
 
             $item = array(
                 'ItemCode' => $row['PEDIDO_CODSAP'],
-                'Quantity' => $row['PEDIDO_QUANTIDADE'],
+                'Quantity' => intval($row['PEDIDO_QUANTIDADE']),
             );
 
             $linha[] = $item;
         }
-
-            
+ 
             $API = array(
 
                 'CardCode' => $ClienteSAP,
@@ -112,11 +112,65 @@ class PedidoDAO extends DAO
                 'DocDate' => $ClassProduto->getData(),
                 'TaxDate' => $ClassProduto->getData(),
                 'DocDueDate' => $ClassProduto->getData(),
-                'ITEM' => $linha
+                "BPL_IDAssignedToInvoice" => 1,
+                'Lines' => $linha
             );
-                       
-            echo json_encode($API);
-           
+            
+        /************************************************************************************************** */
+        $info = array(
+
+            "_postman_id" => "97f92a3b-fa8a-4bea-b288-56e734a508d4",
+            "name" => "KONEC",
+            "schema" => "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+
+        );
+
+        $auth = array(
+
+            "type" => "basic",
+            "basic" => array(
+                [
+                    "key" => "password",
+                    "value" => "{{apiPass}}",
+                    "type" => "string"
+                ],
+                [
+                    "key" => "username",
+                    "value" => "{{apiUser}}",
+                    "type" => "string"
+                ]
+            )
+        );
+        $dados = $API;
+        $login = 'konecApiIntegration';
+        $password = 'konecTest123';
+
+
+        $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+
+            CURLOPT_URL => $endpointAPI,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($dados),
+            CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
+            CURLOPT_USERPWD => $login . ':' . $password,
+        ));
+
+        //echo json_encode($dados, JSON_PRETTY_PRINT);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+        /************************************************************************************************** */
     }
 
     public function selectProduto()
