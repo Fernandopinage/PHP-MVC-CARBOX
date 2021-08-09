@@ -35,16 +35,14 @@ if (isset($_POST['confirmarorcamento'])) {
     $Produto->encode($ClassProduto);
 
 
-    /*
     $emailCliente = $_SESSION['user']['email'];
     $cliente = $_SESSION['user']['nome'];
-    $ClassProduto->setProduto (implode(" ,",$_POST['produto']));
-    $ClassProduto->setQuantidade(implode(" ,",$_POST['quantidade']));
+    $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
+    $ClassProduto->setQuantidade(implode(" ,", $_POST['quantidade']));
     $PedidoOrcamento = new OrçamentoMAIL();
-    $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente,$cliente,$tamanho);
+    $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
     unset($_SESSION['lista']);
     //header('location: ../php/home.php?p=pedido/');
-    */
 }
 
 
@@ -54,6 +52,7 @@ if (isset($_POST['carrinho'])) {
     if (isset($_SESSION['lista'])) {
 
         $tamanho = count($_SESSION['lista']); // tamanho
+        
     }
 
     if (empty($_SESSION['carrinho'])) {
@@ -68,7 +67,7 @@ if (isset($_POST['carrinho'])) {
         );
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
-        //header('Location: ../php/home.php?p=add/pedido/');
+      
     } else {
 
 
@@ -80,24 +79,28 @@ if (isset($_POST['carrinho'])) {
             'sap' => $_POST['sap']
 
         );
-        $_SESSION['lista'][] = $_SESSION['carrinho'];
-        
+
+
         for ($i = 0; $i < $tamanho; $i++) {
-            
+
             if ($_SESSION['lista'][$i]['id'] == $_SESSION['carrinho']['id']) {
-                
+
                 $qtd = $_SESSION['lista'][$i]['quantidade'] + $_SESSION['carrinho']['quantidade'];
-                $_SESSION['carrinho']['quantidade'] = $qtd;
-                header('Location: ../php/home.php?p=add/pedido/');
-            }           
+                $_SESSION['lista'][$i]['quantidade'] = $qtd;
+                unset($_SESSION['carrinho']);
+               header('Location: ../php/home.php?p=add/pedido/');
+            }
         }
+
         
-     
+        if (isset($_SESSION['carrinho'])) {
+            $_SESSION['lista'][] = $_SESSION['carrinho'];
+            
+        }
+
+        //header('Location: ../php/home.php?p=add/pedido/');
     }
 }
-    echo "<pre>";
-    var_dump($_SESSION['lista']);
-    echo "</pre>";
 
 
 ?>
@@ -203,7 +206,7 @@ if (isset($_POST['carrinho'])) {
                     <table class="table">
                         <thead>
                             <tr>
-                                
+                                <th scope="col">#</th>
                                 <th scope="col">Produto</th>
                                 <th scope="col">Quantidade</th>
 
@@ -217,7 +220,7 @@ if (isset($_POST['carrinho'])) {
                             ?>
 
                                 <tr>
-                                   
+                                    <th scope="row"><?php echo $i + 1; ?></th>
                                     <td><?php echo $_SESSION['lista'][$i]['produto'] ?></td>
                                     <td><?php echo $_SESSION['lista'][$i]['quantidade'] ?></td>
 
