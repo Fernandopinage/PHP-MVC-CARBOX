@@ -73,14 +73,6 @@ class PedidoDAO extends DAO
     {
         $cod =  $ClassProduto->getNum();
 
-        // numero do orçamento      PEDIDO_NUM
-        // codigo do pedido item    PEDIDO_CODSAP
-        // quantidade  item         PEDIDO_QUANTIDADE 
-        // codigocliente sap        COMPRADOR_CODSAP
-
-
-
-
 
         $sql = "SELECT PEDIDO_NUM,PEDIDO_CODSAP,PEDIDO_QUANTIDADE,COMPRADOR_CODSAP FROM pedido INNER JOIN comprador
             ON PEDIDO_RAZAO = comprador_id WHERE PEDIDO_NUM = :PEDIDO_NUM";
@@ -91,8 +83,8 @@ class PedidoDAO extends DAO
 
 
         /************************************************************************************************** */
-        
-        
+
+
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
             $ClienteSAP = $row['COMPRADOR_CODSAP'];
@@ -104,18 +96,18 @@ class PedidoDAO extends DAO
 
             $linha[] = $item;
         }
- 
-            $API = array(
 
-                'CardCode' => $ClienteSAP,
-               /* 'ORCAMENTO' => $ClassProduto->getNum(),*/
-                'DocDate' => $ClassProduto->getData(),
-                'TaxDate' => $ClassProduto->getData(),
-                'DocDueDate' => $ClassProduto->getData(),
-                "BPL_IDAssignedToInvoice" => 1,
-                'Lines' => $linha
-            );
-            
+        $API = array(
+
+            'CardCode' => $ClienteSAP,
+            /* 'ORCAMENTO' => $ClassProduto->getNum(),*/
+            'DocDate' => $ClassProduto->getData(),
+            'TaxDate' => $ClassProduto->getData(),
+            'DocDueDate' => $ClassProduto->getData(),
+            "BPL_IDAssignedToInvoice" => 1,
+            'Lines' => $linha
+        );
+
         /************************************************************************************************** */
         $info = array(
 
