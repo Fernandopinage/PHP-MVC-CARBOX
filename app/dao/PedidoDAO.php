@@ -186,6 +186,8 @@ class PedidoDAO extends DAO
         } catch (\Throwable $th) {
             
         }
+
+        
     }
 
     public function selectProduto()
