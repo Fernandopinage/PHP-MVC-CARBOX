@@ -1,6 +1,6 @@
 <?php
 
-
+include_once "../dao/MailPedido.php";
 include_once "../dao/DAO.php";
 include_once "../class/ClassPedido.php";
 include_once "../class/ClassProduto.php";
@@ -69,7 +69,7 @@ class PedidoDAO extends DAO
         }
     }
 
-    public function encode($ClassProduto)
+    public function encode($ClassProduto, $emailCliente, $cliente, $tamanho)
     {
         $cod =  $ClassProduto->getNum();
 
@@ -108,67 +108,84 @@ class PedidoDAO extends DAO
             'Lines' => $linha
         );
 
-        echo '<pre>';
-        var_dump($API);
-        echo '</pre>';
-
+   
         /************************************************************************************************** */
-        /*
-        $info = array(
 
-            "_postman_id" => "97f92a3b-fa8a-4bea-b288-56e734a508d4",
-            "name" => "KONEC",
-            "schema" => "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        try {
+            
 
-        );
+            $info = array(
 
-        $auth = array(
+                "_postman_id" => "97f92a3b-fa8a-4bea-b288-56e734a508d4",
+                "name" => "KONEC",
+                "schema" => "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 
-            "type" => "basic",
-            "basic" => array(
-                [
-                    "key" => "password",
-                    "value" => "{{apiPass}}",
-                    "type" => "string"
-                ],
-                [
-                    "key" => "username",
-                    "value" => "{{apiUser}}",
-                    "type" => "string"
-                ]
-            )
-        );
-        $dados = $API;
-        $login = 'konecApiIntegration';
-        $password = 'konecTest123';
+            );
+
+            $auth = array(
+
+                "type" => "basic",
+                "basic" => array(
+                    [
+                        "key" => "password",
+                        "value" => "{{apiPass}}",
+                        "type" => "string"
+                    ],
+                    [
+                        "key" => "username",
+                        "value" => "{{apiUser}}",
+                        "type" => "string"
+                    ]
+                )
+            );
+            $dados = $API;
+            $login = 'konecApiIntegration';
+            $password = 'konecTest123';
 
 
-        $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
-        $curl = curl_init();
+            $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
+            $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+            curl_setopt_array($curl, array(
 
-            CURLOPT_URL => $endpointAPI,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode($dados),
-            CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
-            CURLOPT_USERPWD => $login . ':' . $password,
-        ));
+                CURLOPT_URL => $endpointAPI,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => json_encode($dados),
+                CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
+                CURLOPT_USERPWD => $login . ':' . $password,
+            ));
 
-        //echo json_encode($dados, JSON_PRETTY_PRINT);
+            //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-        $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
-        curl_close($curl);
-        echo $response;
-        */
-        /************************************************************************************************** */
+            curl_close($curl);
+            echo $arr = $response;
+        
+            $explode = explode(",", $response);
+        
+            
+            if($explode[3] === '"documentMessage":"Inserida com sucesso no sistema."}'){
+                $PedidoOrcamento = new OrçamentoMAIL();
+                $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+
+            }else{
+
+                echo "<script>Alert('erro ao gravar dados')</script>";
+            }
+         
+            /*
+            */
+            /************************************************************************************************** */
+        } catch (\Throwable $th) {
+            
+        }
     }
 
     public function selectProduto()

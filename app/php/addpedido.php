@@ -51,17 +51,16 @@ if (isset($_POST['confirmarorcamento'])) {
             $Pedido->insertPedido($ClassProduto);
         }
         
-        $Produto->encode($ClassProduto);
-        /*
+        
         $emailCliente = $_SESSION['user']['email'];
         $cliente = $_SESSION['user']['nome'];
         $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
         $ClassProduto->setQuantidade(implode(" ,", $_POST['quantidade']));
-        $PedidoOrcamento = new OrçamentoMAIL();
-        $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+        $Produto->encode($ClassProduto, $emailCliente, $cliente, $tamanho);
+
         unset($_SESSION['lista']);
         //header('location: ../php/home.php?p=pedido/');
-        */
+        
         
     }
 }
