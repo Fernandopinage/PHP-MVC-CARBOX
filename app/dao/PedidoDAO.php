@@ -1,6 +1,7 @@
 <?php
 
 include_once "../dao/MailPedido.php";
+include_once "../dao/MailEmpresa.php";
 include_once "../dao/DAO.php";
 include_once "../class/ClassPedido.php";
 include_once "../class/ClassProduto.php";
@@ -74,8 +75,9 @@ class PedidoDAO extends DAO
         $cod =  $ClassProduto->getNum();
 
 
-        $sql = "SELECT PEDIDO_NUM,PEDIDO_CODSAP,PEDIDO_QUANTIDADE,COMPRADOR_CODSAP FROM pedido INNER JOIN comprador
-            ON PEDIDO_RAZAO = comprador_id WHERE PEDIDO_NUM = :PEDIDO_NUM";
+        $sql = "SELECT PEDIDO_NUM,PEDIDO_CODSAP,PEDIDO_QUANTIDADE,COMPRADOR_CODSAP,cliente_email FROM pedido INNER JOIN comprador
+        ON PEDIDO_RAZAO = comprador_id inner JOIN cliente 
+        ON comprador_cnpj = CLIENTE_CNPJ WHERE PEDIDO_NUM = :PEDIDO_NUM";
 
         $select = $this->con->prepare($sql);
         $select->bindValue(":PEDIDO_NUM", $cod);
@@ -88,7 +90,7 @@ class PedidoDAO extends DAO
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
             $ClienteSAP = $row['COMPRADOR_CODSAP'];
-
+            $EmailEmpresa = $row['cliente_email'];
             $item = array(
                 'ItemCode' => $row['PEDIDO_CODSAP'],
                 'Quantity' => intval($row['PEDIDO_QUANTIDADE']),
@@ -163,7 +165,7 @@ class PedidoDAO extends DAO
 
             //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-           echo $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
             curl_close($curl);
 
@@ -174,6 +176,11 @@ class PedidoDAO extends DAO
             if($pieces[9] === "Inserida com sucesso no sistema."){
                 $PedidoOrcamento = new OrçamentoMAIL();
                 $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+                
+                /*** Email da empresa ********/
+                $EmpresaOrcamento = new OrçamentoEmpresaMAIL();
+                $EmpresaOrcamento->emailOrçamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho);
+
             }else{
                 ?>
                  <script>
