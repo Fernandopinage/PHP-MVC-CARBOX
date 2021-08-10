@@ -46,12 +46,12 @@ class OrçamentoMAIL
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->SMTPSecure = 'SSL';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
-            $mail->Username   = 'luizfernandoluck@gmail.com';                     //SMTP username
-            $mail->Password   = 'root36482681';                               //SMTP password
+            $mail->Username   = 'carboxigasesvendas@gmail.com';                     //SMTP username
+            $mail->Password   = 'pr0gr!d@2021';                               //SMTP password
             //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
-            $mail->setFrom('progride@carboxigases.com', 'CARBOXI');
+            $mail->setFrom('carboxigasesvendas@gmail.com', 'CARBOXI');
             $mail->addAddress($emailCliente, 'destinatalho');     //Add a recipient $contatoemail
             // $mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
