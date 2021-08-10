@@ -163,20 +163,39 @@ class PedidoDAO extends DAO
 
             //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-            $response = curl_exec($curl);
+           echo $response = curl_exec($curl);
 
             curl_close($curl);
-            echo $arr = $response;
+
+            $pieces = explode(":", $response);
+            $pieces = explode( '"' ,$response);
         
-            $explode = explode(",", $response);
-            echo "<pre>";
-            var_dump($explode);
-            echo "</pre>";
-         
-            /*
-            $PedidoOrcamento = new OrçamentoMAIL();
-            $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
-            */
+
+            if($pieces[9] === "Inserida com sucesso no sistema."){
+                $PedidoOrcamento = new OrçamentoMAIL();
+                $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+            }else{
+                ?>
+                 <script>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Erro ao tentar gravar dados',
+                        text: 'Por favor entre em contato com administrador do sistema',
+                        showConfirmButton: false,
+                        timer: 3500
+                    })
+                </script>";
+                
+                
+                <?php
+
+
+
+            }
+                
+        
+
             /************************************************************************************************** */
         } catch (\Throwable $th) {
             
