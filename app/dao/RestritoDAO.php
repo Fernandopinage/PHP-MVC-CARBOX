@@ -42,7 +42,7 @@ class RestritoDAO  extends DAO{
                 'email' => $row['RESTRITO_EMAIL'],
                 'status' => $row['RESTRITO_STATUS']
             );
-            header('Location: ../php/home.php?p=home/');
+            header('Location: ../php/home.php?p=cliente/');
 
         }else{
             header('Location: ../php/index.php');
