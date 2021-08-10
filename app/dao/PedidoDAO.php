@@ -169,25 +169,18 @@ class PedidoDAO extends DAO
             echo $arr = $response;
         
             $explode = explode(",", $response);
-        
-            
-            if($explode[3] === '"documentMessage":"Inserida com sucesso no sistema."}'){
-                $PedidoOrcamento = new OrçamentoMAIL();
-                $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
-
-            }else{
-
-                echo "<script>Alert('erro ao gravar dados')</script>";
-            }
+            echo "<pre>";
+            var_dump($explode);
+            echo "</pre>";
          
             /*
+            $PedidoOrcamento = new OrçamentoMAIL();
+            $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
             */
             /************************************************************************************************** */
         } catch (\Throwable $th) {
             
         }
-
-        
     }
 
     public function selectProduto()
