@@ -14,35 +14,55 @@ $dado = $Produto->selectProduto();
 
 if (isset($_POST['confirmarorcamento'])) {
 
+    if($_SESSION['user']['status'] == 'S'){
+
+        ?>
+
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Perfil administrativo!',
+                text: 'Por favor entre com perfil de comprador',
+                showConfirmButton: false,
+                timer: 3500
+            })
+        </script>
 
 
-    $tamanho = count($_POST['sap']);
+        <?php
 
-    $ClassProduto = new ClassPedido();
+    }else{
 
-    for ($i = 0; $i < $tamanho; $i++) {
+        
+        $tamanho = count($_POST['sap']);
 
-        $ClassProduto->setNum($_POST['numero_orcamento']);
-        $ClassProduto->setData(date('Y-m-d'));
-        $ClassProduto->setID($_POST['razao_cliente']);
-        $ClassProduto->setSap($_POST['sap'][$i]);
-        $ClassProduto->setProduto($_POST['produto'][$i]);
-        $ClassProduto->setQuantidade($_POST['quantidade'][$i]);
-        $Pedido = new PedidoDAO();
-        $Pedido->insertPedido($ClassProduto);
+        $ClassProduto = new ClassPedido();
+        
+        for ($i = 0; $i < $tamanho; $i++) {
+            
+            $ClassProduto->setNum($_POST['numero_orcamento']);
+            $ClassProduto->setData(date('Y-m-d'));
+            $ClassProduto->setID($_POST['razao_cliente']);
+            $ClassProduto->setSap($_POST['sap'][$i]);
+            $ClassProduto->setProduto($_POST['produto'][$i]);
+            $ClassProduto->setQuantidade($_POST['quantidade'][$i]);
+            $Pedido = new PedidoDAO();
+            $Pedido->insertPedido($ClassProduto);
+        }
+        
+        $Produto->encode($ClassProduto);
+        
+        
+        $emailCliente = $_SESSION['user']['email'];
+        $cliente = $_SESSION['user']['nome'];
+        $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
+        $ClassProduto->setQuantidade(implode(" ,", $_POST['quantidade']));
+        $PedidoOrcamento = new OrçamentoMAIL();
+        $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+        unset($_SESSION['lista']);
+        //header('location: ../php/home.php?p=pedido/');
     }
-
-    $Produto->encode($ClassProduto);
-
-
-    $emailCliente = $_SESSION['user']['email'];
-    $cliente = $_SESSION['user']['nome'];
-    $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
-    $ClassProduto->setQuantidade(implode(" ,", $_POST['quantidade']));
-    $PedidoOrcamento = new OrçamentoMAIL();
-    $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
-    unset($_SESSION['lista']);
-    //header('location: ../php/home.php?p=pedido/');
 }
 
 
@@ -52,54 +72,21 @@ if (isset($_POST['carrinho'])) {
     if (isset($_SESSION['lista'])) {
 
         $tamanho = count($_SESSION['lista']); // tamanho
-        
+
     }
 
-    if (empty($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = array(
 
-        $_SESSION['carrinho'] = array(
+        'id' => $_POST['id'],
+        'produto' => $_POST['produto'],
+        'quantidade' => $_POST['quantidade'],
+        'sap' => $_POST['sap']
 
-            'id' => $_POST['id'],
-            'produto' => $_POST['produto'],
-            'quantidade' => $_POST['quantidade'],
-            'sap' => $_POST['sap']
+    );
 
-        );
+    $_SESSION['lista'][] = $_SESSION['carrinho'];
+    unset($_SESSION['carrinho']);
 
-        $_SESSION['lista'][] = $_SESSION['carrinho'];
-      
-    } else {
-
-
-        $_SESSION['carrinho'] = array(
-
-            'id' => $_POST['id'],
-            'produto' => $_POST['produto'],
-            'quantidade' => $_POST['quantidade'],
-            'sap' => $_POST['sap']
-
-        );
-
-
-        for ($i = 0; $i < $tamanho; $i++) {
-
-            if ($_SESSION['lista'][$i]['id'] == $_SESSION['carrinho']['id']) {
-
-                $qtd = $_SESSION['lista'][$i]['quantidade'] + $_SESSION['carrinho']['quantidade'];
-                $_SESSION['lista'][$i]['quantidade'] = $qtd;
-                unset($_SESSION['carrinho']);
-                //header('Location: ../php/home.php?p=add/pedido/');
-            }
-        }
-
-        
-        if (isset($_SESSION['carrinho'])) {
-            $_SESSION['lista'][] = $_SESSION['carrinho'];
-            
-        }
-
-        header('Location: ../php/home.php?p=add/pedido/');
-    }
 }
 
 
@@ -187,7 +174,7 @@ if (isset($_POST['carrinho'])) {
 
     <style>
         .tabela {
-            max-height: 440px;
+            max-height: 340px;
             overflow-y: auto;
             justify-content: center;
         }
@@ -240,7 +227,7 @@ if (isset($_POST['carrinho'])) {
 
         <div class="submit" style="margin-top: 10px; margin-left:8%;">
             <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#finalizar" style="padding-left:25%; padding-right:25%;">Finalizar Orçamento</button>
-            <button type="button" class="btn btn-success btn-lg " onclick="div()" data-toggle="modal" data-target="" style="padding-left:25%; padding-right:20%; margin-top:10px;">Continuar Comprando</button>
+            <button type="button" class="btn btn-success btn-lg " onclick="div()" data-toggle="modal" data-target="" style="padding-left:25%; padding-right:22%; margin-top:10px;">Continuar Comprando</button>
         </div>
     </div>
 
@@ -282,7 +269,7 @@ if (isset($_POST['carrinho'])) {
                                                 <th scope="col">#</th>
                                                 <th scope="col">Produto</th>
                                                 <th scope="col">Quantidade</th>
-
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -293,10 +280,11 @@ if (isset($_POST['carrinho'])) {
                                             for ($i = 0; $i < $tamanho; $i++) {
                                             ?>
 
-                                                <tr>
+                                                <tr id=<?php echo $i+1; ?>>
                                                     <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
                                                     <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
                                                     <td><a class="btn btn-sm a" id="subtrair" onclick="subtrair2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="<?php echo $i + 1; ?>" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn-sm a" id="subtrair" onclick="somar2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">+</a></td>
+                                                    <td><a class="btn btn-danger" style="color: #fff;" onclick="remover(<?php echo $i+1; ?>)">REMOVER</a></td>
                                                 </tr>
 
                                             <?php
@@ -348,6 +336,10 @@ if (isset($_POST['carrinho'])) {
         var soma = 1;
         var total = 0;
 
+        function remover(id){
+           
+            document.getElementById(id).remove()
+        }
 
         function subtrair(id) {
 
