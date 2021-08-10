@@ -108,7 +108,12 @@ class PedidoDAO extends DAO
             'Lines' => $linha
         );
 
+        echo '<pre>';
+        var_dump($API);
+        echo '</pre>';
+
         /************************************************************************************************** */
+        /*
         $info = array(
 
             "_postman_id" => "97f92a3b-fa8a-4bea-b288-56e734a508d4",
@@ -162,6 +167,7 @@ class PedidoDAO extends DAO
 
         curl_close($curl);
         echo $response;
+        */
         /************************************************************************************************** */
     }
 

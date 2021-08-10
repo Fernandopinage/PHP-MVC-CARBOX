@@ -52,8 +52,7 @@ if (isset($_POST['confirmarorcamento'])) {
         }
         
         $Produto->encode($ClassProduto);
-        
-        
+        /*
         $emailCliente = $_SESSION['user']['email'];
         $cliente = $_SESSION['user']['nome'];
         $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
@@ -62,6 +61,8 @@ if (isset($_POST['confirmarorcamento'])) {
         $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
         unset($_SESSION['lista']);
         //header('location: ../php/home.php?p=pedido/');
+        */
+        
     }
 }
 
@@ -280,7 +281,7 @@ if (isset($_POST['carrinho'])) {
                                             for ($i = 0; $i < $tamanho; $i++) {
                                             ?>
 
-                                                <tr id=<?php echo $i+1; ?>>
+                                                <tr id=tr<?php echo $i+1; ?>>
                                                     <th scope="row"><?php echo $i + 1; ?><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
                                                     <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
                                                     <td><a class="btn btn-sm a" id="subtrair" onclick="subtrair2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="<?php echo $i + 1; ?>" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn-sm a" id="subtrair" onclick="somar2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">+</a></td>
@@ -338,7 +339,7 @@ if (isset($_POST['carrinho'])) {
 
         function remover(id){
            
-            document.getElementById(id).remove()
+            document.getElementById('tr'+id).remove()
         }
 
         function subtrair(id) {
