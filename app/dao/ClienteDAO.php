@@ -35,9 +35,10 @@ class ClienteDAO extends DAO
                 })
             </script>
 
+                
 
         <?php
-
+            return true;
         } catch (\Throwable $th) {
 
         ?>
@@ -48,13 +49,14 @@ class ClienteDAO extends DAO
                     icon: 'error',
                     title: 'Código SAP já cadastrado',
                     showConfirmButton: false,
-                    timer: 3500
+                    timer: 4000
                 })
             </script>
 
 
         <?php
- 
+
+                return false;
         }
 
 
