@@ -5,7 +5,7 @@ include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
-
+var_dump($produtos = $_SESSION['user']['produtos']);
 
 $GerarNumero = new GerarNumero();
 $Produto = new PedidoDAO();

@@ -67,7 +67,7 @@ class CompradorDAO extends DAO
     public function validarLogin($ClassComprador)
     {
 
-        $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_SENHA = :COMPRADOR_SENHA and COMPRADOR_EMAIL= :COMPRADOR_EMAIL";
+        $sql = "SELECT * FROM `comprador` INNER join cliente_produto on cli_pro_cnpj = COMPRADOR_CNPJ WHERE COMPRADOR_SENHA = :COMPRADOR_SENHA and COMPRADOR_EMAIL= :COMPRADOR_EMAIL";
         $select = $this->con->prepare($sql);
         $select->bindValue(':COMPRADOR_SENHA', $ClassComprador->getSenha());
         $select->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
@@ -85,7 +85,8 @@ class CompradorDAO extends DAO
                 'nome' => $row['COMPRADOR_NOME'],
                 'email' => $row['COMPRADOR_EMAIL'],
                 'status' => 'N',
-                'comprador' => 'S'
+                'comprador' => 'S',
+                'produtos' => $row['cli_pro_produto']
             );
             header('Location: ../php/home.php?p=home/');
         } else {

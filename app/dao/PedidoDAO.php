@@ -211,7 +211,8 @@ class PedidoDAO extends DAO
     public function selectProduto()
     {
 
-        $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S'";
+        $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S' and PEDIDO_CODSAP in ('PPEX001','PPLT002')";
+        
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
