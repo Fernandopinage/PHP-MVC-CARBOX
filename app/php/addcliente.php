@@ -6,6 +6,9 @@ include_once "../class/ClassComprador.php";
 include_once "../dao/CompradorDAO.php";
 include_once "../dao/Produto.DAO.php";
 include_once "../class/ClassProduto.php";
+include_once "../class/ClassClienteProduto.php";
+include_once "../dao/ClienteProdutoDAO.php";
+
 
 $produto = new ProdutoDAO();
 $dados = $produto->listaProduto();
@@ -22,6 +25,16 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setSap($_POST['sap']);
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
+
+        $ClassCliPro = new ClassClienteProduto();
+        $ClassCliPro->setProduto($_POST['produtoC']);
+        $ClassCliPro->setCnpj($_POST['cpf']);
+        $ClassCliPro->setSap($_POST['sap']);
+        
+        $CliPro = new ClienteProdutoDAO();
+        $CliPro->insertClienteProduto($ClassCliPro);
+        
+
     }
 }
 
@@ -84,15 +97,12 @@ if (isset($_POST['clientesalva'])) {
     </div>
 
     <div id="lista">
-        <h6 class="text-center" style="margin-bottom: 20px; margin-top:20px;">Lista de Produtos</h6>
+        <h6  style="margin-bottom: 20px; margin-top:20px;">Lista de Produtos</h6>
 
     </div>
     <div id="msg">
 
     </div>
-
-
-
 
     <div class="text-right">
         <a href="?p=cliente/" class="btn btn-danger">Cancelar</a>
@@ -112,7 +122,7 @@ if (isset($_POST['clientesalva'])) {
         if (produto != '') {
 
             console.log(produto)
-            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" disabled> </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
+            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produtoC[]" value="' + produto + '" > </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
             cont++
             document.getElementById('msg').innerHTML = "";
 
