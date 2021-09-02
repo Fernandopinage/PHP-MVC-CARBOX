@@ -4,8 +4,11 @@ include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
 include_once "../class/ClassComprador.php";
 include_once "../dao/CompradorDAO.php";
+include_once "../dao/Produto.DAO.php";
+include_once "../class/ClassProduto.php";
 
-
+$produto = new ProdutoDAO();
+$dados = $produto->listaProduto();
 
 if (isset($_POST['clientesalva'])) {
 
@@ -19,53 +22,6 @@ if (isset($_POST['clientesalva'])) {
         $ClassCliente->setSap($_POST['sap']);
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
-
-        if (isset($_POST['comprador_nome']) != '' and  isset($_POST['comprador_email']) != '' and  isset($_POST['comprador_senha']) != '' and isset($_POST['comprador_status']) != '') {
-
-
-            $ClassComprador =  new ClassComprador();
-
-            $lista = array(
-
-                'cnpj' => $_POST['CNPJ'],
-                'nome' => $nome = $_POST['comprador_nome'],
-                'email' => $email = $_POST['comprador_email'],
-                'senha' => $senha  = $_POST['comprador_senha'],
-                'status' => $status = $_POST['comprador_status'],
-                'codsap' => $codsap = $_POST['codsap']
-            );
-
-            $tamanho = count($lista['cnpj']);
-
-            for ($i = 0; $i < $tamanho; $i++) {
-
-
-                $cnpj =  $lista['cnpj'][$i];
-                $nome =  $lista['nome'][$i];
-                $email =  $lista['email'][$i];
-                $senha =  $lista['senha'][$i];
-                $codsap = $lista['codsap'][$i];
-                //$status =  $lista['status'][$i];
-                $Comprador = new CompradorDAO();
-                $Comprador->inserComprador($cnpj, $nome, $email,$codsap);
-            }
-        }
-    } else {
-?>
-
-        <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'Preenchar todos os campos obrigatorio',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        </script>
-
-
-<?php
-
     }
 }
 
@@ -77,11 +33,7 @@ if (isset($_POST['clientesalva'])) {
     <div class="text-left" id="title">
         <h2> CLIENTE </h2>
     </div>
-    <div class="text-right">
-        <a href="?p=cliente/"  class="btn btn-danger">Cancelar</a>
-        <button type="submit" class="btn btn-success" name="clientesalva">Salvar Cliente</button>
-    </div>
-        <hr>
+    <hr>
     <div class="form-row">
 
         <div class="form-group col-md-4">
@@ -109,191 +61,75 @@ if (isset($_POST['clientesalva'])) {
         </div>
     </div>
 
-
-    <div class="text-left" id="title" style="margin-top: 20px;">
-        <h2> COMPRADORES </h2>
+    <div class="text-left" id="title">
+        <h2> PRODUTO </h2>
         <hr>
     </div>
-
-
-
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-            <input type="text" class="form-control form-control-sm" id="comprador_nome" placeholder="">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-            <input type="email" class="form-control form-control-sm" id="comprador_email" placeholder="">
-        </div>
-        <div class="form-group col-md-1">
-            <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
+            <select class="custom-select custom-select-sm" id="produto">
+                <option selected></option>
+                <?php
+
+                foreach ($dados as $dados) {
+                    echo "<option value='" . $dados->getProduto() . "'>" . $dados->getSap() . " - " . $dados->getProduto() . "</option>";
+                }
+
+                ?>
+            </select>
         </div>
         <div class="form-group col-md-3">
-
-            <input type="hidden" class="form-control form-control-sm" id="comprador_senha" placeholder="">
+            <button type="button" class="btn btn-primary btn-sm" id="mais">Adicionar</button>
         </div>
     </div>
 
-    <table class="table">
-        <thead class="thead" style="background-color: #136132;color:white;">
-            <tr>
+    <div id="lista">
+        <h6 class="text-center" style="margin-bottom: 20px; margin-top:20px;">Lista de Produtos</h6>
 
-                <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
-                <th scope="col"></th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody id="lista">
+    </div>
+    <div id="msg">
 
-        </tbody>
-    </table>
+    </div>
 
-    <hr>
 
+
+
+    <div class="text-right">
+        <a href="?p=cliente/" class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-success" name="clientesalva">Salvar Cliente</button>
+    </div>
 
 </form>
 
-
-<script>
-    $(document).ready(function() {
-        $("#comprador_nome").attr('readonly', true);
-        $("#comprador_email").attr('readonly', true);
-        $("#comprador_senha").attr('readonly', true);
-        $('#mais').hide();
-    });
-</script>
-
-<script>
-    $('#cpf').change(function() {
-
-
-
-        var cnpj = document.getElementById('cpf').value
-        if (cnpj != '') {
-
-
-            $("#comprador_nome").attr('readonly', false);
-            $("#comprador_email").attr('readonly', false);
-            $("#comprador_senha").attr('readonly', false);
-            $('#mais').show();
-        } else {
-            $("#comprador_nome").attr('readonly', true);
-            $("#comprador_email").attr('readonly', true);
-            $("#comprador_senha").attr('readonly', true);
-            $('#mais').hide();
-        }
-
-    });
-</script>
-
-
-<script>
-    $("#cpf").change(function() {
-
-        if (document.getElementById('cpf').value != "") {
-            $('#cpf').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-
-        } else {
-            $('#cpf').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-
-
-    $("#razao").change(function() {
-
-        if (document.getElementById('razao').value != "") {
-            $('#razao').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-
-        } else {
-            $('#razao').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-
-
-    $("#nome").change(function() {
-
-        if (document.getElementById('nome').value != "") {
-            $('#nome').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-
-        } else {
-            $('#nome').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-
-    $("#sap").change(function() {
-
-        if (document.getElementById('sap').value != "") {
-            $('#sap').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-
-        } else {
-            $('#sap').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-
-    $("#email").change(function() {
-
-        if (document.getElementById('email').value != "") {
-            $('#email').removeClass("form-control form-control is-invalid").addClass("form-control form-control is-valid");
-
-        } else {
-            $('#email').removeClass("form-control form-control is-valid").addClass("form-control form-control is-invalid");
-
-        }
-
-    });
-</script>
 <script>
     var cont = 0;
-
-
     $('#mais').click(function() {
 
-        var comprador_nome = document.getElementById('comprador_nome').value;
-        var comprador_email = document.getElementById('comprador_email').value;
-        var comprador_senha = document.getElementById('comprador_senha').value;
-        var CNPJ = document.getElementById('cpf').value;
-        var codsap = document.getElementById('sap').value;
 
+        var produto = document.getElementById('produto').value;
+        
 
+        if (produto != '') {
 
-        var comprador_status = "Ativo";
+            console.log(produto)
+            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produto[]" value="' + produto + '" disabled> </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
+            cont++
+            document.getElementById('msg').innerHTML = "";
 
-        if (comprador_nome != '' && comprador_email != '') {
-
-            $('#lista').append('<tr id="campo' + cont + '"> <th scope="col"><input type="hidden" name="codsap[]" value="'+codsap+'" ><input type="text"  id="comprador_nome" name="comprador_nome[]" value="' + comprador_nome + '" style="border:0px" readonly></th> <th scope="col"><input type="hidden" name="CNPJ[]" value="' + CNPJ + '"><input type="email"  id="comprador_email" name="comprador_email[]" value="' + comprador_email + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="hidden"  id="comprador_senha" name="comprador_senha[]" value="' + comprador_senha + '" placeholder="" style="border:0px" readonly></th> <th scope="col"><input type="teste"  id="comprador_status" name="comprador_status[]" value="' + comprador_status + '" placeholder="" style="border:0px" readonly></th><th scope="col"><a class="btn btn-danger btn-block btn-sm"  id="' + cont + '" style="color: #fff;"> Remover </a></th></tr>');
+        } else {
+            document.getElementById('msg').innerHTML = "<p style='color:red;margin-left:20px'>Preenchar os campos obrigatorios";
         }
 
-
-        cont++
-
-        var comprador_nome = document.getElementById('comprador_nome').value = "";
-        var comprador_email = document.getElementById('comprador_email').value = "";
-        var comprador_senha = document.getElementById('comprador_senha').value = "";
-
-        var comprador_status = "Ativo";
-
-
     });
 
-    $("form").on("click", ".btn-danger", function() {
 
-        var btn_id = $(this).attr("id");
-        $('#campo' + btn_id + '').remove();
-        console.log(btn_id)
-    });
+    function remove(id) {
+
+
+        $('#campo' + id).hide("#campo" + id)
+        document.getElementById('campo' + id).innerHTML = "";
+
+    }
 </script>
-
-
 
 <?php include_once "../layout/footer.php"; ?>

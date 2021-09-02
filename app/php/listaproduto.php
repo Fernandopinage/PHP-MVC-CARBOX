@@ -102,7 +102,7 @@ if (isset($_POST['editaproduto'])) {
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="inputEmail4">Cód. SAP</label>
-                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>" readonly>
+                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">

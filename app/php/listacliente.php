@@ -70,7 +70,7 @@ if (isset($_POST['novocomprador'])) {
         if (!empty($nome) and !empty($email)) {
 
             $Comprador = new CompradorDAO();
-            $Comprador->inserComprador($cnpj, $nome, $email,$codsap);
+            $Comprador->inserComprador($cnpj, $nome, $email, $codsap);
         }
     }
 }
@@ -133,8 +133,8 @@ if (isset($_POST['novocomprador'])) {
                         <th scope="col"><?php echo  $obj->getRazao(); ?></th>
                         <th scope="col"><?php echo  $obj->getEmail(); ?></th>
                         <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Adicionar Comprador</button></th>
-                        <th scope="col"><button type="button" class="btn btn-info btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#listar<?php echo $obj->getID(); ?>">Lista</button></th>
-                        <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar</button></th>
+                        <th scope="col"><button type="button" class="btn btn-info btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#listar<?php echo $obj->getID(); ?>">Lista Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar Cliente</button></th>
                         <th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?cliente/delete=<?php echo $obj->getID(); ?>">Inativar</a></th>
 
                     </tr>
@@ -158,7 +158,7 @@ if (isset($_POST['novocomprador'])) {
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
 
-                                        <input type="hidden" name="codsap[]" id="codsap" value="<?php echo  $obj->getSap();?>">
+                                            <input type="hidden" name="codsap[]" id="codsap" value="<?php echo  $obj->getSap(); ?>">
                                             <input type="hidden" name="comprador_cnpj[]" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
@@ -169,7 +169,7 @@ if (isset($_POST['novocomprador'])) {
                                                 <input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder="">
                                             </div>
                                             <div class="form-group col-md-1">
-                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">+</button>
+                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
                                             </div>
                                         </div>
                                         <div id="lista">
@@ -311,16 +311,19 @@ if (isset($_POST['novocomprador'])) {
 <script>
     var cont = 0;
 
-
-
     $('#mais').click(function() {
+
+        var codsapC = document.getElementById('codsap').value;
+        var cnpj = document.getElementById('comprador_cnpj').value;
+        var nomeC = document.getElementById('comprador_nome').value;
+        var emailC = document.getElementById('comprador_email').value;
 
         if (document.getElementById('comprador_nome').value != '' && document.getElementById('comprador_email').value != '') {
 
-            var cnpj = document.getElementById('comprador_cnpj').value
-
-            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome' + cont + '" placeholder=""></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email' + cont + '" placeholder=""></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
+            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome' + cont + '" placeholder="" value="' + nomeC + '" disabled></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" value="' + emailC + '" id="comprador_email' + cont + '" placeholder="" disabled></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
             cont++
+            var nomeC = document.getElementById('comprador_nome').value = "";
+            var emailC = document.getElementById('comprador_email').value = "";
             document.getElementById('msg').innerHTML = "";
 
 
