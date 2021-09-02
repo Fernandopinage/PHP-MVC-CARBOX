@@ -13,7 +13,7 @@ class ClienteProdutoDAO extends DAO{
         $insert = $this->con->prepare($sql);
         $insert->bindValue(':cli_pro_cnpj', $ClassCliPro->getCnpj());
         $insert->bindValue(':cli_pro_sap', $ClassCliPro->getSap());
-        $insert->bindValue(':cli_pro_produto', $ClassCliPro->getProduto());
+        $insert->bindValue(':cli_pro_produto', json_encode($ClassCliPro->getProduto(),JSON_UNESCAPED_UNICODE));
         $insert->execute();
     }
 
