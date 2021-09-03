@@ -141,8 +141,8 @@ class PedidoDAO extends DAO
                 )
             );
             $dados = $API;
-            $login = 'konecApiIntegration';
-            $password = 'konecTest123';
+            $login = 'konecApiIntegration'; // --  login antigo konecApiIntegration
+            $password = 'konecTest123';     // --  senha antigo konecTest123
 
 
             $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
@@ -165,6 +165,8 @@ class PedidoDAO extends DAO
             //echo json_encode($dados, JSON_PRETTY_PRINT);
             echo "<pre>";
              $response = curl_exec($curl);
+
+
             var_dump(json_decode($response));
             echo "</pre>";
             curl_close($curl);
