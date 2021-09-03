@@ -85,7 +85,7 @@ if (isset($_POST['clientesalva'])) {
                 <?php
 
                 foreach ($dados as $dados) {
-                    echo "<option value='" . $dados->getProduto() . "'>" . $dados->getSap() . " - " . $dados->getProduto() . "</option>";
+                    echo "<option value='" . $dados->getSap() . "'>" . $dados->getSap() . " - " . $dados->getProduto() . "</option>";
                 }
 
                 ?>
@@ -122,7 +122,7 @@ if (isset($_POST['clientesalva'])) {
         if (produto != '') {
 
             console.log(produto)
-            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-4"><input type="text" class="form-control form-control-sm" name="produtoC[]" value="' + produto + '" > </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
+            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><label>Código Produto: </label><div class="form-group col-md-2"><input type="text" class="form-control form-control-sm" name="produtoC[]" value="' + produto + '" > </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
             cont++
             document.getElementById('msg').innerHTML = "";
 

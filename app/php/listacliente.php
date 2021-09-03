@@ -168,9 +168,11 @@ if (isset($_POST['novocomprador'])) {
                                                 <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
                                                 <input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder="">
                                             </div>
+                                            <!--
                                             <div class="form-group col-md-1">
                                                 <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
                                             </div>
+                                            -->
                                         </div>
                                         <div id="lista">
 
