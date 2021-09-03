@@ -191,7 +191,7 @@ class PedidoDAO extends DAO
                         showConfirmButton: false,
                         timer: 3500
                     })
-                </script>";
+                </script>
                 
                 
                 <?php
