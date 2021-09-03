@@ -10,7 +10,10 @@ if (isset($_POST['edita-model'])) {
     $ClassRestrito =  new ClassRestrito();
     $ClassRestrito->setNome($_POST['nome']);
     $ClassRestrito->setEmail($_POST['email']);
-    $ClassRestrito->setSenha(md5($_POST['senha']));
+    if(!empty($_POST['senha'])){
+
+        $ClassRestrito->setSenha(md5($_POST['senha']));
+    }
     $ClassRestrito->setID($_POST['id']);
     $ClassRestrito->setStatus($_POST['status']);
     $Restrito = new RestritoDAO($ClassRestrito);
@@ -90,7 +93,7 @@ if (isset($_POST['edita-model'])) {
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="inputEmail4">Senha</label>
-                                        <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="" value="<?php echo $obj->getSenha(); ?>">
+                                        <input type="password" class="form-control form-control-sm is-invalid" id="senha" name="senha" placeholder="" value="">
                                     </div>
 
                                 </div>
