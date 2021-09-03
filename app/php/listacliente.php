@@ -230,7 +230,10 @@ if (isset($_POST['novocomprador'])) {
                                                 <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="" value="<?php echo $obj->getEmail(); ?>">
                                             </div>
                                         </div>
-                                        <hr>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Dados do Compradores</h5>
+
+                                        </div>
                                         <?php
                                         $id = $obj->getID();
                                         $lista = $Cliente->listaVendedores($id);
