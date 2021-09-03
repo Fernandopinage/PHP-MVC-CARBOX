@@ -163,7 +163,7 @@ class PedidoDAO extends DAO
             ));
             //echo json_encode($dados, JSON_PRETTY_PRINT);
             echo "<pre>";
-             $response = curl_exec($curl);
+            echo $response = curl_exec($curl);
 
 
             var_dump(json_decode($response));
