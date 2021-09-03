@@ -201,16 +201,17 @@ class PedidoDAO extends DAO
             }
                 
         
+
             /************************************************************************************************** */
         } catch (\Throwable $th) {
             
         }
     }
 
-    public function selectProduto()
+    public function selectProduto($produtos)
     {
 
-        $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S' and PEDIDO_CODSAP in ('PPEX001','PPLT002')";
+        $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S' and PEDIDO_CODSAP in ('$produtos')";
         
         $select = $this->con->prepare($sql);
         $select->execute();

@@ -5,11 +5,16 @@ include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
-var_dump($produtos = $_SESSION['user']['produtos']);
+
+$produtos = json_decode($_SESSION['user']['produtos']);
+$produtos = implode("','",$produtos);
+    
+
+//var_dump($produtos = $_SESSION['user']['produtos']);
 
 $GerarNumero = new GerarNumero();
 $Produto = new PedidoDAO();
-$dado = $Produto->selectProduto();
+$dado = $Produto->selectProduto($produtos);
 
 
 if (isset($_POST['confirmarorcamento'])) {
