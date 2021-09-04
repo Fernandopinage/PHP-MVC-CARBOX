@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 02-Set-2021 às 19:39
--- Versão do servidor: 10.4.18-MariaDB
--- versão do PHP: 8.0.3
+-- Host: localhost:3306
+-- Tempo de geração: 04-Set-2021 às 16:15
+-- Versão do servidor: 10.3.31-MariaDB
+-- versão do PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `carbox`
+-- Banco de dados: `agenciaprogride_carboxi`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +43,29 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES
-(1, '004.963.342-20', 'Razão Social', '', 'luizfernandoluck@hotmail.com', 'C000002', 'S');
+(2, '013.152.582-42', 'luiz fernando pinage coutinho', '', 'luiz.c@progride.com.br', '01', 'S'),
+(3, '004.963.342-20', 'Razão Social', '', 'luizfernandoluck@hotmail.com', '12', 'S');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cliente_produto`
+--
+
+CREATE TABLE `cliente_produto` (
+  `cli_pro_id` int(11) NOT NULL,
+  `cli_pro_cnpj` varchar(20) NOT NULL,
+  `cli_pro_sap` int(11) NOT NULL,
+  `cli_pro_produto` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `cliente_produto`
+--
+
+INSERT INTO `cliente_produto` (`cli_pro_id`, `cli_pro_cnpj`, `cli_pro_sap`, `cli_pro_produto`) VALUES
+(1, '013.152.582-42', 1, '[\"10\",\"08\",\"05\",\"PPLT002\"]'),
+(2, '004.963.342-20', 12, '[\"07\",\"PPEX001\",\"12\",\"03\",\"09\"]');
 
 -- --------------------------------------------------------
 
@@ -66,7 +89,8 @@ CREATE TABLE `comprador` (
 --
 
 INSERT INTO `comprador` (`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES
-(25, '004.963.342-20', 'luiz', 'luiz.c@progride.com.br', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S', 'C000002');
+(5, '013.152.582-42', 'luiz fernando', 'luiz.c@progride.com.br', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S', '01'),
+(7, '004.963.342-20', 'luiz fernando', 'luizfernandoluck@hotmail.com', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S', '12');
 
 -- --------------------------------------------------------
 
@@ -91,13 +115,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
-(1, '', '', 'Oxigênio Industrial ', 8, '2021-08-10', '25', 'PPEX001', 1373710),
-(2, '', '', 'Oxigênio Industrial ', 1, '2021-08-10', '25', 'PPEX001', 6798610),
-(3, '', '', 'Oxigênio Medicinal ', 1, '2021-08-10', '25', 'PPLT002', 6798610),
-(4, '', '', 'Oxigênio Industrial ', 1, '2021-08-10', '25', 'PPEX001', 6798610),
-(5, '', '', 'Oxigênio Medicinal ', 1, '2021-08-10', '25', 'PPLT002', 6798610),
-(6, '', '', 'Oxigênio Industrial ', 3, '2021-08-10', '25', 'PPEX001', 4897510),
-(7, '', '', 'Oxigênio Medicinal ', 7, '2021-08-10', '25', 'PPLT002', 4897510);
+(1, '', '', 'Oxigênio Industrial ', 1, '2021-09-03', '7', 'PPEX001', 4997803),
+(2, '', '', 'Nitrogênio Industrial ', 1, '2021-09-03', '7', '03', 4997803);
 
 -- --------------------------------------------------------
 
@@ -168,6 +187,12 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `CLIENTE_CODSAP` (`CLIENTE_CODSAP`);
 
 --
+-- Índices para tabela `cliente_produto`
+--
+ALTER TABLE `cliente_produto`
+  ADD PRIMARY KEY (`cli_pro_id`);
+
+--
 -- Índices para tabela `comprador`
 --
 ALTER TABLE `comprador`
@@ -200,19 +225,25 @@ ALTER TABLE `restrito`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `cliente_produto`
+--
+ALTER TABLE `cliente_produto`
+  MODIFY `cli_pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
