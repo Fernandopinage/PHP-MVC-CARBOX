@@ -141,8 +141,9 @@ class PedidoDAO extends DAO
                 )
             );
             $dados = $API;
-            $login = 'manager'; // --  login antigo konecApiIntegration
-            $password = 'Kontec123@';     // --  senha antigo konecTest123
+            $login = 'konecApiIntegration';
+            $password = 'konecTest123';
+
 
             $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
             $curl = curl_init();
@@ -162,12 +163,9 @@ class PedidoDAO extends DAO
                 CURLOPT_USERPWD => $login . ':' . $password,
             ));
             //echo json_encode($dados, JSON_PRETTY_PRINT);
-            echo "<pre>";
-            echo $response = curl_exec($curl);
 
+            $response = curl_exec($curl);
 
-            var_dump(json_decode($response));
-            echo "</pre>";
             curl_close($curl);
 
             $pieces = explode(":", $response);
@@ -193,7 +191,7 @@ class PedidoDAO extends DAO
                         showConfirmButton: false,
                         timer: 3500
                     })
-                </script>
+                </script>";
                 
                 
                 <?php
@@ -212,7 +210,6 @@ class PedidoDAO extends DAO
 
     public function selectProduto($produtos)
     {
-
 
         $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S' and PEDIDO_CODSAP in ('$produtos')";
         

@@ -330,7 +330,7 @@ if (isset($_POST['carrinho'])) {
                 echo $total;
             } else {
 
-                //echo "0";
+                echo "0";
             }
 
             ?>
