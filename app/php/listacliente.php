@@ -45,33 +45,18 @@ if (isset($_POST['editacliente'])) {
 
 if (isset($_POST['novocomprador'])) {
 
-    $lista = array(
+    if(!empty($_POST['comprador_nome']) and !empty($_POST['comprador_email'])){
 
-        'cnpj' => $_POST['comprador_cnpj'],
-        'nome' => $nome = $_POST['comprador_nome'],
-        'email' => $email = $_POST['comprador_email'],
-        'status' => "Ativo",
-        'codsap' => $codsap = $_POST['codsap']
-    );
+        $ClassComprador = new ClassComprador();
 
-    $tamanho = count($lista['cnpj']);
+        $ClassComprador->setCodsap($_POST['codsap']);
+        $ClassComprador->setCnpj($_POST['comprador_cnpj']);
+        $ClassComprador->setNome($_POST['comprador_nome']);
+        $ClassComprador->setEmail($_POST['comprador_email']);
 
-    for ($i = 0; $i < $tamanho; $i++) {
+       $Comprador = new CompradorDAO();
+       $Comprador->inserComprador($ClassComprador);
 
-
-        $cnpj =  $lista['cnpj'][$i];
-        $nome =  $lista['nome'][$i];
-        $email =  $lista['email'][$i];
-        $codsap = $lista['codsap'][$i];
-
-        //$senha =  $lista['senha'][$i];
-        //$status =  $lista['status'][$i];
-
-        if (!empty($nome) and !empty($email)) {
-
-            $Comprador = new CompradorDAO();
-            $Comprador->inserComprador($cnpj, $nome, $email, $codsap);
-        }
     }
 }
 
@@ -158,15 +143,15 @@ if (isset($_POST['novocomprador'])) {
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
 
-                                            <input type="hidden" name="codsap[]" id="codsap" value="<?php echo  $obj->getSap(); ?>">
-                                            <input type="hidden" name="comprador_cnpj[]" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                            <input type="hidden" name="codsap" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                            <input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome" placeholder="">
+                                                <input type="text" class="form-control form-control-sm" name="comprador_nome" id="comprador_nome" placeholder="">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                                <input type="email" class="form-control form-control-sm" name="comprador_email[]" id="comprador_email" placeholder="">
+                                                <input type="email" class="form-control form-control-sm" name="comprador_email" id="comprador_email" placeholder="">
                                             </div>
                                             <!--
                                             <div class="form-group col-md-1">

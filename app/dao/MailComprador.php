@@ -1,6 +1,6 @@
-<?php
-include_once "../class/ClassCliente.php";
+<?php 
 
+include_once "../class/ClassComprador.php";
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -11,19 +11,19 @@ use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 require_once "../vendor/autoload.php";
 
-//Instantiation and passing `true` enables exceptions
+class CompradorEmail{
 
-class VendedorMAIL
-{
+    public function emailComprador($ClassComprador){
 
-    public function vendedorMail($nome, $email,$rash)
-    {
+        
+        echo "<pre>";
+        var_dump($ClassComprador);
+        echo "</pre>";
 
-
-                    
         $mail = new PHPMailer(true);
+
         try {
-            //Server settings
+         //Server settings
             //$mail->SMTPDebug = 1;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
@@ -35,7 +35,7 @@ class VendedorMAIL
             $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
             $mail->setFrom('carboxigasesvendas@gmail.com', 'CARBOXI');
-            $mail->addAddress($email, 'destinatalho');     //Add a recipient $contatoemail
+            $mail->addAddress($ClassComprador->getEmail(), 'destinatalho');     //Add a recipient $contatoemail
             // $mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
             // $mail->addCC('cc@example.com');
@@ -70,8 +70,8 @@ class VendedorMAIL
                         <div class="col-sm">
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
-                                <h3 class="font-weight-light">Olá, <b style="color:#136132;">' . $nome . '</b> você foi cadastrado no sistema de compras da Carboxi.</h3>
-                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://carboxigases.com/carboxi_sistema/app/php/acesso.php?email='.$email.'&senha='.$rash.'"> click no link </a> para definir uma senha.</h3>
+                                <h3 class="font-weight-light">Olá, <b style="color:#136132;">' . $ClassComprador->getNome() . '</b> você foi cadastrado no sistema de compras da Carboxi.</h3>
+                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://carboxigases.com/carboxi_sistema/app/php/acesso.php?email='.$ClassComprador->getEmail().'&senha='.$ClassComprador->getSenha().'"> click no link </a> para definir uma senha.</h3>
                             </div>
                         </div>
                     </div>
@@ -92,10 +92,15 @@ class VendedorMAIL
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            //echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            //echo 'Message has been sent';   
+
+        } catch (PDOException $e) {
+            
+            echo $e->getMessage();
+
         }
-      
     }
+
 }
+
+?>

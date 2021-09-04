@@ -2,68 +2,48 @@
 include_once "../dao/DAO.php";
 include_once "../class/ClassComprador.php";
 include_once "../class/GerarSenha.php";
-include_once "../dao/MailVendedor.php";
+include_once "../dao/Mailcomprador.php";
 
 class CompradorDAO extends DAO
 {
 
-    public function inserComprador($cnpj, $nome, $email,$codsap)
+    public function inserComprador(ClassComprador $ClassComprador)
     {
-        
-        
-        $senha = new GerarSenha();
-        $rash = $senha->senha();
-        $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO, :COMPRADOR_CODSAP)";
-        
-        $insert = $this->con->prepare($sql);
-        $insert->bindValue(":COMPRADOR_CNPJ", $cnpj);
-        $insert->bindValue(":COMPRADOR_NOME", $nome);
-        $insert->bindValue(":COMPRADOR_EMAIL", $email);
-        $insert->bindValue(":COMPRADOR_SENHA", md5($rash));
-        $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
-        $insert->bindValue(":COMPRADOR_ACESSO", 'N');
-        $insert->bindValue(":COMPRADOR_CODSAP", $codsap);
-        
-        try {
+       
+
+
+            $senha = new GerarSenha();
+            $rash = $senha->senha();
+            $ClassComprador->setSenha(md5($rash));
+
+            $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO, :COMPRADOR_CODSAP)";
+
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(":COMPRADOR_CNPJ",$ClassComprador->getCnpj());
+            $insert->bindValue(":COMPRADOR_NOME",$ClassComprador->getNome());
+            $insert->bindValue(":COMPRADOR_EMAIL", $ClassComprador->getEmail());
+            $insert->bindValue(":COMPRADOR_SENHA",  $ClassComprador->getSenha());
+            $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
+            $insert->bindValue(":COMPRADOR_ACESSO", 'N');
+            $insert->bindValue(":COMPRADOR_CODSAP", $ClassComprador->getCodsap());
             
-            $insert->execute();
-            $emailCliente = new VendedorMAIL();
-            $emailCliente->vendedorMail($nome, $email, $rash);
-            ?>
 
-            <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Registro salvo com sucesso',
-                    showConfirmButton: false,
-                    timer: 3500
-                })
-            </script>
+            try {
+                $insert->execute();
 
+                
+            } catch (PDOException $e) {
 
-        <?php
-        } catch (\Throwable $th) {
-        ?>
+                echo $e->getMessage();
+            }
 
-            <script>
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Duplicidade.',
-                    text: '<?= $email ?> Já possui este email na base de dados',
-                    showConfirmButton: false,
-                    timer: 3500
-                })
-            </script>
-
-
-<?php
-        }
-
-
-        // header('Location: ../php/home.php?p=cliente/');
+            $EmailComprador = new CompradorEmail();
+            $EmailComprador->emailComprador($ClassComprador);
     }
+
+
+    // header('Location: ../php/home.php?p=cliente/');
+
     public function validarLogin($ClassComprador)
     {
 
@@ -188,16 +168,16 @@ class CompradorDAO extends DAO
         $select->bindValue(':COMPRADOR_SENHA', md5($senha));
         $select->execute();
 
-        if($select->fetch(PDO::FETCH_ASSOC)){
+        if ($select->fetch(PDO::FETCH_ASSOC)) {
 
 
-        $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
-        $update = $this->con->prepare($sql);
-        $update->bindValue(':COMPRADOR_EMAIL', $email);
-        $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
-        $update->execute();
-           
-        echo " <script>
+            $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+            $update = $this->con->prepare($sql);
+            $update->bindValue(':COMPRADOR_EMAIL', $email);
+            $update->bindValue(':COMPRADOR_SENHA', md5($novasenha));
+            $update->execute();
+
+            echo " <script>
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -208,10 +188,8 @@ class CompradorDAO extends DAO
                     })
                     setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
                     </script>";
-       
-        }else{
+        } else {
             echo "nao";
         }
-
     }
 }
