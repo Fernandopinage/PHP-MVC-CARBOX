@@ -16,9 +16,7 @@ class CompradorEmail{
     public function emailComprador($ClassComprador){
 
         
-        echo "<pre>";
-        var_dump($ClassComprador);
-        echo "</pre>";
+      
 
         $mail = new PHPMailer(true);
 
