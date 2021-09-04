@@ -26,19 +26,34 @@ class CompradorDAO extends DAO
             $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
             $insert->bindValue(":COMPRADOR_ACESSO", 'N');
             $insert->bindValue(":COMPRADOR_CODSAP", $ClassComprador->getCodsap());
-            
+            $insert->execute();
+            if($insert->rowCount()){
+                $EmailComprador = new CompradorEmail();
+                $EmailComprador->emailComprador($ClassComprador);
 
-            try {
-                $insert->execute();
-
-                
-            } catch (PDOException $e) {
-
-                echo $e->getMessage();
+                echo " <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro salvo com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>";
+            }else{
+                echo " <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Duplicidade.',
+                    text: '".$ClassComprador->getEmail()." Já possui este email na base de dados',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>";
             }
 
-            $EmailComprador = new CompradorEmail();
-            $EmailComprador->emailComprador($ClassComprador);
+            
     }
 
 
