@@ -320,9 +320,9 @@ if (isset($_POST['novocomprador'])) {
                                         echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
                                         
                                         if($key['log'] === 'S'){
-                                            echo "<strong>Status: </strong> Ativo <hr>"; 
+                                            echo "<strong>Status: </strong> <img src='../img/png-clipart-traffic-light-computer-icons-green-light-flashlight-search.png'height='20px' width='21px'><hr>"; 
                                         }else{
-                                            echo "<strong>Status: </strong> Inativo <hr>";
+                                            echo "<strong>Status: </strong> <img src='../img/kisspng-traffic-light-computer-icons-red-clip-art-red-light-5abd00332878e2.5822707515223357951658.jpg'height='20px' width='21px'><hr>"; 
                                         }
                                     }
 
