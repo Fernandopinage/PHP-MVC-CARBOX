@@ -273,7 +273,7 @@ if (isset($_POST['novocomprador'])) {
                                                                 
                                                                 <div class="modal-footer">
                                                                     
-                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Editar</button>
+                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Redefinier Senha</button>
                                                                 </div>
                                                             </form>
                                                         </div>

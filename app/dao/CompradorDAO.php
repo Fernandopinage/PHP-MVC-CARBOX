@@ -9,29 +9,33 @@ class CompradorDAO extends DAO
 
     public function inserComprador(ClassComprador $ClassComprador)
     {
-       
 
 
-            $senha = new GerarSenha();
-            $rash = $senha->senha();
-            $ClassComprador->setSenha(md5($rash));
 
-            $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO, :COMPRADOR_CODSAP)";
+        $senha = new GerarSenha();
+        $rash = $senha->senha();
+        $ClassComprador->setSenha(md5($rash));
 
-            $insert = $this->con->prepare($sql);
-            $insert->bindValue(":COMPRADOR_CNPJ",$ClassComprador->getCnpj());
-            $insert->bindValue(":COMPRADOR_NOME",$ClassComprador->getNome());
-            $insert->bindValue(":COMPRADOR_EMAIL", $ClassComprador->getEmail());
-            $insert->bindValue(":COMPRADOR_SENHA",  $ClassComprador->getSenha());
-            $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
-            $insert->bindValue(":COMPRADOR_ACESSO", 'N');
-            $insert->bindValue(":COMPRADOR_CODSAP", $ClassComprador->getCodsap());
-            $insert->execute();
-            if($insert->rowCount()){
-                $EmailComprador = new CompradorEmail();
-                $EmailComprador->emailComprador($ClassComprador);
+        $sql = "INSERT INTO `comprador`(`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES (null, :COMPRADOR_CNPJ, :COMPRADOR_NOME, :COMPRADOR_EMAIL, :COMPRADOR_SENHA, :COMPRADOR_STATUS, :COMPRADOR_ACESSO, :COMPRADOR_CODSAP)";
 
-                echo " <script>
+        $insert = $this->con->prepare($sql);
+        $insert->bindValue(":COMPRADOR_CNPJ", $ClassComprador->getCnpj());
+        $insert->bindValue(":COMPRADOR_NOME", $ClassComprador->getNome());
+        $insert->bindValue(":COMPRADOR_EMAIL", $ClassComprador->getEmail());
+        $insert->bindValue(":COMPRADOR_SENHA",  $ClassComprador->getSenha());
+        $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
+        $insert->bindValue(":COMPRADOR_ACESSO", 'N');
+        $insert->bindValue(":COMPRADOR_CODSAP", $ClassComprador->getCodsap());
+        $insert->execute();
+
+        $comprador = new CompradorDAO();
+        $comprador->log($ClassComprador);
+
+        if ($insert->rowCount()) {
+            $EmailComprador = new CompradorEmail();
+            $EmailComprador->emailComprador($ClassComprador);
+
+            echo " <script>
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -40,20 +44,18 @@ class CompradorDAO extends DAO
                     timer: 3500
                 })
             </script>";
-            }else{
-                echo " <script>
+        } else {
+            echo " <script>
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     title: 'Duplicidade.',
-                    text: '".$ClassComprador->getEmail()." Já possui este email na base de dados',
+                    text: '" . $ClassComprador->getEmail() . " Já possui este email na base de dados',
                     showConfirmButton: false,
                     timer: 3500
                 })
             </script>";
-            }
-
-            
+        }
     }
 
 
@@ -105,13 +107,11 @@ class CompradorDAO extends DAO
     public function primeiroAcesso(ClassComprador $ClassComprador)
     {
 
-        $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_SENHA = :COMPRADOR_SENHA and COMPRADOR_EMAIL= :COMPRADOR_EMAIL";
+        $sql = "SELECT  * FROM `comprador` WHERE  `COMPRADOR_EMAIL`= :COMPRADOR_EMAIL";
         $select = $this->con->prepare($sql);
-        $select->bindValue(':COMPRADOR_SENHA', $ClassComprador->getSenha());
+
         $select->bindValue(':COMPRADOR_EMAIL', $ClassComprador->getEmail());
         $select->execute();
-
-
 
         if ($select->fetch(PDO::FETCH_ASSOC)) {
 
@@ -122,11 +122,11 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_ACESSO', 'S');
             $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
             $update->execute();
-
-            header('Location: ../php/login.php');
         } else {
-            header('Location: ../php/acesso.php');
+            echo 'nao';
         }
+        $comprador = new CompradorDAO();
+        $comprador->logFist($ClassComprador);
     }
     public function esquecisenha($email)
     {
@@ -207,5 +207,24 @@ class CompradorDAO extends DAO
             echo "nao";
         }
     }
-    
+
+    public function log($ClassComprador)
+    {
+
+        $strm = "INSERT INTO `log`(`log_id`, `log_comprador`, `log_data`, `log_status`) VALUES (null, :log_comprador, :log_data, :log_status)";
+        $insert = $this->con->prepare($strm);
+        $insert->bindValue(':log_comprador', $ClassComprador->getEmail());
+        $insert->bindValue(':log_data', date('Y-m-d'));
+        $insert->bindValue(':log_status', 'N');
+        $insert->execute();
+    }
+    public function logFist($ClassComprador)
+    {
+
+        $smtp = "UPDATE `log` SET `log_status`= :log_status WHERE  `log_comprador` = :log_comprador";
+        $update = $this->con->prepare($smtp);
+        $update->bindValue(':log_status', 'S');
+        $update->bindValue(':log_comprador', $ClassComprador->getEmail());
+        $update->execute();
+    }
 }
