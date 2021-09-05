@@ -207,4 +207,5 @@ class CompradorDAO extends DAO
             echo "nao";
         }
     }
+    
 }

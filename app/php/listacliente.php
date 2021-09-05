@@ -45,7 +45,7 @@ if (isset($_POST['editacliente'])) {
 
 if (isset($_POST['novocomprador'])) {
 
-    if(!empty($_POST['comprador_nome']) and !empty($_POST['comprador_email'])){
+    if (!empty($_POST['comprador_nome']) and !empty($_POST['comprador_email'])) {
 
         $ClassComprador = new ClassComprador();
 
@@ -54,9 +54,8 @@ if (isset($_POST['novocomprador'])) {
         $ClassComprador->setNome($_POST['comprador_nome']);
         $ClassComprador->setEmail($_POST['comprador_email']);
 
-       $Comprador = new CompradorDAO();
-       $Comprador->inserComprador($ClassComprador);
-
+        $Comprador = new CompradorDAO();
+        $Comprador->inserComprador($ClassComprador);
     }
 }
 
@@ -223,7 +222,14 @@ if (isset($_POST['novocomprador'])) {
                                         $id = $obj->getID();
                                         $lista = $Cliente->listaVendedores($id);
 
+                                        if(isset($_POST['redefinir_comprador'])){
+                                            if(!empty($_POST['email_vendedor'])){
 
+                                                $email = $_POST['email_vendedor'];
+                                                $vendedor = new CompradorDAO();
+                                                $vendedor->esquecisenha($email);
+                                            }
+                                        }
 
                                         foreach ($lista as $lista => $key) {
 
@@ -239,11 +245,46 @@ if (isset($_POST['novocomprador'])) {
                                                         <label for="inputEmail4">Email</label>
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
+                                                    <div class="form-group col-md-3">
+                                                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
+                                                            Redefinir senha
+                                                    </button>
+                                                    </div>
 
                                                   </div>
                                                        
                                                 ';
+
+                                        ?>
+
+                                            <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Redefinir Senha</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form  method="post">
+                                                                <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                                <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
+                                                                
+                                                                <div class="modal-footer">
+                                                                    
+                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Editar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php
                                         }
+
+
                                         ?>
 
 
