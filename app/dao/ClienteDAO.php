@@ -115,7 +115,7 @@ class ClienteDAO extends DAO
     public function listarCompradores($id)
     {
 
-        $sql = "SELECT * FROM `comprador` where COMPRADOR_CNPJ = :COMPRADOR_CNPJ";
+        $sql = "SELECT * FROM `comprador` inner join `log` on COMPRADOR_EMAIL = log_comprador where COMPRADOR_CNPJ = :COMPRADOR_CNPJ";
         $select = $this->con->prepare($sql);
         $select->bindValue(":COMPRADOR_CNPJ", $id);
         $select->execute();
@@ -128,7 +128,8 @@ class ClienteDAO extends DAO
                 'nome' => $row['COMPRADOR_NOME'],
                 'email' => $row['COMPRADOR_EMAIL'],
                 'password' => $row['COMPRADOR_SENHA'],
-                'status' => $row['COMPRADOR_STATUS']
+                'status' => $row['COMPRADOR_STATUS'],
+                'log' => $row['log_status']
             );
 
             $listacomprador[]  = $array;

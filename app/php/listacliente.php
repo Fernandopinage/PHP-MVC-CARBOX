@@ -273,7 +273,7 @@ if (isset($_POST['novocomprador'])) {
                                                                 
                                                                 <div class="modal-footer">
                                                                     
-                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Redefinier Senha</button>
+                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Redefinier Sen</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -317,7 +317,13 @@ if (isset($_POST['novocomprador'])) {
 
                                     foreach ($todos as $todos => $key) {
 
-                                        echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br><hr>";
+                                        echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
+                                        
+                                        if($key['log'] === 'S'){
+                                            echo "<strong>Status: </strong> Ativo <hr>"; 
+                                        }else{
+                                            echo "<strong>Status: </strong> Inativo <hr>";
+                                        }
                                     }
 
                                     ?>
