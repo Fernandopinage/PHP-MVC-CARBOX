@@ -56,7 +56,7 @@ class CompradorDAO extends DAO
                 })
             </script>";
         }
-            header('Location: ../php/home.php?p=cliente/');
+           // header('Location: ../php/home.php?p=cliente/');
     }
 
 
