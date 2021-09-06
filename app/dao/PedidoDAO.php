@@ -164,19 +164,23 @@ class PedidoDAO extends DAO
             ));
             //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-             $response = curl_exec($curl);
-
+            echo $response = curl_exec($curl);
             curl_close($curl);
 
             $pieces = explode(":", $response);
             $pieces = explode( '"' ,$response);
         
 
+
+
+           
             if($pieces[9] === "Inserida com sucesso no sistema."){
                 $PedidoOrcamento = new OrçamentoMAIL();
                 $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
                 
                 /*** Email da empresa ********/
+
+                
                 $EmpresaOrcamento = new OrçamentoEmpresaMAIL();
                 $EmpresaOrcamento->emailOrçamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho);
 

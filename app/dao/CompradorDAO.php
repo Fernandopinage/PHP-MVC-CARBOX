@@ -124,10 +124,12 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
             $update->execute();
         } else {
-            echo 'nao';
+           
         }
         $comprador = new CompradorDAO();
         $comprador->logFist($ClassComprador);
+
+        header('Location: ../php/login.php');
     }
     public function esquecisenha($email)
     {

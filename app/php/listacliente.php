@@ -235,7 +235,7 @@ if (isset($_POST['novocomprador'])) {
 
                                             echo '<div class="form-row" id="row' . $key['id'] . '">
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-3">
                                                         <label for="inputEmail4">Nome </label>
                                                         <input type="hidden" class="form-control form-control-sm" name="id_comprador[]" value="' . $key['id'] . '" readonly>
                                                         <input type="text" class="form-control form-control-sm" name="nome_comprador[]" value="' . $key['nome'] . '" readonly>
@@ -245,7 +245,7 @@ if (isset($_POST['novocomprador'])) {
                                                         <label for="inputEmail4">Email</label>
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
-                                                    <div class="form-group col-md-3">
+                                                    <div class="form-group col-md-4">
                                                     <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
                                                             Redefinir senha
                                                     </button>
@@ -261,7 +261,7 @@ if (isset($_POST['novocomprador'])) {
                                                 <div class="modal-dialog modal-sm" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Redefinir Senha</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -272,8 +272,8 @@ if (isset($_POST['novocomprador'])) {
                                                                 <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
                                                                 
                                                                 <div class="modal-footer">
-                                                                    
-                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Redefinier Sen</button>
+                                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
                                                                 </div>
                                                             </form>
                                                         </div>
