@@ -16,7 +16,7 @@ class PedidoDAO extends DAO
     {
 
         try {
-            //code...
+           
 
             $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
          (null, :PEDIDO_DESC, :PEDIDO_UNIDADE, :PEDIDO_PRODUTO, :PEDIDO_QUANTIDADE, :PEDIDO_DATAEMISSAO, :PEDIDO_RAZAO, :PEDIDO_CODSAP, :PEDIDO_NUM)";
@@ -191,7 +191,7 @@ class PedidoDAO extends DAO
                         showConfirmButton: false,
                         timer: 3500
                     })
-                </script>";
+                </script>
                 
                 
                 <?php
