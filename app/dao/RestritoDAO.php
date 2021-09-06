@@ -9,11 +9,7 @@ class RestritoDAO  extends DAO{
 
 
     public function primeiroAcesso($ClassRestrito){
-        
-        echo "<pre>";
-        var_dump($ClassRestrito);
-        echo "</pre>";
-        
+                
         $sql = "SELECT * from restrito  WHERE RESTRITO_EMAIL = :RESTRITO_EMAIL";
         $select = $this->con->prepare($sql);
         $select->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());

@@ -20,10 +20,10 @@ if (isset($_POST['restritosalvar'])) {
         
         $Restrito = new RestritoDAO();
         $Restrito->insertRestrito($ClassRestrito);
+        $RestritoMial = new RestritoMAIL();
+        $RestritoMial->emailRestrito($ClassRestrito);
     }
     
-    $RestritoMial = new RestritoMAIL();
-    $RestritoMial->emailRestrito($ClassRestrito);
 }
 
 ?>
