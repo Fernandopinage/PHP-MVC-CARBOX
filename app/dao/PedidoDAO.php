@@ -145,7 +145,7 @@ class PedidoDAO extends DAO
             $password = 'konecTest123';
 
 
-            $endpointAPI = 'http://177.85.33.158:8080/B1iXcellerator/exec/ipo/vP.0010000129.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
+            $endpointAPI = 'http://srvcaboxits01.b1cloud.com.br:10067/B1iXcellerator/exec/ipo/vP.0010000105.in_HCSX/com.sap.b1i.vplatform.runtime/INB_HT_CALL_SYNC_XPT/INB_HT_CALL_SYNC_XPT.ipo/proc/KNCsalQuot';
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
@@ -164,7 +164,10 @@ class PedidoDAO extends DAO
             ));
             //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-            $response = curl_exec($curl);
+            echo $response = curl_exec($curl);
+            echo "<pre>";
+            var_dump($API);
+            echo "</pre>";
 
             curl_close($curl);
 

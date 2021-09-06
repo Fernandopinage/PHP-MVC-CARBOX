@@ -6,13 +6,32 @@ include_once "../class/ClassRestrito.php";
 class RestritoDAO  extends DAO{
 
 
+
+
+    public function primeiroAcesso($ClassRestrito){
+  
+        $sql = "SELECT  * FROM `restrito` WHERE  `RESTRITO_EMAIL`= :RESTRITO_EMAIL";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+        $select->execute();
+
+
+        if ($select->fetch(PDO::FETCH_ASSOC)) {
+
+            $sql2 = "UPDATE `restrito` SET   RESTRITO_SENHA =:RESTRITO_SENHA WHERE RESTRITO_EMAIL = :RESTRITO_EMAIL";
+            $update = $this->con->prepare($sql2);
+            $update->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+            $update->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
+            $update = $this->con->prepare($sql2);
+        }
+    }
+
+
     public function insertRestrito(ClassRestrito $ClassRestrito){
 
         $sql = "INSERT INTO `restrito`(`RESTRITO_ID`, `RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`,`RESTRITO_STATUS`) 
         VALUES (null, :RESTRITO_NOME, :RESTRITO_SENHA, :RESTRITO_EMAIL, :RESTRITO_STATUS) ";
         $insert = $this->con->prepare($sql);
-
-
         $insert->bindValue(":RESTRITO_NOME", $ClassRestrito->getNome());
         $insert->bindValue(":RESTRITO_SENHA", $ClassRestrito->getSenha());
         $insert->bindValue(":RESTRITO_EMAIL", $ClassRestrito->getEmail());
