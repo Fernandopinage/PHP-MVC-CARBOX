@@ -9,21 +9,30 @@ class RestritoDAO  extends DAO{
 
 
     public function primeiroAcesso($ClassRestrito){
-  
-        $sql = "SELECT  * FROM `restrito` WHERE  `RESTRITO_EMAIL`= :RESTRITO_EMAIL";
+        
+        echo "<pre>";
+        var_dump($ClassRestrito);
+        echo "</pre>";
+        
+        $sql = "SELECT * from restrito  WHERE RESTRITO_EMAIL = :RESTRITO_EMAIL";
         $select = $this->con->prepare($sql);
         $select->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+
         $select->execute();
 
 
         if ($select->fetch(PDO::FETCH_ASSOC)) {
 
-            $sql2 = "UPDATE `restrito` SET   RESTRITO_SENHA =:RESTRITO_SENHA WHERE RESTRITO_EMAIL = :RESTRITO_EMAIL";
+           
+            $sql2 = "UPDATE `restrito` SET `RESTRITO_SENHA`= :RESTRITO_SENHA WHERE `RESTRITO_EMAIL` = :RESTRITO_EMAIL ";
             $update = $this->con->prepare($sql2);
             $update->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
             $update->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
-            $update = $this->con->prepare($sql2);
+            $update->execute();
+            
         }
+        
+        
     }
 
 
