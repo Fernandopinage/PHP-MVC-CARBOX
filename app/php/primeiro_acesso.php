@@ -27,9 +27,6 @@ if(isset($_POST['primeiro'])){
 
 }
 
-
-
-
 ?>
 
 <head>
