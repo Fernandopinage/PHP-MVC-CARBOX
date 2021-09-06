@@ -215,7 +215,7 @@ if (isset($_POST['novocomprador'])) {
                                             </div>
                                         </div>
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Dados do Compradores</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Compradores</h5>
 
                                         </div>
                                         <?php
