@@ -18,8 +18,7 @@ if(isset($_POST['primeiro'])){
 
         $ClassRestrito = new ClassRestrito();
         $ClassRestrito->setEmail($_POST['email']);
-        $ClassRestrito->setSenha(md5($_POST['senha']));
-        
+        $ClassRestrito->setSenha(md5($_POST['password1'])); 
         $Restrito = new RestritoDAO();
         $Restrito->primeiroAcesso($ClassRestrito);
         
