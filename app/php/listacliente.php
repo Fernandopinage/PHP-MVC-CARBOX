@@ -116,9 +116,9 @@ if (isset($_POST['novocomprador'])) {
                         <th scope="col"><?php echo  $obj->getCnpj(); ?></th>
                         <th scope="col"><?php echo  $obj->getRazao(); ?></th>
                         <th scope="col"><?php echo  $obj->getEmail(); ?></th>
-                        <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Adicionar Comprador</button></th>
+                        <th scope="col"><button type="button" class="btn btn-primary btn-block btn-sm" id="novoBTN" data-toggle="modal" data-target="#novo<?php echo $obj->getID(); ?>">Adicionar Comprador / Produtos</button></th>
                         <th scope="col"><button type="button" class="btn btn-info btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#listar<?php echo $obj->getID(); ?>">Lista Comprador</button></th>
-                        <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar Cliente</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar Cliente / Produtos</button></th>
                         <th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?cliente/delete=<?php echo $obj->getID(); ?>">Inativar</a></th>
 
                     </tr>
@@ -173,6 +173,45 @@ if (isset($_POST['novocomprador'])) {
 
                                     </form>
 
+                                    <form method="POST">
+
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Produtos</h5>
+                                        </div>
+                                        <div class="form-row" style="margin-top: 30px;">
+                                            <div class="form-group col-md-9">
+                                                <select class="custom-select custom-select-sm" id="Pproduto">
+                                                    <option selected></option>
+
+                                                    <?php
+                                                    $produto = new ProdutoDAO();
+                                                    $Pdados = $produto->listaProduto();
+
+                                                    foreach ($Pdados as $Pdados) {
+                                                        echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
+                                                    }
+
+                                                    ?>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <button type="button" class="btn btn-outline-success btn-sm" id="Pmais">Adicionar</button>
+                                            </div>
+                                            <div id="Plista" style="margin-left: 20px;">
+
+
+                                            </div>
+                                            <div id="Pmsg">
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
+                                        </div>
+                                    </form>
 
 
                                 </div>
@@ -222,8 +261,8 @@ if (isset($_POST['novocomprador'])) {
                                         $id = $obj->getID();
                                         $lista = $Cliente->listaVendedores($id);
 
-                                        if(isset($_POST['redefinir_comprador'])){
-                                            if(!empty($_POST['email_vendedor'])){
+                                        if (isset($_POST['redefinir_comprador'])) {
+                                            if (!empty($_POST['email_vendedor'])) {
 
                                                 $email = $_POST['email_vendedor'];
                                                 $vendedor = new CompradorDAO();
@@ -241,13 +280,16 @@ if (isset($_POST['novocomprador'])) {
                                                         <input type="text" class="form-control form-control-sm" name="nome_comprador[]" value="' . $key['nome'] . '" readonly>
                                                     </div>
 
-                                                    <div class="form-group col-md-5">
+                                                    <div class="form-group col-md-4">
                                                         <label for="inputEmail4">Email</label>
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-5">
                                                     <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
                                                             Redefinir senha
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
+                                                        Inativar 
                                                     </button>
                                                     </div>
 
@@ -267,10 +309,10 @@ if (isset($_POST['novocomprador'])) {
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form  method="post">
+                                                            <form method="post">
                                                                 <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
                                                                 <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
-                                                                
+
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
                                                                     <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
@@ -286,7 +328,6 @@ if (isset($_POST['novocomprador'])) {
 
 
                                         ?>
-
 
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -318,11 +359,11 @@ if (isset($_POST['novocomprador'])) {
                                     foreach ($todos as $todos => $key) {
 
                                         echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
-                                        
-                                        if($key['log'] === 'S'){
-                                            echo "<strong>Status: </strong> <img src='../img/png-clipart-traffic-light-computer-icons-green-light-flashlight-search.png'height='20px' width='21px'><hr>"; 
-                                        }else{
-                                            echo "<strong>Status: </strong> <img src='../img/kisspng-traffic-light-computer-icons-red-clip-art-red-light-5abd00332878e2.5822707515223357951658.jpg'height='20px' width='21px'><hr>"; 
+
+                                        if ($key['log'] === 'S') {
+                                            echo "<strong>Status: </strong> <img src='../img/png-clipart-traffic-light-computer-icons-green-light-flashlight-search.png'height='20px' width='21px'><hr>";
+                                        } else {
+                                            echo "<strong>Status: </strong> <img src='../img/kisspng-traffic-light-computer-icons-red-clip-art-red-light-5abd00332878e2.5822707515223357951658.jpg'height='20px' width='21px'><hr>";
                                         }
                                     }
 
@@ -345,6 +386,7 @@ if (isset($_POST['novocomprador'])) {
         </tbody>
     </table>
 </div>
+<!--
 <script>
     var cont = 0;
 
@@ -357,7 +399,7 @@ if (isset($_POST['novocomprador'])) {
 
         if (document.getElementById('comprador_nome').value != '' && document.getElementById('comprador_email').value != '') {
 
-            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-5"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome' + cont + '" placeholder="" value="' + nomeC + '" disabled></div><div class="form-group col-md-5"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" value="' + emailC + '" id="comprador_email' + cont + '" placeholder="" disabled></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
+            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-9"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome' + cont + '" placeholder="" value="' + nomeC + '" disabled></div><div class="form-group col-md-8"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" value="' + emailC + '" id="comprador_email' + cont + '" placeholder="" disabled></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
             cont++
             var nomeC = document.getElementById('comprador_nome').value = "";
             var emailC = document.getElementById('comprador_email').value = "";
@@ -377,6 +419,7 @@ if (isset($_POST['novocomprador'])) {
 
     }
 </script>
+-->
 <script>
 
 
@@ -445,4 +488,35 @@ if (isset($_POST['novocomprador'])) {
         }
 
     });
+</script>
+
+<script>
+    var cont = 0;
+    $('#Pmais').click(function() {
+
+
+        var produto = document.getElementById('Pproduto').value;
+
+
+        if (produto != '') {
+
+            console.log(produto)
+            $('#Plista').append('<div id="campo' + cont + '"><div class="form-row"><label>Código Produto: </label><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produtoC[]" value="' + produto + '" > </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
+            cont++
+            document.getElementById('Pmsg').innerHTML = "";
+
+        } else {
+            document.getElementById('Pmsg').innerHTML = "<p style='color:red;margin-left:20px'>Preenchar os campos obrigatorios";
+        }
+
+    });
+
+
+    function remove(id) {
+
+
+        $('#campo' + id).hide("#campo" + id)
+        document.getElementById('campo' + id).innerHTML = "";
+
+    }
 </script>

@@ -26,7 +26,15 @@ class CompradorDAO extends DAO
         $insert->bindValue(":COMPRADOR_STATUS", 'Ativo');
         $insert->bindValue(":COMPRADOR_ACESSO", 'N');
         $insert->bindValue(":COMPRADOR_CODSAP", $ClassComprador->getCodsap());
-        $insert->execute();
+
+        try {
+            $insert->execute();
+            
+        } catch (PDOException $e) {
+
+           // echo $e->getMessage();
+            
+        }
 
         $comprador = new CompradorDAO();
         $comprador->log($ClassComprador);
