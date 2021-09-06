@@ -29,6 +29,8 @@ class CompradorDAO extends DAO
 
         try {
             $insert->execute();
+            $comprador = new CompradorDAO();
+            $comprador->log($ClassComprador);
             
         } catch (PDOException $e) {
 
@@ -36,8 +38,6 @@ class CompradorDAO extends DAO
             
         }
 
-        $comprador = new CompradorDAO();
-        $comprador->log($ClassComprador);
 
         if ($insert->rowCount()) {
             $EmailComprador = new CompradorEmail();
