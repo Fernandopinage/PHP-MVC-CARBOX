@@ -164,7 +164,7 @@ class PedidoDAO extends DAO
             ));
             //echo json_encode($dados, JSON_PRETTY_PRINT);
 
-            $response = curl_exec($curl);
+             $response = curl_exec($curl);
 
             curl_close($curl);
 
@@ -203,8 +203,9 @@ class PedidoDAO extends DAO
         
 
             /************************************************************************************************** */
-        } catch (\Throwable $th) {
+        } catch (PDOException $e) {
             
+            echo $e->getMessage();
         }
     }
 
