@@ -219,6 +219,27 @@ class CompradorDAO extends DAO
         }
     }
 
+    public function ClienteProduto($cnpj)
+    {
+        $sql = "SELECT * FROM `comprador` INNER join cliente_produto on cli_pro_cnpj = COMPRADOR_CNPJ WHERE CLIENTE_CNPJ = :CLIENTE_CNPJ";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':CLIENTE_CNPJ', $cnpj);
+        $select->execute();
+        $dados = array();
+        if ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+
+            $dados = array(
+
+                'produto' => $row['cli_pro_produto'],
+
+
+            );
+
+        }
+
+        return $dados;
+    }
+
     public function log($ClassComprador)
     {
 

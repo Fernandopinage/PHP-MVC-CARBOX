@@ -12,7 +12,7 @@ $dados = $Pedido->listaPedido($id);
 <br>
 <link href='../css/table.css' rel='stylesheet' />
 <div class="text-right">
-    <a class="btn btn-primary" href="?p=add/pedido/">Novo Pedido</a>
+    <a class="btn btn-primary" href="?p=add/pedido/">Novo Orçamento</a>
 </div>
 <br>
 <style>

@@ -75,7 +75,7 @@ if (isset($_POST['clientesalva'])) {
     </div>
 
     <div class="text-left" id="title">
-        <h2> PRODUTO </h2>
+        <h2> PRODUTO QUE PODEM SER ADQUIRIDOS</h2>
         <hr>
     </div>
     <div class="form-row">
