@@ -25,7 +25,7 @@ if (isset($_POST['novoproduto'])) {
 
 
 if (isset($_POST['editacliente'])) {
-    echo "aqui";
+
     $ClassCliente = new ClassCliente();
 
     $ClassCliente->setID($_POST['id']);
@@ -72,6 +72,7 @@ if (isset($_POST['novocomprador'])) {
         $Comprador->inserComprador($ClassComprador);
     }
 }
+
 
 
 ?>
@@ -307,6 +308,13 @@ if (isset($_POST['novocomprador'])) {
                                         }
                                     }
 
+                                    if(isset($_POST['desativar_comprador'])){
+
+                                        $id = $_POST['id_vendedor'];
+                                        $vendedor = new CompradorDAO();
+                                        $vendedor->inativarComprador($id);
+                                    }
+
                                     foreach ($lista as $lista => $key) {
 
                                         echo '<div class="form-row" id="row' . $key['id'] . '">
@@ -322,7 +330,7 @@ if (isset($_POST['novocomprador'])) {
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
                                                     <div class="form-group col-md-5">
-                                                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
+                                                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#blue' . $key['id'] . '" style="margin-top:31px;">
                                                             Redefinir senha
                                                     </button>
                                                     <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
@@ -336,7 +344,7 @@ if (isset($_POST['novocomprador'])) {
 
                                     ?>
 
-                                        <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade bd-example-modal-lg" id="blue<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-sm" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -353,6 +361,31 @@ if (isset($_POST['novocomprador'])) {
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Deseja desativar? </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post">
+                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo  $key['id']; ?>" ><br>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" name="desativar_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
                                                             </div>
                                                         </form>
                                                     </div>

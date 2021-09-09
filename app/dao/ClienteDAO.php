@@ -84,8 +84,6 @@ class ClienteDAO extends DAO
         return $array;
     }
 
-
-
     public function listaVendedores($id)
     {
 

@@ -241,6 +241,17 @@ class CompradorDAO extends DAO
         return $dados;
     }
 
+
+    public function inativarComprador($id){
+
+        $sql2 = "UPDATE `comprador` SET `COMPRADOR_STATUS`=:COMPRADOR_STATUS WHERE `COMPRADOR_ID`=:COMPRADOR_ID";
+        $update = $this->con->prepare($sql2);
+        $update->bindValue(':COMPRADOR_ID', $id);
+        $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
+        $update->execute();
+
+    }
+
     public function log($ClassComprador)
     {
 
