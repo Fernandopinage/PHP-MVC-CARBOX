@@ -25,16 +25,6 @@ if (isset($_POST['clientesalva'])) {
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
 
-        /*
-        $ClassCliPro = new ClassClienteProduto();
-        $ClassCliPro->setProduto($_POST['produtoC']);
-        $ClassCliPro->setCnpj($_POST['cpf']);
-        $ClassCliPro->setSap($_POST['sap']);
-        
-        $CliPro = new ClienteProdutoDAO();
-        $CliPro->insertClienteProduto($ClassCliPro);
-        */
-
     }
 }
 
@@ -74,41 +64,11 @@ if (isset($_POST['clientesalva'])) {
         </div>
     </div>
 
-    <div class="text-left" id="title">
-        <h2> PRODUTO QUE PODEM SER ADQUIRIDOS</h2>
-        <hr>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <select class="custom-select custom-select-sm" id="produto">
-                <option selected></option>
-                <?php
-
-                foreach ($dados as $dados) {
-                    echo "<option value='" . $dados->getSap() . "'>" . $dados->getSap() . " - " . $dados->getProduto() . "</option>";
-                }
-
-                ?>
-            </select>
-        </div>
-        <div class="form-group col-md-3">
-            <button type="button" class="btn btn-primary btn-sm" id="mais">Adicionar</button>
-        </div>
-    </div>
-
-    <div id="lista">
-        <h6  style="margin-bottom: 20px; margin-top:20px;">Lista de Produtos</h6>
-
-    </div>
-    <div id="msg">
-
-    </div>
 
     <div class="text-right">
         <a href="?p=cliente/" class="btn btn-danger">Cancelar</a>
         <button type="submit" class="btn btn-success" name="clientesalva">Salvar Cliente</button>
     </div>
-
 </form>
 
 <script>

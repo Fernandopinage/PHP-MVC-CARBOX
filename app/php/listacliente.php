@@ -4,14 +4,28 @@ include_once "../class/ClassCliente.php";
 include_once "../dao/ClienteDAO.php";
 include_once "../dao/CompradorDAO.php";
 include_once "../class/ClassComprador.php";
+include_once "../class/ClassClienteProduto.php";
+include_once "../dao/ClienteProdutoDAO.php";
 
 
 $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
 
+if (isset($_POST['novoproduto'])) {
+
+    $ClassCliPro = new ClassClienteProduto();
+    $ClassCliPro->setProduto($_POST['produtoC']);
+    $ClassCliPro->setCnpj($_POST['cpf_produtos']);
+    $ClassCliPro->setSap($_POST['sap_produtos']);
+
+    $CliPro = new ClienteProdutoDAO();
+    $CliPro->insertClienteProduto($ClassCliPro);
+}
+
+
 
 if (isset($_POST['editacliente'])) {
-
+    echo "aqui";
     $ClassCliente = new ClassCliente();
 
     $ClassCliente->setID($_POST['id']);
@@ -173,43 +187,61 @@ if (isset($_POST['novocomprador'])) {
 
                                     </form>
 
+                                    <style>
+                                        .table-overflow_2 {
+                                            margin: 10px;
+                                            max-height: 300px;
+                                            overflow-y: auto;
+                                        }
+                                    </style>
+
+
+
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
+                                    </div>
                                     <form method="POST">
+                                        <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                        <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                        <div id="ProdutoNovos">
 
 
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Produtos</h5>
-                                        </div>
-                                        <div class="form-row" style="margin-top: 30px;">
-                                            <div class="form-group col-md-9">
-                                                <select class="custom-select custom-select-sm" id="Pproduto">
-                                                    <option selected></option>
+                                            <div class="table-overflow_2">
 
-                                                    <?php
-                                                    $produto = new ProdutoDAO();
-                                                    $Pdados = $produto->listaProduto();
 
-                                                    foreach ($Pdados as $Pdados) {
-                                                        echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
-                                                    }
+                                                <div class="form-row" style="margin-top: 30px;">
+                                                    <div class="form-group col-md-9">
 
-                                                    ?>
 
-                                                </select>
+                                                        <?php
+                                                        $produto = new ProdutoDAO();
+                                                        $Pdados = $produto->listaProduto();
+
+                                                        foreach ($Pdados as $Pdados) {
+                                                            // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
+                                                                <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
+                                                                    <?php echo $Pdados->getProduto(); ?>
+                                                                </label>
+                                                            </div>
+                                                        <?php
+
+                                                        }
+
+                                                        ?>
+
+
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                <button type="button" class="btn btn-outline-success btn-sm" id="Pmais">Adicionar</button>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
                                             </div>
-                                            <div id="Plista" style="margin-left: 20px;">
-
-
-                                            </div>
-                                            <div id="Pmsg">
-
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
                                         </div>
                                     </form>
 
@@ -253,26 +285,31 @@ if (isset($_POST['novocomprador'])) {
                                                 <input type="email" class="form-control form-control-sm is-invalid" id="email" name="email" placeholder="" value="<?php echo $obj->getEmail(); ?>">
                                             </div>
                                         </div>
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Compradores</h5>
-
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <input type="submit" name="editacliente" class="btn btn-primary" value="Editar">
                                         </div>
-                                        <?php
-                                        $id = $obj->getID();
-                                        $lista = $Cliente->listaVendedores($id);
+                                    </form>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Compradores</h5>
 
-                                        if (isset($_POST['redefinir_comprador'])) {
-                                            if (!empty($_POST['email_vendedor'])) {
+                                    </div>
+                                    <?php
+                                    $id = $obj->getID();
+                                    $lista = $Cliente->listaVendedores($id);
 
-                                                $email = $_POST['email_vendedor'];
-                                                $vendedor = new CompradorDAO();
-                                                $vendedor->esquecisenha($email);
-                                            }
+                                    if (isset($_POST['redefinir_comprador'])) {
+                                        if (!empty($_POST['email_vendedor'])) {
+
+                                            $email = $_POST['email_vendedor'];
+                                            $vendedor = new CompradorDAO();
+                                            $vendedor->esquecisenha($email);
                                         }
+                                    }
 
-                                        foreach ($lista as $lista => $key) {
+                                    foreach ($lista as $lista => $key) {
 
-                                            echo '<div class="form-row" id="row' . $key['id'] . '">
+                                        echo '<div class="form-row" id="row' . $key['id'] . '">
 
                                                     <div class="form-group col-md-3">
                                                         <label for="inputEmail4">Nome </label>
@@ -281,7 +318,7 @@ if (isset($_POST['novocomprador'])) {
                                                     </div>
 
                                                     <div class="form-group col-md-4">
-                                                        <label for="inputEmail4">Email</label>
+                                                        <label for="inputEmail4">E-mail</label>
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
                                                     <div class="form-group col-md-5">
@@ -297,44 +334,38 @@ if (isset($_POST['novocomprador'])) {
                                                        
                                                 ';
 
-                                        ?>
+                                    ?>
 
-                                            <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-sm" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="post">
-                                                                <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
-                                                                <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
+                                        <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
+                                                    <div class="modal-body">
+                                                        <form method="post">
+                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                            <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" name="redefinir_comprador" class="btn btn-outline-success btn-sm">Confirmar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                        <?php
-                                        }
-
-
-                                        ?>
-
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" name="editacliente" class="btn btn-primary">Editar</button>
                                         </div>
+                                    <?php
+                                    }
+
+
+                                    ?>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -386,40 +417,7 @@ if (isset($_POST['novocomprador'])) {
         </tbody>
     </table>
 </div>
-<!--
-<script>
-    var cont = 0;
 
-    $('#mais').click(function() {
-
-        var codsapC = document.getElementById('codsap').value;
-        var cnpj = document.getElementById('comprador_cnpj').value;
-        var nomeC = document.getElementById('comprador_nome').value;
-        var emailC = document.getElementById('comprador_email').value;
-
-        if (document.getElementById('comprador_nome').value != '' && document.getElementById('comprador_email').value != '') {
-
-            $('#lista').append('<div id="campo' + cont + '"><div class="form-row"><div class="form-group col-md-9"><label for="inputEmail4">Nome <span style="color: red;">*</span></label><input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="' + cnpj + '"><input type="text" class="form-control form-control-sm" name="comprador_nome[]" id="comprador_nome' + cont + '" placeholder="" value="' + nomeC + '" disabled></div><div class="form-group col-md-8"><label for="inputEmail4">E-mail<span style="color: red;">*</span></label><input type="email" class="form-control form-control-sm" name="comprador_email[]" value="' + emailC + '" id="comprador_email' + cont + '" placeholder="" disabled></div><div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff; margin-top: 30px;"> Remover </a></div></div></div>');
-            cont++
-            var nomeC = document.getElementById('comprador_nome').value = "";
-            var emailC = document.getElementById('comprador_email').value = "";
-            document.getElementById('msg').innerHTML = "";
-
-
-        } else {
-            document.getElementById('msg').innerHTML = "<p style='color:red;'>Preenchar os campos obrigatorios";
-        }
-
-    });
-
-    function remove(id) {
-
-        $('#campo' + id).hide("#campo" + id)
-        document.getElementById('campo' + id).innerHTML = "";
-
-    }
-</script>
--->
 <script>
 
 
@@ -491,32 +489,16 @@ if (isset($_POST['novocomprador'])) {
 </script>
 
 <script>
-    var cont = 0;
-    $('#Pmais').click(function() {
+    document.getElementById('ProdutoNovos').style.display = "none";
 
+    function addProdutos() {
 
-        var produto = document.getElementById('Pproduto').value;
+        if (document.getElementById('ProdutoNovos').style.display == 'none') {
 
-
-        if (produto != '') {
-
-            console.log(produto)
-            $('#Plista').append('<div id="campo' + cont + '"><div class="form-row"><label>Código Produto: </label><div class="form-group col-md-5"><input type="text" class="form-control form-control-sm" name="produtoC[]" value="' + produto + '" > </div> <div class="form-group col-md-1"><a class="btn btn-danger btn-sm" onclick="remove(' + cont + ')" id="' + cont + '" style="color: #fff;"> Remover </a></div></div>');
-            cont++
-            document.getElementById('Pmsg').innerHTML = "";
-
+            document.getElementById('ProdutoNovos').style.display = 'block'
         } else {
-            document.getElementById('Pmsg').innerHTML = "<p style='color:red;margin-left:20px'>Preenchar os campos obrigatorios";
+            document.getElementById('ProdutoNovos').style.display = 'none'
         }
-
-    });
-
-
-    function remove(id) {
-
-
-        $('#campo' + id).hide("#campo" + id)
-        document.getElementById('campo' + id).innerHTML = "";
 
     }
 </script>
