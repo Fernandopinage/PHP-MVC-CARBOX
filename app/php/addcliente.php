@@ -6,8 +6,7 @@ include_once "../class/ClassComprador.php";
 include_once "../dao/CompradorDAO.php";
 include_once "../dao/Produto.DAO.php";
 include_once "../class/ClassProduto.php";
-include_once "../class/ClassClienteProduto.php";
-include_once "../dao/ClienteProdutoDAO.php";
+
 
 
 $produto = new ProdutoDAO();
@@ -26,6 +25,7 @@ if (isset($_POST['clientesalva'])) {
         $Cliente = new ClienteDAO();
         $Cliente->insertCliente($ClassCliente);
 
+        /*
         $ClassCliPro = new ClassClienteProduto();
         $ClassCliPro->setProduto($_POST['produtoC']);
         $ClassCliPro->setCnpj($_POST['cpf']);
@@ -33,7 +33,7 @@ if (isset($_POST['clientesalva'])) {
         
         $CliPro = new ClienteProdutoDAO();
         $CliPro->insertClienteProduto($ClassCliPro);
-        
+        */
 
     }
 }
