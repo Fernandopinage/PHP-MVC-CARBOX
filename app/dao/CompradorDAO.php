@@ -104,14 +104,15 @@ class CompradorDAO extends DAO
 
     public function updateComprador($id, $email)
     {
-
-
+        
         $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_ID', $id);
-        //$update->bindValue(':COMPRADOR_STATUS',  $status);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->execute();
+
+        var_dump($email);
+       
     }
 
     public function primeiroAcesso(ClassComprador $ClassComprador)
@@ -216,7 +217,7 @@ class CompradorDAO extends DAO
                     setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
                     </script>";
         } else {
-            echo "nao";
+            
         }
     }
 

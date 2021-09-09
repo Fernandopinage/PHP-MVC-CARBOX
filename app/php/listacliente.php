@@ -299,6 +299,13 @@ if (isset($_POST['novocomprador'])) {
                                     $id = $obj->getID();
                                     $lista = $Cliente->listaVendedores($id);
 
+                                    if(isset($_POST['atualizar_comprador'])){
+                                         $id = $_POST['id_vendedor'];
+                                         $email = $_POST['email_vendedor'];
+                                        $vendedor = new CompradorDAO();
+                                        $vendedor->updateComprador($id, $email);
+                                    }
+
                                     if (isset($_POST['redefinir_comprador'])) {
                                         if (!empty($_POST['email_vendedor'])) {
 
@@ -330,6 +337,9 @@ if (isset($_POST['novocomprador'])) {
                                                         <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
                                                     <div class="form-group col-md-5">
+                                                    <button type="button" class="btn btn-outline-success btn-sm"data-toggle="modal" data-target="#green' . $key['id'] . '" style="margin-top:31px;">
+                                                    Atualizar
+                                                    </button>
                                                     <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#blue' . $key['id'] . '" style="margin-top:31px;">
                                                             Redefinir senha
                                                     </button>
@@ -343,6 +353,33 @@ if (isset($_POST['novocomprador'])) {
                                                 ';
 
                                     ?>
+                                        <div class="modal fade bd-example-modal-lg" id="green<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-center">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja atualizar o registro? </h5>
+                                                        </div>
+                                                        <form method="post">
+                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor[]" value="<?php echo  $key['email']; ?>"><br>
+                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor[]" value="<?php echo  $key['id']; ?>"><br>
+
+                                                            <div class="modal-footer">
+
+                                                                <button type="submit" name="atualizar_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="modal fade bd-example-modal-lg" id="blue<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -383,7 +420,7 @@ if (isset($_POST['novocomprador'])) {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja desativar? </h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Realmente deseja desativar? </h5>
                                                         </div>
                                                         <form method="post">
                                                             <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
