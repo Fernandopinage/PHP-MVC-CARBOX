@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Set-2021 às 19:52
+-- Tempo de geração: 09-Set-2021 às 23:29
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 8.0.3
 
@@ -42,7 +42,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_FANTASIA`, `CLIENTE_EMAIL`, `CLIENTE_CODSAP`, `CLIENTE_STATUS`) VALUES
-(3, '35.576.769/0001-37', 'luiz fernando pinage coutinho', '', 'suporte@progride.com.br', 'C000025', 'S');
+(1, '35.576.769/0001-37', 'luiz fernando', '', 'suporte@progride.com.br', '111', 'S');
 
 -- --------------------------------------------------------
 
@@ -52,8 +52,8 @@ INSERT INTO `cliente` (`CLIENTE_ID`, `CLIENTE_CNPJ`, `CLIENTE_RAZAO`, `CLIENTE_F
 
 CREATE TABLE `cliente_produto` (
   `cli_pro_id` int(11) NOT NULL,
-  `cli_pro_cnpj` varchar(20) NOT NULL,
-  `cli_pro_sap` int(11) NOT NULL,
+  `cli_pro_cnpj` varchar(100) NOT NULL,
+  `cli_pro_sap` varchar(100) NOT NULL,
   `cli_pro_produto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -62,7 +62,7 @@ CREATE TABLE `cliente_produto` (
 --
 
 INSERT INTO `cliente_produto` (`cli_pro_id`, `cli_pro_cnpj`, `cli_pro_sap`, `cli_pro_produto`) VALUES
-(3, '35.576.769/0001-37', 0, '[\"10010021\",\"10010038\"]');
+(2, '35.576.769/0001-37', '111', '[\"10010021\",\"10010038\",\"03\",\"04\",\"05\",\"06\",\"07\",\"08\",\"09\",\"10\",\"11\",\"12\",\"13\"]');
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,8 @@ CREATE TABLE `comprador` (
 --
 
 INSERT INTO `comprador` (`COMPRADOR_ID`, `COMPRADOR_CNPJ`, `COMPRADOR_NOME`, `COMPRADOR_EMAIL`, `COMPRADOR_SENHA`, `COMPRADOR_STATUS`, `COMPRADOR_ACESSO`, `COMPRADOR_CODSAP`) VALUES
-(26, '35.576.769/0001-37', 'luiz', 'luizfernandoluck@hotmail.com', '3b52435882ba7eab1fd312eef506c370', 'Ativo', 'N', 'C000025');
+(1, '35.576.769/0001-37', 'luiz ', 'luiz.c@progride.com.br', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S', '001'),
+(2, '35.576.769/0001-37', 'luiz fernando', 'luizfernandoluck@hotmail.com.br', '63a9f0ea7bb98050796b649e85481845', 'Ativo', 'S', '001');
 
 -- --------------------------------------------------------
 
@@ -106,8 +107,8 @@ CREATE TABLE `log` (
 --
 
 INSERT INTO `log` (`log_id`, `log_comprador`, `log_data`, `log_status`) VALUES
-(19, 'luizfernandoluck@hotmail.com', '2021-09-06', 'N'),
-(20, 'luizfernandoluck@hotmail.com', '2021-09-06', 'N');
+(1, 'luiz.c@progride.com.br', '2021-09-09', 'N'),
+(2, 'luizfernandoluck@hotmail.com.br', '2021-09-09', 'N');
 
 -- --------------------------------------------------------
 
@@ -126,14 +127,6 @@ CREATE TABLE `pedido` (
   `PEDIDO_CODSAP` varchar(200) CHARACTER SET utf8 NOT NULL,
   `PEDIDO_NUM` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `pedido`
---
-
-INSERT INTO `pedido` (`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
-(37, '', '', 'Oxigênio Industrial ', 1, '2021-09-06', '14', '10010021', 4648106),
-(38, '', '', 'Oxigênio Medicinal ', 1, '2021-09-06', '14', '10010038', 4648106);
 
 -- --------------------------------------------------------
 
@@ -190,7 +183,8 @@ CREATE TABLE `restrito` (
 --
 
 INSERT INTO `restrito` (`RESTRITO_ID`, `RESTRITO_NOME`, `RESTRITO_SENHA`, `RESTRITO_EMAIL`, `RESTRITO_STATUS`) VALUES
-(4, 'LUIZ FERNANDO PINAGÉ COUTINHO', '63a9f0ea7bb98050796b649e85481845', 'luiz.c@progride.com.br', 'S');
+(4, 'LUIZ FERNANDO PINAGÉ COUTINHO', '63a9f0ea7bb98050796b649e85481845', 'luiz.c@progride.com.br', 'S'),
+(14, 'LUIZ FERNANDO PINAGÉ COUTINHO', '63a9f0ea7bb98050796b649e85481845', 'luizfernandoluck@hotmail.com', 'N');
 
 --
 -- Índices para tabelas despejadas
@@ -249,31 +243,31 @@ ALTER TABLE `restrito`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CLIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `cliente_produto`
 --
 ALTER TABLE `cliente_produto`
-  MODIFY `cli_pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cli_pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `comprador`
 --
 ALTER TABLE `comprador`
-  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `COMPRADOR_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `log`
 --
 ALTER TABLE `log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `PEDIDO_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
@@ -285,7 +279,7 @@ ALTER TABLE `produto`
 -- AUTO_INCREMENT de tabela `restrito`
 --
 ALTER TABLE `restrito`
-  MODIFY `RESTRITO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `RESTRITO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
