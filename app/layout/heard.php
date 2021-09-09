@@ -7,6 +7,15 @@ if (empty($_SESSION['user']['nome'])) {
 }
 
 
+if(!empty($_SESSION['user']['status_comprador'])){
+
+  if($_SESSION['user']['status_comprador'] != 'Ativo'){
+    session_unset();
+    header('Location: ../php/login.php');
+  }
+}
+
+
 ?>
 <!doctype html>
 <html lang="pt-br">

@@ -91,6 +91,7 @@ class CompradorDAO extends DAO
                 'nome' => $row['COMPRADOR_NOME'],
                 'email' => $row['COMPRADOR_EMAIL'],
                 'status' => 'N',
+                'status_comprador' => $row['COMPRADOR_STATUS'],
                 'comprador' => 'S',
                 'produtos' => $row['cli_pro_produto']
             );

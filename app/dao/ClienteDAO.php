@@ -159,14 +159,26 @@ class ClienteDAO extends DAO
     public function deleteCliente($delete)
     {
 
-
-
-        $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_ID`=:CLIENTE_ID";
+        $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_CNPJ`=:CLIENTE_CNPJ";
 
         $update = $this->con->prepare($sql);
-        $update->bindValue(':CLIENTE_ID', $delete);
+        $update->bindValue(':CLIENTE_CNPJ', $delete);
         $update->bindValue(':CLIENTE_STATUS', 'N');
-        $update->execute();
+
+        try {
+            
+            $update->execute();
+
+            $sql2 = "UPDATE `comprador` SET `COMPRADOR_STATUS`=:COMPRADOR_STATUS WHERE `COMPRADOR_CNPJ`=:COMPRADOR_CNPJ";
+            $update = $this->con->prepare($sql2);
+            $update->bindValue(':COMPRADOR_CNPJ', $delete);
+            $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
+            $update->execute();
+            
+        } catch (PDOException $e) {
+           
+        }
+
 
         header('Location: ../php/home.php?p=cliente/');
     }
