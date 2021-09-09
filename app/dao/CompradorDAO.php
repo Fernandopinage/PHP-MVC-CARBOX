@@ -105,13 +105,13 @@ class CompradorDAO extends DAO
     public function updateComprador($id, $email)
     {
         
+        
         $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_ID', $id);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->execute();
 
-        var_dump($email);
        
     }
 

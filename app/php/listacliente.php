@@ -299,9 +299,9 @@ if (isset($_POST['novocomprador'])) {
                                     $id = $obj->getID();
                                     $lista = $Cliente->listaVendedores($id);
 
-                                    if(isset($_POST['atualizar_comprador'])){
-                                         $id = $_POST['id_vendedor'];
-                                         $email = $_POST['email_vendedor'];
+                                    if (isset($_POST['atualizar_comprador'])) {
+                                        $id = $_POST['id_vendedor'];
+                                        $email = $_POST['email_vendedor'];
                                         $vendedor = new CompradorDAO();
                                         $vendedor->updateComprador($id, $email);
                                     }
@@ -326,18 +326,19 @@ if (isset($_POST['novocomprador'])) {
 
                                         echo '<div class="form-row" id="row' . $key['id'] . '">
 
-                                                    <div class="form-group col-md-3">
-                                                        <label for="inputEmail4">Nome </label>
+                                                    <div class="form-group col-md-0">
+                                                       
                                                         <input type="hidden" class="form-control form-control-sm" name="id_comprador[]" value="' . $key['id'] . '" readonly>
-                                                        <input type="text" class="form-control form-control-sm" name="nome_comprador[]" value="' . $key['nome'] . '" readonly>
+                                                        
                                                     </div>
 
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-6">
                                                         <label for="inputEmail4">E-mail</label>
-                                                        <input type="text" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
+                                                        <input type="text" class="form-control form-control-sm " name="" value="' . $key['email'] . '" placeholder="" disabled>
+                                                        <input type="hidden" class="form-control form-control-sm is-invalid" name="email_comprador[]" value="' . $key['email'] . '" placeholder="">
                                                     </div>
                                                     <div class="form-group col-md-5">
-                                                    <button type="button" class="btn btn-outline-success btn-sm"data-toggle="modal" data-target="#green' . $key['id'] . '" style="margin-top:31px;">
+                                                    <button type="button" class="btn btn-outline-success btn-sm"data-toggle="modal"  data-target="#green' . $key['id'] . '" style="margin-top:31px;">
                                                     Atualizar
                                                     </button>
                                                     <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#blue' . $key['id'] . '" style="margin-top:31px;">
@@ -364,11 +365,11 @@ if (isset($_POST['novocomprador'])) {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja atualizar o registro? </h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Digite novo e-mail </h5>
                                                         </div>
                                                         <form method="post">
-                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor[]" value="<?php echo  $key['email']; ?>"><br>
-                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor[]" value="<?php echo  $key['id']; ?>"><br>
+                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo $key['id']; ?>"><br>
+                                                            <input type="text" class="form-control form-control-sm" name="email_vendedor" value=""><br>
 
                                                             <div class="modal-footer">
 
@@ -577,4 +578,14 @@ if (isset($_POST['novocomprador'])) {
         }
 
     }
+</script>
+
+
+<script>
+    $('email_comprador').blur(function() {
+
+        alert('aqui')
+        var email = document.getElementById('email_comprador').value
+        var email2 = document.getElementById('email_vendedor').value = email;
+    });
 </script>
