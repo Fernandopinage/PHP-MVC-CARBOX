@@ -336,8 +336,6 @@ class CompradorDAO extends DAO
     public function log($ClassComprador)
     {
 
-        
-        
         $strm = "INSERT INTO `log`(`log_id`, `log_comprador`, `log_data`, `log_status`) VALUES (null, :log_comprador, :log_data, :log_status)";
         $insert = $this->con->prepare($strm);
         $insert->bindValue(':log_comprador', $ClassComprador->getEmail());
