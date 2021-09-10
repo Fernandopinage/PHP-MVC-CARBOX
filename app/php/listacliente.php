@@ -71,6 +71,7 @@ if (isset($_POST['novocomprador'])) {
 
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($ClassComprador);
+        header('Refresh: 4.0; url=home.php?p=cliente/');
     }
 }
 

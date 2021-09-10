@@ -67,7 +67,7 @@ class CompradorDAO extends DAO
             </script>";
         }
             
-        header('Refresh: 4.0; url=home.php?p=cliente/');
+       
     }
 
 
