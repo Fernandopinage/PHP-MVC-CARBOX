@@ -164,12 +164,7 @@ class PedidoDAO extends DAO
             ));
 
 
-            echo $response = curl_exec($curl);
-
-            echo "<pre>";
-            var_dump($API);
-            echo "</pre>";
-
+            $response = curl_exec($curl);
             curl_close($curl);
 
             $pieces = explode(":", $response);
