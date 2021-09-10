@@ -162,13 +162,9 @@ class PedidoDAO extends DAO
                 CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
                 CURLOPT_USERPWD => $login . ':' . $password,
             ));
-            //echo json_encode($dados, JSON_PRETTY_PRINT);
+
 
             echo $response = curl_exec($curl);
-            echo "<pre>";
-            var_dump($API);
-            echo "</pre>";
-
             curl_close($curl);
 
             $pieces = explode(":", $response);
