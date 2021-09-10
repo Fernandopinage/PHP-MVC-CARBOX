@@ -16,7 +16,7 @@ class PedidoDAO extends DAO
     {
 
         try {
-           
+
 
             $sql = "INSERT INTO `pedido`(`PEDIDO_ID`, `PEDIDO_DESC`, `PEDIDO_UNIDADE`, `PEDIDO_PRODUTO`, `PEDIDO_QUANTIDADE`, `PEDIDO_DATAEMISSAO`, `PEDIDO_RAZAO`, `PEDIDO_CODSAP`, `PEDIDO_NUM`) VALUES
          (null, :PEDIDO_DESC, :PEDIDO_UNIDADE, :PEDIDO_PRODUTO, :PEDIDO_QUANTIDADE, :PEDIDO_DATAEMISSAO, :PEDIDO_RAZAO, :PEDIDO_CODSAP, :PEDIDO_NUM)";
@@ -66,7 +66,7 @@ class PedidoDAO extends DAO
             </script>
 
 
-<?php
+            <?php
         }
     }
 
@@ -110,11 +110,11 @@ class PedidoDAO extends DAO
             'Lines' => $linha
         );
 
-   
+
         /************************************************************************************************** */
 
         try {
-            
+
 
             $info = array(
 
@@ -164,24 +164,27 @@ class PedidoDAO extends DAO
             ));
 
 
-            echo $response = curl_exec($curl);
+            $response = curl_exec($curl);
+
+
+            curl_close($curl);
+
             $pieces = explode(":", $response);
-            $pieces = explode( '"' ,$response);
-    
-           
-            if($pieces[9] === "Inserida com sucesso no sistema."){
+            $pieces = explode('"', $response);
+
+
+            if ($pieces[9] === "Inserida com sucesso no sistema.") {
                 $PedidoOrcamento = new OrçamentoMAIL();
                 $PedidoOrcamento->emailOrçamento($ClassProduto, $emailCliente, $cliente, $tamanho);
-                
+
                 /*** Email da empresa ********/
 
-                
-                $EmpresaOrcamento = new OrçamentoEmpresaMAIL();
-                $EmpresaOrcamento->emailOrçamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho);
 
-            }else{
-                ?>
-                 <script>
+                $EmpresaOrcamento = new OrçamentoEmpresaMAIL();
+                $EmpresaOrcamento->emailOrçamento($ClassProduto, $EmailEmpresa, $cliente, $tamanho);
+            } else {
+            ?>
+                <script>
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -191,19 +194,19 @@ class PedidoDAO extends DAO
                         timer: 3500
                     })
                 </script>
-                
-                
-                <?php
+
+
+<?php
 
 
 
             }
-                
-        
+
+
 
             /************************************************************************************************** */
         } catch (PDOException $e) {
-            
+
             echo $e->getMessage();
         }
     }
@@ -212,7 +215,7 @@ class PedidoDAO extends DAO
     {
 
         $sql = "SELECT * FROM `produto` WHERE 	PRODUTO_STATUS = 'S' and PEDIDO_CODSAP in ('$produtos')";
-        
+
         $select = $this->con->prepare($sql);
         $select->execute();
         $array = array();
