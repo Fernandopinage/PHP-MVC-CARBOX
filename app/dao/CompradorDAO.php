@@ -10,8 +10,6 @@ class CompradorDAO extends DAO
     public function inserComprador(ClassComprador $ClassComprador)
     {
 
-
-
         $senha = new GerarSenha();
         $rash = $senha->senha();
         $ClassComprador->setSenha(md5($rash));
@@ -338,12 +336,15 @@ class CompradorDAO extends DAO
     public function log($ClassComprador)
     {
 
+        var_dump($ClassComprador);
+        
         $strm = "INSERT INTO `log`(`log_id`, `log_comprador`, `log_data`, `log_status`) VALUES (null, :log_comprador, :log_data, :log_status)";
         $insert = $this->con->prepare($strm);
         $insert->bindValue(':log_comprador', $ClassComprador->getEmail());
         $insert->bindValue(':log_data', date('Y-m-d'));
         $insert->bindValue(':log_status', 'N');
         $insert->execute();
+        
     }
     public function logFist($ClassComprador)
     {
