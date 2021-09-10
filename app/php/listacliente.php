@@ -35,7 +35,7 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setEmail($_POST['email']);
     $Cliente->editarCliente($ClassCliente);
 
-
+    /*
     $lista = array(
         'id' => $id = $_POST['id_comprador'],
         'nome' => $nome = $_POST['nome_comprador'],
@@ -55,6 +55,7 @@ if (isset($_POST['editacliente'])) {
         $Comprador = new CompradorDAO();
         $Comprador->updateComprador($id, $email);
     }
+    */
 }
 
 if (isset($_POST['novocomprador'])) {
@@ -369,7 +370,7 @@ if (isset($_POST['novocomprador'])) {
                                                         </div>
                                                         <form method="post">
                                                             <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo $key['id']; ?>"><br>
-                                                            <input type="text" class="form-control form-control-sm" name="email_vendedor" value=""><br>
+                                                            <input type="email" class="form-control form-control-sm" name="email_vendedor" value=""><br>
 
                                                             <div class="modal-footer">
 

@@ -148,10 +148,50 @@ class ClienteDAO extends DAO
         $update->bindValue(':CLIENTE_RAZAO', $ClassCliente->getRazao());
         $update->bindValue(':CLIENTE_EMAIL', $ClassCliente->getEmail());
         $update->bindValue(':CLIENTE_CODSAP', $ClassCliente->getSap());
-        $update->execute();
+        
+        try {
+            $update->execute();
+            
+            ?>
+           <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro',
+                    text:'Alterado com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+           
+           
+           
+           <?php
+           header('Refresh: 3.5; url=home.php?p=cliente/');
+
+        } catch (\Throwable $th) {
+            
+            ?>
+           <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text:'ao alterar registro, entre em contato com o administrador',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+           
+           
+           
+           <?php
+           header('Refresh: 3.5; url=home.php?p=cliente/');
+        }
+
 
         // não pode redirecionar
-        header('Location: ../php/home.php?p=cliente/');
+        //header('Location: ../php/home.php?p=cliente/');
     }
 
     public function deleteCliente($delete)
@@ -173,12 +213,46 @@ class ClienteDAO extends DAO
             $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
             $update->execute();
             
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'success',
+                     title: 'Registro',
+                     text:'Inativado com sucesso',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+
+            header('Refresh: 4.0; url=home.php?p=cliente/');
+
         } catch (PDOException $e) {
            
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'error',
+                     title: 'Erro',
+                     text:'ao Inativa o registro, entre em contato com o administrador',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+            header('Refresh: 4.0; url=home.php?p=cliente/');
         }
 
 
-        header('Location: ../php/home.php?p=cliente/');
+        
     }
 
     public function editarComprador()

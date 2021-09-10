@@ -52,6 +52,8 @@ class CompradorDAO extends DAO
                     timer: 3500
                 })
             </script>";
+
+            
         } else {
             echo " <script>
                 Swal.fire({
@@ -65,7 +67,7 @@ class CompradorDAO extends DAO
             </script>";
         }
             
-           // header('Location: ../php/home.php?p=cliente/');
+        header('Refresh: 4.0; url=home.php?p=cliente/');
     }
 
 
@@ -110,8 +112,46 @@ class CompradorDAO extends DAO
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_ID', $id);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
-        $update->execute();
+        
+        try {
+            $update->execute();
 
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'success',
+                     title: 'Registro',
+                     text:'Alterado com sucesso',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+            
+            
+        } catch (\Throwable $th) {
+            
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'error',
+                     title: 'Erro',
+                     text:'ao alterar registro, entre em contato com o administrador',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+            header('Refresh: 3.5; url=home.php?p=cliente/');
+        }
        
     }
 
@@ -170,6 +210,7 @@ class CompradorDAO extends DAO
                     timer: 3500
                 })
                 </script>";
+                
         } else {
             echo "
                 <script>
@@ -182,6 +223,7 @@ class CompradorDAO extends DAO
                         timer: 3500
                     })
                 </script>";
+                
         }
     }
 
@@ -249,7 +291,47 @@ class CompradorDAO extends DAO
         $update = $this->con->prepare($sql2);
         $update->bindValue(':COMPRADOR_ID', $id);
         $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
+
+        try {
+            
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'success',
+                     title: 'Registro',
+                     text:'Inativado com sucesso',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+            
+            
+        } catch (\Throwable $th) {
+            
+            ?>
+            <script>
+                 Swal.fire({
+                     position: 'center',
+                     icon: 'error',
+                     title: 'Erro',
+                     text:'ao Inativa o registro, entre em contato com o administrador',
+                     showConfirmButton: false,
+                     timer: 3500
+                 })
+             </script>
+            
+            
+            
+            <?php
+        }
+        
         $update->execute();
+        
 
     }
 
