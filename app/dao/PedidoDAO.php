@@ -92,6 +92,7 @@ class PedidoDAO extends DAO
             $ClienteSAP = $row['COMPRADOR_CODSAP'];
             $EmailEmpresa = $row['cliente_email'];
             $item = array(
+                'UomCode' => 'M3',
                 'ItemCode' => $row['PEDIDO_CODSAP'],
                 'Quantity' => intval($row['PEDIDO_QUANTIDADE']),
             );
