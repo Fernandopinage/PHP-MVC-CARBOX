@@ -22,42 +22,6 @@ if (isset($_POST['novoproduto'])) {
     $CliPro->insertClienteProduto($ClassCliPro);
 }
 
-
-
-if (isset($_POST['editacliente'])) {
-
-    $ClassCliente = new ClassCliente();
-
-    $ClassCliente->setID($_POST['id']);
-    $ClassCliente->setCnpj($_POST['cpf']);
-    $ClassCliente->setRazao($_POST['razao']);
-    $ClassCliente->setSap($_POST['sap']);
-    $ClassCliente->setEmail($_POST['email']);
-    $Cliente->editarCliente($ClassCliente);
-
-    /*
-    $lista = array(
-        'id' => $id = $_POST['id_comprador'],
-        'nome' => $nome = $_POST['nome_comprador'],
-        'email' => $email  = $_POST['email_comprador'],
-        //'status' => $status = $_POST['status_comprador']
-    );
-
-    $tamanho = count($lista['email']);
-
-    for ($i = 0; $i < $tamanho; $i++) {
-
-        $id =  $lista['id'][$i];
-        // $status =  $lista['status'][$i];
-        $email =  $lista['email'][$i];
-        //$status = $lista['status'][$i];
-
-        $Comprador = new CompradorDAO();
-        $Comprador->updateComprador($id, $email);
-    }
-    */
-}
-
 if (isset($_POST['novocomprador'])) {
 
     if (!empty($_POST['comprador_nome']) and !empty($_POST['comprador_email'])) {
@@ -74,6 +38,22 @@ if (isset($_POST['novocomprador'])) {
        // header('Refresh: 4.0; url=home.php?p=cliente/');
     }
 }
+
+
+if (isset($_POST['editacliente'])) {
+
+    $ClassCliente = new ClassCliente();
+
+    $ClassCliente->setID($_POST['id']);
+    $ClassCliente->setCnpj($_POST['cpf']);
+    $ClassCliente->setRazao($_POST['razao']);
+    $ClassCliente->setSap($_POST['sap']);
+    $ClassCliente->setEmail($_POST['email']);
+    $Cliente->editarCliente($ClassCliente);
+
+}
+
+
 
 
 

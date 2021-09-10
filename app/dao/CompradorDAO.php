@@ -341,7 +341,29 @@ class CompradorDAO extends DAO
         $insert->bindValue(':log_comprador', $ClassComprador->getEmail());
         $insert->bindValue(':log_data', date('Y-m-d'));
         $insert->bindValue(':log_status', 'N');
-        $insert->execute();
+
+        try {
+            $insert->execute();
+            ?>
+            
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro salvo com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+            
+            <?php
+        header('Refresh: 3.5; url=home.php?p=cliente/');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        
         
     }
     public function logFist($ClassComprador)
