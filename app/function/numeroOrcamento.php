@@ -5,11 +5,16 @@ class GerarNumero{
     
     public function idONum(){
         
-        $id = random_int(11111, 99999);
+        $id = random_int(1000, 9999);
 
         $today = date('d');
 
-        $num = $id."".$today;
+        if($today <= 9){
+            $num = $id."0".$today;
+        }else{
+
+            $num = $id."".$today;
+        }
 
         return $num;
     }

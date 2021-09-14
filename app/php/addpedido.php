@@ -59,6 +59,7 @@ if (isset($_POST['confirmarorcamento'])) {
         
         $emailCliente = $_SESSION['user']['email'];
         $cliente = $_SESSION['user']['nome'];
+        $ClassProduto->setNum($_POST['numero_orcamento']);
         $ClassProduto->setProduto(implode(" ,", $_POST['produto']));
         $ClassProduto->setQuantidade(implode(" ,", $_POST['quantidade']));
         $Produto->encode($ClassProduto, $emailCliente, $cliente, $tamanho);

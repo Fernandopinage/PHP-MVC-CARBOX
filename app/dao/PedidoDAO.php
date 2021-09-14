@@ -72,7 +72,7 @@ class PedidoDAO extends DAO
 
     public function encode($ClassProduto, $emailCliente, $cliente, $tamanho)
     {
-        $cod =  $ClassProduto->getNum();
+        $cod =  intval($ClassProduto->getNum());
 
 
         $sql = "SELECT PEDIDO_NUM,PEDIDO_CODSAP,PEDIDO_QUANTIDADE,COMPRADOR_CODSAP,cliente_email FROM pedido INNER JOIN comprador
@@ -80,12 +80,12 @@ class PedidoDAO extends DAO
         ON comprador_cnpj = CLIENTE_CNPJ WHERE PEDIDO_NUM = :PEDIDO_NUM";
 
         $select = $this->con->prepare($sql);
-        $select->bindValue(":PEDIDO_NUM", $cod);
+        $select->bindValue(":PEDIDO_NUM", $ClassProduto->getNum());
         $select->execute();
 
 
         /************************************************************************************************** */
-
+        //$ClassProduto->getNum()
 
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
@@ -101,6 +101,9 @@ class PedidoDAO extends DAO
         }
 
         $API = array(
+
+            'NumControle' => $cod,
+            'Origem' => 'SITE12',
 
             'CardCode' => $ClienteSAP,
             /* 'ORCAMENTO' => $ClassProduto->getNum(),*/
@@ -165,7 +168,11 @@ class PedidoDAO extends DAO
             ));
 
 
-            $response = curl_exec($curl);
+            echo $response = curl_exec($curl);
+
+            echo "<pre>";
+            var_dump($API);
+            echo "</pre>";
             curl_close($curl);
 
             $pieces = explode(":", $response);
