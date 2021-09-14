@@ -102,7 +102,7 @@ class PedidoDAO extends DAO
 
         $API = array(
 
-            'NumControle' => $cod,
+            'NumControle' => $ClassProduto->getNum(),
             'Origem' => 'SITE12',
 
             'CardCode' => $ClienteSAP,
