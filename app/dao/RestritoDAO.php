@@ -28,6 +28,7 @@ class RestritoDAO  extends DAO{
             
         }
         
+        header('Location: ../php/index.php');
         
     }
 
