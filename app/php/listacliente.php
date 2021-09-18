@@ -35,7 +35,7 @@ if (isset($_POST['novocomprador'])) {
 
         $Comprador = new CompradorDAO();
         $Comprador->inserComprador($ClassComprador);
-       // header('Refresh: 4.0; url=home.php?p=cliente/');
+        // header('Refresh: 4.0; url=home.php?p=cliente/');
     }
 }
 
@@ -50,7 +50,6 @@ if (isset($_POST['editacliente'])) {
     $ClassCliente->setSap($_POST['sap']);
     $ClassCliente->setEmail($_POST['email']);
     $Cliente->editarCliente($ClassCliente);
-
 }
 
 
@@ -128,14 +127,14 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Compradores</h5>
+                                   <!-- <h5 class="modal-title" id="exampleModalLabel">Adicionar Compradores / Produtos</h5> -->
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
 
-
+                                <h5 class="modal-title" id="exampleModalLabel">Compradores</h5><hr>
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
 
@@ -435,7 +434,7 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Lista de Compradores</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Lista Compradores / Produtos</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
