@@ -127,14 +127,14 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                   <!-- <h5 class="modal-title" id="exampleModalLabel">Adicionar Compradores / Produtos</h5> -->
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
 
-                                <h5 class="modal-title" id="exampleModalLabel">Compradores</h5><hr>
+
                                     <form id="form-comprador" action="" method="POST">
                                         <div class="form-row">
 
@@ -178,10 +178,8 @@ if (isset($_POST['editacliente'])) {
                                     </style>
 
 
-
-
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
                                     </div>
                                     <form method="POST">
                                         <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
@@ -238,7 +236,7 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Alteração no cadastro do Cliente</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Alteração Cliente</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -272,40 +270,41 @@ if (isset($_POST['editacliente'])) {
                                             <input type="submit" name="editacliente" class="btn btn-primary" value="Editar">
                                         </div>
                                     </form>
+
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Compradores</h5>
-
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Compradores</h5>
                                     </div>
-                                    <?php
-                                    $id = $obj->getID();
-                                    $lista = $Cliente->listaVendedores($id);
+                                    <div class="table-overflow_2">
+                                        <?php
+                                        $id = $obj->getID();
+                                        $lista = $Cliente->listaVendedores($id);
 
-                                    if (isset($_POST['atualizar_comprador'])) {
-                                        $id = $_POST['id_vendedor'];
-                                        $email = $_POST['email_vendedor'];
-                                        $vendedor = new CompradorDAO();
-                                        $vendedor->updateComprador($id, $email);
-                                    }
-
-                                    if (isset($_POST['redefinir_comprador'])) {
-                                        if (!empty($_POST['email_vendedor'])) {
-
+                                        if (isset($_POST['atualizar_comprador'])) {
+                                            $id = $_POST['id_vendedor'];
                                             $email = $_POST['email_vendedor'];
                                             $vendedor = new CompradorDAO();
-                                            $vendedor->esquecisenha($email);
+                                            $vendedor->updateComprador($id, $email);
                                         }
-                                    }
 
-                                    if (isset($_POST['desativar_comprador'])) {
+                                        if (isset($_POST['redefinir_comprador'])) {
+                                            if (!empty($_POST['email_vendedor'])) {
 
-                                        $id = $_POST['id_vendedor'];
-                                        $vendedor = new CompradorDAO();
-                                        $vendedor->inativarComprador($id);
-                                    }
+                                                $email = $_POST['email_vendedor'];
+                                                $vendedor = new CompradorDAO();
+                                                $vendedor->esquecisenha($email);
+                                            }
+                                        }
 
-                                    foreach ($lista as $lista => $key) {
+                                        if (isset($_POST['desativar_comprador'])) {
 
-                                        echo '<div class="form-row" id="row' . $key['id'] . '">
+                                            $id = $_POST['id_vendedor'];
+                                            $vendedor = new CompradorDAO();
+                                            $vendedor->inativarComprador($id);
+                                        }
+
+                                        foreach ($lista as $lista => $key) {
+
+                                            echo '<div class="form-row" id="row' . $key['id'] . '">
 
                                                     <div class="form-group col-md-0">
                                                        
@@ -334,95 +333,96 @@ if (isset($_POST['editacliente'])) {
                                                        
                                                 ';
 
-                                    ?>
-                                        <div class="modal fade bd-example-modal-lg" id="green<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
+                                        ?>
+                                            <div class="modal fade bd-example-modal-lg" id="green<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
 
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Digite novo e-mail </h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
                                                         </div>
-                                                        <form method="post">
-                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo $key['id']; ?>"><br>
-                                                            <input type="email" class="form-control form-control-sm" name="email_vendedor" value=""><br>
-
-                                                            <div class="modal-footer">
-
-                                                                <button type="submit" name="atualizar_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Digite novo e-mail </h5>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            <form method="post">
+                                                                <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo $key['id']; ?>"><br>
+                                                                <input type="email" class="form-control form-control-sm" name="email_vendedor" value=""><br>
 
+                                                                <div class="modal-footer">
+
+                                                                    <button type="submit" name="atualizar_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="modal fade bd-example-modal-lg" id="blue<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
+                                            <div class="modal fade bd-example-modal-lg" id="blue<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
 
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
                                                         </div>
-                                                        <form method="post">
-                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
-                                                            <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
-
-                                                            <div class="modal-footer">
-
-                                                                <button type="submit" name="redefinir_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            <form method="post">
+                                                                <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                                <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
 
+                                                                <div class="modal-footer">
+
+                                                                    <button type="submit" name="redefinir_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
+                                            <div class="modal fade bd-example-modal-lg" id="red<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
 
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Realmente deseja desativar? </h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
                                                         </div>
-                                                        <form method="post">
-                                                            <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
-                                                            <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo  $key['id']; ?>"><br>
-
-                                                            <div class="modal-footer">
-
-                                                                <button type="submit" name="desativar_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                        <div class="modal-body">
+                                                            <div class="text-center">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Realmente deseja desativar? </h5>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            <form method="post">
+                                                                <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                                <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo  $key['id']; ?>"><br>
 
+                                                                <div class="modal-footer">
+
+                                                                    <button type="submit" name="desativar_comprador" class="btn btn-success btn-sm">Confirmar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php
-                                    }
+                                        <?php
+                                        }
 
 
-                                    ?>
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -434,30 +434,47 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Lista Compradores / Produtos</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Lista de Compradores</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <?php
 
-                                    $id =  $obj->getCnpj();
-                                    $todos = $Cliente->listarCompradores($id);
+                                <div class="table-overflow_2">
+                                    <div class="modal-body">
+                                        <?php
 
-                                    foreach ($todos as $todos => $key) {
+                                        $id =  $obj->getCnpj();
+                                        $todos = $Cliente->listarCompradores($id);
 
-                                        echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
+                                        foreach ($todos as $todos => $key) {
 
-                                        if ($key['log'] === 'S') {
-                                            echo "<strong>Status: </strong> <img src='../img/png-clipart-traffic-light-computer-icons-green-light-flashlight-search.png'height='20px' width='21px'><hr>";
-                                        } else {
-                                            echo "<strong>Status: </strong> <img src='../img/kisspng-traffic-light-computer-icons-red-clip-art-red-light-5abd00332878e2.5822707515223357951658.jpg'height='20px' width='21px'><hr>";
+                                            echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
+
+                                            if ($key['log'] === 'S') {
+                                                echo "<strong>Status: </strong> <img src='../img/png-clipart-traffic-light-computer-icons-green-light-flashlight-search.png'height='20px' width='21px'><hr>";
+                                            } else {
+                                                echo "<strong>Status: </strong> <img src='../img/kisspng-traffic-light-computer-icons-red-clip-art-red-light-5abd00332878e2.5822707515223357951658.jpg'height='20px' width='21px'><hr>";
+                                            }
                                         }
-                                    }
+
+                                        ?>
+                                    </div>
+
+                                </div>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Lista de Produtos</h5>
+
+                                </div>
+                                <div class="table-overflow_2" style="padding-left:20px;">
+                                    <?php
+                                    $id =  $obj->getCnpj();
+                                    $ClassCliPro = new ClienteProdutoDAO();
+                                    $produtoss = $ClassCliPro->listaPordutoCliente($id);
 
                                     ?>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
 

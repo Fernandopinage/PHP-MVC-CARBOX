@@ -58,6 +58,37 @@ class ClienteProdutoDAO extends DAO{
 
     }
 
+    public function listaPordutoCliente($id){
+
+        $sql = "SELECT  * FROM `cliente_produto` WHERE `cli_pro_cnpj` =:cli_pro_cnpj";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':cli_pro_cnpj', $id);
+        $select->execute();
+        $lista = array();
+
+        if($row = $select->fetch(PDO::FETCH_ASSOC)){
+          $row = $row['cli_pro_produto'];
+        }
+       
+        $lista = json_decode($row);    
+       $tanho = count($lista);
+       
+       for($i=0; $i<$tanho;$i++){
+
+        $sql2 = "SELECT * FROM `produto` WHERE `PEDIDO_CODSAP` =:PEDIDO_CODSAP";
+        $select = $this->con->prepare($sql2);
+        $select->bindValue(':PEDIDO_CODSAP', $lista[$i]);
+        $select->execute();
+        if($row = $select->fetch(PDO::FETCH_ASSOC)){
+            echo $row = $row['PRODUTO_PRODUTO']."<br>";
+        }
+
+       }
+       // return $lista;
+
+    }
+
+
 }
 
 
