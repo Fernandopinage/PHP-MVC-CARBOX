@@ -87,7 +87,7 @@ if (isset($_POST['editaproduto'])) {
                         } else {
 
                         ?>
-                            <a target="_blank" style="color:#284D92 ;">Não possui fixa tecnica </a>
+                            <a target="_blank" style="color:#284D92 ;">Não existe ficha técnica </a>
 
                         <?php
 
