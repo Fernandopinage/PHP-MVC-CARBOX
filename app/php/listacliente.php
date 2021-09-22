@@ -447,6 +447,10 @@ if (isset($_POST['editacliente'])) {
                                         $id =  $obj->getCnpj();
                                         $todos = $Cliente->listarCompradores($id);
 
+                                        if(empty($todos)){
+                                            echo "<p style='color:red;'>Por favor cadastre pelo menos 1 vendedor!</p>";
+                                        }
+
                                         foreach ($todos as $todos => $key) {
 
                                             echo "<strong>Cliente: </strong>" . $key['nome'] . "<br><strong> E-mail: </strong>" . $key['email'] . "<br>";
@@ -470,7 +474,7 @@ if (isset($_POST['editacliente'])) {
                                     <?php
                                     $id =  $obj->getCnpj();
                                     $ClassCliPro = new ClienteProdutoDAO();
-                                    $produtoss = $ClassCliPro->listaPordutoCliente($id);
+                                    $ClassCliPro->listaPordutoCliente($id);
 
                                     ?>
                                 </div>

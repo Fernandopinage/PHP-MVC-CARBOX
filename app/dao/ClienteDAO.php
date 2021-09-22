@@ -119,6 +119,8 @@ class ClienteDAO extends DAO
         $select->bindValue(":COMPRADOR_CNPJ", $id);
         $select->execute();
         $listacomprador = array();
+
+        
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
 
             $array = array(
