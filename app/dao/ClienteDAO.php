@@ -47,7 +47,8 @@ class ClienteDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Código SAP já cadastrado',
+                    title:'Erro',
+                    text: 'Verifique se CNPJ ou Código SAP já possui registro!',
                     showConfirmButton: false,
                     timer: 4000
                 })
