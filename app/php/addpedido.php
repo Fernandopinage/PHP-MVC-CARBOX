@@ -116,7 +116,7 @@ if (isset($_POST['carrinho'])) {
             <div class="form-row" <?php echo $obj->getID(); ?> style="border: 0px;">
                 <div class="form-group col-md-4">
                     <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap">
+                        <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap" height="500" width="150" >
                         <div class="card-body">
                             <h5 class="card-title text-center">
                                 <spam><?php echo $obj->getProduto(); ?></spam>
