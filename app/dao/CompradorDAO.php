@@ -29,11 +29,10 @@ class CompradorDAO extends DAO
             $insert->execute();
             $comprador = new CompradorDAO();
             $comprador->log($ClassComprador);
-            
         } catch (PDOException $e) {
 
-           // echo $e->getMessage();
-            
+            // echo $e->getMessage();
+
         }
 
 
@@ -45,13 +44,11 @@ class CompradorDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Registro salvo com sucesso',
+                    title: 'Cadastro feito com sucesso',
                     showConfirmButton: false,
                     timer: 3500
                 })
             </script>";
-
-            
         } else {
             echo " <script>
                 Swal.fire({
@@ -64,8 +61,6 @@ class CompradorDAO extends DAO
                 })
             </script>";
         }
-            
-       
     }
 
 
@@ -104,53 +99,52 @@ class CompradorDAO extends DAO
 
     public function updateComprador($id, $email)
     {
-        
-        
+
+
         $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_ID', $id);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
-        
+
         try {
             $update->execute();
 
-            ?>
+?>
             <script>
-                 Swal.fire({
-                     position: 'center',
-                     icon: 'success',
-                     title: 'Registro',
-                     text:'Alterado com sucesso',
-                     showConfirmButton: false,
-                     timer: 3500
-                 })
-             </script>
-            
-            
-            
-            <?php
-            
-            
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro',
+                    text: 'Alterado com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+
+        <?php
+
+
         } catch (\Throwable $th) {
-            
-            ?>
+
+        ?>
             <script>
-                 Swal.fire({
-                     position: 'center',
-                     icon: 'error',
-                     title: 'Erro',
-                     text:'ao alterar registro, entre em contato com o administrador',
-                     showConfirmButton: false,
-                     timer: 3500
-                 })
-             </script>
-            
-            
-            
-            <?php
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'ao alterar registro, entre em contato com o administrador',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+
+        <?php
             header('Refresh: 3.5; url=home.php?p=cliente/');
         }
-       
     }
 
     public function primeiroAcesso(ClassComprador $ClassComprador)
@@ -172,7 +166,6 @@ class CompradorDAO extends DAO
             $update->bindValue(':COMPRADOR_SENHA', $ClassComprador->getNovasenha());
             $update->execute();
         } else {
-           
         }
         $comprador = new CompradorDAO();
         $comprador->logFist($ClassComprador);
@@ -181,7 +174,6 @@ class CompradorDAO extends DAO
     }
     public function esquecisenha($email)
     {
-
         $senha = new GerarSenha();
         $rash = $senha->senha();
 
@@ -197,8 +189,8 @@ class CompradorDAO extends DAO
             $redefinir = new RedefinirSenhaEmail();
             $redefinir->redefinir($email, $rash);
 
-
-            echo " <script>
+        ?>
+            <script>
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -207,21 +199,21 @@ class CompradorDAO extends DAO
                     showConfirmButton: false,
                     timer: 3500
                 })
-                </script>";
-                
+            </script>";
+        <?php
         } else {
-            echo "
-                <script>
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'E-mail não cadastrado',
-                        text: 'Informe um e-mail válido',
-                        showConfirmButton: false,
-                        timer: 3500
-                    })
-                </script>";
-                
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'E-mail não cadastrado',
+                    text: 'Informe um e-mail válido',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>";
+        <?php
         }
     }
 
@@ -257,7 +249,6 @@ class CompradorDAO extends DAO
                     setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
                     </script>";
         } else {
-            
         }
     }
 
@@ -276,14 +267,14 @@ class CompradorDAO extends DAO
 
 
             );
-
         }
 
         return $dados;
     }
 
 
-    public function inativarComprador($id){
+    public function inativarComprador($id)
+    {
 
         $sql2 = "UPDATE `comprador` SET `COMPRADOR_STATUS`=:COMPRADOR_STATUS WHERE `COMPRADOR_ID`=:COMPRADOR_ID";
         $update = $this->con->prepare($sql2);
@@ -291,46 +282,44 @@ class CompradorDAO extends DAO
         $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
 
         try {
-            
-            ?>
-            <script>
-                 Swal.fire({
-                     position: 'center',
-                     icon: 'success',
-                     title: 'Registro',
-                     text:'Inativado com sucesso',
-                     showConfirmButton: false,
-                     timer: 3500
-                 })
-             </script>
-            
-            
-            
-            <?php
-            
-            
-        } catch (\Throwable $th) {
-            
-            ?>
-            <script>
-                 Swal.fire({
-                     position: 'center',
-                     icon: 'error',
-                     title: 'Erro',
-                     text:'ao Inativa o registro, entre em contato com o administrador',
-                     showConfirmButton: false,
-                     timer: 3500
-                 })
-             </script>
-            
-            
-            
-            <?php
-        }
-        
-        $update->execute();
-        
 
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro',
+                    text: 'Inativado com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+
+        <?php
+
+
+        } catch (\Throwable $th) {
+
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'ao Inativa o registro, entre em contato com o administrador',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+
+        <?php
+        }
+
+        $update->execute();
     }
 
     public function log($ClassComprador)
@@ -344,8 +333,8 @@ class CompradorDAO extends DAO
 
         try {
             $insert->execute();
-            ?>
-            
+        ?>
+
             <script>
                 Swal.fire({
                     position: 'center',
@@ -355,16 +344,12 @@ class CompradorDAO extends DAO
                     timer: 3500
                 })
             </script>
-            
-            <?php
-        header('Refresh: 3.5; url=home.php?p=cliente/');
 
+<?php
+            header('Refresh: 3.5; url=home.php?p=cliente/');
         } catch (\Throwable $th) {
             //throw $th;
         }
-
-        
-        
     }
     public function logFist($ClassComprador)
     {

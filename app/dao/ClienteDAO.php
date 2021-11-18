@@ -29,7 +29,7 @@ class ClienteDAO extends DAO
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Registro salvo com sucesso',
+                    title: 'Cliente salvo com sucesso',
                     showConfirmButton: false,
                     timer: 3500
                 })

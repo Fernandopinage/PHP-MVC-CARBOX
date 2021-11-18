@@ -127,49 +127,14 @@ if (isset($_POST['editacliente'])) {
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Produto / Comprador</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
 
-
-                                    <form id="form-comprador" action="" method="POST">
-                                        <div class="form-row">
-
-                                            <input type="hidden" name="codsap" id="codsap" value="<?php echo  $obj->getSap(); ?>">
-                                            <input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
-                                            <div class="form-group col-md-5">
-                                                <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" name="comprador_nome" id="comprador_nome" placeholder="">
-                                            </div>
-                                            <div class="form-group col-md-5">
-                                                <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                                <input type="email" class="form-control form-control-sm" name="comprador_email" id="comprador_email" placeholder="">
-                                            </div>
-                                            <!--
-                                            <div class="form-group col-md-1">
-                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
-                                            </div>
-                                            -->
-                                        </div>
-                                        <div id="lista">
-
-
-                                        </div>
-                                        <div id="msg">
-
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" name="novocomprador" class="btn btn-primary">Salvar</button>
-                                        </div>
-
-                                    </form>
-
-                                    <style>
+                                <style>
                                         .table-overflow_2 {
                                             margin: 10px;
                                             max-height: 300px;
@@ -179,7 +144,7 @@ if (isset($_POST['editacliente'])) {
 
 
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
                                     </div>
                                     <form method="POST">
                                         <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
@@ -223,6 +188,45 @@ if (isset($_POST['editacliente'])) {
                                                 <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
                                             </div>
                                         </div>
+                                    </form>
+
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
+                                    </div>
+
+                                    <form id="form-comprador" action="" method="POST">
+                                        <div class="form-row">
+
+                                            <input type="hidden" name="codsap" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                            <input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                            <div class="form-group col-md-5">
+                                                <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
+                                                <input type="text" class="form-control form-control-sm" name="comprador_nome" id="comprador_nome" placeholder="">
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
+                                                <input type="email" class="form-control form-control-sm" name="comprador_email" id="comprador_email" placeholder="">
+                                            </div>
+                                            <!--
+                                            <div class="form-group col-md-1">
+                                                <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
+                                            </div>
+                                            -->
+                                        </div>
+                                        <div id="lista">
+
+
+                                        </div>
+                                        <div id="msg">
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" name="novocomprador" class="btn btn-primary">Salvar</button>
+                                        </div>
+
                                     </form>
 
 
