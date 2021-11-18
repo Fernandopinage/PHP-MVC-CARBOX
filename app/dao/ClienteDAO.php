@@ -138,6 +138,24 @@ class ClienteDAO extends DAO
         return $listacomprador;
     }
 
+    public function listarProdutos($dados){
+
+        $sap = $dados;
+
+        $sql = "SELECT * FROM `cliente_produto` where cli_pro_sap =:cli_pro_sap";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(":cli_pro_sap", $sap);
+        $select->execute();
+        
+        if($select->fetch(PDO::FETCH_ASSOC)){
+            return true;
+        }else{
+            return false;
+        }
+        
+
+    }
+
     public function editarCliente(ClassCliente $ClassCliente)
     {
 

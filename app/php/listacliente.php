@@ -11,6 +11,7 @@ include_once "../dao/ClienteProdutoDAO.php";
 $Cliente = new ClienteDAO();
 $dados = $Cliente->listaCliente();
 
+
 if (isset($_POST['novoproduto'])) {
 
     $ClassCliPro = new ClassClienteProduto();
@@ -134,7 +135,7 @@ if (isset($_POST['editacliente'])) {
                                 </div>
                                 <div class="modal-body">
 
-                                <style>
+                                    <style>
                                         .table-overflow_2 {
                                             margin: 10px;
                                             max-height: 300px;
@@ -142,7 +143,15 @@ if (isset($_POST['editacliente'])) {
                                         }
                                     </style>
 
+                                       <?php 
+                                       
+                                        $produt = $Cliente->listarProdutos($obj->getSap());
+                                        $produt;
 
+                                        if($produt != 1){
+                                       
+
+                                       ?> 
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
                                     </div>
@@ -189,7 +198,11 @@ if (isset($_POST['editacliente'])) {
                                             </div>
                                         </div>
                                     </form>
-
+                                        <?php 
+                                            
+                                            }
+                                            if($produt == 1){
+                                        ?>
 
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
@@ -228,7 +241,9 @@ if (isset($_POST['editacliente'])) {
                                         </div>
 
                                     </form>
-
+                                                <?php
+                                            }
+                                                ?>
 
                                 </div>
                             </div>
@@ -451,7 +466,7 @@ if (isset($_POST['editacliente'])) {
                                         $id =  $obj->getCnpj();
                                         $todos = $Cliente->listarCompradores($id);
 
-                                        if(empty($todos)){
+                                        if (empty($todos)) {
                                             echo "<p style='color:red;'>Por favor cadastre pelo menos 1 vendedor!</p>";
                                         }
 
