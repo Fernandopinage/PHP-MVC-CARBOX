@@ -23,6 +23,22 @@ if (isset($_POST['novoproduto'])) {
     $CliPro->insertClienteProduto($ClassCliPro);
 }
 
+if(isset($_POST['updateproduto'])){
+    $ClassCliPro = new ClassClienteProduto();
+    $ClassCliPro->setProduto($_POST['produtoC']);
+    $ClassCliPro->setCnpj($_POST['cpf_produtos']);
+    $ClassCliPro->setSap($_POST['sap_produtos']);
+
+    $Cliente = new ProdutoDAO();
+    $Cliente->listaProdutoCliente($ClassCliPro);
+
+
+
+}
+
+
+
+
 if (isset($_POST['novocomprador'])) {
 
     if (!empty($_POST['comprador_nome']) and !empty($_POST['comprador_email'])) {
@@ -441,6 +457,55 @@ if (isset($_POST['editacliente'])) {
 
 
                                         ?>
+                                    </div>
+                                    <div style="margin-top: 50px;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Lista  de Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-primary btn-sm" onclick="addProdutos()">Atualizar Produtos</button></h5>
+                                    </div>
+
+                                    <form method="POST">
+                                        <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                        <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                        <div id="ProdutoNovos">
+
+
+                                            <div class="table-overflow_2">
+
+
+                                                <div class="form-row" style="margin-top: 30px;">
+                                                    <div class="form-group col-md-9">
+
+
+                                                        <?php
+                                                        $produto = new ProdutoDAO();
+                                                        $Pdados = $produto->listaProduto();
+
+                                                        foreach ($Pdados as $Pdados) {
+                                                            // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
+                                                                <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
+                                                                    <?php echo $Pdados->getProduto(); ?>
+                                                                </label>
+                                                            </div>
+                                                        <?php
+
+                                                        }
+
+                                                        ?>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" name="updateproduto" class="btn btn-primary">Salvar</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
