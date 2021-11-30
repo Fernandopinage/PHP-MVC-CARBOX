@@ -261,8 +261,18 @@ if (isset($_POST['carrinho'])) {
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label for="inputEmail4">Nome do Cliente</label>
+
+                                    <?php 
+                                    
+                                        $email = $_SESSION['user']['email'];
+                                        $comprador = new ClienteDAO();
+                                       $empresa = $comprador->ClienteComprador($email);
+                                    
+                                    ?>
+
+
                                     <input type="hidden" name="razao_cliente" value="<?php echo $_SESSION['user']['id'] ?>">
-                                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="" placeholder="" value="<?php echo $_SESSION['user']['nome'] ?>" readonly>
+                                    <input type="text" class="form-control form-control-sm" id="razão_cliente" name="" placeholder="" value="<?php echo $empresa ?>" readonly>
 
                                 </div>
                             </div>

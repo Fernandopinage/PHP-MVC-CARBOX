@@ -159,8 +159,6 @@ class ClienteDAO extends DAO
     public function editarCliente(ClassCliente $ClassCliente)
     {
 
-
-
         $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID";
 
         $update = $this->con->prepare($sql);
@@ -275,6 +273,36 @@ class ClienteDAO extends DAO
 
         
     }
+
+    public function ClienteComprador($email){
+
+        $sql = "SELECT * FROM `comprador` WHERE COMPRADOR_EMAIL = :COMPRADOR_EMAIL";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':COMPRADOR_EMAIL', $email);
+        $select->execute();
+
+        if($row  = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $codigo = $row['COMPRADOR_CNPJ'];
+
+            $query = "SELECT * FROM `cliente` WHERE CLIENTE_CNPJ =:CLIENTE_CNPJ";
+            $select = $this->con->prepare($query);
+            $select->bindValue(':CLIENTE_CNPJ', $codigo);
+            $select->execute();
+
+            if($row  = $select->fetch(PDO::FETCH_ASSOC)){
+                
+                $empresa = $row['CLIENTE_RAZAO'];
+            }
+
+
+        }
+
+        return $empresa;
+
+    }
+
+
 
     public function editarComprador()
     {
