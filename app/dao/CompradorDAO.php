@@ -2,7 +2,7 @@
 include_once "../dao/DAO.php";
 include_once "../class/ClassComprador.php";
 include_once "../class/GerarSenha.php";
-include_once "../dao/Mailcomprador.php";
+include_once "../dao/MailComprador.php";
 
 class CompradorDAO extends DAO
 {
