@@ -1,5 +1,5 @@
 <?php   
 
-header('location: ../carbox/app/php/index.php');
+header('location: ../app/php/index.php');
 
 ?>
