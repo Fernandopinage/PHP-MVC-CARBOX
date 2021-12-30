@@ -150,7 +150,7 @@ if (isset($_POST['carrinho'])) {
 
                         <form method="POST" action="../php/home.php?p=add/pedido/">
                             <div class="form-group text-center">
-                                <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap" style="width: 20rem;">
+                                <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap" style="width: 10rem;">
                             </div>
                             <div class="form-group text-center">
                                 <input type="hidden" name="id" value="<?php echo $obj->getID(); ?>">
