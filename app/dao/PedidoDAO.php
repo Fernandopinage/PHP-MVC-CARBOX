@@ -173,7 +173,7 @@ class PedidoDAO extends DAO
             $pieces = explode( '"' ,$response);
     
 
-            //var_dump($response);
+            //var_dump($response); 
            
             if($pieces[9] === "Inserida com sucesso no sistema."){
                 $PedidoOrcamento = new OrçamentoMAIL();
