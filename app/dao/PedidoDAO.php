@@ -34,7 +34,7 @@ class PedidoDAO extends DAO
 
             //header('location: ../php/home.php?p=pedido/');
 
-?>
+                ?>
 
             <script>
                 Swal.fire({
@@ -48,7 +48,7 @@ class PedidoDAO extends DAO
             </script>
 
 
-        <?php
+                <?php
 
 
         } catch (\Throwable $th) {
@@ -172,6 +172,8 @@ class PedidoDAO extends DAO
             $pieces = explode(":", $response);
             $pieces = explode( '"' ,$response);
     
+
+            //var_dump($response);
            
             if($pieces[9] === "Inserida com sucesso no sistema."){
                 $PedidoOrcamento = new OrçamentoMAIL();
