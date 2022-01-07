@@ -20,7 +20,7 @@ class ClienteProdutoDAO extends DAO
 
         try {
             $insert->execute();
-?>
+        ?>
             <script>
                 Swal.fire({
                     position: 'center',
@@ -36,7 +36,7 @@ class ClienteProdutoDAO extends DAO
 
         <?php
 
-            header('Refresh: 3.5; url=home.php?p=cliente/');
+            
         } catch (\Throwable $th) {
 
         ?>
@@ -52,10 +52,11 @@ class ClienteProdutoDAO extends DAO
                 })
             </script>
 
-<?php
+        <?php
 
-            header('Refresh: 4.0; url=home.php?p=cliente/');
+           
         }
+        
     }
 
     public function listaPordutoCliente($id)
