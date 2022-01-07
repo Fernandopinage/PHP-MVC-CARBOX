@@ -23,7 +23,7 @@ if (isset($_POST['novoproduto'])) {
     $CliPro->insertClienteProduto($ClassCliPro);
 }
 
-if(isset($_POST['updateproduto'])){
+if (isset($_POST['updateproduto'])) {
     $ClassCliPro = new ClassClienteProduto();
     $ClassCliPro->setProduto($_POST['produtoC']);
     $ClassCliPro->setCnpj($_POST['cpf_produtos']);
@@ -31,9 +31,6 @@ if(isset($_POST['updateproduto'])){
 
     $Cliente = new ProdutoDAO();
     $Cliente->listaProdutoCliente($ClassCliPro);
-
-
-
 }
 
 
@@ -69,12 +66,11 @@ if (isset($_POST['editacliente'])) {
     $Cliente->editarCliente($ClassCliente);
 }
 
-if(isset($_POST['deleteCliente'])){
+if (isset($_POST['deleteCliente'])) {
 
     $delete =  $_POST['deleteCliente'];
     $Cliente = new ClienteDAO();
     $Cliente->deleteCliente($delete);
-
 }
 
 
@@ -139,7 +135,9 @@ if(isset($_POST['deleteCliente'])){
                         <th scope="col"><button type="button" class="btn btn-info btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#listar<?php echo $obj->getID(); ?>">Listar Comprador / Produto</button></th>
                         <th scope="col"><button type="button" class="btn btn-success btn-block btn-sm" id="editarBTN" data-toggle="modal" data-target="#editar<?php echo $obj->getID(); ?>">Editar Cliente / Produtos</button></th>
                         <!--<th scope="col"><a class="btn btn-danger btn-block btn-sm" href="?cliente/delete=<?php echo $obj->getCnpj(); ?>">Inativar Cliente</a></th>-->
-                        <th scope="col"><form method="POST"><button class="btn btn-danger btn-block btn-sm" type="submit" name="deleteCliente" value="<?php echo $obj->getCnpj(); ?>">Inativar Cliente</button></form></th>
+                        <th scope="col">
+                            <form method="POST"><button class="btn btn-danger btn-block btn-sm" type="submit" name="deleteCliente" value="<?php echo $obj->getCnpj(); ?>">Inativar Cliente</button></form>
+                        </th>
                     </tr>
 
 
@@ -165,107 +163,107 @@ if(isset($_POST['deleteCliente'])){
                                         }
                                     </style>
 
-                                       <?php 
-                                       
-                                        $produt = $Cliente->listarProdutos($obj->getSap());
-                                        $produt;
+                                    <?php
 
-                                        if($produt != 1){
-                                       
+                                    $produt = $Cliente->listarProdutos($obj->getSap());
+                                    $produt;
 
-                                       ?> 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
-                                    </div>
-                                    <form method="POST">
-                                        <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
-                                        <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
-                                        <div id="ProdutoNovos">
+                                    if ($produt != 1) {
 
 
-                                            <div class="table-overflow_2">
+                                    ?>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
+                                        </div>
+                                        <form method="POST">
+                                            <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                            <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                            <div id="ProdutoNovos">
 
 
-                                                <div class="form-row" style="margin-top: 30px;">
-                                                    <div class="form-group col-md-9">
+                                                <div class="table-overflow_2">
 
 
-                                                        <?php
-                                                        $produto = new ProdutoDAO();
-                                                        $Pdados = $produto->listaProduto();
+                                                    <div class="form-row" style="margin-top: 30px;">
+                                                        <div class="form-group col-md-9">
 
-                                                        foreach ($Pdados as $Pdados) {
-                                                            // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
-                                                        ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
-                                                                <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
-                                                                    <?php echo $Pdados->getProduto(); ?>
-                                                                </label>
-                                                            </div>
-                                                        <?php
 
-                                                        }
+                                                            <?php
+                                                            $produto = new ProdutoDAO();
+                                                            $Pdados = $produto->listaProduto();
 
-                                                        ?>
+                                                            foreach ($Pdados as $Pdados) {
+                                                                // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
+                                                            ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
+                                                                    <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
+                                                                        <?php echo $Pdados->getProduto(); ?>
+                                                                    </label>
+                                                                </div>
+                                                            <?php
 
+                                                            }
+
+                                                            ?>
+
+
+                                                        </div>
 
                                                     </div>
-
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" name="novoproduto" class="btn btn-primary">Salvar</button>
-                                            </div>
+                                        </form>
+                                    <?php
+
+                                    }
+                                    if ($produt == 1) {
+                                    ?>
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
                                         </div>
-                                    </form>
-                                        <?php 
-                                            
-                                            }
-                                            if($produt == 1){
-                                        ?>
 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Adicionar Compradores</h5>
-                                    </div>
+                                        <form id="form-comprador" action="" method="POST">
+                                            <div class="form-row">
 
-                                    <form id="form-comprador" action="" method="POST">
-                                        <div class="form-row">
-
-                                            <input type="hidden" name="codsap" id="codsap" value="<?php echo  $obj->getSap(); ?>">
-                                            <input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
-                                            <div class="form-group col-md-5">
-                                                <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" name="comprador_nome" id="comprador_nome" placeholder="">
-                                            </div>
-                                            <div class="form-group col-md-5">
-                                                <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
-                                                <input type="email" class="form-control form-control-sm" name="comprador_email" id="comprador_email" placeholder="">
-                                            </div>
-                                            <!--
+                                                <input type="hidden" name="codsap" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                                <input type="hidden" name="comprador_cnpj" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                                <div class="form-group col-md-5">
+                                                    <label for="inputEmail4">Nome <span style="color: red;">*</span></label>
+                                                    <input type="text" class="form-control form-control-sm" name="comprador_nome" id="comprador_nome" placeholder="">
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label for="inputEmail4">E-mail<span style="color: red;">*</span></label>
+                                                    <input type="email" class="form-control form-control-sm" name="comprador_email" id="comprador_email" placeholder="">
+                                                </div>
+                                                <!--
                                             <div class="form-group col-md-1">
                                                 <button type="button" class="btn btn-primary btn-sm" id="mais" style="margin-top: 28px;">Adicionar</button>
                                             </div>
                                             -->
-                                        </div>
-                                        <div id="lista">
+                                            </div>
+                                            <div id="lista">
 
 
-                                        </div>
-                                        <div id="msg">
+                                            </div>
+                                            <div id="msg">
 
-                                        </div>
+                                            </div>
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <button type="submit" name="novocomprador" class="btn btn-primary">Salvar</button>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" name="novocomprador" class="btn btn-primary">Salvar</button>
+                                            </div>
 
-                                    </form>
-                                                <?php
-                                            }
-                                                ?>
+                                        </form>
+                                    <?php
+                                    }
+                                    ?>
 
                                 </div>
                             </div>
@@ -312,13 +310,18 @@ if(isset($_POST['deleteCliente'])){
                                         </div>
                                     </form>
 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Compradores</h5>
-                                    </div>
                                     <div class="table-overflow_2">
                                         <?php
                                         $id = $obj->getID();
                                         $lista = $Cliente->listaVendedores($id);
+
+                                        if (!empty($lista)) {
+                                        ?>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Compradores</h5>
+                                            </div>
+                                        <?php
+                                        } 
 
                                         if (isset($_POST['atualizar_comprador'])) {
                                             $id = $_POST['id_vendedor'];
@@ -465,53 +468,53 @@ if(isset($_POST['deleteCliente'])){
                                         ?>
                                     </div>
                                     <div style="margin-top: 50px;">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Lista  de Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-primary btn-sm" onclick="addProdutos()">Atualizar Produtos</button></h5>
-                                    </div>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Lista de Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-primary btn-sm" onclick="addProdutos()">Atualizar Produtos</button></h5>
+                                        </div>
 
-                                    <form method="POST">
-                                        <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
-                                        <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
-                                        <div id="ProdutoNovos">
-
-
-                                            <div class="table-overflow_2">
+                                        <form method="POST">
+                                            <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
+                                            <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
+                                            <div id="ProdutoNovos">
 
 
-                                                <div class="form-row" style="margin-top: 30px;">
-                                                    <div class="form-group col-md-9">
+                                                <div class="table-overflow_2">
 
 
-                                                        <?php
-                                                        $produto = new ProdutoDAO();
-                                                        $Pdados = $produto->listaProduto();
+                                                    <div class="form-row" style="margin-top: 30px;">
+                                                        <div class="form-group col-md-9">
 
-                                                        foreach ($Pdados as $Pdados) {
-                                                            // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
-                                                        ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
-                                                                <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
-                                                                    <?php echo $Pdados->getProduto(); ?>
-                                                                </label>
-                                                            </div>
-                                                        <?php
 
-                                                        }
+                                                            <?php
+                                                            $produto = new ProdutoDAO();
+                                                            $Pdados = $produto->listaProduto();
 
-                                                        ?>
+                                                            foreach ($Pdados as $Pdados) {
+                                                                // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
+                                                            ?>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
+                                                                    <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
+                                                                        <?php echo $Pdados->getProduto(); ?>
+                                                                    </label>
+                                                                </div>
+                                                            <?php
 
+                                                            }
+
+                                                            ?>
+
+
+                                                        </div>
 
                                                     </div>
-
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" name="updateproduto" class="btn btn-primary">Salvar</button>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" name="updateproduto" class="btn btn-primary">Salvar</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
