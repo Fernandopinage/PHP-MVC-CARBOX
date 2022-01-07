@@ -111,7 +111,7 @@ class ClienteDAO extends DAO
     public function listarCompradores($id)
     {
 
-        $sql = "SELECT * FROM `comprador` inner join `log` on COMPRADOR_EMAIL = log_comprador where COMPRADOR_CNPJ = :COMPRADOR_CNPJ";
+        $sql = "SELECT DISTINCT COMPRADOR_ID,COMPRADOR_NOME, COMPRADOR_EMAIL, COMPRADOR_SENHA,COMPRADOR_STATUS,log_status FROM `comprador` inner join `log` on COMPRADOR_EMAIL = log_comprador where COMPRADOR_CNPJ = :COMPRADOR_CNPJ";
         $select = $this->con->prepare($sql);
         $select->bindValue(":COMPRADOR_CNPJ", $id);
         $select->execute();
