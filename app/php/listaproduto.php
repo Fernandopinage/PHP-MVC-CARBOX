@@ -2,32 +2,38 @@
 include_once "../class/ClassProduto.php";
 include_once "../dao/Produto.DAO.php";
 
-
 $Produto = new ProdutoDAO();
 $dados = $Produto->listaProduto();
 
-
-if (isset($_FILES['imagem']['name'])) {
-    $imagem = $_FILES['imagem']['name'];
-
-
-    $diretorio = '../imagens/';
-    $diretorioPDF = '../pdf/';
-    move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio . $imagem);
-}
-if (isset($_FILES['ficha']['name'])) {
-
-    $ficha = $_FILES['ficha']['name'];
-    move_uploaded_file($_FILES['ficha']['tmp_name'], $diretorioPDF . $ficha);
-}
 if (isset($_POST['editaproduto'])) {
+
+    if (isset($_FILES['imagem']['name'])) {
+        $imagem = $_FILES['imagem']['name'];
+
+
+        $diretorio = '../imagens/';
+        $diretorioPDF = '../pdf/';
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio . $imagem);
+    }
+    if (isset($_FILES['ficha']['name'])) {
+
+        $ficha = $_FILES['ficha']['name'];
+        move_uploaded_file($_FILES['ficha']['tmp_name'], $diretorioPDF . $ficha);
+    }
+
 
     $ClassProduto = new ClassProduto();
     $ClassProduto->setID($_POST['id']);
     $ClassProduto->setProduto($_POST['desc']);
     $ClassProduto->setUnidade($_POST['unidade']);
-    $ClassProduto->setImg($imagem);
-    $ClassProduto->setFicha($ficha);
+    if(!empty($imagem)){
+
+        $ClassProduto->setImg($imagem);
+    }
+    if(!empty($ficha)){
+
+        $ClassProduto->setFicha($ficha);
+    }
 
 
     $Produto = new ProdutoDAO();
@@ -124,7 +130,7 @@ if (isset($_POST['editaproduto'])) {
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="inputEmail4">Cód. SAP</label>
-                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>">
+                                            <input type="text" class="form-control form-control-sm is-invalid" id="sap" name="sap" placeholder="" value="<?php echo $obj->getSap(); ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="form-row">

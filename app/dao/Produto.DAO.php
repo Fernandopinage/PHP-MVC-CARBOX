@@ -97,62 +97,75 @@ class ProdutoDAO extends DAO
 
             header('Refresh: 4.0; url=home.php?p=cliente/');
         }
-        
     }
 
 
     public function editarProduto(ClassProduto $ClassProduto)
     {
 
-        if ($ClassProduto->getImg() == '') {
-            $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
-                `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
-                `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
-                `PRODUTO_FIXA` = :PRODUTO_FIXA
-                 WHERE `PRODUTO_ID` = :PRODUTO_ID";
+        $sql = "UPDATE `produto` SET ";
 
-            $insert = $this->con->prepare($sql);
-            $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-            $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-            $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-            $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
-            $insert->execute();
-            header('Location: ../php/home.php?p=produto/');
-        } else {
-            $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
-                `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
-                `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
-                `PRODUTO_IMG` = :PRODUTO_IMG,
-                `PRODUTO_FIXA` = :PRODUTO_FIXA
-                 WHERE `PRODUTO_ID` = :PRODUTO_ID";
-
-            $insert = $this->con->prepare($sql);
-            $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-            $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-            $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
-            $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-            $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
-            $insert->execute();
-            header('Location: ../php/home.php?p=produto/');
+        if (!empty($ClassProduto->getImg())) {
+            $sql = $sql . " `PRODUTO_IMG` = '" . $ClassProduto->getImg() . "',";
         }
-        /*
 
-        $sql = "UPDATE `produto` SET `PRODUTO_ID` = :PRODUTO_ID,
-                                    `PRODUTO_PRODUTO`= :PRODUTO_PRODUTO,
-                                    `PRODUTO_UNIDADE` = :PRODUTO_UNIDADE,
-                                    `PRODUTO_IMG` = :PRODUTO_IMG,
-                                    `PRODUTO_FIXA` = :PRODUTO_FIXA
-                                     WHERE `PRODUTO_ID` = :PRODUTO_ID";
+        if (!empty($ClassProduto->getProduto())) {
+            $sql = $sql . " `PRODUTO_PRODUTO`= '" . $ClassProduto->getProduto() . "'";
+        }
 
-        $insert = $this->con->prepare($sql);
-        $insert->bindValue(":PRODUTO_ID", $ClassProduto->getID());
-        $insert->bindValue(":PRODUTO_PRODUTO", $ClassProduto->getProduto());
-        $insert->bindValue(":PRODUTO_IMG", $ClassProduto->getImg());
-        $insert->bindValue(":PRODUTO_UNIDADE", $ClassProduto->getUnidade());
-        $insert->bindValue(":PRODUTO_FIXA", $ClassProduto->getFicha());
-        $insert->execute();
-        header('Location: ../php/home.php?p=produto/');
-        */
+        if (!empty($ClassProduto->getFicha())) {
+            $sql = $sql . ", `PRODUTO_FIXA` = '" . $ClassProduto->getFicha() . "'";
+        }
+
+
+        if (!empty($ClassProduto->getUnidade())) {
+            $sql = $sql . " `PRODUTO_UNIDADE` = '" . $ClassProduto->getUnidade() . "',";
+        }
+        $sql = $sql . " WHERE `PRODUTO_ID` = " . $ClassProduto->getID();
+
+
+        $update = $this->con->prepare($sql);
+
+
+
+        try {
+            $update->execute();
+
+        ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Produto(s)',
+                    text: 'Atualizado(s) com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+
+
+        <?php
+        header('Refresh: 2.5; url=home.php?p=produto/');
+
+        } catch (PDOException $e) {
+            echo $e;
+        ?>
+
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'ao atualizar o produto(s)',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+<?php
+        }
+      
     }
 
     public function delete($delete)
