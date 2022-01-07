@@ -23,6 +23,7 @@ if (isset($_POST['edita-model'])) {
 
 ?>
 <br>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href='../css/table.css' rel='stylesheet' />
 <div class="text-right">
     <a class="btn btn-primary" href="?p=add/restrito/">Adicionar Usuário</a>

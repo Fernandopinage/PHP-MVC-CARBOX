@@ -102,8 +102,46 @@ class RestritoDAO  extends DAO{
         $insert->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
         $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
         $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
-        $insert->execute();
-        header('Location: ../php/home.php?p=restrito/');
+        
+        
+        try {
+            $insert->execute();
+
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Registro alterado com sucesso',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+                
+
+        <?php
+
+
+            header('Location: ../php/home.php?p=restrito/');
+            
+        } catch (\Throwable $th) {
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Registro não alterado',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+                
+
+        <?php
+        }
+
 
     }
 

@@ -37,7 +37,7 @@ if(!empty($_SESSION['user']['status_comprador'])){
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jquery CDN  -->
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Carbox</title>
 </head>
 
