@@ -288,7 +288,7 @@ class CompradorDAO extends DAO
         $update->bindValue(':COMPRADOR_STATUS', 'Inativo');
 
         try {
-
+            $update->execute();
         ?>
             <script>
                 Swal.fire({
@@ -304,7 +304,7 @@ class CompradorDAO extends DAO
 
 
         <?php
-
+            header('Refresh: 3.5; url=home.php?p=cliente/');
 
         } catch (\Throwable $th) {
 
@@ -325,7 +325,7 @@ class CompradorDAO extends DAO
         <?php
         }
 
-        $update->execute();
+        
     }
 
     public function log($ClassComprador)
