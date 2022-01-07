@@ -60,9 +60,6 @@ class ClienteDAO extends DAO
                 return false;
         }
 
-
-        //include_once "../class/ClassPedidoMAIL.php";
-        // header('Location: ../php/home.php?p=cliente/');
     }
 
     public function listaCliente()
@@ -158,8 +155,12 @@ class ClienteDAO extends DAO
 
     public function editarCliente(ClassCliente $ClassCliente)
     {
+    echo "<pre>";
+    var_dump($ClassCliente);
+    echo "</pre>";
 
-        $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID";
+
+        $sql = "UPDATE `cliente` SET `CLIENTE_ID`=:CLIENTE_ID,`CLIENTE_CNPJ`=:CLIENTE_CNPJ,`CLIENTE_RAZAO`=:CLIENTE_RAZAO,`CLIENTE_EMAIL`=:CLIENTE_EMAIL,`CLIENTE_CODSAP`=:CLIENTE_CODSAP WHERE `CLIENTE_ID`=:CLIENTE_ID";
 
         $update = $this->con->prepare($sql);
         $update->bindValue(':CLIENTE_ID', $ClassCliente->getID());
@@ -186,10 +187,12 @@ class ClienteDAO extends DAO
            
            
            <?php
-           header('Refresh: 3.5; url=home.php?p=cliente/');
+           //header('Refresh: 3.5; url=home.php?p=cliente/');
 
-        } catch (\Throwable $th) {
+        } catch (PDOException $e) {
             
+            echo $e;
+
             ?>
            <script>
                 Swal.fire({
@@ -205,17 +208,20 @@ class ClienteDAO extends DAO
            
            
            <?php
-           header('Refresh: 3.5; url=home.php?p=cliente/');
+          // header('Refresh: 3.5; url=home.php?p=cliente/');
         }
 
 
         // não pode redirecionar
         //header('Location: ../php/home.php?p=cliente/');
+
+        
     }
 
     public function deleteCliente($delete)
     {
 
+       
         $sql = "UPDATE `cliente` SET `CLIENTE_STATUS`=:CLIENTE_STATUS WHERE `CLIENTE_CNPJ`=:CLIENTE_CNPJ";
 
         $update = $this->con->prepare($sql);
@@ -240,7 +246,7 @@ class ClienteDAO extends DAO
                      title: 'Registro',
                      text:'Inativado com sucesso',
                      showConfirmButton: false,
-                     timer: 3500
+                     timer: 3000
                  })
              </script>
             
@@ -260,14 +266,14 @@ class ClienteDAO extends DAO
                      title: 'Erro',
                      text:'ao Inativa o registro, entre em contato com o administrador',
                      showConfirmButton: false,
-                     timer: 3500
+                     timer: 3000
                  })
              </script>
             
             
             
             <?php
-            header('Refresh: 4.0; url=home.php?p=cliente/');
+           //header('Refresh: 4.0; url=home.php?p=cliente/');
         }
 
 
