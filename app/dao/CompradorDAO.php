@@ -182,9 +182,10 @@ class CompradorDAO extends DAO
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->bindValue(':COMPRADOR_SENHA', md5($rash));
-        $update->execute();
-
-
+        
+        try {
+            $update->execute();
+                  
         if ($update->rowCount()) {
 
             $redefinir = new RedefinirSenhaEmail();
@@ -216,6 +217,10 @@ class CompradorDAO extends DAO
             </script>";
         <?php
         }
+        } catch (\Throwable $th) {
+           
+        }
+
     }
 
 
