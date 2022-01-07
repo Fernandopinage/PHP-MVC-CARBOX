@@ -174,15 +174,16 @@ if (isset($_POST['deleteCliente'])) {
                                     ?>
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel" style="color:#136132; margin-bottom:20px">Adicionar Produtos <button type="submit" style="margin-left: 25px;" class="btn btn-success btn-sm" onclick="addProdutos()">Add Produtos</button></h5>
+                                            
                                         </div>
+                                        
                                         <form method="POST">
                                             <input type="hidden" name="sap_produtos" id="codsap" value="<?php echo  $obj->getSap(); ?>">
                                             <input type="hidden" name="cpf_produtos" id="comprador_cnpj" value="<?php echo  $obj->getCnpj(); ?>">
                                             <div id="ProdutoNovos">
 
-
                                                 <div class="table-overflow_2">
-
+                                                    
 
                                                     <div class="form-row" style="margin-top: 30px;">
                                                         <div class="form-group col-md-9">
@@ -488,12 +489,12 @@ if (isset($_POST['deleteCliente'])) {
                                                             <?php
                                                             $produto = new ProdutoDAO();
                                                             $Pdados = $produto->listaProduto();
-
+                                                            
                                                             foreach ($Pdados as $Pdados) {
                                                                 // echo "<option value='" . $Pdados->getSap() . "'>" . $Pdados->getSap() . " - " . $Pdados->getProduto() . "</option>";
                                                             ?>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" name="produtoC[]" type="checkbox" value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
+                                                                    <input class="form-check-input" name="produtoC[]" type="checkbox"  value="<?php echo $Pdados->getSap(); ?>" id="<?php echo $Pdados->getSap(); ?>">
                                                                     <label class="form-check-label" for="<?php echo $Pdados->getSap(); ?>">
                                                                         <?php echo $Pdados->getProduto(); ?>
                                                                     </label>
@@ -561,7 +562,7 @@ if (isset($_POST['deleteCliente'])) {
                                 </div>
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel" style="color:#136132;">Lista de Produtos</h5>
-
+                                  
                                 </div>
                                 <div class="table-overflow_2" style="padding-left:20px;">
                                     <?php

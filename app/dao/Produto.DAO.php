@@ -46,6 +46,7 @@ class ProdutoDAO extends DAO
     public function listaProdutoCliente($ClassCliPro)
     {
 
+
         $query = "DELETE FROM `cliente_produto` WHERE cli_pro_sap =:cli_pro_sap";
         $delete = $this->con->prepare($query);
         $delete->bindValue(':cli_pro_sap', $ClassCliPro->getSap());
@@ -96,6 +97,7 @@ class ProdutoDAO extends DAO
 
             header('Refresh: 4.0; url=home.php?p=cliente/');
         }
+        
     }
 
 
