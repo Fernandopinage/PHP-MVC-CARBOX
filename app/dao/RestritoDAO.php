@@ -95,14 +95,28 @@ class RestritoDAO  extends DAO{
     }
     public function editarRegistro(ClassRestrito $ClassRestrito){
 
-        $sql = "UPDATE `restrito` SET `RESTRITO_NOME`= :RESTRITO_NOME,`RESTRITO_SENHA`= :RESTRITO_SENHA,`RESTRITO_EMAIL`=:RESTRITO_EMAIL,`RESTRITO_STATUS`= :RESTRITO_STATUS WHERE `RESTRITO_ID`=:RESTRITO_ID";
-        $insert = $this->con->prepare($sql);
-        $insert->bindValue(':RESTRITO_ID', $ClassRestrito->getID());
-        $insert->bindValue(':RESTRITO_NOME', $ClassRestrito->getNome());
-        $insert->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
-        $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
-        $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
-        
+        if(!empty($ClassRestrito->getSenha())){
+            
+            $sql = "UPDATE `restrito` SET `RESTRITO_NOME`= :RESTRITO_NOME,`RESTRITO_SENHA`= :RESTRITO_SENHA,`RESTRITO_EMAIL`=:RESTRITO_EMAIL,`RESTRITO_STATUS`= :RESTRITO_STATUS WHERE `RESTRITO_ID`=:RESTRITO_ID";
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(':RESTRITO_ID', $ClassRestrito->getID());
+            $insert->bindValue(':RESTRITO_NOME', $ClassRestrito->getNome());
+            $insert->bindValue(':RESTRITO_SENHA', $ClassRestrito->getSenha());
+            $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+            $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
+            
+        }else{
+
+            $sql = "UPDATE `restrito` SET `RESTRITO_NOME`= :RESTRITO_NOME,`RESTRITO_EMAIL`=:RESTRITO_EMAIL,`RESTRITO_STATUS`= :RESTRITO_STATUS WHERE `RESTRITO_ID`=:RESTRITO_ID";
+            $insert = $this->con->prepare($sql);
+            $insert->bindValue(':RESTRITO_ID', $ClassRestrito->getID());
+            $insert->bindValue(':RESTRITO_NOME', $ClassRestrito->getNome());
+            $insert->bindValue(':RESTRITO_EMAIL', $ClassRestrito->getEmail());
+            $insert->bindValue(':RESTRITO_STATUS', $ClassRestrito->getStatus());
+            
+
+        }
+
         
         try {
             $insert->execute();
