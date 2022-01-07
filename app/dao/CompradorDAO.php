@@ -100,7 +100,8 @@ class CompradorDAO extends DAO
     public function updateComprador($id, $email)
     {
 
-
+        
+        
         $sql = "UPDATE `comprador` SET  COMPRADOR_EMAIL = :COMPRADOR_EMAIL WHERE COMPRADOR_ID = :COMPRADOR_ID";
         $update = $this->con->prepare($sql);
         $update->bindValue(':COMPRADOR_ID', $id);
@@ -121,10 +122,8 @@ class CompradorDAO extends DAO
                 })
             </script>
 
-
-
         <?php
-
+            //header('Refresh: 3.5; url=home.php?p=cliente/');
 
         } catch (\Throwable $th) {
 
@@ -143,8 +142,10 @@ class CompradorDAO extends DAO
 
 
         <?php
-            header('Refresh: 3.5; url=home.php?p=cliente/');
+           // header('Refresh: 3.5; url=home.php?p=cliente/');
         }
+
+        
     }
 
     public function primeiroAcesso(ClassComprador $ClassComprador)
