@@ -114,7 +114,7 @@ class RestritoDAO  extends DAO{
                     icon: 'success',
                     title: 'Registro alterado com sucesso',
                     showConfirmButton: false,
-                    timer: 3500
+                    timer: 3000
                 })
             </script>
 
@@ -122,8 +122,8 @@ class RestritoDAO  extends DAO{
 
         <?php
 
+            header('Refresh: 3.5; url=home.php?p=restrito/');    
 
-            header('Location: ../php/home.php?p=restrito/');
             
         } catch (\Throwable $th) {
             ?>
