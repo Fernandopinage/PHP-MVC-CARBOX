@@ -90,8 +90,28 @@ if (isset($_POST['carrinho'])) {
 
     );
 
-    $_SESSION['lista'][] = $_SESSION['carrinho'];
-    unset($_SESSION['carrinho']);
+    if(isset($tamanho)){
+
+        for($i=0; $i<$tamanho;$i++){
+            if(!empty($_SESSION['carrinho'])){
+
+                if(array_search($_SESSION['carrinho']['sap'],$_SESSION['lista'][$i])){
+                    
+                    $_SESSION['lista'][$i]['quantidade'] = $_SESSION['carrinho']['quantidade'] + $_SESSION['lista'][$i]['quantidade'];
+                    $_SESSION['carrinho'] ='';
+                    
+                }
+            }
+            
+        }
+    }
+
+    if(!empty($_SESSION['carrinho'])){
+
+        $_SESSION['lista'][] = $_SESSION['carrinho'];
+        unset($_SESSION['carrinho']);
+    }
+
 
 }
 
