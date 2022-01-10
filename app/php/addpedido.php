@@ -121,7 +121,21 @@ if (isset($_POST['carrinho'])) {
                             <h5 class="card-title text-center">
                                 <spam><?php echo $obj->getProduto(); ?></spam>
                             </h5>
-                            <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
+                            <?php 
+                            
+                            if(!empty($obj->getFicha())){
+                                ?>
+                                
+                                <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
+                                
+                                <?php
+                            }else{
+                                ?>
+                                <p class="card-text text-center"><a target="_blank" style="color:#FF5E14 ;">Não possui ficha técnica</a></p>
+                                <?php 
+                            }
+                            
+                            ?>
                             <div class="text-center">
                                 <input type="hidden" value="<?php echo $obj->getSap(); ?>" id="sap<?php echo $obj->getID(); ?>">
                                 <input type="hidden" value="<?php echo $obj->getProduto(); ?>" id="produto<?php echo $obj->getID(); ?>">
