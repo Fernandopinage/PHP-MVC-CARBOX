@@ -262,7 +262,7 @@ class PedidoDAO extends DAO
     {
 
         //$sql = "SELECT * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO ORDER BY `pedido`.`PEDIDO_ID` DESC";
-        $sql = "SELECT DISTINCT  * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO GROUP BY PEDIDO_NUM";
+        $sql = "SELECT DISTINCT  * FROM `pedido` where PEDIDO_RAZAO = :PEDIDO_RAZAO GROUP BY PEDIDO_ID DESC";
         $select = $this->con->prepare($sql);
         $select->bindValue(":PEDIDO_RAZAO", $id);
         $select->execute();
