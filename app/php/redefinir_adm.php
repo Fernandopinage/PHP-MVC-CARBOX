@@ -25,7 +25,7 @@
 
     <style>
         body {
-            background-image: url('../img/03.png');
+            background-image: url('../img/05.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             -webkit-background-size: cover;
@@ -39,7 +39,7 @@
 
         <form class="form-signin" method="POST">
             <div class="text-center" id="logo">
-                <h2 class="form-signin-heading">Redefinir Senha</h2>
+                <h2 class="form-signin-heading">Recuperar Senha</h2>
                 <hr>
             </div>
             <input type="text" class="form-control" name="email" placeholder="Digite o e-mail cadastrado" required="" autofocus="" />
@@ -62,15 +62,15 @@
 <?php
 
 
-require_once "../dao/ClienteDAO.php";
-require_once "../dao/CompradorDAO.php";
+require_once "../dao/RestritoDAO.php";
+require_once "../class/ClassRestrito.php";
 
 if (isset($_POST['redefinirsenha'])) {
 
 
     $email = $_POST['email'];
-    $cliente = new CompradorDAO();
-    $cliente->esquecisenha($email);
+    $cliente = new RestritoDAO();
+    $cliente->redefinirRestrito($email);
 }
 
 ?>

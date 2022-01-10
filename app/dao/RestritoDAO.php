@@ -1,8 +1,8 @@
 <?php 
 include_once "../dao/DAO.php";
 include_once "../class/ClassRestrito.php";
-
-
+include_once "../class/GerarSenha.php";
+include_once "../dao/MailRedefinirsenhaadm.php";
 class RestritoDAO  extends DAO{
 
 
@@ -167,6 +167,101 @@ class RestritoDAO  extends DAO{
         $insert->bindValue(':RESTRITO_STATUS', 'N');
         $insert->execute();
         header('Location: ../php/home.php?p=restrito/');
+
+    }
+
+    public function redefinirRestrito($email){
+
+        $senha = new GerarSenha();
+        $rash = $senha->senha();
+
+        $sql = "UPDATE `restrito` SET RESTRITO_SENHA =:RESTRITO_SENHA WHERE RESTRITO_EMAIL =:RESTRITO_EMAIL";
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':RESTRITO_EMAIL', $email);
+        $update->bindValue(':RESTRITO_SENHA', $rash);
+
+        
+        try {
+            $update->execute();
+
+            if ($update->rowCount()) {
+
+                $redefinir = new RedefinirSenhaEmailAdm();
+                $redefinir->redefinirAdm($email,$rash);
+
+            }
+            
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sua senha foi redefinida',
+                    text: 'Por favor verifique seu e-mail',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+                
+
+        <?php
+            
+        } catch (\Throwable $th) {
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'E-mail não cadastrado',
+                    text: 'Informe um e-mail válido',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>";
+        <?php
+        }
+
+    }
+
+    public function alterandoSenha($email, $senha, $novasenha){
+
+
+        $sql = "UPDATE `restrito` SET RESTRITO_SENHA =:RESTRITO_SENHA WHERE RESTRITO_EMAIL =:RESTRITO_EMAIL";
+        $update = $this->con->prepare($sql);
+        $update->bindValue(':RESTRITO_EMAIL', $email);
+        $update->bindValue(':RESTRITO_SENHA', md5($novasenha));
+
+        try {
+            $update->execute();
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sua senha foi alterada',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>
+
+                
+
+        <?php
+        } catch (\Throwable $th) {
+            ?>
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'houve um erro ao tentar redefinir senha',
+                    showConfirmButton: false,
+                    timer: 3500
+                })
+            </script>";
+            <?php
+        }
 
     }
 

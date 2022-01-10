@@ -63,7 +63,7 @@ if (isset($_POST['acessar'])) {
             <input type="password" class="form-control" name="password" placeholder="Digite seu senha:" required="" />
             <br>
             <div class="text-left" id="cadastro">
-
+                <a href="../php/redefinir_adm.php" class="stretched-link">Esqueci minha senha</a>
             </div>
 
             <div class="text-right">
