@@ -7,8 +7,8 @@ include_once "../function/numeroOrcamento.php";
 
 
 $produtos = json_decode($_SESSION['user']['produtos']);
-$produtos = implode("','",$produtos);
-    
+$produtos = implode("','", $produtos);
+
 
 //var_dump($produtos = $_SESSION['user']['produtos']);
 
@@ -19,9 +19,9 @@ $dado = $Produto->selectProduto($produtos);
 
 if (isset($_POST['confirmarorcamento'])) {
 
-    if($_SESSION['user']['status'] == 'S'){
+    if ($_SESSION['user']['status'] == 'S') {
 
-        ?>
+?>
 
         <script>
             Swal.fire({
@@ -35,17 +35,17 @@ if (isset($_POST['confirmarorcamento'])) {
         </script>
 
 
-        <?php
+<?php
 
-    }else{
+    } else {
 
-        
+
         $tamanho = count($_POST['sap']);
 
         $ClassProduto = new ClassPedido();
-        
+
         for ($i = 0; $i < $tamanho; $i++) {
-            
+
             $ClassProduto->setNum($_POST['numero_orcamento']);
             $ClassProduto->setData(date('Y-m-d'));
             $ClassProduto->setID($_POST['razao_cliente']);
@@ -55,8 +55,8 @@ if (isset($_POST['confirmarorcamento'])) {
             $Pedido = new PedidoDAO();
             $Pedido->insertPedido($ClassProduto);
         }
-        
-        
+
+
         $emailCliente = $_SESSION['user']['email'];
         $cliente = $_SESSION['user']['nome'];
         $ClassProduto->setNum($_POST['numero_orcamento']);
@@ -66,8 +66,8 @@ if (isset($_POST['confirmarorcamento'])) {
 
         unset($_SESSION['lista']);
         //header('location: ../php/home.php?p=pedido/');
-        
-        
+
+
     }
 }
 
@@ -90,29 +90,25 @@ if (isset($_POST['carrinho'])) {
 
     );
 
-    if(isset($tamanho)){
+    if (isset($tamanho)) {
 
-        for($i=0; $i<$tamanho;$i++){
-            if(!empty($_SESSION['carrinho'])){
+        for ($i = 0; $i < $tamanho; $i++) {
+            if (!empty($_SESSION['carrinho'])) {
 
-                if(array_search($_SESSION['carrinho']['sap'],$_SESSION['lista'][$i])){
-                    
+                if (array_search($_SESSION['carrinho']['sap'], $_SESSION['lista'][$i])) {
+
                     $_SESSION['lista'][$i]['quantidade'] = $_SESSION['carrinho']['quantidade'] + $_SESSION['lista'][$i]['quantidade'];
-                    $_SESSION['carrinho'] ='';
-                    
+                    $_SESSION['carrinho'] = '';
                 }
             }
-            
         }
     }
 
-    if(!empty($_SESSION['carrinho'])){
+    if (!empty($_SESSION['carrinho'])) {
 
         $_SESSION['lista'][] = $_SESSION['carrinho'];
         unset($_SESSION['carrinho']);
     }
-
-
 }
 
 
@@ -136,25 +132,31 @@ if (isset($_POST['carrinho'])) {
             <div class="form-row" <?php echo $obj->getID(); ?> style="border: 0px;">
                 <div class="form-group col-md-4">
                     <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap" height="500" width="150" >
+                        <img class="card-img-top" src="../imagens/<?php echo $obj->getImg(); ?>" alt="Card image cap" height="500" width="150">
                         <div class="card-body">
                             <h5 class="card-title text-center">
-                                <spam><?php echo $obj->getProduto(); ?></spam>
+                                <?PHP if (strlen($obj->getProduto()) <= '24') { ?>
+
+                                    <spam style="font-size: 14px;"><?php echo $obj->getProduto(); ?></spam>
+                                <?php } else { ?>
+
+                                    <spam style="font-size: 14px;"><?php echo $obj->getProduto(); ?></spam>
+                                <?php } ?>
                             </h5>
-                            <?php 
-                            
-                            if(!empty($obj->getFicha())){
-                                ?>
-                                
+                            <?php
+
+                            if (!empty($obj->getFicha())) {
+                            ?>
+
                                 <p class="card-text text-center"><a href="../pdf/<?php echo $obj->getFicha(); ?>" target="_blank" style="color:#FF5E14 ;">Ficha Técnica</a></p>
-                                
-                                <?php
-                            }else{
-                                ?>
+
+                            <?php
+                            } else {
+                            ?>
                                 <p class="card-text text-center"><a target="_blank" style="color:#FF5E14 ;">Não possui ficha técnica</a></p>
-                                <?php 
+                            <?php
                             }
-                            
+
                             ?>
                             <div class="text-center">
                                 <input type="hidden" value="<?php echo $obj->getSap(); ?>" id="sap<?php echo $obj->getID(); ?>">
@@ -296,12 +298,12 @@ if (isset($_POST['carrinho'])) {
                                 <div class="form-group col-md-5">
                                     <label for="inputEmail4">Nome do Cliente</label>
 
-                                    <?php 
-                                    
-                                        $email = $_SESSION['user']['email'];
-                                        $comprador = new ClienteDAO();
-                                       $empresa = $comprador->ClienteComprador($email);
-                                    
+                                    <?php
+
+                                    $email = $_SESSION['user']['email'];
+                                    $comprador = new ClienteDAO();
+                                    $empresa = $comprador->ClienteComprador($email);
+
                                     ?>
 
 
@@ -330,11 +332,11 @@ if (isset($_POST['carrinho'])) {
                                             for ($i = 0; $i < $tamanho; $i++) {
                                             ?>
 
-                                                <tr id=tr<?php echo $i+1; ?>>
+                                                <tr id=tr<?php echo $i + 1; ?>>
                                                     <th scope="row"><input type="hidden" value="<?php echo $i + 1; ?>" min="1" max="3"><input type="hidden" value="<?php echo $_SESSION['lista'][$i]['sap']; ?>" name="sap[]"></th>
                                                     <td><?php echo $_SESSION['lista'][$i]['produto']; ?><input type="hidden" name="produto[]" id="produto" value="<?php echo $_SESSION['lista'][$i]['produto']; ?>"></td>
                                                     <td><a class="btn btn-sm a" id="subtrair" onclick="subtrair2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">-</a><input type="text" size="3" name="quantidade[]" id="<?php echo $i + 1; ?>" value="<?php echo $_SESSION['lista'][$i]['quantidade']; ?>" style="text-align: center;"><a class="btn btn-sm a" id="subtrair" onclick="somar2(<?php echo $i + 1; ?>)" style="color:#fff ;background-color:#FF5E14;">+</a></td>
-                                                    <td><a class="btn btn-danger" style="color: #fff;" onclick="remover(<?php echo $i+1; ?>)">REMOVER</a></td>
+                                                    <td><a class="btn btn-danger" style="color: #fff;" onclick="remover(<?php echo $i + 1; ?>)">REMOVER</a></td>
                                                 </tr>
 
                                             <?php
@@ -386,9 +388,9 @@ if (isset($_POST['carrinho'])) {
         var soma = 1;
         var total = 0;
 
-        function remover(id){
-           
-            document.getElementById('tr'+id).remove()
+        function remover(id) {
+
+            document.getElementById('tr' + id).remove()
         }
 
         function subtrair(id) {
