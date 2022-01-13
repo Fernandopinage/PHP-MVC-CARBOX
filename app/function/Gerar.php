@@ -1,9 +1,9 @@
 <?php 
 
-class Gerarnumero{
+class Gerar{
 
     
-    public static function num(){
+    public function num(){
         
         $id = random_int(1000, 9999);
 

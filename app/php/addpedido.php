@@ -3,7 +3,7 @@ include_once "../dao/MailPedido.php";
 include_once "../layout/heard.php";
 include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
-include_once "../function/num.php";
+include_once "../function/Gerar.php";
 
 
 
@@ -13,7 +13,9 @@ $produtos = implode("','", $produtos);
 
 //var_dump($produtos = $_SESSION['user']['produtos']);
 
-$Gerarnumero = new Gerarnumero();
+$gerar = new Gerar();
+
+
 $Produto = new PedidoDAO();
 $dado = $Produto->selectProduto($produtos);
 
@@ -290,7 +292,7 @@ if (isset($_POST['carrinho'])) {
                             <div class="form-row" style="margin-left: 20px;">
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Número do Orçamento</label>
-                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $Gerarnumero::num(); ?>" placeholder="" readonly>
+                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $gerar->num(); ?>" placeholder="" readonly>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Data de Emissão</label>
