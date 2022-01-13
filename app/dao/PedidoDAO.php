@@ -177,10 +177,12 @@ class PedidoDAO extends DAO
 
             //var_dump($response); 
            
+            $PedidoOrcamento = new OrcamentoMAIL();
+            $PedidoOrcamento->emailOrcamento($ClassProduto, $emailCliente, $cliente, $tamanho);
+
+
             if($pieces[9] === "Inserida com sucesso no sistema."){
                 
-                $PedidoOrcamento = new OrcamentoMAIL();
-                $PedidoOrcamento->emailOrcamento($ClassProduto, $emailCliente, $cliente, $tamanho);
                 
                 /*** Email da empresa ********/
 

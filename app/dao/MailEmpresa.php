@@ -39,11 +39,11 @@ class OrcamentoEmpresaMAIL{
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'mail.carboxigases.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->SMTPSecure = 'TLS';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
+            $mail->SMTPSecure = 'SSL';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
             $mail->Username   = 'portal@carboxigases.com';                     //SMTP username
             $mail->Password   = 'pr0gr!d@2021';                               //SMTP password
             //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 465;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
             $mail->setFrom('portal@carboxigases.com', 'CARBOXI');
             $mail->addAddress($EmailEmpresa, 'destinatalho');     //Add a recipient $contatoemail
