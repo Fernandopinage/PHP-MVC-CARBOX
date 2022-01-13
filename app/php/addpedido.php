@@ -6,6 +6,7 @@ include_once "../dao/PedidoDAO.php";
 include_once "../function/numeroOrcamento.php";
 
 
+
 $produtos = json_decode($_SESSION['user']['produtos']);
 $produtos = implode("','", $produtos);
 
@@ -289,7 +290,7 @@ if (isset($_POST['carrinho'])) {
                             <div class="form-row" style="margin-left: 20px;">
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Número do Orçamento</label>
-                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $GerarNumero->idONum(); ?>" placeholder="" readonly>
+                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $GerarNumero->num(); ?>" placeholder="" readonly>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Data de Emissão</label>

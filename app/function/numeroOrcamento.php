@@ -3,7 +3,7 @@
 class GerarNumero{
 
     
-    public function idONum(){
+    public function num(){
         
         $id = random_int(1000, 9999);
 
