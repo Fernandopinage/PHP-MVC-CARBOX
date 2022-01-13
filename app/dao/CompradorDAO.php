@@ -203,6 +203,9 @@ class CompradorDAO extends DAO
                 })
             </script>";
         <?php
+        
+        header('Refresh: 2.5; url=home.php?p=cliente/');
+
         } else {
         ?>
             <script>
