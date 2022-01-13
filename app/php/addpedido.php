@@ -14,6 +14,7 @@ $produtos = implode("','", $produtos);
 //var_dump($produtos = $_SESSION['user']['produtos']);
 
 $gerar = new Gerar();
+$orcamento = $gerar->num();
 
 
 $Produto = new PedidoDAO();
@@ -292,7 +293,7 @@ if (isset($_POST['carrinho'])) {
                             <div class="form-row" style="margin-left: 20px;">
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Número do Orçamento</label>
-                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $gerar->num(); ?>" placeholder="" readonly>
+                                    <input type="text" class="form-control form-control-sm" id="numero_orçamento" name="numero_orcamento" value="<?php echo $orcamento; ?>" placeholder="" readonly>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Data de Emissão</label>
