@@ -67,7 +67,7 @@ class RestritoMAIL {
                             <div>
                                 <h1 class="font-weight-light">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
                                 <h3 class="font-weight-light"> Olá.<b style="color:#136132;">'.$ClassRestrito->getNome().'</b> </h3>
-                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://carboxigases.com/carboxi_sistema/app/php/primeiro_acesso.php?email='.$ClassRestrito->getEmail().'&senha='.$ClassRestrito->getSenha().'"> click no link </a> para definir uma senha.</h3>
+                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://sistema.carboxigases.com/app/php/primeiro_acesso.php?email='.$ClassRestrito->getEmail().'&senha='.$ClassRestrito->getSenha().'"> click no link </a> para definir uma senha.</h3>
                             </div>
                         </div>
                     </div>

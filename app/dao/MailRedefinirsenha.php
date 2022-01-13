@@ -73,7 +73,7 @@ class RedefinirSenhaEmail
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
                                 <h2>Esqueceu sua senha?</h2>
-                                <h3 class="font-weight-light">Não se preocupe, acontece com todo mundo. Para redenifir sua senha, <a href="https://carboxigases.com/carboxi_sistema/app/php/alterarsenha.php?email='.$email.'&senha='.$rash.'"><b style="color:#136132;">Click aqui</b></a>:</h3>
+                                <h3 class="font-weight-light">Não se preocupe, acontece com todo mundo. Para redenifir sua senha, <a href="https://sistema.carboxigases.com/app/php/alterarsenha.php?email='.$email.'&senha='.$rash.'"><b style="color:#136132;">Click aqui</b></a>:</h3>
                             </div>
                         </div>
                     </div>

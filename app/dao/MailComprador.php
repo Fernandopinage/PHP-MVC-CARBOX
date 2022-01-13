@@ -69,7 +69,7 @@ class CompradorEmail{
                             <div>
                                 <h1 class="font-weight-light" style="font-weight:Arial;">Seja bem-vindo ao Portal de Vendas da CARBOXI.</h1>
                                 <h3 class="font-weight-light">Olá, <b style="color:#136132;">' . $ClassComprador->getNome() . '</b> você foi cadastrado no sistema de compras da Carboxi.</h3>
-                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://carboxigases.com/carboxi_sistema/app/php/acesso.php?email='.$ClassComprador->getEmail().'&senha='.$ClassComprador->getSenha().'"> click no link </a> para definir uma senha.</h3>
+                                <h3 class="font-weight-light">Para efetuar o primeiro acesso  <a href="https://sistema.carboxigases.com/app/php/acesso.php?email='.$ClassComprador->getEmail().'&senha='.$ClassComprador->getSenha().'"> click no link </a> para definir uma senha.</h3>
                             </div>
                         </div>
                     </div>

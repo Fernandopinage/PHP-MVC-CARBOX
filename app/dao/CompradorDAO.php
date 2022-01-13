@@ -252,7 +252,7 @@ class CompradorDAO extends DAO
                         showConfirmButton: false,
                         timer: 3500
                     })
-                    setInterval(document.location.href = 'https://carboxigases.com/carboxi_sistema/app/php/login.php', 5000);
+                    setInterval(document.location.href = 'https://sistema.carboxigases.com/app/php/login.php', 5000);
                     </script>";
         } else {
         }
