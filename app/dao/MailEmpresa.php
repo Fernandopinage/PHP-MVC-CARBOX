@@ -11,9 +11,9 @@ require_once "../vendor/autoload.php";
 
 //Instantiation and passing `true` enables exceptions
 
-class OrçamentoEmpresaMAIL{
+class OrcamentoEmpresaMAIL{
 
-    public function emailOrçamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho)
+    public function emailOrcamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho)
     {
         $txt = "";
         $qtd = "";  
