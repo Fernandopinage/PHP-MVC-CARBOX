@@ -3,7 +3,7 @@ include_once "../dao/MailPedido.php";
 include_once "../layout/heard.php";
 include_once "../class/ClassPedido.php";
 include_once "../dao/PedidoDAO.php";
-include_once "../function/numeroOrcamento.php";
+include_once "../function/numeroorcamento.php";
 
 
 
