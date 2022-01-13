@@ -367,9 +367,6 @@ if (isset($_POST['deleteCliente'])) {
                                                     <button type="button" class="btn btn-outline-success btn-sm"data-toggle="modal"  data-target="#green' . $key['id'] . '" style="margin-top:31px;">
                                                     Atualizar
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#blue' . $key['id'] . '" style="margin-top:31px;">
-                                                            Redefinir senha
-                                                    </button>
                                                     <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#red' . $key['id'] . '" style="margin-top:31px;">
                                                         Inativar 
                                                     </button>
@@ -378,6 +375,10 @@ if (isset($_POST['deleteCliente'])) {
                                                   </div>
                                                        
                                                 ';
+                                                /* adicionar esse campo para redefinir senha  */
+                                               // <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#blue' . $key['id'] . '" style="margin-top:31px;">
+                                               // Redefinir senha
+                                               // </button>
 
                                         ?>
                                             <div class="modal fade bd-example-modal-lg" id="green<?php echo $key['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
