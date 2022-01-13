@@ -173,23 +173,25 @@ class CompradorDAO extends DAO
 
         header('Location: ../php/login.php');
     }
-    public function esquecisenha($email)
+    public function esquecisenha($email,$id)
     {
         $senha = new GerarSenha();
         $rash = $senha->senha();
 
-        $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL";
+        $sql = "UPDATE `comprador` SET COMPRADOR_SENHA = :COMPRADOR_SENHA where COMPRADOR_EMAIL =:COMPRADOR_EMAIL and COMPRADOR_ID =:COMPRADOR_ID";
         $update = $this->con->prepare($sql);
+        $update->bindValue(':COMPRADOR_ID', $id);
         $update->bindValue(':COMPRADOR_EMAIL', $email);
         $update->bindValue(':COMPRADOR_SENHA', md5($rash));
         
         try {
             $update->execute();
-                  
+                
+            
         if ($update->rowCount()) {
 
-            $redefinir = new RedefinirSenhaEmail();
-            $redefinir->redefinir($email, $rash);
+            //$redefinir = new RedefinirSenhaEmail();
+            //$redefinir->redefinir($email, $rash);
 
         ?>
             <script>
@@ -203,9 +205,8 @@ class CompradorDAO extends DAO
                 })
             </script>";
         <?php
-        
-        header('Refresh: 2.5; url=home.php?p=cliente/');
 
+            header('Location: ../php/home.php');
         } else {
         ?>
             <script>

@@ -335,8 +335,9 @@ if (isset($_POST['deleteCliente'])) {
                                             if (!empty($_POST['email_vendedor'])) {
 
                                                 $email = $_POST['email_vendedor'];
+                                                $id = $_POST['id_vendedor'];
                                                 $vendedor = new CompradorDAO();
-                                                $vendedor->esquecisenha($email);
+                                                $vendedor->esquecisenha($email,$id);
                                             }
                                         }
 
@@ -421,7 +422,9 @@ if (isset($_POST['deleteCliente'])) {
                                                                 <h5 class="modal-title" id="exampleModalLabel">Deseja redefinir senha ? </h5>
                                                             </div>
                                                             <form method="post">
+
                                                                 <input type="hidden" class="form-control form-control-sm" name="email_vendedor" value="<?php echo  $key['email']; ?>"><br>
+                                                                <input type="hidden" class="form-control form-control-sm" name="id_vendedor" value="<?php echo  $key['id']; ?>"><br>
                                                                 <input type="text" class="form-control form-control-sm" name="" value="<?php echo  $key['email']; ?>" disabled><br>
 
                                                                 <div class="modal-footer">
