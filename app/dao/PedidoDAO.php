@@ -182,9 +182,6 @@ class PedidoDAO extends DAO
                 $PedidoOrcamento = new OrcamentoMAIL();
                 $PedidoOrcamento->emailOrcamento($ClassProduto, $emailCliente, $cliente, $tamanho);
                 
-                /*** Email da empresa ********/
-
-                
                 $EmpresaOrcamento = new OrcamentoEmpresaMAIL();
                 $EmpresaOrcamento->emailOrcamento($ClassProduto, $EmailEmpresa,$cliente,$tamanho);
 
