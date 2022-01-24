@@ -25,12 +25,12 @@ class RestritoMAIL {
             $mail->Host       = 'mail.carboxigases.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->SMTPSecure = 'TLS';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
-            $mail->Username   = 'portal@carboxigases.com';                     //SMTP username
+            $mail->Username   = 'portalvendas@carboxigases.com';                     //SMTP username
             $mail->Password   = 'pr0gr!d@2021';                               //SMTP password
             //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 465;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
-            $mail->setFrom('portal@carboxigases.com', 'CARBOXI');
+            $mail->setFrom('portalvendas@carboxigases.com', 'CARBOXI');
             $mail->addAddress($ClassRestrito->getEmail(), 'destinatalho');     //Add a recipient $contatoemail
             // $mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
