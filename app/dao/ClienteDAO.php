@@ -183,7 +183,7 @@ class ClienteDAO extends DAO
            
            
            <?php
-           //header('Refresh: 3.5; url=home.php?p=cliente/');
+           header('Refresh: 3.5; url=home.php?p=cliente/');
 
         } catch (PDOException $e) {
             
@@ -269,7 +269,7 @@ class ClienteDAO extends DAO
             
             
             <?php
-           //header('Refresh: 4.0; url=home.php?p=cliente/');
+           header('Refresh: 4.0; url=home.php?p=cliente/');
         }
 
 
