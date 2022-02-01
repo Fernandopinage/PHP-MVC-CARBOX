@@ -22,7 +22,7 @@ class RestritoMAIL {
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'mail.carboxigases.com';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
+            $mail->Host       = 'mail.gotoservice.com.br';                     //Set the SMTP server to send through HOTMAIL -> "smtp.live.com" GMAIL -> "smtp.gmail.com"
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->SMTPSecure = 'TLS';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
             $mail->Username   = 'carboxi@gotoservice.com.br';                     //SMTP username
