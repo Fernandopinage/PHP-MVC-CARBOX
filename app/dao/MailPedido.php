@@ -55,8 +55,8 @@ class OrcamentoMAIL
             $mail->addAddress($emailCliente, 'destinatalho');     //Add a recipient $contatoemail
             // $mail->addAddress('ellen@example.com');               //Name is optional
             //$mail->addReplyTo('info@example.com', 'Information');
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
+           // $mail->addCC('pedidos@carboxigases.com'); // copia de e-mail 
+            $mail->addBCC('pedidos@carboxigases.com');  //  copia oculta
 
             //Attachments
             // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
