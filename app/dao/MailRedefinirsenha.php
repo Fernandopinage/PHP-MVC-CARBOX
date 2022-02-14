@@ -32,7 +32,7 @@ class RedefinirSenhaEmail
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->SMTPSecure = 'SSL';  // GMAIL -> "SSL" REQUERIDO pelo GMail  HOTMAIL -> TLS
             $mail->Username   = 'portalvendas@carboxigases.com';                     //SMTP username
-            $mail->Password   = 'pr0gr!d@2021';                               //SMTP password
+            $mail->Password   = '+8ct1JQ&8!6A';                               //SMTP password
             //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
             $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
             //Recipients
